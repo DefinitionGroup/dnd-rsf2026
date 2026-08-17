@@ -24,9 +24,9 @@ export default function TestimonialBlock({ block }: BlockProps<"testimonialBlock
             return (
               <Reveal as="li" key={testimonial._id} delay={(index % 3) * 60} className="flex">
                 <figure className="tile flex h-full w-full flex-col justify-between gap-6">
-                  <blockquote className="subheading text-carbon">{testimonial.quote}</blockquote>
+                  <blockquote className="subheading text-fg">{testimonial.quote}</blockquote>
                   <figcaption>
-                    <span className="body-sm block text-carbon">{testimonial.name}</span>
+                    <span className="body-sm block text-fg">{testimonial.name}</span>
                     {meta ? <span className="caption mt-1 block">{meta}</span> : null}
                   </figcaption>
                 </figure>

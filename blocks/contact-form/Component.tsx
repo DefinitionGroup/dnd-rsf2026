@@ -11,7 +11,7 @@ type SubmissionState = "idle" | "submitting" | "success" | "error";
 
 const DEFAULT_STOCKIST_URL = "https://www.theaquariumsolution.com/stockists";
 
-const inputClass = "field text-carbon transition-colors duration-200 disabled:opacity-60";
+const inputClass = "field text-fg transition-colors duration-200 disabled:opacity-60";
 
 function CheckIcon() {
   return (
@@ -37,7 +37,7 @@ function SelectChevron() {
       height="16"
       aria-hidden="true"
       focusable="false"
-      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ash"
+      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-fg-muted"
     >
       <path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -145,7 +145,7 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
                 <CheckIcon />
               </span>
               <h4>{labels.successTitle}</h4>
-              {labels.successMessage ? <p className="body-sm text-ash">{labels.successMessage}</p> : null}
+              {labels.successMessage ? <p className="body-sm text-fg-muted">{labels.successMessage}</p> : null}
               <button
                 type="button"
                 className="action-link action-link--text mt-2 cursor-pointer"
@@ -234,7 +234,7 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
                 </div>
               </div>
 
-              <p className="body-sm mt-4 min-h-6 text-carbon" role="status" aria-live="polite">
+              <p className="body-sm mt-4 min-h-6 text-fg" role="status" aria-live="polite">
                 {submissionState === "error" ? labels.errorMessage : ""}
               </p>
             </form>
@@ -260,10 +260,10 @@ function Field({
 }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <label htmlFor={id} className="body-sm text-carbon">
+      <label htmlFor={id} className="body-sm text-fg">
         {label}
         {required ? (
-          <span className="text-ash" aria-hidden="true">
+          <span className="text-fg-muted" aria-hidden="true">
             {" "}
             *
           </span>

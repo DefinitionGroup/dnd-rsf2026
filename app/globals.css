@@ -2,8 +2,8 @@
 
 /*
   Design system v3 — pinned to the Apple design architecture (refero.design/styles/apple),
-  translated for D-D The Aquarium Solution: "a white room with a single lime switch".
-  - Frost (#f5f5f7) canvas alternating with white; near-black for nav and film sections.
+  translated for D-D The Aquarium Solution — DARK register: "a black room with a single lime switch".
+  - Black canvas alternating with #1d1d1f lift sections; real white only for photo wells, pills, handles.
   - One accent, lime, used ONLY as filled-button fill and selected state; lime-deep for
     outlined actions and inline links; never as text decoration or borders elsewhere.
   - SF Pro on Apple devices, Inter elsewhere. Major-second scale from 17px.
@@ -13,35 +13,41 @@
 @theme {
   /* accent (the "single switch") */
   --color-lime: #99cc33;         /* filled buttons + selected states only */
-  --color-lime-deep: #6f9a1f;    /* outlined action border/text, inline links (AA on white) */
+  --color-lime-deep: #99cc33;    /* dark register: outlined actions and links use full lime */
   --color-lime-signal: #b9dd6b;  /* decorative strokes / image outlines (rare) */
 
-  /* neutrals (Apple names → roles) */
-  --color-onyx: #000000;
-  --color-carbon: #1d1d1f;       /* primary text, dark sections */
-  --color-smoke: #333333;        /* secondary text */
-  --color-graphite: #474747;     /* nav text on light */
-  --color-ash: #6e6e73;          /* muted body / captions */
-  --color-mist: #86868b;         /* icon strokes, tertiary text on dark */
-  --color-pebble: #e8e8ed;       /* disabled fills, secondary button fill */
-  --color-hairline: #d2d2d7;
-  --color-frost: #f5f5f7;        /* the canvas */
-  --color-ice: #f4f8fb;
-  --color-white: #ffffff;
-  --color-danger: #d1352b;
+  /* neutrals — Apple DARK ramp (this branch is predominantly dark) */
+  --color-onyx: #000000;         /* the canvas */
+  --color-carbon: #1d1d1f;       /* lift sections, nav, tiles on black */
+  --color-smoke: #2c2c2e;
+  --color-graphite: #86868b;
+  --color-ash: #86868b;          /* muted text on dark (AA on #000/#1d1d1f) */
+  --color-mist: #a1a1a6;
+  --color-pebble: #2c2c2e;       /* fills: segmented controls, disabled */
+  --color-hairline: #424245;
+  --color-frost: #1d1d1f;        /* "lift" surface (was the light canvas) */
+  --color-ice: #161617;
+  --color-white: #ffffff;        /* real white: photo wells, pills, handles */
+  --color-danger: #ff453a;
+  /* role tokens used by components */
+  --color-fg: #f5f5f7;
+  --color-fg-muted: #86868b;
+  --color-canvas: #000000;
+  --color-canvas-alt: #1d1d1f;
+  --color-fill: #2c2c2e;
 
   /* aliases used by components */
-  --color-ink: #1d1d1f;
-  --color-text: #1d1d1f;
-  --color-muted: #6e6e73;
+  --color-ink: #f5f5f7;
+  --color-text: #f5f5f7;
+  --color-muted: #86868b;
   --color-muted-dark: #a1a1a6;
-  --color-paper: #ffffff;
-  --color-sand: #f5f5f7;
-  --color-line: #d2d2d7;
+  --color-paper: #000000;
+  --color-sand: #1d1d1f;
+  --color-line: #424245;
   --color-line-dark: #424245;
   --color-stage: #000000;
   --color-stage-soft: #1d1d1f;
-  --color-lime-soft: #eef7dc;
+  --color-lime-soft: #1f2a10;
   --color-warn: #e6a700;
 
   /* type: SF Pro (Apple devices) → Inter (everywhere else) */
@@ -72,15 +78,15 @@
   --section-y: clamp(4rem, 8vw, 7rem);   /* ≥ 64px */
   --header-h: 44px;
   --productbar-h: 52px;
-  color-scheme: light;
+  color-scheme: dark;
   scrollbar-color: var(--color-hairline) transparent;
 }
 
 @layer base {
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { @apply bg-white text-carbon font-sans antialiased; font-size: 17px; line-height: 1.47; letter-spacing: -0.016em; }
+  body { background: var(--color-canvas); color: var(--color-fg); @apply font-sans antialiased; font-size: 17px; line-height: 1.47; letter-spacing: -0.016em; }
   /* Apple scale (major second from 17px): sizes/weights/tracking as documented */
-  h1, h2, h3, h4 { @apply font-display text-carbon; text-wrap: balance; }
+  h1, h2, h3, h4 { @apply font-display; color: var(--color-white); text-wrap: balance; }
   h1 { font-size: clamp(2.5rem, 4.6vw, 3.5rem); line-height: 1.07; font-weight: 600; letter-spacing: 0.011em; }   /* display 56 */
   h2 { font-size: clamp(2rem, 3.4vw, 2.5rem); line-height: 1.14; font-weight: 600; letter-spacing: 0.011em; }      /* heading 40 */
   h3 { font-size: 1.75rem; line-height: 1.18; font-weight: 600; letter-spacing: 0.007em; }                          /* heading-sm 28 */
@@ -88,13 +94,13 @@
   p { text-wrap: pretty; }
   a { color: inherit; text-decoration: none; }
   strong { font-weight: 600; }
-  ::selection { background: var(--color-lime); color: var(--color-carbon); }
-  :focus-visible { outline: 2px solid var(--color-lime-deep); outline-offset: 2px; border-radius: 4px; }
+  ::selection { background: var(--color-lime); color: #000; }
+  :focus-visible { outline: 2px solid var(--color-lime); outline-offset: 2px; border-radius: 4px; }
   .dark :focus-visible { outline-color: var(--color-lime); }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-thumb { background: var(--color-hairline); border-radius: 999px; border: 3px solid transparent; background-clip: content-box; }
   input, textarea, select, button { font: inherit; color: inherit; letter-spacing: inherit; }
-  input::placeholder, textarea::placeholder { color: var(--color-ash); }
+  input::placeholder, textarea::placeholder { color: var(--color-fg-muted); }
   table { border-collapse: collapse; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -113,16 +119,17 @@
   .container-prose { @apply mx-auto w-full; max-width: var(--container-prose); }
 
   /* canvases — full-bleed, alternate frost / white; dark only for nav + film sections */
-  .canvas-frost { background: var(--color-frost); }
-  .canvas-white { background: var(--color-white); }
-  .canvas-dark { background: var(--color-onyx); color: var(--color-frost); }
+  /* dark branch: "white" canvas = black, "frost" canvas = #1d1d1f lift, film sections = black */
+  .canvas-frost { background: var(--color-canvas-alt); }
+  .canvas-white { background: var(--color-canvas); }
+  .canvas-dark { background: var(--color-onyx); color: var(--color-fg); }
   .canvas-dark h1, .canvas-dark h2, .canvas-dark h3, .canvas-dark h4 { color: var(--color-white); }
-  .dark { color: var(--color-frost); }
+  .dark { color: var(--color-fg); }
   .dark h1, .dark h2, .dark h3, .dark h4 { color: var(--color-white); }
   /* legacy aliases from v2 kept for block code that still uses them */
-  .stage { background: var(--color-onyx); color: var(--color-frost); }
+  .stage { background: var(--color-onyx); color: var(--color-fg); }
   .stage h1, .stage h2, .stage h3, .stage h4, .on-dark h1, .on-dark h2, .on-dark h3, .on-dark h4 { color: var(--color-white); }
-  .stage-sand { background: var(--color-frost); }
+  .stage-sand { background: var(--color-canvas-alt); }
 
   /* type roles (Apple scale) */
   .display { font-size: clamp(2.5rem, 4.6vw, 3.5rem); line-height: 1.07; font-weight: 600; letter-spacing: 0.011em; }
@@ -133,32 +140,29 @@
   .display-md { font-size: 1.75rem; line-height: 1.18; font-weight: 600; letter-spacing: 0.007em; }
   .heading-sm { font-size: 1.75rem; line-height: 1.18; font-weight: 400; letter-spacing: 0.007em; }
   .subheading { font-size: 1.3125rem; line-height: 1.24; font-weight: 400; letter-spacing: -0.005em; }
-  .whisper { font-size: clamp(1.3125rem, 1.9vw, 1.625rem); line-height: 1.24; font-weight: 300; letter-spacing: 0.004em; }  /* Apple tagline voice */
-  .lead { font-size: clamp(1.1875rem, 1.6vw, 1.3125rem); line-height: 1.38; font-weight: 400; letter-spacing: 0.011em; color: var(--color-ash); }
+  .whisper { font-size: clamp(1.3125rem, 1.9vw, 1.625rem); line-height: 1.24; font-weight: 300; letter-spacing: 0.004em; color: var(--color-fg); }  /* Apple tagline voice */
+  .lead { font-size: clamp(1.1875rem, 1.6vw, 1.3125rem); line-height: 1.38; font-weight: 400; letter-spacing: 0.011em; color: var(--color-fg-muted); }
   .dark .lead, .canvas-dark .lead, .stage .lead, .on-dark .lead { color: var(--color-mist); }
   .body { font-size: 17px; line-height: 1.47; letter-spacing: -0.016em; }
   .body-sm { font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; }
-  .caption { font-size: 12px; line-height: 1.33; letter-spacing: -0.01em; color: var(--color-ash); }
-  .label { font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: var(--color-ash); }
+  .caption { font-size: 12px; line-height: 1.33; letter-spacing: -0.01em; color: var(--color-fg-muted); }
+  .label { font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: var(--color-fg-muted); }
   .dark .caption, .dark .label, .canvas-dark .caption, .canvas-dark .label, .stage .caption, .stage .label, .on-dark .label, .on-dark .caption { color: var(--color-mist); }
   /* measurements: display size, tabular */
-  .figure { font-weight: 600; letter-spacing: 0; font-variant-numeric: tabular-nums lining-nums; line-height: 1; }
+  .figure { font-weight: 600; letter-spacing: 0; font-variant-numeric: tabular-nums lining-nums; line-height: 1; white-space: nowrap; }
   .figure-unit { font-weight: 400; letter-spacing: 0; }
   .num { font-variant-numeric: tabular-nums lining-nums; }
-  .text-muted { color: var(--color-ash); }
-  .text-lime-deep { color: var(--color-lime-deep); }
+  .text-muted { color: var(--color-fg-muted); }
+  .text-lime-deep { color: var(--color-lime); } /* on dark, links/outlines use full lime (9:1) */
 
   /* surfaces */
-  .media { border-radius: var(--radius-media); overflow: hidden; background: var(--color-frost); }
-  .dark .media, .canvas-dark .media, .stage .media { background: var(--color-carbon); }
-  .tile { border-radius: var(--radius-card); background: var(--color-frost); padding: 24px; }
-  .canvas-frost .tile { background: var(--color-white); }
-  .dark .tile, .canvas-dark .tile, .stage .tile { background: var(--color-carbon); }
-  .card { border-radius: var(--radius-card); background: var(--color-frost); }
-  .canvas-frost .card { background: var(--color-white); }
-  .dark .card, .canvas-dark .card, .stage .card { background: var(--color-carbon); }
+  .media { border-radius: var(--radius-media); overflow: hidden; background: var(--color-canvas-alt); }
+  .canvas-frost .media { background: var(--color-canvas); }
+  .tile { border-radius: var(--radius-card); background: var(--color-canvas-alt); padding: 24px; }
+  .canvas-frost .tile { background: var(--color-canvas); }
+  .card { border-radius: var(--radius-card); background: var(--color-canvas-alt); }
+  .canvas-frost .card { background: var(--color-canvas); }
   .hairline { border-color: var(--color-hairline); }
-  .dark .hairline, .canvas-dark .hairline, .stage .hairline { border-color: var(--color-line-dark); }
   .product-shadow { filter: drop-shadow(3px 5px 30px rgb(0 0 0 / 0.22)); }  /* the only shadow in the system, product imagery only */
   .elevated { box-shadow: none; }
 
@@ -170,28 +174,27 @@
   .prose-site ul { @apply my-4 list-disc pl-6; }
   .prose-site ol { @apply my-4 list-decimal pl-6; }
   .prose-site li + li { @apply mt-1; }
-  .prose-site a { color: var(--color-lime-deep); }
+  .prose-site a { color: var(--color-lime); }
   .prose-site a:hover { text-decoration: underline; }
-  .prose-site blockquote { @apply my-6 pl-4; border-left: 1px solid var(--color-hairline); color: var(--color-ash); }
+  .prose-site blockquote { @apply my-6 pl-4; border-left: 1px solid var(--color-hairline); color: var(--color-fg-muted); }
 
   /* actions — Apple pill grammar; filled = the accent's only home; outlined always pairs with filled */
   .action-link { border-radius: var(--radius-pill); display: inline-flex; align-items: center; gap: 6px; padding: 11px 15px; font-size: 17px; line-height: 1.17; font-weight: 400; letter-spacing: -0.022em; transition: background-color 150ms, color 150ms, border-color 150ms; }
   .action-link--primary { background: var(--color-lime); color: var(--color-carbon); border: 1px solid var(--color-lime); }
   .action-link--primary:hover { background: #a3d63f; border-color: #a3d63f; }
-  .action-link--secondary { background: transparent; color: var(--color-lime-deep); border: 1px solid var(--color-lime-deep); }
-  .action-link--secondary:hover { background: var(--color-lime-deep); color: var(--color-white); }
+  .action-link--secondary { background: transparent; color: var(--color-lime); border: 1px solid var(--color-lime); }
+  .action-link--secondary:hover { background: var(--color-lime); color: #000; }
   .dark .action-link--secondary, .canvas-dark .action-link--secondary, .stage .action-link--secondary, .on-dark .action-link--secondary { color: var(--color-lime); border-color: var(--color-lime); }
   .dark .action-link--secondary:hover, .canvas-dark .action-link--secondary:hover, .stage .action-link--secondary:hover, .on-dark .action-link--secondary:hover { background: var(--color-lime); color: var(--color-carbon); }
-  .action-link--text { padding: 0; border: 0; color: var(--color-lime-deep); }
+  .action-link--text { padding: 0; border: 0; color: var(--color-lime); }
   .action-link--text:hover { text-decoration: underline; }
   .dark .action-link--text, .canvas-dark .action-link--text, .stage .action-link--text, .on-dark .action-link--text { color: var(--color-lime); }
   .action-link--small { padding: 6px 12px; font-size: 14px; }
 
   /* form controls */
-  .field { border-radius: var(--radius-input); border: 1px solid var(--color-hairline); background: var(--color-white); padding: 12px 14px; font-size: 17px; width: 100%; }
-  .field:focus-visible { outline: 2px solid var(--color-lime-deep); outline-offset: 0; border-color: transparent; }
-  .canvas-frost .field { background: var(--color-white); }
-  .dark .field { background: var(--color-carbon); border-color: var(--color-line-dark); color: var(--color-white); }
+  .field { border-radius: var(--radius-input); border: 1px solid var(--color-hairline); background: var(--color-canvas-alt); color: var(--color-fg); padding: 12px 14px; font-size: 17px; width: 100%; }
+  .field:focus-visible { outline: 2px solid var(--color-lime); outline-offset: 0; border-color: transparent; }
+  .canvas-frost .field { background: var(--color-canvas); }
 
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 }

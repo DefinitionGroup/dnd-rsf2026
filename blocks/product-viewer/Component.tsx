@@ -331,7 +331,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   transition={{ duration: reduceMotion ? 0 : 0.35, ease: EASE_PRESENCE }}
                   className="body-sm pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-white"
                 >
-                  <svg aria-hidden width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-mist motion-safe:animate-pulse">
+                  <svg aria-hidden width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-fg-muted motion-safe:animate-pulse">
                     <path d="M1 6h14M4 3 1 6l3 3M12 3l3 3-3 3" />
                   </svg>
                   {block.hint}
@@ -413,7 +413,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M2.5 7a4.5 4.5 0 1 0 1.3-3.2M2.5 1.5v3h3" />
                   </svg>
-                  Reset {zoom > 1 && <span className="num text-ash">{zoom.toFixed(1)}×</span>}
+                  Reset {zoom > 1 && <span className="num text-fg-muted">{zoom.toFixed(1)}×</span>}
                 </motion.button>
               )}
             </AnimatePresence>
@@ -443,7 +443,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
           {block.product && (block.product.name || block.product.tagline) && (
             <div className="mt-10 text-center">
               {block.product.name && <h4 className="text-white">{block.product.name}</h4>}
-              {block.product.tagline && <p className="body-sm mx-auto mt-2 max-w-[52ch] text-mist">{block.product.tagline}</p>}
+              {block.product.tagline && <p className="body-sm mx-auto mt-2 max-w-[52ch] text-fg-muted">{block.product.tagline}</p>}
             </div>
           )}
         </div>

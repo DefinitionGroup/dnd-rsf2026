@@ -34,9 +34,9 @@ export function formatNumeric(n: number, p: Parsed) {
 
 const TONES = {
   // v3: figures are carbon on white; tone is ignored except ink → dark film canvas.
-  lime: { section: "canvas-white", value: "text-carbon", unit: "text-ash", label: "text-ash" },
-  paper: { section: "canvas-white", value: "text-carbon", unit: "text-ash", label: "text-ash" },
-  ink: { section: "canvas-dark", value: "text-white", unit: "text-mist", label: "text-mist" },
+  lime: { section: "canvas-white", value: "text-fg", unit: "text-fg-muted", label: "text-fg-muted" },
+  paper: { section: "canvas-white", value: "text-fg", unit: "text-fg-muted", label: "text-fg-muted" },
+  ink: { section: "canvas-dark", value: "text-white", unit: "text-fg-muted", label: "text-fg-muted" },
 } as const;
 
 type Tone = (typeof TONES)[keyof typeof TONES];

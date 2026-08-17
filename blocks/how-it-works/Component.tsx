@@ -12,28 +12,28 @@ const DEFAULT_DURATION = 6;
 
 /**
  * Apple "how it works": frost canvas (film-dark for tone "ink"); the steps list
- * lives in a white `.tile` (a real object), numbers `.body-sm text-ash`, titles
- * h4 21/600, body `.body-sm text-ash`, progress = hairline with a carbon fill.
+ * lives in a white `.tile` (a real object), numbers `.body-sm text-fg-muted`, titles
+ * h4 21/600, body `.body-sm text-fg-muted`, progress = hairline with a carbon fill.
  */
 const TONES = {
   paper: {
     section: "canvas-frost",
-    number: "text-ash",
-    titleActive: "text-carbon",
-    titleIdle: "text-ash",
-    body: "text-ash",
+    number: "text-fg-muted",
+    titleActive: "text-fg",
+    titleIdle: "text-fg-muted",
+    body: "text-fg-muted",
     track: "bg-hairline",
     fill: "bg-carbon",
-    titleHover: "group-hover:text-carbon",
+    titleHover: "group-hover:text-fg",
     rule: "border-hairline",
     badge: "bg-white text-carbon",
   },
   ink: {
     section: "canvas-dark",
-    number: "text-mist",
+    number: "text-fg-muted",
     titleActive: "text-white",
-    titleIdle: "text-mist",
-    body: "text-mist",
+    titleIdle: "text-fg-muted",
+    body: "text-fg-muted",
     track: "bg-line-dark",
     fill: "bg-white",
     titleHover: "group-hover:text-white",

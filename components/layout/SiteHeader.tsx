@@ -44,7 +44,7 @@ export default function SiteHeader({
   const brand = settings?.brandName ?? "The Aquarium Solution";
 
   return (
-    <header className="dark sticky top-0 z-40 bg-carbon/95 text-white backdrop-blur-md">
+    <header className="dark sticky top-0 z-40 border-b border-white/10 bg-carbon/90 text-white backdrop-blur-md">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:z-50 focus:rounded-full focus:bg-lime focus:px-3 focus:py-1.5 focus:text-carbon">
         {t(locale, "skipToContent")}
       </a>

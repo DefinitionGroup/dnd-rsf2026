@@ -37,7 +37,7 @@ export type ProductFinderDemoInput = {
 const DEFAULT_LOAD: NonNullable<ProductFinderDemoInput["loadOptions"]> = [
   { label: "Light", factor: 1, rollFactor: 1.15 },
   { label: "Normal", factor: 1, rollFactor: 1 },
-  { label: "Heavy feeding", factor: 1.3, rollFactor: 0.75 },
+  { label: "Heavy", factor: 1.3, rollFactor: 0.75 },
 ];
 
 const DEFAULT_RULES: NonNullable<ProductFinderDemoInput["rules"]> = [

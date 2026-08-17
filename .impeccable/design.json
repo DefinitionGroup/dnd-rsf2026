@@ -1,39 +1,42 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-08-18T00:00:00Z",
-  "title": "Design System: D-D The Aquarium Solution — ClariSea (v3)",
+  "title": "Design System: D-D The Aquarium Solution — ClariSea (v3, dark register)",
   "extensions": {
     "colorMeta": {
       "lime": { "role": "primary", "displayName": "Lime", "canonical": "#99cc33", "tonalRamp": ["#1f2c08", "#354d0f", "#4c6d16", "#6f9a1f", "#99cc33", "#b9dd6b", "#d6ec9f", "#eef7dc"] },
-      "lime-deep": { "role": "primary", "displayName": "Lime Deep", "canonical": "#6f9a1f", "tonalRamp": ["#1a2408", "#2d3f0d", "#465f14", "#5c7e1a", "#6f9a1f", "#8ab83a", "#b3d477", "#e2efc6"] },
+      "lime-deep": { "role": "primary", "displayName": "Lime Deep (= lime on dark)", "canonical": "#99cc33", "tonalRamp": ["#1f2c08", "#354d0f", "#4c6d16", "#6f9a1f", "#99cc33", "#b9dd6b", "#d6ec9f", "#eef7dc"] },
       "lime-signal": { "role": "primary", "displayName": "Lime Signal", "canonical": "#b9dd6b", "tonalRamp": ["#28320f", "#44561b", "#657f28", "#87a838", "#a6c94f", "#b9dd6b", "#d3ea9c", "#eef7dc"] },
-      "onyx": { "role": "neutral", "displayName": "Onyx", "canonical": "#000000", "tonalRamp": ["#000000", "#1d1d1f", "#333333", "#474747", "#6e6e73", "#86868b", "#d2d2d7", "#f5f5f7"] },
-      "carbon": { "role": "neutral", "displayName": "Carbon", "canonical": "#1d1d1f", "tonalRamp": ["#000000", "#1d1d1f", "#333333", "#424245", "#6e6e73", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
-      "smoke": { "role": "neutral", "displayName": "Smoke", "canonical": "#333333", "tonalRamp": ["#111111", "#222222", "#333333", "#474747", "#6e6e73", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
-      "graphite": { "role": "neutral", "displayName": "Graphite", "canonical": "#474747", "tonalRamp": ["#1d1d1f", "#333333", "#474747", "#5c5c5f", "#6e6e73", "#86868b", "#a1a1a6", "#e8e8ed"] },
-      "ash": { "role": "neutral", "displayName": "Ash", "canonical": "#6e6e73", "tonalRamp": ["#1d1d1f", "#333333", "#474747", "#6e6e73", "#86868b", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
-      "mist": { "role": "neutral", "displayName": "Mist", "canonical": "#86868b", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#c7c7cc", "#e8e8ed", "#f5f5f7"] },
-      "pebble": { "role": "neutral", "displayName": "Pebble", "canonical": "#e8e8ed", "tonalRamp": ["#333333", "#6e6e73", "#a1a1a6", "#c7c7cc", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
-      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#d2d2d7", "tonalRamp": ["#333333", "#424245", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
-      "line-dark": { "role": "neutral", "displayName": "Line Dark", "canonical": "#424245", "tonalRamp": ["#1d1d1f", "#2c2c2e", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
-      "frost": { "role": "neutral", "displayName": "Frost", "canonical": "#f5f5f7", "tonalRamp": ["#1d1d1f", "#474747", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
+      "onyx": { "role": "neutral", "displayName": "Onyx", "canonical": "#000000", "tonalRamp": ["#000000", "#161617", "#1d1d1f", "#2c2c2e", "#424245", "#86868b", "#a1a1a6", "#f5f5f7"] },
+      "carbon": { "role": "neutral", "displayName": "Carbon (lift)", "canonical": "#1d1d1f", "tonalRamp": ["#000000", "#161617", "#1d1d1f", "#2c2c2e", "#424245", "#86868b", "#a1a1a6", "#f5f5f7"] },
+      "pebble": { "role": "neutral", "displayName": "Pebble (fill)", "canonical": "#2c2c2e", "tonalRamp": ["#000000", "#1d1d1f", "#2c2c2e", "#424245", "#5c5c5f", "#86868b", "#a1a1a6", "#f5f5f7"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#424245", "tonalRamp": ["#1d1d1f", "#2c2c2e", "#424245", "#5c5c5f", "#6e6e73", "#86868b", "#a1a1a6", "#f5f5f7"] },
+      "ash": { "role": "neutral", "displayName": "Ash", "canonical": "#86868b", "tonalRamp": ["#1d1d1f", "#2c2c2e", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
+      "mist": { "role": "neutral", "displayName": "Mist", "canonical": "#a1a1a6", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#c7c7cc", "#e8e8ed", "#f5f5f7"] },
+      "fg": { "role": "neutral", "displayName": "Foreground", "canonical": "#f5f5f7", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#d2d2d7", "#f5f5f7", "#ffffff"] },
+      "fg-muted": { "role": "neutral", "displayName": "Foreground Muted", "canonical": "#86868b", "tonalRamp": ["#1d1d1f", "#2c2c2e", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
+      "canvas": { "role": "neutral", "displayName": "Canvas", "canonical": "#000000", "tonalRamp": ["#000000", "#161617", "#1d1d1f", "#2c2c2e", "#424245", "#86868b", "#a1a1a6", "#f5f5f7"] },
+      "canvas-alt": { "role": "neutral", "displayName": "Canvas Alt (lift)", "canonical": "#1d1d1f", "tonalRamp": ["#000000", "#161617", "#1d1d1f", "#2c2c2e", "#424245", "#86868b", "#a1a1a6", "#f5f5f7"] },
+      "fill": { "role": "neutral", "displayName": "Fill", "canonical": "#2c2c2e", "tonalRamp": ["#000000", "#1d1d1f", "#2c2c2e", "#424245", "#5c5c5f", "#86868b", "#a1a1a6", "#f5f5f7"] },
+      "frost": { "role": "neutral", "displayName": "Frost (= lift on dark)", "canonical": "#1d1d1f", "tonalRamp": ["#000000", "#161617", "#1d1d1f", "#2c2c2e", "#424245", "#86868b", "#a1a1a6", "#f5f5f7"] },
       "white": { "role": "neutral", "displayName": "White", "canonical": "#ffffff", "tonalRamp": ["#1d1d1f", "#474747", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
-      "danger": { "role": "neutral", "displayName": "Danger", "canonical": "#d1352b", "tonalRamp": ["#3a0e0b", "#621813", "#8c221b", "#b02c24", "#d1352b", "#e2685f", "#f0a59f", "#fde8e6"] }
+      "danger": { "role": "neutral", "displayName": "Danger", "canonical": "#ff453a", "tonalRamp": ["#3a1c1a", "#5c1a15", "#8c221b", "#c0302a", "#ff453a", "#ff7a72", "#ffaba6", "#ffe0dd"] },
+      "alarm-well": { "role": "neutral", "displayName": "Alarm Well", "canonical": "#3a1c1a", "tonalRamp": ["#1d0d0c", "#3a1c1a", "#5c1a15", "#8c221b", "#c0302a", "#ff453a", "#ff7a72", "#ffe0dd"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero h1 only; centered, ≤18ch." },
-      "heading": { "displayName": "Heading", "purpose": "Section h2 via SectionHeader; centered, ≤24ch." },
-      "heading-sm": { "displayName": "Heading Small", "purpose": "h3: split-content and feature-tour step titles." },
+      "display": { "displayName": "Display", "purpose": "Hero h1 only; white, centered, ≤18ch." },
+      "heading": { "displayName": "Heading", "purpose": "Section h2 via SectionHeader; white, centered, ≤24ch." },
+      "heading-sm": { "displayName": "Heading Small", "purpose": "h3: split-content and feature-tour step titles (ash when inactive)." },
       "subheading": { "displayName": "Subheading", "purpose": "h4 tile titles, product-bar title, comparison column names." },
-      "whisper": { "displayName": "Whisper", "purpose": "300-weight tagline under headlines and CTA body; ≤42rem." },
-      "body": { "displayName": "Body", "purpose": "Default 17px copy; supporting copy in ash." },
+      "whisper": { "displayName": "Whisper", "purpose": "300-weight fg tagline under headlines and CTA body; ≤42rem." },
+      "body": { "displayName": "Body", "purpose": "Default 17px fg copy; supporting copy in ash." },
       "body-sm": { "displayName": "Body Small", "purpose": "Tile body, table labels/cells, form labels, in-media pill labels." },
       "caption": { "displayName": "Caption", "purpose": "Image captions, footnotes, slider bounds, severity chips, footer." },
       "nav": { "displayName": "Nav", "purpose": "12px global-nav and product-bar links." },
-      "figure": { "displayName": "Figure", "purpose": "Tabular 600 measurements at 40px or display size; units in ash 400." }
+      "figure": { "displayName": "Figure", "purpose": "Tabular 600 fg measurements at 40px or display size; units in ash 400." }
     },
     "shadows": [
-      { "name": "product-shadow", "value": "filter: drop-shadow(3px 5px 30px rgb(0 0 0 / 0.22))", "purpose": "The only shadow in the system; product cut-outs (PNG on white) only." }
+      { "name": "product-shadow", "value": "filter: drop-shadow(3px 5px 30px rgb(0 0 0 / 0.22))", "purpose": "The only shadow in the system; product cut-outs only." }
     ],
     "motion": [
       { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single easing; rise-in and block-native presence transitions." },
@@ -62,114 +65,123 @@
       "name": "Primary Pill",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Filled lime pill, the accent's only home. Always the first action.",
-      "html": "<a class=\"ds-pill ds-pill-primary\" href=\"#\"><span>Which size do I need?</span></a>",
-      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 980px; padding: 11px 15px; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; transition: background-color 150ms, color 150ms, border-color 150ms; } .ds-pill-primary { background: #99cc33; color: #1d1d1f; border: 1px solid #99cc33; } .ds-pill-primary:hover { background: #a3d63f; border-color: #a3d63f; } .ds-pill:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; }"
+      "description": "Filled lime pill, the accent's filled home. Always the first action.",
+      "html": "<div class=\"ds-on-black\"><a class=\"ds-pill ds-pill-primary\" href=\"#\"><span>Which size do I need?</span></a></div>",
+      "css": ".ds-on-black { background: #000; padding: 16px; } .ds-pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 980px; padding: 11px 15px; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; transition: background-color 150ms, color 150ms, border-color 150ms; } .ds-pill-primary { background: #99cc33; color: #1d1d1f; border: 1px solid #99cc33; } .ds-pill-primary:hover { background: #a3d63f; border-color: #a3d63f; } .ds-pill:focus-visible { outline: 2px solid #99cc33; outline-offset: 2px; }"
     },
     {
       "name": "Secondary Pill",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Outlined lime-deep pill; always paired beside a primary.",
-      "html": "<a class=\"ds-pill ds-pill-secondary\" href=\"#\"><span>Find a stockist</span></a>",
-      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 980px; padding: 11px 15px; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; transition: background-color 150ms, color 150ms, border-color 150ms; } .ds-pill-secondary { background: transparent; color: #6f9a1f; border: 1px solid #6f9a1f; } .ds-pill-secondary:hover { background: #6f9a1f; color: #ffffff; } .ds-pill:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; }"
+      "description": "Outlined lime pill on black; always paired beside a primary. Hover fills lime with black text.",
+      "html": "<div class=\"ds-on-black\"><a class=\"ds-pill ds-pill-secondary\" href=\"#\"><span>Find a stockist</span></a></div>",
+      "css": ".ds-on-black { background: #000; padding: 16px; } .ds-pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 980px; padding: 11px 15px; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; transition: background-color 150ms, color 150ms, border-color 150ms; } .ds-pill-secondary { background: transparent; color: #99cc33; border: 1px solid #99cc33; } .ds-pill-secondary:hover { background: #99cc33; color: #000000; } .ds-pill:focus-visible { outline: 2px solid #99cc33; outline-offset: 2px; }"
     },
     {
       "name": "Ghost Link",
       "kind": "button",
       "refersTo": "button-text",
-      "description": "Lime-deep text link with 1.5-stroke chevron; tertiary actions (Learn more, downloads).",
-      "html": "<a class=\"ds-ghost\" href=\"#\"><span>Learn more</span><svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"11\" height=\"11\"><path d=\"M4.5 2.5 8 6l-3.5 3.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
-      "css": ".ds-ghost { display: inline-flex; align-items: center; gap: 6px; color: #6f9a1f; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; } .ds-ghost:hover { text-decoration: underline; } .ds-ghost:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; border-radius: 4px; }"
+      "description": "Lime text link with 1.5-stroke chevron; tertiary actions (Learn more, downloads).",
+      "html": "<div class=\"ds-on-black\"><a class=\"ds-ghost\" href=\"#\"><span>Learn more</span><svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"11\" height=\"11\"><path d=\"M4.5 2.5 8 6l-3.5 3.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></div>",
+      "css": ".ds-on-black { background: #000; padding: 16px; } .ds-ghost { display: inline-flex; align-items: center; gap: 6px; color: #99cc33; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; } .ds-ghost:hover { text-decoration: underline; } .ds-ghost:focus-visible { outline: 2px solid #99cc33; outline-offset: 2px; border-radius: 4px; }"
     },
     {
       "name": "Tile",
       "kind": "card",
       "refersTo": "tile",
-      "description": "Apple tile: 8px, 24px padding, frost on white / white on frost; only for real objects. h4 21/600 + body-sm ash.",
-      "html": "<div class=\"ds-tile\"><h4 class=\"ds-tile-title\">Fail-safe overflow</h4><p class=\"ds-tile-body\">If the fleece runs out or the motor stops, water bypasses the roll instead of flooding the sump.</p></div>",
-      "css": ".ds-tile { background: #f5f5f7; border-radius: 8px; padding: 24px; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-tile-title { margin: 0; font-size: 21px; line-height: 1.24; font-weight: 600; letter-spacing: -0.005em; text-wrap: balance; } .ds-tile-body { margin: 12px 0 0; font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: #6e6e73; }"
+      "description": "Apple tile on dark: 8px, 24px padding, lift #1d1d1f on black (black on lift); only for real objects. h4 21/600 white + body-sm ash.",
+      "html": "<div class=\"ds-on-black\"><div class=\"ds-tile\"><h4 class=\"ds-tile-title\">Fail-safe overflow</h4><p class=\"ds-tile-body\">If the fleece runs out or the motor stops, water bypasses the roll instead of flooding the sump.</p></div></div>",
+      "css": ".ds-on-black { background: #000; padding: 16px; } .ds-tile { background: #1d1d1f; border-radius: 8px; padding: 24px; color: #f5f5f7; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-tile-title { margin: 0; color: #ffffff; font-size: 21px; line-height: 1.24; font-weight: 600; letter-spacing: -0.005em; text-wrap: balance; } .ds-tile-body { margin: 12px 0 0; font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: #86868b; }"
     },
     {
       "name": "Field",
       "kind": "input",
       "refersTo": "field",
-      "description": "White input, 1px hairline, 8px, 17px; lime-deep focus outline.",
-      "html": "<label class=\"ds-field-label\" for=\"ds-f\">Email</label><input class=\"ds-field\" id=\"ds-f\" type=\"email\" placeholder=\"name@example.com\">",
-      "css": ".ds-field-label { display: block; margin-bottom: 8px; font: 400 14px/1.29 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; color: #1d1d1f; } .ds-field { width: 100%; box-sizing: border-box; border-radius: 8px; border: 1px solid #d2d2d7; background: #ffffff; padding: 12px 14px; font: 400 17px/1.47 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; color: #1d1d1f; } .ds-field::placeholder { color: #6e6e73; } .ds-field:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 0; border-color: transparent; }"
+      "description": "Lift-filled input, 1px hairline #424245, 8px, 17px fg; lime focus outline.",
+      "html": "<div class=\"ds-on-black\"><label class=\"ds-field-label\" for=\"ds-f\">Email</label><input class=\"ds-field\" id=\"ds-f\" type=\"email\" placeholder=\"name@example.com\"></div>",
+      "css": ".ds-on-black { background: #000; padding: 16px; } .ds-field-label { display: block; margin-bottom: 8px; font: 400 14px/1.29 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; color: #f5f5f7; } .ds-field { width: 100%; box-sizing: border-box; border-radius: 8px; border: 1px solid #424245; background: #1d1d1f; padding: 12px 14px; font: 400 17px/1.47 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; color: #f5f5f7; color-scheme: dark; } .ds-field::placeholder { color: #86868b; } .ds-field:focus-visible { outline: 2px solid #99cc33; outline-offset: 0; border-color: transparent; }"
     },
     {
       "name": "Segmented Control",
       "kind": "chip",
       "refersTo": "segmented-control",
-      "description": "Pebble pill track; selected segment is lime (the allowed selected state).",
-      "html": "<div class=\"ds-seg\" role=\"radiogroup\"><button class=\"ds-seg-opt is-selected\" role=\"radio\" aria-checked=\"true\">Light</button><button class=\"ds-seg-opt\" role=\"radio\" aria-checked=\"false\">Normal</button><button class=\"ds-seg-opt\" role=\"radio\" aria-checked=\"false\">Heavy</button></div>",
-      "css": ".ds-seg { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; padding: 4px; border-radius: 980px; background: #e8e8ed; } .ds-seg-opt { border: 0; background: transparent; border-radius: 980px; padding: 8px 16px; cursor: pointer; color: #6e6e73; font: 400 14px/1.29 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; transition: color 200ms, background-color 200ms; } .ds-seg-opt:hover { color: #1d1d1f; } .ds-seg-opt.is-selected { background: #99cc33; color: #1d1d1f; } .ds-seg-opt:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; }"
+      "description": "Pebble #2c2c2e pill track; selected segment is lime (the allowed selected state).",
+      "html": "<div class=\"ds-on-black\"><div class=\"ds-seg\" role=\"radiogroup\"><button class=\"ds-seg-opt is-selected\" role=\"radio\" aria-checked=\"true\">Light</button><button class=\"ds-seg-opt\" role=\"radio\" aria-checked=\"false\">Normal</button><button class=\"ds-seg-opt\" role=\"radio\" aria-checked=\"false\">Heavy</button></div></div>",
+      "css": ".ds-on-black { background: #000; padding: 16px; } .ds-seg { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; padding: 4px; border-radius: 980px; background: #2c2c2e; } .ds-seg-opt { border: 0; background: transparent; border-radius: 980px; padding: 8px 16px; cursor: pointer; color: #86868b; font: 400 14px/1.29 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; transition: color 200ms, background-color 200ms; } .ds-seg-opt:hover { color: #f5f5f7; } .ds-seg-opt.is-selected { background: #99cc33; color: #1d1d1f; } .ds-seg-opt:focus-visible { outline: 2px solid #99cc33; outline-offset: 2px; }"
     },
     {
       "name": "Global Nav + Product Bar",
       "kind": "nav",
       "refersTo": "global-nav",
-      "description": "44px carbon global nav (logo, 12px links) over a 52px white product bar (title 21/600, jump links, small lime pill).",
+      "description": "44px carbon/90 global nav with white/10 hairline (logo, 12px links) over a 52px black/80 product bar (title 21/600 white, ash jump links, small lime pill).",
       "html": "<div class=\"ds-shell\"><header class=\"ds-gnav\"><span class=\"ds-gnav-logo\">D-D</span><nav class=\"ds-gnav-links\"><a href=\"#\">ClariSea</a><a href=\"#\">Spektrum 150</a><a href=\"#\">Funktion Pump</a><a href=\"#\">KH Manager</a></nav><span class=\"ds-gnav-lang\">EN</span></header><nav class=\"ds-pbar\"><span class=\"ds-pbar-title\">ClariSea Gen 3</span><ul class=\"ds-pbar-links\"><li><a href=\"#\">By the numbers</a></li><li><a href=\"#\" aria-current=\"true\">See it run</a></li><li><a href=\"#\">Which size?</a></li></ul><a class=\"ds-pbar-cta\" href=\"#\">Find a stockist</a></nav></div>",
-      "css": ".ds-shell { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-gnav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 44px; padding: 0 22px; background: rgba(29,29,31,0.95); color: #ffffff; } .ds-gnav-logo { font-weight: 700; font-size: 14px; letter-spacing: 0.02em; } .ds-gnav-links { display: flex; gap: 32px; } .ds-gnav-links a, .ds-gnav-lang { color: rgba(255,255,255,0.8); font-size: 12px; letter-spacing: -0.01em; text-decoration: none; transition: color 150ms; } .ds-gnav-links a:hover { color: #ffffff; } .ds-pbar { display: flex; align-items: center; gap: 24px; height: 52px; padding: 0 22px; background: rgba(255,255,255,0.9); border-bottom: 1px solid #d2d2d7; color: #1d1d1f; } .ds-pbar-title { font-size: 21px; font-weight: 600; letter-spacing: -0.005em; } .ds-pbar-links { display: flex; gap: 24px; margin: 0 0 0 auto; padding: 0; list-style: none; } .ds-pbar-links a { font-size: 12px; letter-spacing: -0.01em; color: #474747; text-decoration: none; transition: color 150ms; } .ds-pbar-links a:hover, .ds-pbar-links a[aria-current] { color: #1d1d1f; } .ds-pbar-cta { display: inline-flex; align-items: center; border-radius: 980px; padding: 6px 12px; background: #99cc33; border: 1px solid #99cc33; color: #1d1d1f; font-size: 14px; letter-spacing: -0.022em; text-decoration: none; } .ds-pbar-cta:hover { background: #a3d63f; border-color: #a3d63f; }"
+      "css": ".ds-shell { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #000; } .ds-gnav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 44px; padding: 0 22px; background: rgba(29,29,31,0.9); border-bottom: 1px solid rgba(255,255,255,0.1); color: #ffffff; } .ds-gnav-logo { font-weight: 700; font-size: 14px; letter-spacing: 0.02em; } .ds-gnav-links { display: flex; gap: 32px; } .ds-gnav-links a, .ds-gnav-lang { color: rgba(255,255,255,0.8); font-size: 12px; letter-spacing: -0.01em; text-decoration: none; transition: color 150ms; } .ds-gnav-links a:hover { color: #ffffff; } .ds-pbar { display: flex; align-items: center; gap: 24px; height: 52px; padding: 0 22px; background: rgba(0,0,0,0.8); border-bottom: 1px solid #424245; color: #ffffff; } .ds-pbar-title { font-size: 21px; font-weight: 600; letter-spacing: -0.005em; } .ds-pbar-links { display: flex; gap: 24px; margin: 0 0 0 auto; padding: 0; list-style: none; } .ds-pbar-links a { font-size: 12px; letter-spacing: -0.01em; color: #86868b; text-decoration: none; transition: color 150ms; } .ds-pbar-links a:hover, .ds-pbar-links a[aria-current] { color: #ffffff; } .ds-pbar-cta { display: inline-flex; align-items: center; border-radius: 980px; padding: 6px 12px; background: #99cc33; border: 1px solid #99cc33; color: #1d1d1f; font-size: 14px; letter-spacing: -0.022em; text-decoration: none; } .ds-pbar-cta:hover { background: #a3d63f; border-color: #a3d63f; }"
     },
     {
       "name": "Section Header",
       "kind": "custom",
       "refersTo": "heading",
-      "description": "Centered h2 40/600 with the 300-weight whisper tagline; no eyebrow above.",
+      "description": "Centered white h2 40/600 with the 300-weight fg whisper tagline; no eyebrow above.",
       "html": "<header class=\"ds-sh\"><h2 class=\"ds-sh-h\">Everything the fleece caught.</h2><p class=\"ds-sh-whisper\">Slide to compare a fresh roll with one after weeks in the sump.</p></header>",
-      "css": ".ds-sh { text-align: center; max-width: 980px; margin: 0 auto; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-sh-h { margin: 0 auto; max-width: 24ch; font-size: clamp(2rem, 3.4vw, 2.5rem); line-height: 1.14; font-weight: 600; letter-spacing: 0.011em; text-wrap: balance; } .ds-sh-whisper { margin: 12px auto 0; max-width: 42rem; font-size: clamp(1.3125rem, 1.9vw, 1.625rem); line-height: 1.24; font-weight: 300; letter-spacing: 0.004em; }"
+      "css": ".ds-sh { text-align: center; max-width: 980px; margin: 0 auto; padding: 24px 16px; background: #000; color: #f5f5f7; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-sh-h { margin: 0 auto; max-width: 24ch; color: #ffffff; font-size: clamp(2rem, 3.4vw, 2.5rem); line-height: 1.14; font-weight: 600; letter-spacing: 0.011em; text-wrap: balance; } .ds-sh-whisper { margin: 12px auto 0; max-width: 42rem; font-size: clamp(1.3125rem, 1.9vw, 1.625rem); line-height: 1.24; font-weight: 300; letter-spacing: 0.004em; }"
     },
     {
       "name": "Stat Figure",
       "kind": "custom",
       "refersTo": "figure",
-      "description": "Tabular 600 measurement with ash unit and body-sm label; hairline rules frame the row.",
+      "description": "Tabular 600 fg measurement with ash unit and body-sm label; hairline #424245 rules frame the row.",
       "html": "<dl class=\"ds-stat\"><dd class=\"ds-stat-fig\">5,000<span class=\"ds-stat-unit\">l/h</span></dd><dt class=\"ds-stat-label\">SK-5000 G3 — 1,320 gal per hour</dt></dl>",
-      "css": ".ds-stat { margin: 0; padding: 40px 0; border-top: 1px solid #d2d2d7; border-bottom: 1px solid #d2d2d7; text-align: center; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-stat-fig { margin: 0; font-size: clamp(2.5rem, 4.6vw, 3.5rem); font-weight: 600; line-height: 1; letter-spacing: 0; font-variant-numeric: tabular-nums lining-nums; } .ds-stat-unit { margin-left: 6px; font-size: 21px; font-weight: 400; color: #6e6e73; } .ds-stat-label { margin-top: 12px; font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: #6e6e73; }"
+      "css": ".ds-stat { margin: 0; padding: 40px 16px; background: #000; border-top: 1px solid #424245; border-bottom: 1px solid #424245; text-align: center; color: #f5f5f7; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-stat-fig { margin: 0; font-size: clamp(2.5rem, 4.6vw, 3.5rem); font-weight: 600; line-height: 1; letter-spacing: 0; font-variant-numeric: tabular-nums lining-nums; } .ds-stat-unit { margin-left: 6px; font-size: 21px; font-weight: 400; color: #86868b; } .ds-stat-label { margin-top: 12px; font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: #86868b; }"
+    },
+    {
+      "name": "Severity Chip",
+      "kind": "chip",
+      "refersTo": "severity-chip",
+      "description": "Caption-size pill in the indicator legend: pebble/fg by default, alarm well #3a1c1a with danger #ff453a text for alarms.",
+      "html": "<div class=\"ds-on-black\"><span class=\"ds-chip\">Warning</span> <span class=\"ds-chip ds-chip-alarm\">Alarm</span></div>",
+      "css": ".ds-on-black { background: #000; padding: 16px; } .ds-chip { display: inline-flex; align-items: center; border-radius: 980px; padding: 4px 10px; background: #2c2c2e; color: #f5f5f7; font: 400 12px/1.33 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.01em; } .ds-chip-alarm { background: #3a1c1a; color: #ff453a; }"
     }
   ],
   "narrative": {
-    "northStar": "A White Room With a Single Lime Switch",
-    "overview": "This is the Apple design architecture (Refero \"Apple\") translated for reef-keeping hardware. The page is a sequence of full-bleed, centered, stacked, symmetric sections on two canvases, frost and white, alternating as the story moves; the only dark surfaces are the 44px global nav and the film/360° sections. Every section opens with a centered headline and, optionally, a light 300-weight \"whisper\" tagline; below it sits the thing itself, a photograph or product cut-out from the client's original studio photography, on white. Copy is carbon on light, ash for the supporting voice, and it stays inside a 980px column. There are no decorative colours, no gradients, no glass, no glow, and exactly one shadow (a soft drop shadow reserved for product cut-outs).\n\nColour is a switch, not a palette. Lime (#99cc33) appears only where the user can act or has chosen: the filled pill and the selected state of a segmented control. Lime-deep (#6f9a1f), which passes AA on white, draws outlined pills, ghost links, focus rings and prose links. Nothing else, no border, figure, icon or heading, is coloured. Numbers are big and tabular in carbon; icons are 1.5-stroke grayscale line SVGs; progress and slider fills are carbon on hairline. Type is SF Pro on Apple devices and Inter everywhere else, on a major-second scale from 17px with Apple's slightly positive tracking on large sizes and slightly negative tracking on body.\n\nThe system rejects the previous v2 world explicitly: no dark product stages behind copy, no card grids sitting on the canvas for text alone, no eyebrows or kickers over headings, no second accent, no 700-weight headlines, no shipped display face.",
+    "northStar": "A Black Room With a Single Lime Switch",
+    "overview": "This is the Apple design architecture (Refero \"Apple\") translated for reef-keeping hardware, in its dark register. The page is a sequence of full-bleed, centered, stacked, symmetric sections on two canvases, black (#000) and a #1d1d1f lift, alternating as the story moves; the hero, film and 360° sections sit on black and the first lift begins with the next section. Every section opens with a centered white headline and, optionally, a light 300-weight \"whisper\" tagline in fg; below it sits the thing itself, a photograph or product cut from the client's own dark studio photography, feathered into black. Copy is fg (#f5f5f7) on black, ash (#86868b) for the supporting voice, and it stays inside a 980px column. There are no decorative colours, no gradients, no glass, no glow, and exactly one shadow (a soft drop shadow reserved for product cut-outs). Real white is reserved for headings, photo wells, pill labels, the before/after handle and the slider thumb.\n\nColour is a switch, not a palette. Lime (#99cc33) appears where the user can act or has chosen: the filled pill, the selected segment of a segmented control, and, because full lime passes 9:1 on black, also the outlined secondary pill, ghost links, prose links and focus rings. lime-deep is kept as a token name but resolves to the same lime on this branch. Nothing else, no border, figure, icon or heading, is coloured. Numbers are big and tabular in fg; icons are 1.5-stroke line SVGs in ash/fg; progress and slider fills are fg on hairline (#424245). Type is SF Pro on Apple devices and Inter everywhere else, on a major-second scale from 17px with Apple's slightly positive tracking on large sizes and slightly negative tracking on body.\n\nThe system rejects the previous v2 world explicitly: no dark-glow product stages behind copy, no card grids sitting on the canvas for text alone, no eyebrows or kickers over headings, no second accent, no 700-weight headlines, no shipped display face. Dark here is a flat black room, not a lit stage.",
     "keyCharacteristics": [
-      "Two light canvases (frost #f5f5f7 / white) alternating; dark (#000 / #1d1d1f) only for global nav and film sections.",
-      "One accent with two jobs: lime fills the primary pill and the selected state; lime-deep outlines, links, and focus rings.",
-      "Photography-led: the product render/photograph is the hero of every section; cut-outs sit on white, uncropped, object-contain.",
+      "Two dark canvases (black #000 / lift #1d1d1f) alternating; color-scheme: dark; the global nav is carbon over both.",
+      "One accent with two jobs: lime fills the primary pill and the selected state; the same lime outlines the secondary pill, draws links and focus rings.",
+      "Photography-led: the hero is the unit cut from the brand's dark banner feathered into black; product cut-outs sit object-contain on transparent or lift wells; white-background renders are not used on this branch's ClariSea page.",
       "Apple type scale from 17px, weight 600 for headings, 300 for the whisper tagline, never 700.",
-      "Two-tier navigation: 44px carbon global nav with the real D-D wordmark, 52px sticky white product bar generated from block eyebrows.",
-      "Pills 980px, everything else 8px; hairlines #d2d2d7; one product-image shadow; a single rise-in scroll motion."
+      "Two-tier navigation: 44px carbon/90 blurred global nav with the real D-D wordmark and a white/10 hairline, 52px sticky black/80 blurred product bar generated from block eyebrows.",
+      "Pills 980px, everything else 8px; hairlines #424245; one product-image shadow; a single rise-in scroll motion."
     ],
     "rules": [
-      { "name": "The Single Switch Rule", "body": "Lime is a fill, never a stroke or a glyph. It may only fill the primary pill and the selected state; lime-deep may only draw an outline, a link, or a focus ring. Everything else is carbon, ash, hairline, frost or white.", "section": "colors" },
-      { "name": "The Two Canvases Rule", "body": "Sections alternate frost and white; the hero is white and the first frost canvas begins with the next section. Dark canvases are for the global nav, the film section and the 360° viewer only, never as a product stage behind copy.", "section": "colors" },
-      { "name": "The Carbon Fill Rule", "body": "Progress rails, slider fills, active tour segments and how-it-works progress use carbon (white on dark), not lime. Selection is lime; progress is carbon.", "section": "colors" },
+      { "name": "The Single Switch Rule", "body": "Lime is the only colour. It may fill the primary pill and the selected state, and on this dark register it may also draw an outline, a link or a focus ring; it may never colour a heading, figure, icon, rule or background wash. Everything else is fg, ash, hairline, lift or black.", "section": "colors" },
+      { "name": "The Two Canvases Rule", "body": "Sections alternate black and lift; the hero, film and 360° sections are black and the first lift begins with the next section. There is no third canvas and no product \"stage\" with a glow or vignette behind copy.", "section": "colors" },
+      { "name": "The Foreground Fill Rule", "body": "Progress rails, slider fills, active tour segments and how-it-works progress use fg (#f5f5f7; pure white on film sections), not lime. Selection is lime; progress is foreground.", "section": "colors" },
+      { "name": "The Real White Rule", "body": "#ffffff is spent only on headings, photo wells that need it, pill labels, the before/after handle and the slider thumb. Body copy is #f5f5f7; there is no white surface.", "section": "colors" },
       { "name": "The No-Eyebrow Rule", "body": "Nothing sits above a heading. SectionHeader accepts eyebrow but never renders it; the field feeds the product bar's jump-link label instead. No kickers, no section numbers except in a real sequence (how-it-works keeps its numbers).", "section": "typography" },
       { "name": "The 600 Ceiling Rule", "body": "Headings are weight 600 and never 700; the tagline is 300; body is 400. Emphasis comes from size and canvas, not weight.", "section": "typography" },
       { "name": "The Center Column Rule", "body": "Headline + whisper are centered in the 980px container-text; body copy caps at 42rem/68ch. Only reading blocks (portableText, 720px) are left-aligned.", "section": "typography" },
       { "name": "The One Shadow Rule", "body": "If it isn't a product cut-out, it has no shadow. Tiles, pills, inputs, tables and popovers are flat; the locale listbox uses a 1px hairline ring instead.", "section": "elevation" }
     ],
     "dos": [
-      "Do alternate canvas-frost and canvas-white sections; the hero is white and the next section starts frost.",
-      "Do put lime only in a filled pill fill or a selected state, and lime-deep only in outlines, links and focus rings.",
-      "Do open every section with a centered h2 (40/600, ≤24ch) and an optional 300-weight whisper tagline (≤42rem) via SectionHeader.",
-      "Do lead with the client's original photography in 8px .media frames or uncropped object-contain cut-outs on white; .product-shadow only on cut-outs.",
-      "Do use hairline (#d2d2d7) 1px rules for tables, stat rows, rails and dividers; carbon for progress and slider fills.",
-      "Do pair pills: filled primary first, outlined secondary beside it, ghost chevron links for tertiary actions.",
-      "Do keep tiles at 8px / 24px padding, frost on white and white on frost, and only for real objects (products, controls, forms, spec tables, quotes).",
-      "Do use .figure tabular 600 numbers with ash 400 units for every measurement.",
-      "Do keep icons 1.5-stroke line SVGs in ash/carbon, 11–24px.",
+      "Do alternate canvas-white (black) and canvas-frost (lift #1d1d1f) sections; the hero is black and the next section starts lift.",
+      "Do put lime in a filled pill fill or a selected state, and only otherwise in an outline, a link or a focus ring.",
+      "Do open every section with a centered white h2 (40/600, ≤24ch) and an optional 300-weight fg whisper tagline (≤42rem) via SectionHeader.",
+      "Do lead with the client's own dark studio photography: the hero unit feathered into black, 8px .media frames, or uncropped object-contain cut-outs on transparent/lift wells; .product-shadow only on cut-outs.",
+      "Do use hairline (#424245) 1px rules for tables, stat rows, rails and dividers; fg for progress and slider fills.",
+      "Do pair pills: filled primary first, outlined lime secondary beside it, ghost chevron links for tertiary actions.",
+      "Do keep tiles at 8px / 24px padding, lift on black and black on lift, and only for real objects (products, controls, forms, spec tables, quotes).",
+      "Do use .figure tabular 600 numbers in fg with ash 400 units for every measurement.",
+      "Do keep icons 1.5-stroke line SVGs in ash/fg, 11–24px.",
       "Do rely on rise-in as the only scroll motion (560ms ease-out-expo, 14px) and honour reduced motion."
     ],
     "donts": [
       "Don't render an eyebrow, kicker or section number above a heading (eyebrow labels the product bar's jump link only).",
-      "Don't use dark canvases outside the global nav, film/video and 360° sections; never as a product stage behind text.",
-      "Don't colour text, borders, figures or icons lime; no lime lines, no lime headings, no \"Recommended\" filled pills (use lime-deep body-sm text).",
-      "Don't add shadows, gradients, glass, glow, rings or blur beyond the two sticky bars' backdrop blur and the single product drop shadow.",
+      "Don't introduce a light canvas, a white surface, or white-background product renders on this branch; white is for headings, pill labels, handles and thumbs.",
+      "Don't colour headings, figures, icons or rules lime; no lime lines, no lime washes, no \"Recommended\" filled pills (use lime body-sm text).",
+      "Don't add shadows, gradients, glass, glow, vignettes, rings or blur beyond the two sticky bars' backdrop blur, the LED's own pulse and the single product drop shadow.",
       "Don't set headlines at weight 700, ship a separate display face, or use uppercase tracked labels.",
-      "Don't put a text-only card on the frost canvas; the canvas is the surface.",
+      "Don't put a text-only card on the canvas; the canvas is the surface.",
       "Don't crop product cut-outs or leave sections without a photograph where one exists.",
       "Don't introduce a second accent, brand colours from imagery, or an unpaired outlined pill.",
       "Don't add entrance motion to the hero or any motion other than rise-in and a block's own signature interaction."

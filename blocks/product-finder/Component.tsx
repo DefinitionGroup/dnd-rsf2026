@@ -33,9 +33,9 @@ function pickRule(rules: Rule[], effective: number): number {
 
 const RANGE_CLASS = [
   "h-5 w-full cursor-pointer appearance-none bg-transparent",
-  // track: hairline with carbon fill up to --pct
-  "[&::-webkit-slider-runnable-track]:h-px [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--color-carbon)_var(--pct),var(--color-hairline)_var(--pct))]",
-  "[&::-moz-range-track]:h-px [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--color-carbon)_var(--pct),var(--color-hairline)_var(--pct))]",
+  // track: hairline with fg fill up to --pct
+  "[&::-webkit-slider-runnable-track]:h-px [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--color-fg)_var(--pct),var(--color-hairline)_var(--pct))]",
+  "[&::-moz-range-track]:h-px [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--color-fg)_var(--pct),var(--color-hairline)_var(--pct))]",
   // thumb: white disc with hairline
   "[&::-webkit-slider-thumb]:-mt-[10px] [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-hairline [&::-webkit-slider-thumb]:bg-white",
   "[&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border [&::-moz-range-thumb]:border-solid [&::-moz-range-thumb]:border-hairline [&::-moz-range-thumb]:bg-white",
@@ -92,7 +92,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
             {/* Volume */}
             <div>
               <div className="flex flex-wrap items-end justify-between gap-3">
-                <label htmlFor={`${uid}-volume`} className="body-sm text-ash">
+                <label htmlFor={`${uid}-volume`} className="body-sm text-fg-muted">
                   {block.volumeLabel ?? "Aquarium volume"}
                 </label>
                 <div className="flex items-baseline gap-2">
@@ -111,9 +111,9 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                       if (e.target.value !== "" && Number.isFinite(n)) setVolume(clamp(Math.round(n), min, max));
                     }}
                     onBlur={() => commitVolume(Number(volumeText))}
-                    className="field num w-28 py-2 text-right text-[21px] font-semibold text-carbon"
+                    className="field num w-28 py-2 text-right text-[21px] font-semibold text-fg"
                   />
-                  <span className="figure-unit text-[17px] text-ash">l</span>
+                  <span className="figure-unit text-[17px] text-fg-muted">l</span>
                 </div>
               </div>
 
@@ -135,7 +135,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                 />
                 <div className="caption num mt-2 flex justify-between" aria-hidden="true">
                   <span>{min} l</span>
-                  <span className="text-carbon">≈ {gallons} US gal</span>
+                  <span className="text-fg">≈ {gallons} US gal</span>
                   <span>{max} l</span>
                 </div>
               </div>
@@ -144,13 +144,13 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
             {/* Bioload */}
             {options.length > 0 && (
               <div>
-                <p id={`${uid}-load-label`} className="body-sm text-ash">
+                <p id={`${uid}-load-label`} className="body-sm text-fg-muted">
                   {block.loadLabel ?? "Stocking / feeding"}
                 </p>
                 <div
                   role="radiogroup"
                   aria-labelledby={`${uid}-load-label`}
-                  className="mt-3 grid grid-cols-1 gap-1 rounded-[var(--radius-pill)] bg-pebble p-1 sm:grid-flow-col sm:auto-cols-fr"
+                  className="mt-3 grid grid-flow-col auto-cols-fr gap-1 rounded-[var(--radius-pill)] bg-pebble p-1"
                 >
                   {options.map((o, i) => {
                     const selected = i === loadIndex;
@@ -172,7 +172,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                           }
                         }}
                         className={`body-sm relative cursor-pointer rounded-[var(--radius-pill)] px-4 py-2 transition-colors duration-200 ${
-                          selected ? "bg-lime text-carbon" : "text-ash hover:text-carbon"
+                          selected ? "bg-lime text-carbon" : "text-fg-muted hover:text-fg"
                         }`}
                       >
                         {o.label}
@@ -207,30 +207,30 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                   )}
                   <div className="min-w-0">
                     <h4 className="text-balance">{rule.resultTitle}</h4>
-                    {productName && stegaClean(productName) !== stegaClean(rule.resultTitle) && <p className="body-sm mt-1 text-ash">{productName}</p>}
+                    {productName && stegaClean(productName) !== stegaClean(rule.resultTitle) && <p className="body-sm mt-1 text-fg-muted">{productName}</p>}
                   </div>
                 </div>
 
-                {rule.resultBody && <p className="mt-3 text-ash">{rule.resultBody}</p>}
+                {rule.resultBody && <p className="mt-3 text-fg-muted">{rule.resultBody}</p>}
 
                 {(typeof rule.flowLph === "number" || rollRange) && (
                   <dl className="hairline mt-6 grid grid-cols-2 gap-6 border-t pt-6">
                     {typeof rule.flowLph === "number" && (
                       <div>
-                        <dt className="body-sm text-ash">Flow</dt>
+                        <dt className="body-sm text-fg-muted">Flow</dt>
                         <dd className="mt-2 flex items-baseline gap-1.5">
-                          <span className="figure text-[40px] text-carbon">{rule.flowLph.toLocaleString("en")}</span>
-                          <span className="figure-unit text-[17px] text-ash">l/h</span>
+                          <span className="figure text-[clamp(1.625rem,7vw,2.5rem)] text-fg">{rule.flowLph.toLocaleString("en")}</span>
+                          <span className="figure-unit text-[17px] text-fg-muted">l/h</span>
                         </dd>
                       </div>
                     )}
                     {rollRange && (
                       <div>
-                        <dt className="body-sm text-ash">{block.rollLifeLabel ?? "Expected roll life"}</dt>
+                        <dt className="body-sm text-fg-muted">{block.rollLifeLabel ?? "Expected roll life"}</dt>
                         <dd className="mt-2 flex items-baseline gap-1.5">
-                          <span className="figure-unit text-[17px] text-ash">≈</span>
-                          <span className="figure text-[40px] text-carbon">{rollRange}</span>
-                          <span className="figure-unit text-[17px] text-ash">weeks</span>
+                          <span className="figure-unit text-[17px] text-fg-muted">≈</span>
+                          <span className="figure text-[clamp(1.625rem,7vw,2.5rem)] text-fg">{rollRange}</span>
+                          <span className="figure-unit text-[17px] text-fg-muted">weeks</span>
                         </dd>
                       </div>
                     )}

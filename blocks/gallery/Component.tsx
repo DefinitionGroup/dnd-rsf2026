@@ -13,7 +13,7 @@ export default function GalleryBlock({ block }: BlockProps<"galleryBlock">) {
   if (!images.length) return null;
 
   return (
-    <section className="canvas-white section-space page-gutter">
+    <section className="canvas-frost section-space page-gutter">
       <div className="container-site">
         <SectionHeader headline={block.headline} />
 

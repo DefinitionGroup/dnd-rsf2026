@@ -58,7 +58,7 @@ export default function FeatureTourBlock({ block }: BlockProps<"featureTourBlock
           {/* Sticky media */}
           <div className="relative">
             <div className="sticky top-24">
-              <div className="media relative aspect-[4/3]">
+              <div className="media relative aspect-[4/5] max-h-[calc(100svh-8rem)]">
                 <AnimatePresence initial={false} mode="sync">
                   <motion.div
                     key={activeStep._key}
@@ -153,9 +153,9 @@ function StepBody({
   active: boolean;
   className?: string;
 }) {
-  const titleColor = active ? (dark ? "text-white" : "text-carbon") : dark ? "text-mist" : "text-ash";
-  const bodyColor = active ? (dark ? "text-mist" : "text-ash") : dark ? "text-mist/60" : "text-ash/60";
-  const figureColor = dark ? "text-white" : "text-carbon";
+  const titleColor = active ? (dark ? "text-white" : "text-fg") : dark ? "text-fg-muted" : "text-fg-muted";
+  const bodyColor = "text-fg-muted";
+  const figureColor = dark ? "text-white" : "text-fg";
 
   return (
     <div className={`transition-colors duration-500 ${className}`}>

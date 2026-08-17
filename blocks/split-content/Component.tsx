@@ -23,7 +23,7 @@ export default function SplitContentBlock({ block }: BlockProps<"splitContentBlo
   const toneKey = stegaClean(block.tone ?? "paper");
   const tone: Tone = toneKey === "ink" || toneKey === "sand" ? toneKey : "paper";
   const reverse = Boolean(block.reverse);
-  const bodyColor = tone === "ink" ? "text-mist" : "text-ash";
+  const bodyColor = tone === "ink" ? "text-fg-muted" : "text-fg-muted";
 
   return (
     <section className={`section-space page-gutter ${TONE_SECTION[tone]}`}>

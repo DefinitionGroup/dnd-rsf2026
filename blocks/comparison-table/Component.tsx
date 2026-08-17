@@ -16,7 +16,7 @@ const NA = new Set(["—", "-", "–", "n/a", "na", ""]);
 
 function CheckIcon() {
   return (
-    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-carbon">
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-fg">
       <path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -24,7 +24,7 @@ function CheckIcon() {
 
 function CrossIcon() {
   return (
-    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-ash">
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-fg-muted">
       <path d="M6 6l8 8M14 6l-8 8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
@@ -32,7 +32,7 @@ function CrossIcon() {
 
 function DashIcon() {
   return (
-    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-ash">
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-fg-muted">
       <path d="M6 10h8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
@@ -64,7 +64,7 @@ function CellValue({ value }: { value: string | undefined }) {
       </span>
     );
   }
-  return <span className="body num text-carbon">{value}</span>;
+  return <span className="body num text-fg">{value}</span>;
 }
 
 /* ------------------------------------------------------------------ */
@@ -77,19 +77,19 @@ function ColumnHeader({ column, highlight }: { column: Column; highlight: boolea
   return (
     <div className="flex flex-col items-center gap-4 text-center">
       {product?.image?.asset ? (
-        <span className="media relative mx-auto block aspect-square w-40 bg-white">
+        <span className="media relative mx-auto block aspect-square w-40 bg-transparent">
           <SanityImage image={product.image} alt={product.imageAlt ?? product.name ?? column.title ?? ""} fill sizes="160px" className="object-contain" />
         </span>
       ) : null}
       <div className="flex flex-col items-center gap-1">
         <h4 className="text-balance">{column.title}</h4>
         {(column.subtitle || highlight) && (
-          <p className="body-sm text-ash">
+          <p className="body-sm text-fg-muted">
             {column.subtitle}
             {highlight && (column.subtitle ? " · Recommended" : "Recommended")}
           </p>
         )}
-        {showProductName && <p className="body-sm text-ash">{product.name}</p>}
+        {showProductName && <p className="body-sm text-fg-muted">{product.name}</p>}
       </div>
     </div>
   );
@@ -126,7 +126,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
 
             <thead>
               <tr className="align-bottom">
-                <th scope="col" className="hairline sticky left-0 z-10 min-w-[10rem] border-b bg-white px-4 pb-6 pt-2 text-left md:min-w-[14rem] md:px-5">
+                <th scope="col" className="hairline sticky left-0 z-10 min-w-[10rem] border-b bg-canvas px-4 pb-6 pt-2 text-left md:min-w-[14rem] md:px-5">
                   <span className="sr-only">{block.rowHeader ?? "Feature"}</span>
                 </th>
                 {columns.map((col) => {
@@ -147,7 +147,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
                   <tr key={row._key}>
                     <th
                       scope="row"
-                      className={`hairline body-sm sticky left-0 z-10 bg-white px-4 py-4 text-left align-top font-normal text-ash md:px-5 ${
+                      className={`hairline body-sm sticky left-0 z-10 bg-canvas px-4 py-4 text-left align-top font-normal text-fg-muted md:px-5 ${
                         last ? "" : "border-b"
                       }`}
                     >
@@ -167,7 +167,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
             {hasCta && (
               <tfoot>
                 <tr>
-                  <td className="sticky left-0 z-10 bg-white px-4 py-6 md:px-5" aria-hidden="true" />
+                  <td className="sticky left-0 z-10 bg-canvas px-4 py-6 md:px-5" aria-hidden="true" />
                   {columns.map((col) => (
                     <td key={col._key} className="px-4 py-6 text-center align-top md:px-5">
                       <ActionLink link={col.cta} variant="text" />

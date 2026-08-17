@@ -37,7 +37,7 @@ export default function ProductBar({
   if (!sections.length && !cta) return null;
 
   return (
-    <nav aria-label={`${title} sections`} className="sticky top-[var(--header-h)] z-30 border-b border-hairline bg-white/90 backdrop-blur-md">
+    <nav aria-label={`${title} sections`} className="sticky top-[var(--header-h)] z-30 border-b border-hairline bg-black/80 backdrop-blur-md">
       <div className="container-page page-gutter flex h-[var(--productbar-h)] items-center gap-6">
         <span className="shrink-0 text-[21px] font-semibold tracking-[-0.005em]">{title}</span>
         <ul className="ml-auto hidden items-center gap-6 overflow-x-auto md:flex [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -46,7 +46,7 @@ export default function ProductBar({
               <a
                 href={`#${s.id}`}
                 aria-current={active === s.id ? "true" : undefined}
-                className={`text-[12px] tracking-[-0.01em] transition-colors ${active === s.id ? "text-carbon" : "text-graphite hover:text-carbon"}`}
+                className={`text-[12px] tracking-[-0.01em] transition-colors ${active === s.id ? "text-white" : "text-fg-muted hover:text-white"}`}
               >
                 {s.label}
               </a>

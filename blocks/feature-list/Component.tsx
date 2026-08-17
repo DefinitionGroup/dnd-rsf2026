@@ -22,7 +22,7 @@ export default function FeatureListBlock({ block }: BlockProps<"featureListBlock
               <Reveal key={item._key} as="li" delay={(index % 3) * 60} className="flex">
                 <div className="tile h-full w-full">
                   <h4>{item.title}</h4>
-                  {item.text && <p className="body-sm mt-3 text-ash">{item.text}</p>}
+                  {item.text && <p className="body-sm mt-3 text-fg-muted">{item.text}</p>}
                 </div>
               </Reveal>
             ))}

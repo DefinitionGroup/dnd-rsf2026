@@ -44,7 +44,7 @@ export default function ProductListBlock({ block }: BlockProps<"productListBlock
             const href = stegaClean(item.link?.href) || product.legacyUrl || null;
             const cardBody = (
               <>
-                <span className="media relative block aspect-square bg-white">
+                <span className="media relative block aspect-square">
                   {product.image?.asset ? (
                     <SanityImage
                       image={product.image}
@@ -56,8 +56,8 @@ export default function ProductListBlock({ block }: BlockProps<"productListBlock
                   ) : null}
                 </span>
                 <span className="flex flex-1 flex-col pt-3">
-                  <h4 className="text-carbon">{product.name}</h4>
-                  {product.tagline ? <span className="body-sm mt-1 block text-ash">{product.tagline}</span> : null}
+                  <h4 className="text-fg">{product.name}</h4>
+                  {product.tagline ? <span className="body-sm mt-1 block text-fg-muted">{product.tagline}</span> : null}
                   {href ? (
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-lime-deep group-hover:underline">
                       <span>{item.link?.label || "Learn more"}</span>

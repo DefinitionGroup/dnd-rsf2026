@@ -92,7 +92,7 @@ export const clarisea: ProductSummary = {
   ),
   category: "Filtration",
   sku: "SK-3000 G3 / SK-5000 G3",
-  image: img("original/clarisea-sk5000-rolls.png", { width: 1055, height: 1058 }),
+  image: img("original/clarisea-unit-dark.jpg", { width: 880, height: 720 }),
   imageAlt: "ClariSea SK-5000 Gen 3 automatic fleece filter with two 40 m XL QuickChange rolls",
   gallery: [
     captioned("original/clarisea-sk3000.jpg", "ClariSea SK-3000 Gen 3", "SK-3000 G3 — up to 3,000 l/h"),

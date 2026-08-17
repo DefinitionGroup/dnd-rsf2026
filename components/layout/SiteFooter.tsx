@@ -11,17 +11,17 @@ export default function SiteFooter({ locale, menu, settings }: { locale: Locale;
   const brand = settings?.brandName ?? "The Aquarium Solution";
   const dealerUrl = settings?.dealerLocatorUrl ?? LEGACY_STOCKISTS_URL;
   const mainSite = settings?.legacySiteUrl ?? LEGACY_SITE_ORIGIN;
-  const head = "mb-2.5 text-[12px] font-semibold text-carbon";
-  const col = "space-y-2 text-[12px] text-ash";
+  const head = "mb-2.5 text-[12px] font-semibold text-white";
+  const col = "space-y-2 text-[12px] text-fg-muted";
   const link = "hover:underline";
 
   return (
-    <footer className="canvas-frost text-carbon">
+    <footer className="canvas-frost text-fg">
       <div className="container-text page-gutter">
         <div className="grid gap-8 border-b border-hairline py-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Logo tone="dark" />
-            {settings?.description && <p className="mt-4 max-w-xs text-[12px] leading-relaxed text-ash">{settings.description}</p>}
+            <Logo />
+            {settings?.description && <p className="mt-4 max-w-xs text-[12px] leading-relaxed text-fg-muted">{settings.description}</p>}
           </div>
           <div>
             <p className={head}>Products</p>
@@ -44,7 +44,7 @@ export default function SiteFooter({ locale, menu, settings }: { locale: Locale;
             </ul>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-2 py-4 text-[12px] text-ash">
+        <div className="flex flex-wrap items-center justify-between gap-2 py-4 text-[12px] text-fg-muted">
           <span>Copyright © {year} {brand}. All rights reserved.</span>
           <span>D-D The Aquarium Solution Ltd.</span>
         </div>

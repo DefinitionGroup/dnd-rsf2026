@@ -12,7 +12,7 @@ function PlusMinusIcon() {
       height="20"
       aria-hidden="true"
       focusable="false"
-      className="shrink-0 text-ash transition-transform duration-300 ease-[var(--ease-out-expo)] group-open:rotate-180"
+      className="shrink-0 text-fg-muted transition-transform duration-300 ease-[var(--ease-out-expo)] group-open:rotate-180"
     >
       <path d="M4 10h12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <path
@@ -48,7 +48,7 @@ export default function FaqSpecBlock({ block }: BlockProps<"faqSpecBlock">) {
               <div className="flex flex-col gap-3">
                 {block.specsHeadline ? <h4>{block.specsHeadline}</h4> : null}
                 {block.product?.name ? (
-                  <p className="body-sm text-ash">
+                  <p className="body-sm text-fg-muted">
                     {block.product.name}
                     {block.product.sku ? <span> · {block.product.sku}</span> : null}
                   </p>
@@ -60,12 +60,12 @@ export default function FaqSpecBlock({ block }: BlockProps<"faqSpecBlock">) {
                     <tbody>
                       {specs.map((spec) => (
                         <tr key={spec._key} className="hairline border-t last:border-b">
-                          <th scope="row" className="body-sm py-3.5 pr-4 text-left align-baseline font-normal text-ash">
+                          <th scope="row" className="body-sm py-3.5 pr-4 text-left align-baseline font-normal text-fg-muted">
                             {spec.label}
                           </th>
-                          <td className="body num py-3.5 text-right align-baseline text-carbon">
+                          <td className="body num py-3.5 text-right align-baseline text-fg">
                             {spec.value}
-                            {spec.unit ? <span className="figure-unit ml-1 text-ash">{spec.unit}</span> : null}
+                            {spec.unit ? <span className="figure-unit ml-1 text-fg-muted">{spec.unit}</span> : null}
                           </td>
                         </tr>
                       ))}
@@ -93,14 +93,14 @@ export default function FaqSpecBlock({ block }: BlockProps<"faqSpecBlock">) {
                 <div>
                   {faqs.map((faq) => (
                     <details key={faq._key} name={accordionName} className="group hairline border-b first:border-t">
-                      <summary className="body flex cursor-pointer list-none items-start justify-between gap-6 py-5 font-semibold text-carbon [&::-webkit-details-marker]:hidden">
+                      <summary className="body flex cursor-pointer list-none items-start justify-between gap-6 py-5 font-semibold text-fg [&::-webkit-details-marker]:hidden">
                         <span>{faq.question}</span>
                         <span className="mt-0.5 flex shrink-0 items-center" aria-hidden="true">
                           <PlusMinusIcon />
                         </span>
                       </summary>
                       <div className="pb-6 pr-12">
-                        <RichText value={faq.answer} className="prose-site text-ash" />
+                        <RichText value={faq.answer} className="prose-site text-fg-muted" />
                       </div>
                     </details>
                   ))}

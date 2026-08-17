@@ -34,9 +34,9 @@ function hasSound(v: string | undefined) {
 }
 
 const SEVERITY_CHIP: Record<Severity, string> = {
-  info: "bg-pebble text-carbon",
-  warning: "bg-pebble text-carbon",
-  alarm: "bg-[#fde8e6] text-danger",
+  info: "bg-pebble text-fg",
+  warning: "bg-pebble text-fg",
+  alarm: "bg-[#3a1c1a] text-danger",
 };
 const SEVERITY_LABEL: Record<Severity, string> = { info: "Normal", warning: "Warning", alarm: "Alarm" };
 const PATTERN_LABEL: Record<Pattern, string> = { solid: "solid", flash: "flashing", pulse: "slow pulse" };
@@ -54,7 +54,7 @@ function ChevronIcon({ open }: { open: boolean }) {
       height="20"
       aria-hidden="true"
       focusable="false"
-      className={`shrink-0 text-ash transition-transform duration-300 ease-[var(--ease-out-expo)] ${open ? "rotate-180" : ""}`}
+      className={`shrink-0 text-fg-muted transition-transform duration-300 ease-[var(--ease-out-expo)] ${open ? "rotate-180" : ""}`}
     >
       <path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -125,7 +125,7 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
                       }
                     }}
                     className={`flex w-full cursor-pointer items-center gap-4 py-5 text-left transition-colors duration-200 ${
-                      isActive ? "text-carbon" : "text-carbon hover:text-ash"
+                      isActive ? "text-fg" : "text-fg hover:text-fg-muted"
                     }`}
                   >
                     <MiniLed color={ledColor(s.ledColor)} />
@@ -148,22 +148,22 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
                         <div className="grid gap-5 pb-6 pl-7 pr-2 sm:grid-cols-2">
                           <dl className="contents">
                             <div>
-                              <dt className="body-sm text-ash">Signal</dt>
-                              <dd className="mt-1 text-carbon">
+                              <dt className="body-sm text-fg-muted">Signal</dt>
+                              <dd className="mt-1 text-fg">
                                 LED {COLOR_LABEL[ledColor(s.ledColor)].toLowerCase()}, {PATTERN_LABEL[pattern(s.pattern)]}
                                 {s.sound ? ` · ${s.sound}` : ""}
                               </dd>
                             </div>
                             {s.meaning && (
                               <div>
-                                <dt className="body-sm text-ash">What it means</dt>
-                                <dd className="mt-1 text-carbon">{s.meaning}</dd>
+                                <dt className="body-sm text-fg-muted">What it means</dt>
+                                <dd className="mt-1 text-fg">{s.meaning}</dd>
                               </div>
                             )}
                             {s.action && (
                               <div className="sm:col-span-2">
-                                <dt className="body-sm text-ash">What to do</dt>
-                                <dd className="mt-1 font-semibold text-carbon">{s.action}</dd>
+                                <dt className="body-sm text-fg-muted">What to do</dt>
+                                <dd className="mt-1 font-semibold text-fg">{s.action}</dd>
                               </div>
                             )}
                           </dl>
@@ -197,7 +197,7 @@ function Device({ signal, label, reduceMotion }: { signal: Signal; label: string
       role="img"
       aria-label={`${label ?? "Smart controller"}: LED ${COLOR_LABEL[color].toLowerCase()} ${PATTERN_LABEL[pat]}${signal.sound ? `, ${signal.sound}` : ""}`}
     >
-      <span className="body-sm text-ash">{label ?? "Smart controller"}</span>
+      <span className="body-sm text-fg-muted">{label ?? "Smart controller"}</span>
 
       {/* LED + speaker on the tile itself (no mock device screen) */}
       <div className="flex items-center justify-between gap-6 border-b border-hairline px-1 py-6">
@@ -215,7 +215,7 @@ function Device({ signal, label, reduceMotion }: { signal: Signal; label: string
               animate={{ opacity: 1, y: 0 }}
               exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
               transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE_PRESENCE }}
-              className="body font-semibold text-carbon"
+              className="body font-semibold text-fg"
             >
               {signal.name}
             </motion.span>
@@ -227,7 +227,7 @@ function Device({ signal, label, reduceMotion }: { signal: Signal; label: string
           {sound ? ` · ${signal.sound}` : " · silent"}
         </p>
         {signal.meaning && <p className="caption">{signal.meaning}</p>}
-        {signal.action && <p className="caption text-carbon">{signal.action}</p>}
+        {signal.action && <p className="caption text-fg">{signal.action}</p>}
       </div>
     </div>
   );
@@ -292,9 +292,9 @@ function Led({ color, pattern: pat, reduceMotion }: { color: LedColor; pattern: 
         )}
       </div>
       <div className="body-sm leading-relaxed">
-        <span className="block text-mist">LED</span>
+        <span className="block text-fg-muted">LED</span>
         <span className="block text-white">{COLOR_LABEL[color]}</span>
-        <span className="block text-mist">{PATTERN_LABEL[pat]}</span>
+        <span className="block text-fg-muted">{PATTERN_LABEL[pat]}</span>
       </div>
     </div>
   );
