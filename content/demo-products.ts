@@ -78,4 +78,43 @@ export const khManager: ProductSummary = {
   videoUrl: null,
 };
 
-export const demoProducts = [spektrum150, funktionPump, khManager];
+export const demoProducts: ProductSummary[] = [spektrum150, funktionPump, khManager];
+
+export const clarisea: ProductSummary = {
+  _id: "demo-product-clarisea-gen3",
+  slug: "clarisea-gen3",
+  name: "ClariSea Gen 3",
+  tagline: "The fleece filter that does more — clever, compact, and virtually maintenance-free.",
+  body: pt(
+    "ClariSea Gen 3 automatic fleece filters continuously remove waste, detritus, uneaten food, microalgae and other fine particles before they break down in your aquarium — no more filter socks, no more sock cleaning.",
+    "Two sizes: the SK-3000 G3 handles up to 3,000 litres per hour (790 gal/h), the SK-5000 G3 up to 5,000 litres per hour (1,320 gal/h). Both fit freshwater and saltwater systems.",
+    "A smart controller advances the fleece as it becomes dirty; audible and visual alarms cover end-of-roll, jams, overflow, float-switch and installation errors, and an integrated fail-safe overflow adds peace of mind.",
+  ),
+  category: "Filtration",
+  sku: "SK-3000 G3 / SK-5000 G3",
+  image: img("clarisea-sk5000.jpg"),
+  imageAlt: "ClariSea SK-5000 Gen 3 automatic fleece filter",
+  gallery: [
+    captioned("clarisea-sk3000.jpg", "ClariSea SK-3000 G3", "SK-3000 G3 — up to 3,000 l/h"),
+    captioned("clarisea-sk5000.jpg", "ClariSea SK-5000 G3", "SK-5000 G3 — up to 5,000 l/h"),
+    captioned("clarisea-controller.jpg", "ClariSea Gen 3 smart controller with LED", "Smart controller"),
+    captioned("clarisea-roll.jpg", "40-metre phosphate-free fleece roll", "40 m fleece roll"),
+    captioned("clarisea-sump.jpg", "ClariSea installed in a sump, cabinet open", "In the sump"),
+  ],
+  specs: [
+    spec("Flow SK-3000 G3", "3,000", "l/h"),
+    spec("Flow SK-5000 G3", "5,000", "l/h"),
+    spec("Recommended tank SK-3000", "up to 600", "l"),
+    spec("Recommended tank SK-5000", "up to 1,200", "l"),
+    spec("Optimal water depth", "10", "cm"),
+    spec("Submerged depth", "5–20", "cm"),
+    spec("Inlet adaptor", "32 mm / 40 mm / 1\""),
+    spec("Fleece roll", "40", "m"),
+    spec("Roll life", "8–10", "weeks"),
+    spec("Systems", "Freshwater & saltwater"),
+  ],
+  legacyUrl: "https://www.theaquariumsolution.com/product/3078/409",
+  manualUrl: null,
+  videoUrl: null,
+};
+demoProducts.push(clarisea);

@@ -36,3 +36,6 @@ Do **not** edit `app/globals.css`, `blocks/registry.tsx`, `blocks/schemas.ts`, `
 Accessibility: semantic headings (h2 for section headline unless told otherwise), `aria-label`s on interactive controls, keyboard support for sliders/accordions/viewers, `useReducedMotion()` for motion, focus-visible rings (`focus-visible:outline-2 focus-visible:outline-lime`).
 
 Contact form API contract (for `contactFormBlock`): `POST /api/contact` JSON `{ locale, name, company, email, phone, country, interest, message, website /*honeypot, must be empty*/, startedAt /*Date.now() when form mounted*/, pagePath }` → `200 {ok:true}` | `4xx/5xx {ok:false, error:string}`.
+
+## Additional placeholders (ClariSea)
+`clarisea-hero.jpg` (1920×1080), `clarisea-sk3000.jpg`, `clarisea-sk5000.jpg`, `clarisea-controller.jpg`, `clarisea-roll.jpg`, `clarisea-rollers.jpg`, `clarisea-adapter.jpg`, `clarisea-roll-change.jpg`, `clarisea-water-before.jpg`, `clarisea-water-after.jpg`, `clarisea-sump.jpg`, `clarisea-led.jpg`, `clarisea-video-poster.jpg` (1920×1080). Proxy video: `/videos/clarisea-proxy.mp4` (in `public/videos`, 7 MB, H.264). Demo product: `clarisea` from `@/content/demo-products`.

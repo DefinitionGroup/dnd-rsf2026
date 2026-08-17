@@ -54,6 +54,9 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "featureTourBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
   _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> ${productFragment} } },
   _type == "faqSpecBlock" => { ..., product-> ${productFragment} },
+  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster ${imageFragment} },
+  _type == "howItWorksBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
+  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image ${imageFragment} } } },
   _type == "testimonialBlock" => {
     ...,
     "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }

@@ -23,8 +23,13 @@ import { faqSpecDemo } from "@/blocks/faq-spec/demo";
 import { testimonialDemo } from "@/blocks/testimonial/demo";
 import { ctaDemo } from "@/blocks/cta/demo";
 import { contactFormDemo } from "@/blocks/contact-form/demo";
+import { videoDemo } from "@/blocks/video/demo";
+import { statStripDemo } from "@/blocks/stat-strip/demo";
+import { howItWorksDemo } from "@/blocks/how-it-works/demo";
+import { productFinderDemo } from "@/blocks/product-finder/demo";
+import { indicatorLegendDemo } from "@/blocks/indicator-legend/demo";
 import { img, link } from "./demo-helpers";
-import { funktionPump, khManager, spektrum150 } from "./demo-products";
+import { clarisea, funktionPump, khManager, spektrum150 } from "./demo-products";
 
 const STOCKISTS = "https://www.theaquariumsolution.com/stockists";
 
@@ -68,7 +73,7 @@ const home = page({
   isHomepage: true,
   metadata: {
     title: "The Aquarium Solution | Reef equipment by D-D",
-    description: "Lighting, pumps and water chemistry engineered for reef aquariums. Discover Spektrum, Funktion and KH Manager.",
+    description: "Filtration, lighting, pumps and water chemistry engineered for reef aquariums. Discover ClariSea, Spektrum, Funktion and KH Manager.",
     image: "hero-reef.jpg",
   },
   content: [
@@ -89,8 +94,9 @@ const home = page({
     productListDemo({
       eyebrow: "Products",
       headline: "Choose your upgrade.",
-      intro: "Three landing pages, three ways to make a reef more stable, more colourful and quieter.",
+      intro: "Four ways to make a reef clearer, more stable, more colourful and quieter.",
       items: [
+        { product: clarisea, link: { label: "ClariSea Gen 3", href: "/en/clarisea" } },
         { product: spektrum150, link: { label: "Spektrum 150", href: "/en/spektrum-150" } },
         { product: funktionPump, link: { label: "Funktion Return Pump", href: "/en/funktion-return-pump" } },
         { product: khManager, link: { label: "KH Manager", href: "/en/kh-manager" } },
@@ -112,6 +118,141 @@ const home = page({
       body: "We ship through specialist aquarium retailers worldwide.",
       primaryCta: { label: "Find a stockist", href: STOCKISTS },
       secondaryCta: { label: "Contact us", href: "/en/contact" },
+      tone: "ink",
+    }),
+  ],
+});
+
+const clariseaPage = page({
+  id: "clarisea",
+  title: "ClariSea Gen 3",
+  slug: "clarisea",
+  product: clarisea,
+  metadata: {
+    title: "ClariSea Gen 3 automatic fleece filter | The Aquarium Solution",
+    description: "The fleece filter that does more: SK-3000 and SK-5000 Gen 3 remove waste, detritus and microalgae automatically — no filter socks, smart controller, 40 m roll, fail-safe overflow.",
+    image: "clarisea-hero.jpg",
+  },
+  content: [
+    heroDemo({
+      brand: "ClariSea Gen 3 · Automatic fleece filter",
+      headline: "Here comes the fleece filter\nthat does more.",
+      summary: "The clever choice for highly efficient filtration with minimal maintenance — all at exceptional value for money.",
+      image: "clarisea-hero.jpg",
+      imageAlt: "ClariSea Gen 3 automatic fleece filter running in a reef sump",
+      video: { url: "/videos/clarisea-proxy.mp4", mimeType: "video/mp4" },
+      primaryCta: { label: "Which size do I need?", href: "#productFinderBlock" },
+      secondaryCta: { label: "Find a stockist", href: STOCKISTS },
+    }),
+    statStripDemo({
+      stats: [
+        { value: "3,000", suffix: "l/h", label: "SK-3000 G3 — 790 gal per hour" },
+        { value: "5,000", suffix: "l/h", label: "SK-5000 G3 — 1,320 gal per hour" },
+        { value: "40", suffix: "m", label: "Phosphate-free, low-odour fleece per roll" },
+        { value: "8–10", suffix: "weeks", label: "Expected lifespan of one roll" },
+      ],
+    }),
+    introDemo({
+      eyebrow: "Goodbye filter socks",
+      headline: "Automatic removal of waste, detritus, uneaten food, microalgae and fine particles — before they break down in your aquarium.",
+      body: [
+        "These compact roller filters fit both freshwater and saltwater systems. They eliminate the need for annoying filter socks and their constant cleaning.",
+        "The result? Improved water clarity, enhanced light penetration for healthier coral and plant growth, reduced nitrate and phosphate build-up — and a much easier life for your protein skimmer.",
+      ],
+    }),
+    videoDemo({
+      eyebrow: "See it run",
+      headline: "ClariSea in motion.",
+      intro: "Watch the fleece advance, the float rise and the controller take over — the whole cycle in under a minute.",
+      caption: "Proxy footage — final shoot to follow (studio pack shots, store sump, D-D Dave).",
+    }),
+    howItWorksDemo({ eyebrow: "How it works", headline: "Consistent filtration, around the clock.", intro: "The smart controller advances the fleece as it becomes dirty — automatically, or at the push of a button." }),
+    featureTourDemo({
+      eyebrow: "Gen 3 details",
+      headline: "Every part rethought.",
+      intro: "Scroll through what changed in the third generation.",
+      tone: "ink",
+      steps: [
+        { title: "Top rollers with fleece guides", body: "Reduce tension on the fleece, ensuring smoother operation over time.", image: "clarisea-rollers.jpg", imageAlt: "Top rollers with fleece guides", stat: "Gen 3", statLabel: "Roller design" },
+        { title: "Quick-release silencer plates", body: "Reduce noise, water splashes and salt creep even further — and lift off without tools.", image: "clarisea-controller.jpg", imageAlt: "Quick-release silencer plates on the ClariSea", stat: "0", statLabel: "Tools needed" },
+        { title: "Drop-in fleece holder + removal tool", body: "Roll changes are quick and simple — while the unit stays in the sump.", image: "clarisea-roll-change.jpg", imageAlt: "Hands replacing the fleece roll in the sump", stat: "40 m", statLabel: "Per roll" },
+        { title: "Integrated water bypass", body: "Control how heavily your water is filtered — valuable flexibility for feeding, tank medication or general flow management.", image: "clarisea-sump.jpg", imageAlt: "ClariSea in a sump with bypass open", stat: "1", statLabel: "Lever" },
+        { title: "Fully assembled body, universal inlet", body: "Quick and easy installation; the universal inlet adaptor fits 32 mm, 40 mm and 1\" pipework.", image: "clarisea-adapter.jpg", imageAlt: "Universal inlet adaptor close-up", stat: "32 · 40 · 1\"", statLabel: "Inlet sizes" },
+      ],
+    }),
+    beforeAfterDemo({
+      eyebrow: "Before / after",
+      headline: "A beauty patch of clear water.",
+      intro: "Slide to compare the same system with filter socks and with ClariSea Gen 3.",
+      before: "clarisea-water-before.jpg",
+      after: "clarisea-water-after.jpg",
+      beforeLabel: "Filter socks",
+      afterLabel: "ClariSea Gen 3",
+      alt: "Aquarium water clarity with filter socks compared with ClariSea Gen 3 fleece filtration",
+      caption: "Placeholder frames — replaced by the store shoot.",
+    }),
+    productFinderDemo({
+      eyebrow: "Which size?",
+      headline: "Find your ClariSea in ten seconds.",
+      intro: "Tell us your aquarium volume and how heavily you feed — we recommend the model and estimate roll life.",
+      footnote: "Guide values. Very heavy bioload, breeding systems or coral propagation may need the larger unit or two units in parallel.",
+    }),
+    comparisonTableDemo({
+      eyebrow: "SK-3000 vs SK-5000",
+      headline: "Two sizes, one clever design.",
+      rowHeader: "Model",
+      columns: [
+        { title: "ClariSea SK-3000 G3", subtitle: "Up to 3,000 l/h · 790 gal/h", product: clarisea, cta: { label: "Find a stockist", href: STOCKISTS } },
+        { title: "ClariSea SK-5000 G3", subtitle: "Up to 5,000 l/h · 1,320 gal/h", product: clarisea, highlight: true, cta: { label: "Find a stockist", href: STOCKISTS } },
+      ],
+      rows: [
+        { label: "Recommended flow", cells: ["3,000 l/h", "5,000 l/h"] },
+        { label: "Recommended aquarium", hint: "Guide value, normal stocking", cells: ["up to 600 l", "up to 1,200 l"] },
+        { label: "Fleece width", cells: ["10 cm", "15 cm"] },
+        { label: "Universal inlet 32 / 40 mm / 1\"", cells: ["yes", "yes"] },
+        { label: "Smart controller & alarms", cells: ["yes", "yes"] },
+        { label: "Fail-safe overflow", cells: ["yes", "yes"] },
+        { label: "Water bypass", cells: ["yes", "yes"] },
+        { label: "40 m roll included", cells: ["yes", "yes"] },
+        { label: "Freshwater & saltwater", cells: ["yes", "yes"] },
+      ],
+      footnote: "Optional clean-roll positioning kit available for space-constrained sumps.",
+    }),
+    indicatorLegendDemo({ eyebrow: "Extra safe", headline: "Audible and visual alarms — a glance tells you everything is running smoothly.", intro: "Tap a state to see what the controller shows and what to do." }),
+    galleryDemo({
+      eyebrow: "Gallery",
+      headline: "Studio & store.",
+      images: [
+        { file: "clarisea-sk3000.jpg", alt: "ClariSea SK-3000 G3 pack shot", caption: "SK-3000 G3" },
+        { file: "clarisea-sk5000.jpg", alt: "ClariSea SK-5000 G3 pack shot", caption: "SK-5000 G3" },
+        { file: "clarisea-sump.jpg", alt: "Full system with open cabinet, ClariSea in the sump", caption: "Full system, open cabinet" },
+        { file: "clarisea-roll.jpg", alt: "40-metre fleece roll", caption: "40 m fleece roll" },
+        { file: "clarisea-led.jpg", alt: "Blue LED confirming normal operation", caption: "Blue LED — all good" },
+        { file: "clarisea-controller.jpg", alt: "Smart controller in the sump", caption: "Smart controller" },
+      ],
+    }),
+    faqSpecDemo({
+      eyebrow: "Details",
+      headline: "Specs and answers.",
+      product: clarisea,
+      faqs: [
+        { question: "Which model do I need?", answer: ["Match the recommended flow to your return-pump throughput and sump water depth (5–20 cm submerged, 10 cm optimal). As a guide: SK-3000 G3 up to about 600 l, SK-5000 G3 up to about 1,200 l. Use the finder above."] },
+        { question: "How often do I change the roll?", answer: ["A 40 m roll typically lasts eight to ten weeks. The controller alerts you when the roll is empty; the drop-in holder means you change it without lifting the unit out of the sump."] },
+        { question: "Does it work in freshwater?", answer: ["Yes — ClariSea Gen 3 fits both freshwater and saltwater systems, including fish-breeding and coral-propagation set-ups."] },
+        { question: "What does the water bypass do?", answer: ["It lets you decide how much of the flow passes through the fleece — handy when feeding, medicating or tuning overall flow."] },
+        { question: "What happens if the fleece jams?", answer: ["The controller stops advancing, flashes red and sounds an alarm; the integrated fail-safe overflow lets water pass so your return pump never runs dry."] },
+      ],
+      downloads: [
+        { label: "Quick start guide (PDF)", href: "https://www.theaquariumsolution.com/product/3078/409" },
+        { label: "Gen 3 parts list (PDF)", href: "https://www.theaquariumsolution.com/product/3078/409" },
+      ],
+    }),
+    ctaDemo({
+      eyebrow: "ClariSea Gen 3",
+      headline: "Simply the clever choice.",
+      body: "Available through specialist aquarium retailers worldwide.",
+      primaryCta: { label: "Find a stockist", href: STOCKISTS },
+      secondaryCta: { label: "Ask us a question", href: "/en/contact" },
       tone: "ink",
     }),
   ],
@@ -352,7 +493,7 @@ const contactPage = page({
   ],
 });
 
-const pages: PageDocument[] = [home, spektrumPage, funktionPage, khPage, contactPage];
+const pages: PageDocument[] = [home, clariseaPage, spektrumPage, funktionPage, khPage, contactPage];
 
 /* ------------------------------------------------------------- shell */
 
@@ -380,6 +521,7 @@ const shell: SiteShell = {
     _id: "menu-en",
     language: "en",
     items: [
+      { _key: "m0", ...link("ClariSea", "/en/clarisea") },
       { _key: "m1", ...link("Spektrum 150", "/en/spektrum-150") },
       { _key: "m2", ...link("Funktion Pump", "/en/funktion-return-pump") },
       { _key: "m3", ...link("KH Manager", "/en/kh-manager") },

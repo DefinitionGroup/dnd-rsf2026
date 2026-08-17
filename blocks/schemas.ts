@@ -19,6 +19,11 @@ import { schema as faqSpecBlock } from "./faq-spec/schema";
 import { schema as testimonialBlock } from "./testimonial/schema";
 import { schema as ctaBlock } from "./cta/schema";
 import { schema as contactFormBlock } from "./contact-form/schema";
+import { schema as videoBlock } from "./video/schema";
+import { schema as howItWorksBlock } from "./how-it-works/schema";
+import { schema as productFinderBlock } from "./product-finder/schema";
+import { schema as statStripBlock } from "./stat-strip/schema";
+import { schema as indicatorLegendBlock } from "./indicator-legend/schema";
 
 export const blockSchemas = [
   heroBlock,
@@ -34,6 +39,11 @@ export const blockSchemas = [
   featureTourBlock,
   comparisonTableBlock,
   faqSpecBlock,
+  videoBlock,
+  howItWorksBlock,
+  productFinderBlock,
+  statStripBlock,
+  indicatorLegendBlock,
   testimonialBlock,
   ctaBlock,
   contactFormBlock,

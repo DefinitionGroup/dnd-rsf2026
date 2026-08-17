@@ -21,6 +21,7 @@ export default function PageBuilder({ page, locale }: { page: PageDocument; loca
       block._type === "heroBlock" || (block._type === "animatedHeadlineBlock" && stegaClean(block.level) === "h1"),
   );
   let promotedPortableTextHeading = false;
+  const seenTypes = new Set<string>(); // first block of each type gets id=<_type> for in-page anchors
 
   const attr = isSanityConfigured
     ? createDataAttribute({ id: page._id, type: "page", path: "content", projectId: studioProjectId, dataset, baseUrl: "/studio" })
@@ -40,8 +41,11 @@ export default function PageBuilder({ page, locale }: { page: PageDocument; loca
           promotedPortableTextHeading ||= promoteFirstHeading;
         }
 
+        const anchorId = seenTypes.has(block._type) ? undefined : block._type;
+        seenTypes.add(block._type);
+
         return (
-          <div key={block._key} data-sanity={attr ? attr(`[_key=="${block._key}"]`).toString() : undefined} data-block={block._type}>
+          <div key={block._key} id={anchorId} data-sanity={attr ? attr(`[_key=="${block._key}"]`).toString() : undefined} data-block={block._type}>
             <Component block={block} locale={locale} pageId={page._id} index={index} promoteFirstHeading={promoteFirstHeading} />
           </div>
         );

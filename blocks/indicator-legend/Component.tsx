@@ -1,0 +1,343 @@
+"use client";
+
+import { useId, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { stegaClean } from "next-sanity";
+import SectionHeader from "@/components/SectionHeader";
+import { EASE_PRESENCE } from "@/lib/motion";
+import type { BlockOf, BlockProps } from "@/blocks/types";
+
+type Signal = NonNullable<BlockOf<"indicatorLegendBlock">["signals"]>[number];
+type LedColor = "blue" | "red" | "blueRed" | "off";
+type Pattern = "solid" | "flash" | "pulse";
+type Severity = "info" | "warning" | "alarm";
+
+const BLUE = "#3b82f6";
+const RED = "#ef4444";
+const OFF = "#3a3a3a";
+
+function ledColor(v: string | undefined): LedColor {
+  const c = stegaClean(v);
+  return c === "red" || c === "blueRed" || c === "off" ? c : "blue";
+}
+function pattern(v: string | undefined): Pattern {
+  const p = stegaClean(v);
+  return p === "flash" || p === "pulse" ? p : "solid";
+}
+function severity(v: string | undefined): Severity {
+  const s = stegaClean(v);
+  return s === "warning" || s === "alarm" ? s : "info";
+}
+function hasSound(v: string | undefined) {
+  const s = stegaClean(v)?.trim().toLowerCase();
+  return Boolean(s) && s !== "none" && s !== "no" && s !== "-" && s !== "–" && s !== "—";
+}
+
+const SEVERITY_CHIP: Record<Severity, string> = {
+  info: "bg-lime text-ink",
+  warning: "bg-yellow-300 text-ink",
+  alarm: "bg-red-500 text-paper",
+};
+const SEVERITY_LABEL: Record<Severity, string> = { info: "Normal", warning: "Warning", alarm: "Alarm" };
+const PATTERN_LABEL: Record<Pattern, string> = { solid: "solid", flash: "flashing", pulse: "slow pulse" };
+const COLOR_LABEL: Record<LedColor, string> = { blue: "Blue", red: "Red", blueRed: "Blue / red", off: "Off" };
+
+/* ------------------------------------------------------------------ */
+/* Block                                                               */
+/* ------------------------------------------------------------------ */
+
+export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLegendBlock">) {
+  const signals = (block.signals ?? []).filter((s) => s && s.name);
+  const [selected, setSelected] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const uid = useId();
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  if (signals.length === 0) return null;
+
+  const active = signals[Math.min(selected, signals.length - 1)];
+
+  const focusAndSelect = (i: number) => {
+    const next = (i + signals.length) % signals.length;
+    setSelected(next);
+    buttonRefs.current[next]?.focus();
+  };
+
+  return (
+    <section className="on-dark section-space page-gutter bg-ink text-paper">
+      <div className="container-site">
+        {(block.eyebrow || block.headline || block.intro) && (
+          <SectionHeader
+            eyebrow={block.eyebrow}
+            headline={block.headline}
+            intro={block.intro}
+            className="mb-10 md:mb-14 [&_.eyebrow]:text-lime [&_h2]:text-paper [&_p:not(.eyebrow)]:text-paper/70"
+          />
+        )}
+
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
+          {/* ---------- Device ---------- */}
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <Device signal={active} label={block.deviceLabel} reduceMotion={Boolean(reduceMotion)} />
+          </div>
+
+          {/* ---------- Signal list ---------- */}
+          <ul className="flex flex-col gap-2" aria-label={block.headline ?? "Indicator states"}>
+            {signals.map((s, i) => {
+              const isActive = i === selected;
+              const sev = severity(s.severity);
+              const panelId = `${uid}-panel-${i}`;
+              return (
+                <li key={s._key}>
+                  <button
+                    ref={(el) => {
+                      buttonRefs.current[i] = el;
+                    }}
+                    type="button"
+                    aria-pressed={isActive}
+                    aria-controls={panelId}
+                    onClick={() => setSelected(i)}
+                    onKeyDown={(e) => {
+                      if (e.key === "ArrowDown") {
+                        e.preventDefault();
+                        focusAndSelect(i + 1);
+                      } else if (e.key === "ArrowUp") {
+                        e.preventDefault();
+                        focusAndSelect(i - 1);
+                      } else if (e.key === "Home") {
+                        e.preventDefault();
+                        focusAndSelect(0);
+                      } else if (e.key === "End") {
+                        e.preventDefault();
+                        focusAndSelect(signals.length - 1);
+                      }
+                    }}
+                    className={`flex w-full items-center gap-4 rounded-lg border px-4 py-3.5 text-left transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-lime ${
+                      isActive ? "border-lime/60 bg-lime/10" : "border-paper/10 bg-ink-soft hover:border-paper/25"
+                    }`}
+                  >
+                    <MiniLed color={ledColor(s.ledColor)} />
+                    <span className="min-w-0 flex-1 font-display text-base uppercase tracking-wide text-paper md:text-lg">{s.name}</span>
+                    <span className={`shrink-0 rounded-full px-2.5 py-0.5 font-display text-[11px] uppercase tracking-[0.15em] ${SEVERITY_CHIP[sev]}`}>
+                      {SEVERITY_LABEL[sev]}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={`shrink-0 text-paper/40 transition-transform duration-300 ${isActive ? "rotate-180" : ""}`}
+                    >
+                      ▾
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.div
+                        id={panelId}
+                        key="panel"
+                        initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { height: 0, opacity: 0 }}
+                        transition={reduceMotion ? { duration: 0 } : { duration: 0.35, ease: EASE_PRESENCE }}
+                        className="overflow-hidden"
+                      >
+                        <div className="grid gap-4 border-x border-b border-lime/30 px-5 pb-5 pt-4 sm:grid-cols-2">
+                          <dl className="contents">
+                            <div>
+                              <dt className="font-display text-[11px] uppercase tracking-[0.2em] text-paper/50">Signal</dt>
+                              <dd className="mt-1 text-sm text-paper/85">
+                                LED {COLOR_LABEL[ledColor(s.ledColor)].toLowerCase()}, {PATTERN_LABEL[pattern(s.pattern)]}
+                                {s.sound ? ` · ${s.sound}` : ""}
+                              </dd>
+                            </div>
+                            {s.meaning && (
+                              <div>
+                                <dt className="font-display text-[11px] uppercase tracking-[0.2em] text-paper/50">What it means</dt>
+                                <dd className="mt-1 text-sm text-paper/85">{s.meaning}</dd>
+                              </div>
+                            )}
+                            {s.action && (
+                              <div className="sm:col-span-2">
+                                <dt className="font-display text-[11px] uppercase tracking-[0.2em] text-lime">What to do</dt>
+                                <dd className="mt-1 text-paper">{s.action}</dd>
+                              </div>
+                            )}
+                          </dl>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Device panel                                                        */
+/* ------------------------------------------------------------------ */
+
+function Device({ signal, label, reduceMotion }: { signal: Signal; label: string | undefined; reduceMotion: boolean }) {
+  const color = ledColor(signal.ledColor);
+  const pat = pattern(signal.pattern);
+  const sound = hasSound(signal.sound);
+  const sev = severity(signal.severity);
+
+  return (
+    <div
+      className="relative overflow-hidden rounded-[1.5rem] border border-paper/10 bg-gradient-to-b from-[#2b2b2b] to-[#141414] p-6 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.08),0_30px_60px_-30px_rgb(0_0_0_/_0.8)] md:p-8"
+      role="img"
+      aria-label={`${label ?? "Smart controller"}: LED ${COLOR_LABEL[color].toLowerCase()} ${PATTERN_LABEL[pat]}${signal.sound ? `, ${signal.sound}` : ""}`}
+    >
+      {/* Top rail */}
+      <div className="flex items-center justify-between">
+        <span className="font-display text-[11px] uppercase tracking-[0.3em] text-paper/45">{label ?? "Smart controller"}</span>
+        <span className="flex gap-1" aria-hidden="true">
+          <span className="size-1 rounded-full bg-paper/20" />
+          <span className="size-1 rounded-full bg-paper/20" />
+          <span className="size-1 rounded-full bg-paper/20" />
+        </span>
+      </div>
+
+      {/* Face */}
+      <div className="mt-6 flex items-center justify-between gap-6 rounded-2xl border border-paper/5 bg-ink px-6 py-8">
+        <Led color={color} pattern={pat} reduceMotion={reduceMotion} />
+        <Speaker active={sound} reduceMotion={reduceMotion} />
+      </div>
+
+      {/* Buttons row */}
+      <div className="mt-5 flex items-center gap-3" aria-hidden="true">
+        <span className="flex h-9 flex-1 items-center justify-center rounded-md border border-paper/10 bg-paper/5 font-display text-[10px] uppercase tracking-[0.25em] text-paper/50">▶ play</span>
+        <span className="flex h-9 flex-1 items-center justify-center rounded-md border border-paper/10 bg-paper/5 font-display text-[10px] uppercase tracking-[0.25em] text-paper/50">▮▮ pause</span>
+        <span className="flex h-9 flex-1 items-center justify-center rounded-md border border-paper/10 bg-paper/5 font-display text-[10px] uppercase tracking-[0.25em] text-paper/50">▶▶ advance</span>
+      </div>
+
+      {/* Readout */}
+      <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-paper/10 pt-4">
+        <span className={`rounded-full px-2.5 py-0.5 font-display text-[11px] uppercase tracking-[0.15em] ${SEVERITY_CHIP[sev]}`}>{SEVERITY_LABEL[sev]}</span>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={signal._key}
+            initial={reduceMotion ? false : { opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE_PRESENCE }}
+            className="font-display text-sm uppercase tracking-wide text-paper"
+          >
+            {signal.name}
+          </motion.span>
+        </AnimatePresence>
+        <span className="ml-auto text-xs text-paper/60">
+          {COLOR_LABEL[color]} · {PATTERN_LABEL[pat]}
+          {sound ? ` · ${signal.sound}` : " · silent"}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* LED                                                                 */
+/* ------------------------------------------------------------------ */
+
+function ledAnimation(color: LedColor, pat: Pattern) {
+  const on = color === "red" ? RED : color === "off" ? OFF : BLUE;
+  const glowOn = color === "off" ? "0 0 0 0 transparent" : `0 0 18px 4px ${on}`;
+  const glowOff = "0 0 0 0 transparent";
+  const glowRed = `0 0 18px 4px ${RED}`;
+
+  if (color === "off") return { animate: { backgroundColor: OFF, boxShadow: glowOff }, transition: { duration: 0.3 } };
+
+  if (color === "blueRed") {
+    if (pat === "pulse") {
+      return {
+        animate: { backgroundColor: [BLUE, RED, BLUE], boxShadow: [`0 0 18px 4px ${BLUE}`, glowRed, `0 0 18px 4px ${BLUE}`] },
+        transition: { duration: 2, ease: "easeInOut" as const, repeat: Infinity },
+      };
+    }
+    // flash (or solid → treat as alternate)
+    return {
+      animate: { backgroundColor: [BLUE, BLUE, RED, RED, BLUE], boxShadow: [`0 0 18px 4px ${BLUE}`, `0 0 18px 4px ${BLUE}`, glowRed, glowRed, `0 0 18px 4px ${BLUE}`] },
+      transition: { duration: 1, ease: "linear" as const, times: [0, 0.499, 0.5, 0.999, 1], repeat: Infinity },
+    };
+  }
+
+  if (pat === "flash") {
+    return {
+      animate: { opacity: [1, 1, 0.12, 0.12, 1], boxShadow: [glowOn, glowOn, glowOff, glowOff, glowOn], backgroundColor: on },
+      transition: { duration: 1, ease: "linear" as const, times: [0, 0.499, 0.5, 0.999, 1], repeat: Infinity },
+    };
+  }
+  if (pat === "pulse") {
+    return {
+      animate: { opacity: [1, 0.25, 1], boxShadow: [glowOn, glowOff, glowOn], backgroundColor: on },
+      transition: { duration: 2, ease: "easeInOut" as const, repeat: Infinity },
+    };
+  }
+  return { animate: { opacity: 1, boxShadow: glowOn, backgroundColor: on }, transition: { duration: 0.3 } };
+}
+
+function Led({ color, pattern: pat, reduceMotion }: { color: LedColor; pattern: Pattern; reduceMotion: boolean }) {
+  const staticColor = color === "red" ? RED : color === "off" ? OFF : BLUE;
+  return (
+    <div className="flex items-center gap-4">
+      <div className="relative grid size-16 place-items-center rounded-full border border-paper/10 bg-[#0c0c0c] shadow-[inset_0_2px_6px_rgb(0_0_0_/_0.8)]">
+        {reduceMotion ? (
+          <span
+            className="block size-7 rounded-full"
+            style={{
+              background: color === "blueRed" ? `linear-gradient(135deg, ${BLUE} 50%, ${RED} 50%)` : staticColor,
+              boxShadow: color === "off" ? "none" : `0 0 18px 4px ${color === "blueRed" ? BLUE : staticColor}`,
+            }}
+          />
+        ) : (
+          <motion.span key={`${color}-${pat}`} className="block size-7 rounded-full" initial={false} {...ledAnimation(color, pat)} style={{ willChange: "opacity, background-color, box-shadow" }} />
+        )}
+      </div>
+      <div className="font-display text-[11px] uppercase leading-relaxed tracking-[0.2em] text-paper/60">
+        <span className="block text-paper/40">LED</span>
+        <span className="block">{COLOR_LABEL[color]}</span>
+        <span className="block">{PATTERN_LABEL[pat]}</span>
+      </div>
+    </div>
+  );
+}
+
+function MiniLed({ color }: { color: LedColor }) {
+  const c = color === "red" ? RED : color === "off" ? OFF : BLUE;
+  return (
+    <span
+      aria-hidden="true"
+      className="block size-3 shrink-0 rounded-full"
+      style={{ background: color === "blueRed" ? `linear-gradient(135deg, ${BLUE} 50%, ${RED} 50%)` : c, boxShadow: color === "off" ? "none" : `0 0 8px 1px ${c}` }}
+    />
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Speaker                                                             */
+/* ------------------------------------------------------------------ */
+
+function Speaker({ active, reduceMotion }: { active: boolean; reduceMotion: boolean }) {
+  const animated = active && !reduceMotion;
+  const wave = (i: number) => ({
+    animate: { opacity: animated ? [0.2, 1, 0.2] : 1 },
+    transition: animated ? { duration: 1.2, repeat: Infinity, ease: "easeInOut" as const, delay: i * 0.2 } : { duration: 0.2 },
+  });
+  return (
+    <div className="flex items-center gap-2" aria-hidden="true">
+      <svg viewBox="0 0 48 32" className="h-8 w-12 overflow-visible" fill="none">
+        {/* body */}
+        <path d="M4 12h8l10-8v24l-10-8H4z" className={active ? "fill-lime" : "fill-paper/30"} />
+        {/* waves */}
+        <motion.path d="M28 11c2.5 2.5 2.5 7.5 0 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className={active ? "text-lime" : "text-paper/15"} initial={false} {...wave(0)} />
+        <motion.path d="M33 7c5 5 5 13 0 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className={active ? "text-lime" : "text-paper/15"} initial={false} {...wave(1)} />
+        <motion.path d="M38 3c7.5 7.5 7.5 18.5 0 26" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className={active ? "text-lime" : "text-paper/15"} initial={false} {...wave(2)} />
+      </svg>
+      <span className={`font-display text-[11px] uppercase tracking-[0.2em] ${active ? "text-lime" : "text-paper/40"}`}>{active ? "sound" : "silent"}</span>
+    </div>
+  );
+}

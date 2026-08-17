@@ -35,13 +35,14 @@ const ref = (id: string) => ({ _type: "reference", _ref: id });
 
 const assetIds = new Map<string, string>(); // local url → uploaded asset id
 const imageUrls = new Set<string>();
+const fileUrls = new Set<string>(); // videos (demo asset _id starts with "demo-video-")
 
 function collectImages(node: unknown) {
   if (Array.isArray(node)) return node.forEach(collectImages);
   if (!isObj(node)) return;
   const asset = node.asset as AnyObj | undefined;
   if (isObj(asset) && typeof asset._id === "string" && asset._id.startsWith("demo-") && typeof asset.url === "string") {
-    imageUrls.add(asset.url);
+    (asset._id.startsWith("demo-video-") ? fileUrls : imageUrls).add(asset.url);
   }
   Object.values(node).forEach(collectImages);
 }
@@ -58,7 +59,8 @@ function toStored(node: unknown, ctx: { testimonials: Doc[] }): unknown {
     if (!id) throw new Error(`No uploaded asset for ${asset.url}`);
     const { asset: _a, ...rest } = node;
     void _a;
-    return { _type: "image", ...rest, asset: ref(id) };
+    const isFile = (asset._id as string).startsWith("demo-video-");
+    return { _type: isFile ? "file" : "image", ...rest, asset: ref(id) };
   }
   // embedded product → reference
   if (typeof node._id === "string" && node._id.startsWith("demo-product-")) return ref(node._id as string);
@@ -183,11 +185,23 @@ async function main() {
     console.log(`asset  ${url} → ${asset._id}`);
   }
 
+  for (const url of fileUrls) {
+    if (dryRun) {
+      assetIds.set(url, `file-dryrun-${slugify(basename(url))}-mp4`);
+      continue;
+    }
+    const filePath = resolve(process.cwd(), "public", url.replace(/^\//, ""));
+    if (!existsSync(filePath)) throw new Error(`Missing local file: ${filePath}`);
+    const asset = await client.assets.upload("file", createReadStream(filePath), { filename: basename(filePath), label: "seed" });
+    assetIds.set(url, asset._id);
+    console.log(`file   ${url} → ${asset._id}`);
+  }
+
   const documents = buildDocuments();
 
   if (dryRun) {
     console.log(JSON.stringify(documents, null, 2));
-    console.log(`\n[dry-run] ${documents.length} documents, ${imageUrls.size} images`);
+    console.log(`\n[dry-run] ${documents.length} documents, ${imageUrls.size} images, ${fileUrls.size} files`);
     return;
   }
 

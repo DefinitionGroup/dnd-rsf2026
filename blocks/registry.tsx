@@ -19,6 +19,11 @@ import FaqSpecBlock from "./faq-spec/Component";
 import TestimonialBlock from "./testimonial/Component";
 import CtaBlock from "./cta/Component";
 import ContactFormBlock from "./contact-form/Component";
+import VideoBlock from "./video/Component";
+import HowItWorksBlock from "./how-it-works/Component";
+import ProductFinderBlock from "./product-finder/Component";
+import StatStripBlock from "./stat-strip/Component";
+import IndicatorLegendBlock from "./indicator-legend/Component";
 
 export const blockComponents = {
   heroBlock: HeroBlock,
@@ -37,4 +42,9 @@ export const blockComponents = {
   testimonialBlock: TestimonialBlock,
   ctaBlock: CtaBlock,
   contactFormBlock: ContactFormBlock,
+  videoBlock: VideoBlock,
+  howItWorksBlock: HowItWorksBlock,
+  productFinderBlock: ProductFinderBlock,
+  statStripBlock: StatStripBlock,
+  indicatorLegendBlock: IndicatorLegendBlock,
 } satisfies { [K in BlockType]: BlockComponent<K> };
