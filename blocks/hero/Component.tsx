@@ -3,13 +3,18 @@ import SanityImage from "@/components/SanityImage";
 import { resolveVideoUrl } from "@/sanity/lib/video";
 import type { BlockProps } from "@/blocks/types";
 
+/**
+ * Product stage hero: full-bleed media, headline top-left over a soft dark
+ * gradient, one lead sentence, two pills. Visible by default (no entrance
+ * animation) — the first viewport is the thesis, not a curtain.
+ */
 export default function HeroBlock({ block }: BlockProps<"heroBlock">) {
   const videoUrl = resolveVideoUrl(block.video);
   const hasImage = Boolean(block.image?.asset);
   if (!videoUrl && !hasImage) return null;
 
   return (
-    <section className="on-dark relative isolate flex min-h-[88svh] items-end overflow-hidden bg-ink text-paper">
+    <section className="stage relative isolate flex min-h-[92svh] flex-col justify-end overflow-hidden">
       <div className="absolute inset-0 -z-10">
         {hasImage && (
           <SanityImage
@@ -35,21 +40,19 @@ export default function HeroBlock({ block }: BlockProps<"heroBlock">) {
             <source src={videoUrl} type={block.video?.asset?.mimeType ?? undefined} />
           </video>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" aria-hidden />
+        {/* soft legibility gradient, bottom-left weighted */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgb(11_11_12/0.92)_0%,rgb(11_11_12/0.55)_38%,rgb(11_11_12/0.12)_70%,transparent_100%)]" aria-hidden />
       </div>
 
-      <div className="container-site page-gutter pb-16 pt-40 md:pb-24">
-        <div className="max-w-4xl hero-enter">
-          {block.brand && <p className="eyebrow mb-4 text-lime">{block.brand}</p>}
-          <h1 className="whitespace-pre-line text-paper">{block.headline}</h1>
-          {block.summary && <p className="mt-6 max-w-2xl text-lg leading-relaxed text-paper/85 md:text-xl">{block.summary}</p>}
-          {(block.primaryCta || block.secondaryCta) && (
-            <div className="mt-8 flex flex-wrap gap-3">
-              <ActionLink link={block.primaryCta} variant="primary" />
-              <ActionLink link={block.secondaryCta} variant="secondary" />
-            </div>
-          )}
-        </div>
+      <div className="container-wide page-gutter pb-[clamp(3rem,7vw,6rem)] pt-40">
+        <h1 className="max-w-[13ch] whitespace-pre-line text-paper">{block.headline}</h1>
+        {block.summary && <p className="lead mt-6 max-w-[34rem] !text-paper/85">{block.summary}</p>}
+        {(block.primaryCta || block.secondaryCta) && (
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ActionLink link={block.primaryCta} variant="primary" />
+            <ActionLink link={block.secondaryCta} variant="secondary" />
+          </div>
+        )}
       </div>
     </section>
   );

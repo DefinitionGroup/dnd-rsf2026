@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { stegaClean } from "next-sanity";
 import { AnimatePresence, animate, motion, useInView, useMotionValue, useReducedMotion, useTransform, type AnimationPlaybackControls, type MotionValue } from "motion/react";
 import SanityImage from "@/components/SanityImage";
+import SectionHeader from "@/components/SectionHeader";
 import { EASE_PRESENCE } from "@/lib/motion";
 import type { BlockProps } from "@/blocks/types";
 
@@ -11,36 +12,26 @@ const DEFAULT_DURATION = 6;
 
 const TONES = {
   paper: {
-    section: "bg-paper text-ink",
-    eyebrow: "text-lime-deep",
-    headline: "text-ink",
-    intro: "text-muted",
+    section: "bg-paper text-text",
     number: "text-lime-deep",
-    numberActive: "bg-lime text-ink",
-    numberIdle: "border-line text-muted",
-    title: "text-ink",
+    titleActive: "text-ink",
+    titleIdle: "text-muted",
     body: "text-muted",
     track: "bg-line",
     fill: "bg-lime",
-    hover: "hover:bg-sand",
-    active: "bg-sand",
-    frame: "bg-sand",
+    titleHover: "group-hover:text-ink",
+    rule: "border-line",
   },
   ink: {
-    section: "on-dark bg-ink text-paper",
-    eyebrow: "text-lime",
-    headline: "text-paper",
-    intro: "text-paper/70",
+    section: "stage",
     number: "text-lime",
-    numberActive: "bg-lime text-ink",
-    numberIdle: "border-paper/25 text-paper/60",
-    title: "text-paper",
-    body: "text-paper/70",
-    track: "bg-paper/15",
+    titleActive: "text-paper",
+    titleIdle: "text-muted-dark",
+    body: "text-muted-dark",
+    track: "bg-line-dark",
     fill: "bg-lime",
-    hover: "hover:bg-paper/5",
-    active: "bg-paper/8",
-    frame: "bg-ink-soft",
+    titleHover: "group-hover:text-paper",
+    rule: "border-line-dark",
   },
 } as const;
 
@@ -135,18 +126,12 @@ export default function HowItWorksBlock({ block }: BlockProps<"howItWorksBlock">
       }}
     >
       <div className="container-site">
-        {(block.eyebrow || block.headline || block.intro) && (
-          <header className="mb-10 max-w-3xl md:mb-14">
-            {block.eyebrow && <p className={`eyebrow mb-3 ${tone.eyebrow}`}>{block.eyebrow}</p>}
-            {block.headline && <h2 className={`whitespace-pre-line ${tone.headline}`}>{block.headline}</h2>}
-            {block.intro && <p className={`mt-4 text-lg leading-relaxed ${tone.intro}`}>{block.intro}</p>}
-          </header>
-        )}
+        {(block.headline || block.intro) && <SectionHeader headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
 
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-start lg:gap-12">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
           {/* Image of the active step */}
           <div className="lg:order-2 lg:col-span-7">
-            <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl ${tone.frame} lg:sticky lg:top-24`} aria-live="polite" aria-atomic>
+            <div className="media relative aspect-[4/3] lg:sticky lg:top-24" aria-live="polite" aria-atomic>
               <AnimatePresence initial={false}>
                 {current?.image?.asset && (
                   <motion.div
@@ -167,20 +152,14 @@ export default function HowItWorksBlock({ block }: BlockProps<"howItWorksBlock">
                   </motion.div>
                 )}
               </AnimatePresence>
-              <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-ink/80 px-3 py-1.5 font-display text-xs uppercase tracking-[0.2em] text-lime backdrop-blur">
-                <span>Step {active + 1}</span>
-                <span className="text-paper/50">/ {count}</span>
+              <div className="pointer-events-none absolute left-4 top-4 rounded-full bg-paper/90 px-3 py-1 text-xs font-medium text-ink num">
+                Step {active + 1} of {count}
               </div>
             </div>
           </div>
 
           {/* Steps */}
-          <ol
-            ref={listRef}
-            onKeyDown={onKeyDown}
-            aria-label="Steps"
-            className="flex flex-col gap-1 lg:order-1 lg:col-span-5"
-          >
+          <ol ref={listRef} onKeyDown={onKeyDown} aria-label="Steps" className={`flex flex-col border-t ${tone.rule} lg:order-1 lg:col-span-5`}>
             {steps.map((step, i) => (
               <StepItem
                 key={step._key}
@@ -224,7 +203,7 @@ function StepItem({
   onSelect: () => void;
 }) {
   return (
-    <li>
+    <li className={`border-b ${tone.rule}`}>
       <button
         type="button"
         id={id}
@@ -232,29 +211,22 @@ function StepItem({
         aria-current={isActive ? "step" : undefined}
         aria-label={`Step ${index + 1} of ${total}: ${step.title}`}
         tabIndex={isActive ? 0 : -1}
-        className={`group flex w-full cursor-pointer gap-4 rounded-xl px-4 py-4 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime md:px-5 ${
-          isActive ? tone.active : tone.hover
-        }`}
+        className="group flex w-full cursor-pointer gap-5 py-6 text-left"
       >
-        <span
-          className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border font-display text-sm tabular-nums transition-colors ${
-            isActive ? `border-transparent ${tone.numberActive}` : isDone ? `border-transparent bg-lime/25 ${tone.number}` : tone.numberIdle
-          }`}
-          aria-hidden
-        >
+        <span className={`figure w-8 shrink-0 pt-1 text-lg ${tone.number}`} aria-hidden>
           {index + 1}
         </span>
         <span className="min-w-0 flex-1">
-          <span className={`block font-display text-lg uppercase leading-tight tracking-tight md:text-xl ${tone.title}`}>{step.title}</span>
+          <span className={`block text-xl font-semibold transition-colors duration-300 ${tone.titleHover} ${isActive ? tone.titleActive : tone.titleIdle}`}>{step.title}</span>
           <motion.span
             initial={false}
             animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
             transition={{ duration: 0.4, ease: EASE_PRESENCE }}
             className="block overflow-hidden"
           >
-            {step.body && <span className={`block pt-2 text-sm leading-relaxed md:text-base ${tone.body}`}>{step.body}</span>}
+            {step.body && <span className={`block max-w-[46ch] pt-2 ${tone.body}`}>{step.body}</span>}
           </motion.span>
-          <span className={`mt-3 block h-0.5 w-full overflow-hidden rounded-full ${tone.track}`} aria-hidden>
+          <span className={`mt-4 block h-px w-full overflow-hidden ${tone.track}`} aria-hidden>
             {isActive ? (
               <motion.span className={`block h-full ${tone.fill}`} style={{ width: fillWidth }} />
             ) : (

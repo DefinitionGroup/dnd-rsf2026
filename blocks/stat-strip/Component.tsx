@@ -4,6 +4,7 @@ import { useEffect, useRef, useSyncExternalStore } from "react";
 import { stegaClean } from "next-sanity";
 import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { EASE_PRESENCE } from "@/lib/motion";
+import Reveal from "@/components/motion/Reveal";
 import type { BlockProps } from "@/blocks/types";
 
 type Parsed = { target: number; decimals: number; group: "" | "," | "."; decimal: "." | "," };
@@ -32,9 +33,10 @@ export function formatNumeric(n: number, p: Parsed) {
 }
 
 const TONES = {
-  lime: { section: "bg-lime text-ink", eyebrow: "text-ink/70", headline: "text-ink", value: "text-ink", label: "text-ink/70", rule: "border-ink/20" },
-  ink: { section: "on-dark bg-ink text-paper", eyebrow: "text-lime", headline: "text-paper", value: "text-lime", label: "text-paper/70", rule: "border-paper/15" },
-  paper: { section: "bg-paper text-ink", eyebrow: "text-lime-deep", headline: "text-ink", value: "text-ink", label: "text-muted", rule: "border-line" },
+  // lime = the accent lives on the figures, never the ground (OWN-WORLD lime discipline)
+  lime: { section: "bg-paper text-ink", value: "text-lime-deep", label: "", rule: "hairline" },
+  ink: { section: "stage", value: "text-lime", label: "", rule: "hairline" },
+  paper: { section: "stage-sand text-ink", value: "text-ink", label: "", rule: "hairline" },
 } as const;
 
 type Tone = (typeof TONES)[keyof typeof TONES];
@@ -59,13 +61,12 @@ export default function StatStripBlock({ block }: BlockProps<"statStripBlock">) 
   return (
     <section className={`section-space page-gutter ${tone.section}`}>
       <div className="container-site">
-        {(block.eyebrow || block.headline) && (
-          <header className="mb-10 max-w-3xl md:mb-14">
-            {block.eyebrow && <p className={`eyebrow mb-3 ${tone.eyebrow}`}>{block.eyebrow}</p>}
-            {block.headline && <h2 className={`whitespace-pre-line ${tone.headline}`}>{block.headline}</h2>}
-          </header>
+        {block.headline && (
+          <Reveal className="mx-auto mb-12 max-w-[34ch] text-center md:mb-16">
+            <h2 className="display-lg whitespace-pre-line">{block.headline}</h2>
+          </Reveal>
         )}
-        <dl className={`grid grid-cols-2 gap-x-6 gap-y-10 ${cols}`}>
+        <dl className={`hairline grid grid-cols-2 gap-x-6 gap-y-10 border-y py-10 md:py-12 ${cols}`}>
           {stats.map((stat, i) => (
             <Stat key={stat._key} stat={stat} index={i} tone={tone} />
           ))}
@@ -78,13 +79,13 @@ export default function StatStripBlock({ block }: BlockProps<"statStripBlock">) 
 function Stat({ stat, index, tone }: { stat: StatItem; index: number; tone: Tone }) {
   const parsed = parseNumeric(stat.value);
   return (
-    <div className={`flex flex-col border-l-2 pl-4 md:pl-5 ${tone.rule}`}>
-      <dd className={`order-1 font-display text-4xl leading-none tracking-tight tabular-nums sm:text-5xl lg:text-6xl ${tone.value}`}>
-        {stat.prefix && <span className="mr-1 align-top text-[0.45em] tracking-normal opacity-70">{stat.prefix}</span>}
+    <div className="flex flex-col items-start text-left">
+      <dd className={`figure order-1 text-display-xl ${tone.value}`}>
+        {stat.prefix && <span className="figure-unit mr-1 align-top text-[0.4em]">{stat.prefix}</span>}
         {parsed ? <CountUp parsed={parsed} raw={stat.value} delay={index * 0.08} /> : <span>{stat.value}</span>}
-        {stat.suffix && <span className="ml-1.5 text-[0.45em] tracking-normal opacity-70">{stat.suffix}</span>}
+        {stat.suffix && <span className="figure-unit ml-1.5 text-[0.4em]">{stat.suffix}</span>}
       </dd>
-      <dt className={`order-2 mt-3 text-sm leading-snug ${tone.label}`}>{stat.label}</dt>
+      <dt className={`label order-2 mt-4 ${tone.label}`}>{stat.label}</dt>
     </div>
   );
 }

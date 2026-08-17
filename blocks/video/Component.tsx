@@ -56,7 +56,7 @@ export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
   const fileUrl = source === "file" ? block.file?.asset?.url : undefined;
   if (!fileUrl && !embed) return null;
 
-  const hasHeader = Boolean(block.eyebrow || block.headline || block.intro);
+  const hasHeader = Boolean(block.headline || block.intro);
   const bleed = layout === "bleed";
 
   const player =
@@ -73,22 +73,16 @@ export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
     ) : null;
 
   return (
-    <section className={`section-space ${bleed ? "" : "page-gutter"}`}>
+    <section className={`stage section-space ${bleed ? "" : "page-gutter"}`}>
       {hasHeader && (
         <div className={`container-site ${bleed ? "page-gutter" : ""}`}>
-          <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} className="mb-8 md:mb-12" />
+          <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-10 md:mb-14" />
         </div>
       )}
-      <figure className={bleed ? "" : "container-site"}>
-        <div
-          className={`relative isolate aspect-video w-full overflow-hidden bg-ink ${
-            bleed ? "" : "rounded-2xl shadow-[0_30px_80px_-30px_rgba(26,26,26,0.45)]"
-          }`}
-        >
-          {player}
-        </div>
+      <figure className={bleed ? "" : "container-wide"}>
+        <div className={`relative isolate aspect-video w-full overflow-hidden bg-stage-soft ${bleed ? "" : "media"}`}>{player}</div>
         {block.caption && (
-          <figcaption className={`mt-3 text-sm text-muted ${bleed ? "page-gutter container-site" : ""}`}>{block.caption}</figcaption>
+          <figcaption className={`caption mt-4 ${bleed ? "page-gutter container-wide" : ""}`}>{block.caption}</figcaption>
         )}
       </figure>
     </section>
@@ -110,16 +104,40 @@ function FilePlayer({
 }) {
   const reduceMotion = useReducedMotion();
   const auto = autoplay && !reduceMotion;
+  const [playing, setPlaying] = useState(auto);
+  // Manual videos show the poster + one drawn play control; native controls appear only once playing.
+  if (!playing) {
+    return (
+      <button
+        type="button"
+        onClick={() => setPlaying(true)}
+        className="group absolute inset-0 h-full w-full text-left"
+        aria-label={`Play video: ${alt}`}
+      >
+        {poster ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        ) : (
+          <span className="absolute inset-0 bg-stage-soft" aria-hidden />
+        )}
+        <span className="elevated absolute left-1/2 top-1/2 grid size-[72px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-paper transition-transform duration-300 group-hover:scale-105">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" className="translate-x-[2px]">
+            <path d="M8 5.5v13l10-6.5z" fill="#99cc33" />
+          </svg>
+        </span>
+      </button>
+    );
+  }
   return (
     <video
       key={auto ? "auto" : "manual"}
-      className="absolute inset-0 h-full w-full object-cover focus-visible:outline-2 focus-visible:outline-lime"
-      controls
-      autoPlay={auto}
+      className="absolute inset-0 h-full w-full object-cover"
+      controls={!auto}
+      autoPlay
       muted={auto}
       loop={auto}
       playsInline
-      preload={auto ? "auto" : "metadata"}
+      preload="auto"
       poster={poster}
       aria-label={alt}
     >
@@ -160,25 +178,27 @@ function ExternalPlayer({
       {poster?.asset ? (
         <SanityImage image={poster} alt="" fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-ink-soft to-ink" aria-hidden />
+        <div className="absolute inset-0 bg-stage-soft" aria-hidden />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" aria-hidden />
+      {privacyNotice && (
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(to_top,rgb(11_11_12/0.7),transparent)]" aria-hidden />
+      )}
 
       <button
         type="button"
         onClick={() => setLoaded(true)}
         aria-label={`Play video: ${alt} (loads from ${providerLabel})`}
-        className="group absolute inset-0 flex cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-lime"
+        className="group absolute inset-0 flex cursor-pointer items-center justify-center focus-visible:outline-offset-[-4px]"
       >
-        <span className="flex h-20 w-20 items-center justify-center rounded-full bg-lime text-ink shadow-[0_0_0_0_rgba(153,204,51,0.5)] transition-[transform,box-shadow,background-color] duration-300 group-hover:scale-105 group-hover:bg-lime-deep group-hover:shadow-[0_0_0_16px_rgba(153,204,51,0.18)] md:h-24 md:w-24">
-          <svg viewBox="0 0 24 24" className="ml-1 h-9 w-9 fill-current md:h-10 md:w-10" aria-hidden>
+        <span className="elevated flex h-[72px] w-[72px] items-center justify-center rounded-full bg-paper text-lime transition-transform duration-300 ease-out-expo group-hover:scale-105">
+          <svg viewBox="0 0 24 24" width="28" height="28" className="ml-1 fill-current" aria-hidden>
             <path d="M8 5.5v13l11-6.5z" />
           </svg>
         </span>
       </button>
 
       {privacyNotice && (
-        <p className="pointer-events-none absolute inset-x-0 bottom-0 px-5 pb-4 text-center text-xs text-paper/75 md:text-sm">
+        <p className="caption pointer-events-none absolute inset-x-0 bottom-0 px-5 pb-4 text-center text-xs md:text-sm">
           {privacyNotice}
         </p>
       )}

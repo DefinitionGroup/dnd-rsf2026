@@ -18,7 +18,7 @@ export default function SiteShell({
   return (
     <>
       <SiteHeader locale={locale} menu={data.menu} settings={data.settings} routes={routes} />
-      <main id="main" className="[[data-nav=dark]_&]:pt-20">{children}</main>
+      <main id="main" className="[[data-nav=dark]_&]:pt-[var(--header-h)]">{children}</main>
       <SiteFooter locale={locale} menu={data.menu} settings={data.settings} />
     </>
   );

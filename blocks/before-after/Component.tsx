@@ -90,21 +90,21 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
   if (!block.before?.asset || !block.after?.asset) return null;
 
   const rounded = Math.round(position);
-  const hasHeader = Boolean(block.eyebrow || block.headline || block.intro);
+  const hasHeader = Boolean(block.headline || block.intro);
 
   return (
     <section className="section-space page-gutter">
       <div className="container-site">
-        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" />
+        <SectionHeader headline={block.headline} intro={block.intro} align="center" />
 
-        <figure className={`mx-auto max-w-5xl ${hasHeader ? "mt-12" : ""}`}>
+        <figure className={`mx-auto max-w-5xl ${hasHeader ? "mt-12 md:mt-16" : ""}`}>
           <div
             ref={frameRef}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
-            className={`group relative isolate aspect-[16/10] w-full touch-pan-y select-none overflow-hidden rounded-2xl bg-ink ring-1 ring-line ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
+            className={`media group relative isolate aspect-[16/10] w-full touch-pan-y select-none ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
             role="group"
             aria-label={block.alt}
           >
@@ -126,13 +126,13 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
             {/* Labels */}
             <span
               aria-hidden
-              className={`pointer-events-none absolute left-4 top-4 rounded-full bg-ink/80 px-3 py-1.5 font-display text-[11px] uppercase tracking-[0.2em] text-paper ring-1 ring-paper/15 backdrop-blur transition-opacity duration-200 ${position < 12 ? "opacity-0" : "opacity-100"}`}
+              className={`pointer-events-none absolute left-4 top-4 rounded-full bg-paper/90 px-3 py-1 text-xs font-medium text-ink transition-opacity duration-200 ${position < 12 ? "opacity-0" : "opacity-100"}`}
             >
               {beforeLabel}
             </span>
             <span
               aria-hidden
-              className={`pointer-events-none absolute right-4 top-4 rounded-full bg-lime px-3 py-1.5 font-display text-[11px] uppercase tracking-[0.2em] text-ink transition-opacity duration-200 ${position > 88 ? "opacity-0" : "opacity-100"}`}
+              className={`pointer-events-none absolute right-4 top-4 rounded-full bg-paper/90 px-3 py-1 text-xs font-medium text-ink transition-opacity duration-200 ${position > 88 ? "opacity-0" : "opacity-100"}`}
             >
               {afterLabel}
             </span>
@@ -140,7 +140,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
             {/* Divider */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-paper shadow-[0_0_0_1px_rgba(0,0,0,0.25),0_0_16px_rgba(0,0,0,0.35)]"
+              className="pointer-events-none absolute inset-y-0 w-px -translate-x-1/2 bg-paper shadow-[0_0_0_1px_rgba(0,0,0,0.12)]"
               style={{ left: `${position}%`, transition: dragging || reduceMotion ? "none" : "left 120ms ease-out" }}
             />
 
@@ -158,11 +158,11 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
               aria-orientation="horizontal"
               onKeyDown={onKeyDown}
               onFocus={() => setInteracted(true)}
-              className={`absolute top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-paper text-ink shadow-lg ring-1 ring-ink/10 outline-none transition-[transform,left,background-color] duration-150 ease-out hover:bg-lime focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime motion-reduce:transition-none ${dragging ? "scale-110 bg-lime" : ""} ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
+              className={`elevated absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-paper text-ink transition-[transform,left,background-color] duration-150 ease-out hover:bg-lime motion-reduce:transition-none ${dragging ? "scale-105 bg-lime" : ""} ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
               style={{ left: `${position}%`, transition: dragging || reduceMotion ? "none" : undefined }}
             >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M7 4 2 10l5 6M13 4l5 6-5 6" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M8 5 3 10l5 5M12 5l5 5-5 5" />
               </svg>
             </button>
             <span id={labelId} className="sr-only">
@@ -179,15 +179,18 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: reduceMotion ? 0 : 0.35, ease: EASE_PRESENCE, delay: 0.6 }}
-                  className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-ink/80 px-4 py-2 font-display text-[11px] uppercase tracking-[0.18em] text-paper/90 ring-1 ring-paper/15 backdrop-blur"
+                  className="pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-paper/90 px-3.5 py-1.5 text-xs font-medium text-ink"
                 >
-                  <span className="mr-2 text-lime">⟷</span>Drag to compare
+                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M1 6h14M4 3 1 6l3 3M12 3l3 3-3 3" />
+                  </svg>
+                  Drag to compare
                 </motion.span>
               )}
             </AnimatePresence>
           </div>
 
-          {block.caption && <figcaption className="mt-4 text-center text-sm text-muted">{block.caption}</figcaption>}
+          {block.caption && <figcaption className="caption mt-4 text-center">{block.caption}</figcaption>}
         </figure>
       </div>
     </section>

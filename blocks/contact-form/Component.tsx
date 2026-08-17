@@ -12,7 +12,38 @@ type SubmissionState = "idle" | "submitting" | "success" | "error";
 const DEFAULT_STOCKIST_URL = "https://www.theaquariumsolution.com/stockists";
 
 const inputClass =
-  "w-full rounded-lg border border-paper/15 bg-ink px-4 py-3 text-base text-paper placeholder:text-paper/30 transition focus:border-lime focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime disabled:opacity-60";
+  "hairline w-full rounded-xl border bg-paper px-4 py-3 text-base text-ink transition-colors duration-200 focus:border-ink disabled:opacity-60";
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 20 20" width="22" height="22" aria-hidden="true" focusable="false">
+      <path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false" className="shrink-0">
+      <path d="M2.5 6h7M6 2.5 9.5 6 6 9.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SelectChevron() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      width="16"
+      height="16"
+      aria-hidden="true"
+      focusable="false"
+      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted"
+    >
+      <path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export default function ContactFormBlock({ block, locale }: BlockProps<"contactFormBlock">) {
   const reduceMotion = useReducedMotion();
@@ -81,11 +112,7 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
   const revealTransition = reduceMotion ? { duration: 0 } : { duration: DURATION_REVEAL, ease: EASE_PRESENCE };
 
   return (
-    <section
-      id="contact"
-      className="on-dark section-space page-gutter scroll-mt-24 bg-ink text-paper"
-      aria-labelledby={`${fieldId}-heading`}
-    >
+    <section id="contact" className="section-space page-gutter scroll-mt-24 bg-paper text-text" aria-labelledby={`${fieldId}-heading`}>
       <div className="container-site grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -93,15 +120,13 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
           viewport={{ once: true, amount: 0.3 }}
           transition={revealTransition}
         >
-          {block.eyebrow ? <p className="eyebrow mb-3 text-lime">{block.eyebrow}</p> : null}
-          <h2 id={`${fieldId}-heading`} className="whitespace-pre-line text-paper">
+          <h2 id={`${fieldId}-heading`} className="max-w-[20ch] whitespace-pre-line">
             {block.headline}
           </h2>
-          {block.intro ? <p className="mt-5 max-w-md text-lg leading-relaxed text-paper/75">{block.intro}</p> : null}
+          {block.intro ? <p className="lead mt-4 max-w-[36rem]">{block.intro}</p> : null}
         </motion.div>
 
         <motion.div
-          className="rounded-2xl border border-paper/10 bg-ink-soft p-6 md:p-10"
           initial={reduceMotion ? false : { opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -109,26 +134,24 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
         >
           {submissionState === "success" ? (
             <motion.div
-              className="flex flex-col items-start gap-4 py-6"
+              className="card flex flex-col items-start gap-4 p-7 md:p-8"
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={revealTransition}
               role="status"
             >
-              <span
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-lime font-display text-xl text-ink"
-                aria-hidden="true"
-              >
-                ✓
+              <span className="flex size-12 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true">
+                <CheckIcon />
               </span>
-              <h3 className="text-paper">{labels.successTitle}</h3>
-              {labels.successMessage ? <p className="text-paper/75">{labels.successMessage}</p> : null}
+              <h3 className="text-xl font-semibold">{labels.successTitle}</h3>
+              {labels.successMessage ? <p className="text-muted">{labels.successMessage}</p> : null}
               <button
                 type="button"
-                className="mt-2 font-display text-sm uppercase tracking-wider text-lime underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+                className="action-link action-link--text mt-2 cursor-pointer"
                 onClick={() => setSubmissionState("idle")}
               >
-                {t(locale, "sendAnother")}
+                <span>{t(locale, "sendAnother")}</span>
+                <ArrowIcon />
               </button>
             </motion.div>
           ) : (
@@ -168,14 +191,17 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
                 </Field>
                 {block.interestOptions?.length ? (
                   <Field label={labels.interest} id={`${fieldId}-interest`}>
-                    <select id={`${fieldId}-interest`} name="interest" defaultValue="" className={`${inputClass} appearance-none`}>
-                      <option value="">—</option>
-                      {block.interestOptions.map((option) => (
-                        <option value={option} key={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="relative">
+                      <select id={`${fieldId}-interest`} name="interest" defaultValue="" className={`${inputClass} appearance-none pr-11`}>
+                        <option value="">—</option>
+                        {block.interestOptions.map((option) => (
+                          <option value={option} key={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                      <SelectChevron />
+                    </div>
                   </Field>
                 ) : null}
                 <Field label={labels.message} id={`${fieldId}-message`} required className="sm:col-span-2">
@@ -190,24 +216,28 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
               </div>
 
               <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-                {labels.privacyNotice ? <p className="max-w-sm text-sm leading-relaxed text-paper/55">{labels.privacyNotice}</p> : null}
+                {labels.privacyNotice ? <p className="caption max-w-sm leading-relaxed">{labels.privacyNotice}</p> : null}
                 <div className="flex flex-wrap items-center gap-3">
                   <ActionLink link={dealerLocator} variant="secondary" />
                   <button
-                    className="action-link action-link--primary disabled:cursor-wait disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+                    className="action-link action-link--primary cursor-pointer disabled:cursor-wait disabled:opacity-70"
                     type="submit"
                     disabled={submissionState === "submitting"}
                     aria-busy={submissionState === "submitting"}
                   >
                     <span>{labels.submit}</span>
-                    <span aria-hidden="true" className={submissionState === "submitting" ? "motion-safe:animate-pulse" : ""}>
-                      ↗
+                    <span aria-hidden="true" className={`inline-flex ${submissionState === "submitting" ? "motion-safe:animate-pulse" : ""}`}>
+                      <ArrowIcon />
                     </span>
                   </button>
                 </div>
               </div>
 
-              <p className="mt-4 min-h-6 text-sm text-lime" role="status" aria-live="polite">
+              <p
+                className={`mt-4 min-h-6 text-sm ${submissionState === "error" ? "card mt-5 px-4 py-3 text-ink" : ""}`}
+                role="status"
+                aria-live="polite"
+              >
                 {submissionState === "error" ? labels.errorMessage : ""}
               </p>
             </form>
@@ -233,10 +263,10 @@ function Field({
 }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <label htmlFor={id} className="font-display text-xs uppercase tracking-[0.2em] text-paper/70">
+      <label htmlFor={id} className="label">
         {label}
         {required ? (
-          <span className="text-lime" aria-hidden="true">
+          <span className="text-lime-deep" aria-hidden="true">
             {" "}
             *
           </span>

@@ -16,17 +16,24 @@ const NA = new Set(["—", "-", "–", "n/a", "na", ""]);
 
 function CheckIcon() {
   return (
-    <svg viewBox="0 0 20 20" className="h-5 w-5" aria-hidden="true" focusable="false">
-      <circle cx="10" cy="10" r="9" className="fill-lime/20" />
-      <path d="M5.5 10.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-lime-deep" />
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-ink">
+      <path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function CrossIcon() {
   return (
-    <svg viewBox="0 0 20 20" className="h-5 w-5" aria-hidden="true" focusable="false">
-      <path d="M6 6l8 8M14 6l-8 8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-muted/70" />
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-ink">
+      <path d="M6 6l8 8M14 6l-8 8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function DashIcon() {
+  return (
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false" className="text-muted">
+      <path d="M6 10h8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -51,13 +58,13 @@ function CellValue({ value }: { value: string | undefined }) {
   }
   if (NA.has(clean)) {
     return (
-      <span className="text-muted/60">
-        <span aria-hidden="true">—</span>
+      <span className="inline-flex items-center justify-center">
+        <DashIcon />
         <span className="sr-only">Not applicable</span>
       </span>
     );
   }
-  return <span className="text-text">{value}</span>;
+  return <span className="num text-text">{value}</span>;
 }
 
 /* ------------------------------------------------------------------ */
@@ -66,27 +73,22 @@ function CellValue({ value }: { value: string | undefined }) {
 
 function ColumnHeader({ column, highlight }: { column: Column; highlight: boolean }) {
   const product = column.product;
+  const showProductName = product?.name && stegaClean(product.name) !== stegaClean(column.title);
   return (
-    <div className="flex flex-col gap-3">
-      {highlight && (
-        <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-lime px-2.5 py-1 font-display text-[0.65rem] uppercase tracking-[0.18em] text-ink">
-          <span aria-hidden="true">★</span> Recommended
+    <div className="flex flex-col items-start gap-4">
+      {product?.image?.asset ? (
+        <span className="media relative block size-24">
+          <SanityImage image={product.image} alt={product.imageAlt ?? product.name ?? column.title ?? ""} fill sizes="96px" className="object-cover" />
         </span>
-      )}
-      <div>
-        <p className="font-display text-lg uppercase leading-tight tracking-tight text-ink md:text-xl">{column.title}</p>
-        {column.subtitle && <p className="mt-1 text-sm font-normal normal-case tracking-normal text-muted">{column.subtitle}</p>}
+      ) : null}
+      <div className="flex min-h-7 flex-col gap-1">
+        {highlight && (
+          <span className="mb-1 inline-flex w-fit items-center rounded-full bg-lime px-2.5 py-0.5 text-xs font-medium text-ink">Recommended</span>
+        )}
+        <p className="text-xl font-semibold leading-tight text-ink">{column.title}</p>
+        {column.subtitle && <p className="label">{column.subtitle}</p>}
+        {showProductName && <p className="label">{product.name}</p>}
       </div>
-      {product && (product.image?.asset || product.name) && (
-        <div className="flex items-center gap-3">
-          {product.image?.asset && (
-            <span className="relative block h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-line bg-sand">
-              <SanityImage image={product.image} alt={product.imageAlt ?? product.name ?? ""} fill sizes="48px" className="object-cover" />
-            </span>
-          )}
-          {product.name && <span className="text-sm font-normal normal-case tracking-normal text-muted">{product.name}</span>}
-        </div>
-      )}
     </div>
   );
 }
@@ -106,18 +108,18 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
   return (
     <section className="section-space page-gutter bg-paper text-text">
       <div className="container-site">
-        {(block.eyebrow || block.headline || block.intro) && (
-          <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} className="mb-10 md:mb-14" />
-        )}
+        {(block.headline || block.intro) && <SectionHeader headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
+      </div>
 
+      <div className="container-wide">
         {/* Scroll container: horizontal scroll on narrow screens, natural width on ≥md */}
         <div
-          className="-mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)] pb-2 md:mx-0 md:px-0 [scrollbar-width:thin] focus-visible:outline-2 focus-visible:outline-lime"
+          className="relative -mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)] pb-2 md:mx-0 md:px-0 [scrollbar-width:thin]"
           tabIndex={0}
           role="region"
           aria-labelledby={captionId}
         >
-          <table className="w-full min-w-[40rem] border-separate border-spacing-0 text-left text-sm md:text-base">
+          <table className="w-full min-w-[40rem] border-separate border-spacing-0 text-left text-[0.95rem] md:text-base">
             <caption id={captionId} className="sr-only">
               {block.headline ?? "Comparison table"}
             </caption>
@@ -126,9 +128,9 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
               <tr className="align-bottom">
                 <th
                   scope="col"
-                  className="sticky left-0 z-10 min-w-[10rem] border-b-2 border-ink bg-paper px-4 pb-4 pt-6 font-display text-xs uppercase tracking-[0.2em] text-muted md:min-w-[14rem] md:px-5"
+                  className="hairline label sticky left-0 z-10 min-w-[10rem] border-b bg-paper px-4 pb-5 pt-6 text-left md:min-w-[14rem] md:px-5"
                 >
-                  {block.rowHeader ?? "Feature"}
+                  <span className="sr-only">{block.rowHeader ?? "Feature"}</span>
                 </th>
                 {columns.map((col) => {
                   const highlight = Boolean(col.highlight);
@@ -136,8 +138,8 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
                     <th
                       key={col._key}
                       scope="col"
-                      className={`min-w-[10rem] px-4 pb-4 pt-6 align-bottom md:px-5 ${
-                        highlight ? "rounded-t-2xl border-t-4 border-t-lime bg-sand border-b-2 border-b-ink" : "border-b-2 border-ink"
+                      className={`hairline min-w-[11rem] border-b px-4 pb-5 pt-6 align-bottom font-normal md:px-5 ${
+                        highlight ? "bg-sand" : ""
                       }`}
                     >
                       <ColumnHeader column={col} highlight={highlight} />
@@ -151,20 +153,22 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
               {rows.map((row, ri) => {
                 const last = ri === rows.length - 1 && !hasCta;
                 return (
-                  <tr key={row._key} className="group">
+                  <tr key={row._key}>
                     <th
                       scope="row"
-                      className={`sticky left-0 z-10 bg-paper px-4 py-4 text-left shadow-[inset_-1px_0_0_var(--color-line)] md:shadow-none align-top font-medium text-ink md:px-5 ${last ? "" : "border-b border-line"}`}
+                      className={`hairline sticky left-0 z-10 bg-paper px-4 py-4 text-left align-top font-medium text-ink shadow-[inset_-1px_0_0_var(--color-line)] md:px-5 md:shadow-none ${
+                        last ? "" : "border-b"
+                      }`}
                     >
                       <span className="block">{row.label}</span>
-                      {row.hint && <span className="mt-1 block text-xs font-normal leading-snug text-muted">{row.hint}</span>}
+                      {row.hint && <span className="caption mt-1 block font-normal leading-snug">{row.hint}</span>}
                     </th>
                     {columns.map((col, ci) => {
                       const highlight = Boolean(col.highlight);
                       return (
                         <td
                           key={col._key}
-                          className={`px-4 py-4 align-top md:px-5 ${highlight ? "bg-sand" : ""} ${last ? "" : "border-b border-line"}`}
+                          className={`hairline px-4 py-4 align-top md:px-5 ${highlight ? "bg-sand" : ""} ${last ? "" : "border-b"}`}
                         >
                           <CellValue value={row.cells?.[ci]} />
                         </td>
@@ -182,8 +186,8 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
                   {columns.map((col) => {
                     const highlight = Boolean(col.highlight);
                     return (
-                      <td key={col._key} className={`px-4 py-5 align-top md:px-5 ${highlight ? "rounded-b-2xl bg-sand" : ""}`}>
-                        <ActionLink link={col.cta} variant={highlight ? "primary" : "secondary"} className="text-xs" />
+                      <td key={col._key} className={`px-4 py-5 align-top md:px-5 ${highlight ? "bg-sand" : ""}`}>
+                        <ActionLink link={col.cta} variant="text" />
                       </td>
                     );
                   })}
@@ -192,9 +196,13 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
             )}
           </table>
         </div>
-
-        {block.footnote && <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted">{block.footnote}</p>}
       </div>
+
+      {block.footnote && (
+        <div className="container-site">
+          <p className="caption mt-8 max-w-[68ch]">{block.footnote}</p>
+        </div>
+      )}
     </section>
   );
 }

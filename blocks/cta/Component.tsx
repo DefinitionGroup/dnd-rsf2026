@@ -7,35 +7,15 @@ type Tone = "lime" | "ink" | "paper";
 
 const TONE_CLASSES: Record<
   Tone,
-  { section: string; panel: string; eyebrow: string; headline: string; body: string; primary: "primary" | "secondary" }
+  { section: string; body: string; primary: "primary" | "secondary"; secondary: "secondary" | "text" }
 > = {
-  lime: {
-    section: "bg-paper",
-    panel: "bg-lime text-ink",
-    eyebrow: "text-ink/70",
-    headline: "text-ink",
-    body: "text-ink/80",
-    // On a lime panel the primary (lime) button would vanish — use the outlined variant.
-    primary: "secondary",
-  },
-  ink: {
-    section: "on-dark bg-paper",
-    panel: "bg-ink text-paper",
-    eyebrow: "text-lime",
-    headline: "text-paper",
-    body: "text-paper/80",
-    primary: "primary",
-  },
-  paper: {
-    section: "bg-paper",
-    panel: "bg-sand text-text border border-line",
-    eyebrow: "",
-    headline: "",
-    body: "text-muted",
-    primary: "primary",
-  },
+  // Lime field: the primary (lime) pill would vanish — ink pill + text link instead.
+  lime: { section: "bg-lime text-ink", body: "text-ink/75", primary: "secondary", secondary: "text" },
+  ink: { section: "stage", body: "", primary: "primary", secondary: "secondary" },
+  paper: { section: "stage-sand", body: "", primary: "primary", secondary: "secondary" },
 };
 
+/** Centred statement on a full-width field (ink stage / sand / lime). */
 export default function CtaBlock({ block }: BlockProps<"ctaBlock">) {
   const toneKey = stegaClean(block.tone ?? "lime");
   const tone: Tone = toneKey === "ink" || toneKey === "paper" ? toneKey : "lime";
@@ -43,27 +23,14 @@ export default function CtaBlock({ block }: BlockProps<"ctaBlock">) {
 
   return (
     <section className={`section-space page-gutter ${classes.section}`}>
-      <div className="container-site">
-        <Reveal
-          className={`relative isolate overflow-hidden rounded-3xl px-6 py-14 text-center md:px-16 md:py-24 ${classes.panel}`}
-        >
-          {tone === "ink" && (
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-24 -top-24 -z-10 size-96 rounded-full bg-lime/20 blur-3xl"
-            />
-          )}
-          <div className="mx-auto max-w-3xl">
-            {block.eyebrow && <p className={`eyebrow mb-4 ${classes.eyebrow}`}>{block.eyebrow}</p>}
-            <h2 className={`whitespace-pre-line ${classes.headline}`}>{block.headline}</h2>
-            {block.body && <p className={`mx-auto mt-5 max-w-2xl text-lg leading-relaxed ${classes.body}`}>{block.body}</p>}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <ActionLink link={block.primaryCta} variant={classes.primary} />
-              <ActionLink link={block.secondaryCta} variant={tone === "lime" ? "text" : "secondary"} />
-            </div>
-          </div>
-        </Reveal>
-      </div>
+      <Reveal className="mx-auto max-w-[46rem] text-center">
+        <h2 className="display-lg mx-auto max-w-[20ch] whitespace-pre-line">{block.headline}</h2>
+        {block.body && <p className={`lead mx-auto mt-5 max-w-[36rem] ${classes.body}`}>{block.body}</p>}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <ActionLink link={block.primaryCta} variant={classes.primary} />
+          <ActionLink link={block.secondaryCta} variant={classes.secondary} className={tone === "lime" ? "text-ink" : ""} />
+        </div>
+      </Reveal>
     </section>
   );
 }

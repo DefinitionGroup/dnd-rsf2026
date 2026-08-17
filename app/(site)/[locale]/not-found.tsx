@@ -14,7 +14,7 @@ export default async function NotFound() {
       <NavVariant variant="dark" />
       <section className="section-space page-gutter">
         <div className="container-site max-w-2xl">
-          <p className="eyebrow mb-3">404</p>
+          <p className="label mb-3">404</p>
           <h1>{t(locale, "notFoundTitle")}</h1>
           <p className="mt-4 text-lg text-muted">{t(locale, "notFoundBody")}</p>
           <Link href={`/${locale}`} className="action-link action-link--primary mt-8">{t(locale, "backHome")}</Link>

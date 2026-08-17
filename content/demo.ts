@@ -200,6 +200,7 @@ const clariseaPage = page({
     comparisonTableDemo({
       eyebrow: "SK-3000 vs SK-5000",
       headline: "Two sizes, one clever design.",
+      intro: "Same Gen 3 body, controller and 40 m roll — pick by the flow your return pump delivers and the volume you keep.",
       rowHeader: "Model",
       columns: [
         { title: "ClariSea SK-3000 G3", subtitle: "Up to 3,000 l/h · 790 gal/h", product: clarisea, cta: { label: "Find a stockist", href: STOCKISTS } },

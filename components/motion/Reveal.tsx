@@ -1,31 +1,25 @@
-"use client";
+import type { ReactNode } from "react";
 
-import { motion, useReducedMotion } from "motion/react";
-import { DURATION_REVEAL, EASE_PRESENCE, REVEAL_VIEWPORT } from "@/lib/motion";
-
+/**
+ * The one authored scroll motion: rise-in. `RiseObserver` (mounted once in the
+ * site layout) toggles `.is-in`; CSS owns the transition. Server component.
+ */
 export default function Reveal({
   children,
-  className,
+  className = "",
   delay = 0,
-  as = "div",
+  as: Tag = "div",
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
+  /** stagger in ms */
   delay?: number;
-  as?: "div" | "section" | "li" | "article";
+  as?: "div" | "section" | "li" | "article" | "figure";
 }) {
-  const reduceMotion = useReducedMotion();
-  const Tag = motion[as];
-
+  const T = Tag as "div";
   return (
-    <Tag
-      className={className}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={REVEAL_VIEWPORT}
-      transition={reduceMotion ? { duration: 0, delay: 0 } : { duration: DURATION_REVEAL, delay, ease: EASE_PRESENCE }}
-    >
+    <T className={`rise ${className}`.trim()} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
       {children}
-    </Tag>
+    </T>
   );
 }

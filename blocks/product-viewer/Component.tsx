@@ -255,11 +255,11 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
   const showHint = Boolean(block.hint) && !interacted && !isLoading;
 
   return (
-    <section className="section-space page-gutter on-dark bg-ink text-paper">
+    <section className="stage section-space page-gutter">
       <div className="container-site">
-        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" className="[&_h2]:text-paper [&_p:not(.eyebrow)]:text-paper/70 [&_.eyebrow]:text-lime" />
+        <SectionHeader headline={block.headline} intro={block.intro} align="center" />
 
-        <div className={`mx-auto max-w-4xl ${block.eyebrow || block.headline || block.intro ? "mt-12" : ""}`}>
+        <div className={`mx-auto max-w-4xl ${block.headline || block.intro ? "mt-12 md:mt-16" : ""}`}>
           {/* Stage */}
           <div
             ref={stageRef}
@@ -274,13 +274,10 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
             onFocus={markInteracted}
-            className={`group relative isolate aspect-square w-full touch-none select-none overflow-hidden rounded-2xl bg-ink-soft ring-1 ring-paper/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime md:aspect-[4/3] ${
+            className={`media group relative isolate aspect-square w-full touch-none select-none md:aspect-[4/3] ${
               zoom > 1 ? (dragging ? "cursor-grabbing" : "cursor-move") : canRotate ? (dragging ? "cursor-grabbing" : "cursor-grab") : "cursor-zoom-in"
             }`}
           >
-            {/* subtle reef glow */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(153,204,51,0.14),transparent_62%)]" />
-
             <motion.div className="absolute inset-0" style={{ transform, willChange: zoom > 1 || dragging ? "transform" : undefined }}>
               {frames.map((src, i) => (
                 // Plain <img> stacked and pre-decoded so frame switches are instant.
@@ -313,9 +310,9 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   initial={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: reduceMotion ? 0 : 0.4, ease: EASE_PRESENCE }}
-                  className="absolute inset-0 flex items-center justify-center bg-ink/70 backdrop-blur-sm"
+                  className="absolute inset-0 flex items-center justify-center bg-stage-soft/80"
                 >
-                  <span className="font-display text-xs uppercase tracking-[0.2em] text-paper/70">
+                  <span className="label num">
                     Loading {Math.min(loaded, frameCount)}/{frameCount}
                   </span>
                 </motion.div>
@@ -332,9 +329,11 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: reduceMotion ? 0 : 0.35, ease: EASE_PRESENCE }}
-                  className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-ink/80 px-4 py-2 font-display text-xs uppercase tracking-[0.18em] text-paper/90 ring-1 ring-paper/15 backdrop-blur"
+                  className="pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-paper/10 px-3.5 py-1.5 text-xs font-medium text-paper"
                 >
-                  <span aria-hidden className="mr-2 inline-block text-lime motion-safe:animate-pulse">⟷</span>
+                  <svg aria-hidden width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-lime motion-safe:animate-pulse">
+                    <path d="M1 6h14M4 3 1 6l3 3M12 3l3 3-3 3" />
+                  </svg>
                   {block.hint}
                 </motion.p>
               )}
@@ -344,28 +343,28 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
             {canRotate && (
               <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2" aria-hidden>
                 <svg width="36" height="36" viewBox="0 0 36 36" className="-rotate-90">
-                  <circle cx="18" cy="18" r={ringR} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="2" />
+                  <circle cx="18" cy="18" r={ringR} fill="none" stroke="var(--color-line-dark)" strokeWidth="1.5" />
                   <circle
                     cx="18"
                     cy="18"
                     r={ringR}
                     fill="none"
                     stroke="var(--color-lime)"
-                    strokeWidth="2"
+                    strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeDasharray={ringC}
                     strokeDashoffset={ringC * (1 - progress)}
                     className="transition-[stroke-dashoffset] duration-150 ease-out motion-reduce:transition-none"
                   />
                 </svg>
-                <span className="font-display text-xs tabular-nums tracking-widest text-paper/70">
+                <span className="label num text-xs">
                   {String(frame + 1).padStart(2, "0")}/{String(frameCount).padStart(2, "0")}
                 </span>
               </div>
             )}
 
             {/* Zoom controls */}
-            <div className="absolute right-4 top-4 flex flex-col overflow-hidden rounded-full bg-ink/80 ring-1 ring-paper/15 backdrop-blur" onPointerDown={(e) => e.stopPropagation()}>
+            <div className="elevated absolute right-4 top-4 flex flex-col overflow-hidden rounded-full bg-paper text-ink" onPointerDown={(e) => e.stopPropagation()}>
               <button
                 type="button"
                 aria-label="Zoom in"
@@ -374,11 +373,13 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   markInteracted();
                   applyZoom(zoomRef.current + ZOOM_STEP);
                 }}
-                className="flex h-10 w-10 items-center justify-center font-display text-lg text-paper transition hover:bg-lime hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-lime disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-paper"
+                className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-lime disabled:opacity-40 disabled:hover:bg-transparent"
               >
-                +
+                <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M8 3v10M3 8h10" />
+                </svg>
               </button>
-              <span className="mx-2 border-t border-paper/15" aria-hidden />
+              <span className="mx-2.5 border-t border-line" aria-hidden />
               <button
                 type="button"
                 aria-label="Zoom out"
@@ -387,9 +388,11 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   markInteracted();
                   applyZoom(zoomRef.current - ZOOM_STEP);
                 }}
-                className="flex h-10 w-10 items-center justify-center font-display text-lg text-paper transition hover:bg-lime hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-lime disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-paper"
+                className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-lime disabled:opacity-40 disabled:hover:bg-transparent"
               >
-                −
+                <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M3 8h10" />
+                </svg>
               </button>
             </div>
 
@@ -405,9 +408,12 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   transition={{ duration: reduceMotion ? 0 : 0.2 }}
                   onPointerDown={(e) => e.stopPropagation()}
                   onClick={reset}
-                  className="absolute bottom-4 right-4 rounded-full bg-ink/80 px-3 py-2 font-display text-[11px] uppercase tracking-[0.18em] text-paper ring-1 ring-paper/15 backdrop-blur transition hover:bg-lime hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+                  className="elevated absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-xs font-medium text-ink transition-colors hover:bg-lime"
                 >
-                  Reset {zoom > 1 && <span className="tabular-nums text-lime">{zoom.toFixed(1)}×</span>}
+                  <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2.5 7a4.5 4.5 0 1 0 1.3-3.2M2.5 1.5v3h3" />
+                  </svg>
+                  Reset {zoom > 1 && <span className="num text-lime-deep">{zoom.toFixed(1)}×</span>}
                 </motion.button>
               )}
             </AnimatePresence>
@@ -424,7 +430,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
               {frames.map((_, i) => (
                 <span
                   key={i}
-                  className={`h-1 rounded-full transition-all duration-150 motion-reduce:transition-none ${i === frame ? "w-5 bg-lime" : "w-1 bg-paper/25"}`}
+                  className={`h-1 rounded-full transition-all duration-150 motion-reduce:transition-none ${i === frame ? "w-5 bg-lime" : "w-1 bg-line-dark"}`}
                 />
               ))}
             </div>
@@ -435,9 +441,9 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
           </p>
 
           {block.product && (block.product.name || block.product.tagline) && (
-            <div className="mt-8 text-center">
-              {block.product.name && <h3 className="text-paper">{block.product.name}</h3>}
-              {block.product.tagline && <p className="mx-auto mt-2 max-w-xl text-paper/70">{block.product.tagline}</p>}
+            <div className="mt-10 text-center">
+              {block.product.name && <h3 className="text-2xl font-semibold text-paper">{block.product.name}</h3>}
+              {block.product.tagline && <p className="mx-auto mt-2 max-w-[52ch] text-muted-dark">{block.product.tagline}</p>}
             </div>
           )}
         </div>

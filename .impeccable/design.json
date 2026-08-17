@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17T00:00:00Z",
+  "title": "Design System: D-D The Aquarium Solution — Product Stage",
+  "extensions": {
+    "colorMeta": {
+      "lime": { "role": "primary", "displayName": "Brand Lime", "canonical": "#99cc33", "tonalRamp": ["#1e2a08", "#33470f", "#4b6817", "#6f9a1f", "#99cc33", "#b4db66", "#cfe899", "#eef7dc"] },
+      "lime-deep": { "role": "primary", "displayName": "Lime Deep (AA text)", "canonical": "#6f9a1f", "tonalRamp": ["#1e2a08", "#33470f", "#4b6817", "#6f9a1f", "#99cc33", "#b4db66", "#cfe899", "#eef7dc"] },
+      "lime-soft": { "role": "primary", "displayName": "Lime Soft", "canonical": "#eef7dc", "tonalRamp": ["#1e2a08", "#33470f", "#4b6817", "#6f9a1f", "#99cc33", "#b4db66", "#cfe899", "#eef7dc"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1d1d1f", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "ink-soft": { "role": "neutral", "displayName": "Ink Soft", "canonical": "#2c2c2e", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "stage": { "role": "neutral", "displayName": "Stage (near-black)", "canonical": "#0b0b0c", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "stage-soft": { "role": "neutral", "displayName": "Stage Soft", "canonical": "#161618", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "text": { "role": "neutral", "displayName": "Text", "canonical": "#1d1d1f", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "muted": { "role": "neutral", "displayName": "Muted", "canonical": "#6e6e73", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "muted-dark": { "role": "neutral", "displayName": "Muted on Stage", "canonical": "#a1a1a6", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#ffffff", "tonalRamp": ["#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e5e5ea", "#ededf0", "#f5f5f7", "#ffffff"] },
+      "sand": { "role": "neutral", "displayName": "Sand", "canonical": "#f5f5f7", "tonalRamp": ["#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e5e5ea", "#ededf0", "#f5f5f7", "#ffffff"] },
+      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#d2d2d7", "tonalRamp": ["#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e5e5ea", "#ededf0", "#f5f5f7", "#ffffff"] },
+      "line-dark": { "role": "neutral", "displayName": "Hairline on Stage", "canonical": "#3a3a3c", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
+      "sea": { "role": "tertiary", "displayName": "Sea (declared, unused in sampled surface)", "canonical": "#0f4c5c", "tonalRamp": ["#061e25", "#0a3340", "#0f4c5c", "#176c82", "#2a8ea8", "#5db0c5", "#9dd0dd", "#e0f1f5"] },
+      "danger": { "role": "tertiary", "displayName": "Danger (alarm)", "canonical": "#d1352b", "tonalRamp": ["#3a0e0b", "#6b1a14", "#9c271f", "#d1352b", "#e0645c", "#eb948e", "#f5c2be", "#fde8e6"] },
+      "warn": { "role": "tertiary", "displayName": "Warn (LED only)", "canonical": "#e6a700", "tonalRamp": ["#3d2c00", "#6b4e00", "#a37700", "#e6a700", "#f0bf3d", "#f6d47a", "#fbe6b0", "#fff4cc"] }
+    },
+    "typographyMeta": {
+      "display-xl": { "displayName": "Display XL", "purpose": "Hero h1 only, max 13ch, paper on stage." },
+      "display-lg": { "displayName": "Display LG", "purpose": "Section h2 (SectionHeader default, stat strip, CTA, animated headline), max 20ch." },
+      "display-md": { "displayName": "Display MD", "purpose": "Split-content / intro headlines, feature-tour step titles, prose h2." },
+      "title": { "displayName": "Title", "purpose": "In-block object titles: statements, product names, comparison columns, spec/FAQ headings, step titles." },
+      "lead": { "displayName": "Lead", "purpose": "One-sentence intro under a headline, max 36rem, muted (muted-dark on stage)." },
+      "body": { "displayName": "Body", "purpose": "17px reading copy; prose capped at 68ch." },
+      "figure": { "displayName": "Figure", "purpose": "Big measurements: Archivo width 78, 700, tabular; paired with figure-unit (width 100, 500) at 0.4em." },
+      "label": { "displayName": "Label", "purpose": "Stat labels, form labels, spec keys, column subtitles." },
+      "caption": { "displayName": "Caption", "purpose": "Footnotes, media captions, privacy notice, hints." },
+      "nav": { "displayName": "Nav", "purpose": "Header links, product-bar jump links, footer columns." }
+    },
+    "shadows": [
+      { "name": "elevated", "value": "0 12px 32px -12px rgb(0 0 0 / 0.18), 0 2px 6px -2px rgb(0 0 0 / 0.08)", "purpose": "Only for things that float: language menu, video play disc." },
+      { "name": "productbar-stuck", "value": "0 1px 0 0 rgb(0 0 0 / 0.04)", "purpose": "1px underline on the sticky product bar once scrolled past 24px." },
+      { "name": "focus-ring", "value": "outline: 2px solid var(--color-lime-deep); outline-offset: 3px; border-radius: 4px", "purpose": "Global focus-visible; lime on .stage/.on-dark." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one easing: rise-in, hover scale, tour rail, FAQ icon." },
+      { "name": "ease-presence", "value": "cubic-bezier(0.62, 0.05, 0.01, 0.99)", "purpose": "Declared in @theme; lib/motion.ts aliases EASE_PRESENCE to ease-out-expo for JS animations (count-up)." },
+      { "name": "duration-rise", "value": "640ms", "purpose": "Rise-in: opacity 0 → 1, translateY 18px → 0, once, IntersectionObserver rootMargin 0 0 -8% 0, threshold 0.1." },
+      { "name": "stagger", "value": "≤ 80ms per item (60ms in feature list)", "purpose": "transition-delay stagger via Reveal delay prop." },
+      { "name": "duration-state", "value": "200ms", "purpose": "Pill/link/input colour and transform transitions." },
+      { "name": "duration-hover-media", "value": "300–400ms", "purpose": "Play disc scale 1.05 (300ms), product tile image scale 1.02 (400ms expo)." },
+      { "name": "duration-tour", "value": "500ms", "purpose": "Feature-tour progress rail top and title colour." },
+      { "name": "count-up", "value": "1.6s, delay index*80ms, EASE_PRESENCE", "purpose": "Stat strip figures; exact string before hydration and under reduced motion." },
+      { "name": "reduced-motion", "value": "all animation/transition ≈ 0.01ms; .rise visible; RiseObserver marks all .is-in", "purpose": "prefers-reduced-motion contract." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "container-prose", "value": "720px" },
+      { "name": "container-site", "value": "1200px" },
+      { "name": "container-wide", "value": "1440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Pill",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Lime pill with ink text; the one place the brand accent is guaranteed to appear on every ground.",
+      "html": "<a class=\"ds-pill ds-pill-primary\" href=\"#\"><span>Which size do I need?</span></a>",
+      "css": ".ds-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.625rem 1.25rem; border-radius:980px; font: 500 .95rem/1.2 Archivo, ui-sans-serif, system-ui, sans-serif; text-decoration:none; transition: background-color .2s, color .2s, transform .2s, box-shadow .2s; } .ds-pill:active { transform: translateY(1px); } .ds-pill:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; border-radius: 980px; } .ds-pill-primary { background: var(--color-lime, #99cc33); color: var(--color-ink, #1d1d1f); } .ds-pill-primary:hover { background:#a6d63f; }"
+    },
+    {
+      "name": "Secondary Pill",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ink pill with paper text on light grounds; inverts to paper/ink on the stage. Carries an external arrow when the href leaves the site.",
+      "html": "<a class=\"ds-pill ds-pill-secondary\" href=\"#\"><span>Find a stockist</span><svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"12\" height=\"12\"><path d=\"M4 2.5h5.5V8M9.5 2.5 3 9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.625rem 1.25rem; border-radius:980px; font: 500 .95rem/1.2 Archivo, ui-sans-serif, system-ui, sans-serif; text-decoration:none; transition: background-color .2s, color .2s, transform .2s; } .ds-pill:active { transform: translateY(1px); } .ds-pill:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; } .ds-pill-secondary { background: var(--color-ink, #1d1d1f); color: var(--color-paper, #fff); } .ds-pill-secondary:hover { background: var(--color-ink-soft, #2c2c2e); } .ds-stage .ds-pill-secondary { background: var(--color-paper, #fff); color: var(--color-ink, #1d1d1f); } .ds-stage .ds-pill-secondary:hover { background:#ededf0; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Padding-less lime-deep link with a 12px chevron; lime on the stage; underline on hover.",
+      "html": "<a class=\"ds-textlink\" href=\"#\"><span>Learn more</span><svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"12\" height=\"12\"><path d=\"M4.5 2.5 8 6l-3.5 3.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-textlink { display:inline-flex; align-items:center; gap:.25rem; font: 500 .95rem/1.2 Archivo, ui-sans-serif, system-ui, sans-serif; color: var(--color-lime-deep, #6f9a1f); text-decoration:none; text-underline-offset:4px; transition: color .2s; } .ds-textlink:hover { text-decoration: underline; } .ds-textlink:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; border-radius:4px; } .ds-stage .ds-textlink { color: var(--color-lime, #99cc33); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Label above in .label, paper field with hairline stroke and 12px radius; border shifts to ink on focus plus the global lime ring.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-label\" for=\"ds-name\">Name <span class=\"ds-req\" aria-hidden=\"true\">*</span></label><input id=\"ds-name\" class=\"ds-input\" type=\"text\" placeholder=\"Jane Reefer\" /></div>",
+      "css": ".ds-field { display:flex; flex-direction:column; gap:.5rem; font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-label { font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-req { color: var(--color-lime-deep, #6f9a1f); } .ds-input { width:100%; padding:.75rem 1rem; font-size:1rem; color: var(--color-ink, #1d1d1f); background: var(--color-paper, #fff); border:1px solid var(--color-line, #d2d2d7); border-radius:.75rem; transition: border-color .2s; } .ds-input::placeholder { color: var(--color-muted, #6e6e73); } .ds-input:focus { border-color: var(--color-ink, #1d1d1f); } .ds-input:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; } .ds-input:disabled { opacity:.6; }"
+    },
+    {
+      "name": "Product Bar",
+      "kind": "nav",
+      "refersTo": "product-bar",
+      "description": "Sticky in-page bar under the 48px header: page title, jump links (fed by block eyebrows), one primary pill. Paper at 85% with backdrop blur and a hairline.",
+      "html": "<nav class=\"ds-productbar\" aria-label=\"ClariSea Gen 3 sections\"><span class=\"ds-productbar-title\">ClariSea Gen 3</span><ul class=\"ds-productbar-links\"><li><a href=\"#\" aria-current=\"true\">By the numbers</a></li><li><a href=\"#\">Goodbye filter socks</a></li><li><a href=\"#\">See it run</a></li><li><a href=\"#\">Which size?</a></li></ul><a class=\"ds-productbar-cta\" href=\"#\">Find a stockist</a></nav>",
+      "css": ".ds-productbar { display:flex; align-items:center; gap:1.5rem; height:3.25rem; padding-inline: clamp(1.25rem,4vw,3rem); background: rgb(255 255 255 / .85); backdrop-filter: blur(12px); border-bottom:1px solid rgb(210 210 215 / .7); color: var(--color-ink, #1d1d1f); font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-productbar-title { flex-shrink:0; font-size:1.05rem; font-weight:600; letter-spacing:-.01em; } .ds-productbar-links { display:flex; flex:1; min-width:0; gap:1.25rem; list-style:none; margin:0; padding:0; overflow-x:auto; scrollbar-width:none; } .ds-productbar-links a { font-size:.8rem; text-decoration:none; color: var(--color-muted, #6e6e73); transition: color .2s; white-space:nowrap; } .ds-productbar-links a:hover { color: var(--color-ink, #1d1d1f); } .ds-productbar-links a[aria-current=\"true\"] { color: var(--color-ink, #1d1d1f); font-weight:500; } .ds-productbar-cta { margin-left:auto; flex-shrink:0; display:inline-flex; align-items:center; padding:.375rem 1rem; border-radius:980px; background: var(--color-lime, #99cc33); color: var(--color-ink, #1d1d1f); font-size:.85rem; font-weight:500; text-decoration:none; transition: background-color .2s; } .ds-productbar-cta:hover { background:#a6d63f; } .ds-productbar a:focus-visible { outline:2px solid var(--color-lime-deep, #6f9a1f); outline-offset:3px; border-radius:4px; }"
+    },
+    {
+      "name": "Recommended Chip",
+      "kind": "chip",
+      "refersTo": "chip-recommended",
+      "description": "Small lime pill above the highlighted comparison column; the same geometry carries the severity chips (lime-soft / #fff4cc / #fde8e6).",
+      "html": "<span class=\"ds-chip ds-chip-recommended\">Recommended</span> <span class=\"ds-chip ds-chip-info\">Normal</span> <span class=\"ds-chip ds-chip-warning\">Warning</span> <span class=\"ds-chip ds-chip-alarm\">Alarm</span>",
+      "css": ".ds-chip { display:inline-flex; align-items:center; padding:.125rem .625rem; border-radius:980px; font: 500 .75rem/1.4 Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-chip-recommended { background: var(--color-lime, #99cc33); color: var(--color-ink, #1d1d1f); } .ds-chip-info { background: var(--color-lime-soft, #eef7dc); color: var(--color-lime-deep, #6f9a1f); } .ds-chip-warning { background:#fff4cc; color:#7a5a00; } .ds-chip-alarm { background:#fde8e6; color: var(--color-danger, #d1352b); }"
+    },
+    {
+      "name": "Spec Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Sand card (stage-soft on stage), 18px radius, 28px pad, hairline rows with .label keys and tabular values. Cards hold real objects only.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">ClariSea SK-5000 G3</h3><p class=\"ds-card-sub\">Automatic fleece filter · SK5000G3</p><table class=\"ds-spec\"><tr><th>Max flow</th><td>5,000 <span>l/h</span></td></tr><tr><th>Roll length</th><td>40 <span>m</span></td></tr><tr><th>Inlet</th><td>32 · 40 · 1\" </td></tr></table></div>",
+      "css": ".ds-card { background: var(--color-sand, #f5f5f7); border-radius:1.125rem; padding:1.75rem; font-family: Archivo, ui-sans-serif, system-ui, sans-serif; color: var(--color-ink, #1d1d1f); } .ds-card-title { margin:0; font-size:1.25rem; font-weight:600; letter-spacing:-.02em; line-height:1.25; } .ds-card-sub { margin:.25rem 0 0; font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-spec { width:100%; border-collapse:collapse; margin-top:1.5rem; } .ds-spec tr { border-top:1px solid var(--color-line, #d2d2d7); } .ds-spec tr:last-child { border-bottom:1px solid var(--color-line, #d2d2d7); } .ds-spec th { text-align:left; padding:.875rem 1rem .875rem 0; font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-spec td { text-align:right; padding:.875rem 0; font-weight:500; font-variant-numeric: tabular-nums lining-nums; } .ds-spec td span { margin-left:.25rem; font-weight:400; color: var(--color-muted, #6e6e73); } .ds-stage .ds-card { background: var(--color-stage-soft, #161618); color: var(--color-paper, #fff); } .ds-stage .ds-spec tr { border-color: var(--color-line-dark, #3a3a3c); }"
+    },
+    {
+      "name": "Stat Figure",
+      "kind": "custom",
+      "refersTo": "figure",
+      "description": "The signature measurement: Archivo width 78 / 700 tabular figure at display-xl, unit at 0.4em in width 100 / 500, .label beneath; lime-deep on paper, lime on stage.",
+      "html": "<div class=\"ds-stat\"><div class=\"ds-figure\">5,000<span class=\"ds-figure-unit\">l/h</span></div><div class=\"ds-stat-label\">SK-5000 G3 — 1,320 gal per hour</div></div>",
+      "css": ".ds-stat { display:flex; flex-direction:column; align-items:flex-start; padding:2.5rem 0; border-top:1px solid var(--color-line, #d2d2d7); border-bottom:1px solid var(--color-line, #d2d2d7); font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-figure { font-size: clamp(2.75rem, 6vw, 5rem); font-weight:700; line-height:.95; letter-spacing:-.02em; font-variation-settings:'wdth' 78; font-variant-numeric: tabular-nums lining-nums; color: var(--color-lime-deep, #6f9a1f); } .ds-figure-unit { margin-left:.375rem; font-size:.4em; font-weight:500; letter-spacing:0; font-variation-settings:'wdth' 100; } .ds-stat-label { margin-top:1rem; font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-stage .ds-figure { color: var(--color-lime, #99cc33); } .ds-stage .ds-stat { border-color: var(--color-line-dark, #3a3a3c); } .ds-stage .ds-stat-label { color: var(--color-muted-dark, #a1a1a6); }"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "refersTo": "display-lg",
+      "description": "Headline (display-lg, max 20ch) + lead (max 36rem). No eyebrow, no number, no icon; the eyebrow field feeds the product bar instead.",
+      "html": "<header class=\"ds-sectionheader\"><h2>Goodbye filter socks.</h2><p>Automatic fleece removes waste before it breaks down — no more weekly sock washing.</p></header>",
+      "css": ".ds-sectionheader { max-width:46rem; font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-sectionheader h2 { margin:0; max-width:20ch; font-size: clamp(2.25rem, 4.6vw, 3.75rem); font-weight:600; line-height:1.06; letter-spacing:-.025em; color: var(--color-ink, #1d1d1f); text-wrap: balance; } .ds-sectionheader p { margin:1rem 0 0; max-width:36rem; font-size: clamp(1.125rem, 1.4vw, 1.375rem); line-height:1.45; color: var(--color-muted, #6e6e73); text-wrap: pretty; } .ds-stage .ds-sectionheader h2 { color: var(--color-paper, #fff); } .ds-stage .ds-sectionheader p { color: var(--color-muted-dark, #a1a1a6); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Product Stage",
+    "overview": "This is the category standard for aquarium hardware, played straight at the craft level of apple.com and redseafish.com. Every section puts one product on a stage, states one idea, and offers one action. Colour is almost entirely withheld: white and sand grounds, a near-black stage where the product is the picture, ink text, and a single brand lime that appears only on primary pills, key measurement figures and active states. There is one type family (Archivo, with its width axis doing the work a second face would otherwise do), a generous vertical rhythm, and one authored motion — a rise-in on scroll — plus the signature interactions each instrument-like block owns (finder slider, feature-tour rail, before/after handle, LED legend).\n\nDensity is low and confident: headlines are short, sentence-case and tightly tracked; leads are one sentence; supporting copy sits in a muted grey at 17px. Structure comes from hairlines, tone changes (paper → sand → stage) and space, not from boxes. Cards exist only when they hold a real object (spec panel, calculator, result, testimonial). Depth is tonal, with a single soft shadow reserved for things that float (menus, the video play disc).\n\nConfirmed rejections (from the direction contract, honoured by the build): no eyebrows or kickers above headings, no icon-card grids as page structure, no uppercase display type, no gradient text, no glass or glow decoration, no cream+serif editorial, no emoji or unicode glyph icons, no monospace as costume, no border-left accent bars.",
+    "keyCharacteristics": [
+      "Two grounds (paper / sand) and one near-black stage; lime is an accent, never a ground except for the CTA lime field.",
+      "One family, Archivo variable width: normal width for reading, narrow heavy tabular figures for measurements.",
+      "Section headline + lead, no eyebrow; the eyebrow field feeds the sticky product bar as the jump-link label instead.",
+      "Pills for every action; text-variant links carry a chevron; external links carry an arrow.",
+      "Hairlines (#d2d2d7 on light, #3a3a3c on stage) separate; cards contain; shadows only float.",
+      "One motion grammar: 640ms expo ease-out rise-in of 18px, staggered ≤ 80ms, visible by default without JS and under reduced motion. The hero has no entrance."
+    ],
+    "rules": [
+      { "name": "The Lime Discipline Rule", "body": "Lime lives on the figures and the primary action, never on the ground and never as body text on white. On a lime field (CTA lime tone) the primary pill becomes the ink secondary pill and the second action becomes a text link, because a lime pill would vanish.", "section": "colors" },
+      { "name": "The Two-Ground Rule", "body": "Sections alternate paper and sand; the stage is used only where the product is the picture (hero, video, viewer, feature tour, finder instrument). Everything on a stage inherits its own vocabulary via .stage/.on-dark: headings go paper, muted goes muted-dark, hairlines go line-dark, cards and media go stage-soft, secondary pills go paper-on-ink, text links and focus rings go full lime.", "section": "colors" },
+      { "name": "The No-Eyebrow Rule", "body": "Nothing sits above a heading. The content model keeps an eyebrow field, but SectionHeader never renders it; PageBuilder uses it as the section's label in the sticky product bar (truncated at 28 characters). Headline + optional lead is the complete header.", "section": "typography" },
+      { "name": "The Sentence-Case Rule", "body": "No uppercase display or label type anywhere; tracking is negative on display and neutral on labels. Emphasis comes from weight (600) and size, not case.", "section": "typography" },
+      { "name": "The Figure Rule", "body": "Any number that is the point of a section is set as a .figure with a .figure-unit suffix and a .label beneath — never as ordinary bold body text. Numbers elsewhere (spec values, table cells) get .num for tabular alignment.", "section": "typography" },
+      { "name": "The Float-Only Shadow Rule", "body": ".elevated is for menus and controls that hover above the page. Cards, media, sections and buttons carry no shadow at rest or on hover.", "section": "elevation" },
+      { "name": "The Hairline Rule", "body": "Structure is drawn with 1px lines (line on light, line-dark on stage) — list rows, table rows, stat bands, footer legal line, FAQ details, spec rows. Never thicker, never coloured, never as a left accent bar.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do compose every section as section-space page-gutter + a container (container-site for copy, container-wide for big media/tables, container-prose for reading), on a tone field (bg-paper, stage-sand, or .stage).",
+      "Do head a section with SectionHeader (headline + lead only) and let PageBuilder turn the block's eyebrow into the product-bar jump label.",
+      "Do set every headline measurement as .figure + .figure-unit + .label, and every table/spec number with .num.",
+      "Do use .stage only where the product is the picture (hero, video, viewer, feature tour, finder instrument) and rely on .on-dark/.stage cascades for stage colours rather than per-element overrides.",
+      "Do keep lime to primary pills, key figures, active states and the Recommended chip; use text-lime-deep for any lime text on white.",
+      "Do separate lists, rows and stat bands with 1px .hairline; reserve .card (sand / stage-soft, 18px, 28–32px pad) for real objects and .media (20px) for imagery.",
+      "Do animate entrances only with Reveal (.rise, ≤ 80ms stagger) or the block's own signature interaction, and read easing/duration from the tokens (--ease-out-expo, --duration-rise).",
+      "Do draw icons as single-stroke SVGs (1.5–1.6) reused from ActionLink / comparison-table styles."
+    ],
+    "donts": [
+      "Don't render an eyebrow, kicker, section number or icon above a heading (how-it-works step numbers are the one exception because the sequence is information).",
+      "Don't build feature sections as same-size icon + heading + text card grids; use the two-column hairline statement list.",
+      "Don't set display or label type in uppercase, use gradient text, glass/blur decoration, glow, border-l-4 accents, monospace as costume, or emoji/unicode icons.",
+      "Don't put lime on a ground except the CTA lime field, and never pair a lime pill with a lime field.",
+      "Don't add shadows to cards, media, sections or buttons; .elevated is for floating menus and controls only.",
+      "Don't nest cards, wrap tables in an outer card, or box a section.",
+      "Don't give the hero an entrance animation, add whileInView springs to every element, or exceed an 80ms stagger.",
+      "Don't invent colours, radii or easings outside app/globals.css @theme."
+    ]
+  }
+}

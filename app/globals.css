@@ -1,70 +1,167 @@
 @import "tailwindcss";
 
-/* Brand tokens (from theaquariumsolution.com): lime on near-black, Open Sans + Roboto Condensed */
+/*
+  Design system v2 — "product stage": the category standard at Apple / Red Sea craft.
+  Restrained colour (neutrals + one brand accent), one type family (Archivo, width axis),
+  generous vertical rhythm, product imagery on white or near-black stages, motion as one
+  authored moment (rise-in on scroll). Tokens are the only place colours/radii/easing live.
+*/
 @theme {
+  /* colour — light ground, dark stage, lime accent (brand, binding) */
   --color-lime: #99cc33;
-  --color-lime-deep: #7aa329;
-  --color-ink: #1a1a1a;
-  --color-ink-soft: #2a2a2a;
-  --color-text: #333333;
-  --color-muted: #6b7280;
+  --color-lime-deep: #6f9a1f;      /* AA text on white (4.6:1) */
+  --color-lime-soft: #eef7dc;
+  --color-ink: #1d1d1f;
+  --color-ink-soft: #2c2c2e;
+  --color-stage: #0b0b0c;          /* near-black product stage */
+  --color-stage-soft: #161618;
+  --color-text: #1d1d1f;
+  --color-muted: #6e6e73;
+  --color-muted-dark: #a1a1a6;     /* secondary text on stage */
   --color-paper: #ffffff;
-  --color-sand: #f4f5f2;
+  --color-sand: #f5f5f7;
+  --color-line: #d2d2d7;
+  --color-line-dark: #3a3a3c;
   --color-sea: #0f4c5c;
-  --color-line: #e5e7eb;
+  --color-danger: #d1352b;
+  --color-warn: #e6a700;
 
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), var(--font-sans), sans-serif;
+  /* type — Archivo (variable width) everywhere; display tight, body relaxed */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
+  --text-display-xl: clamp(2.75rem, 6vw, 5rem);
+  --text-display-lg: clamp(2.25rem, 4.6vw, 3.75rem);
+  --text-display-md: clamp(1.75rem, 3vw, 2.5rem);
+  --text-lead: clamp(1.125rem, 1.4vw, 1.375rem);
+
+  /* shape */
+  --radius-media: 1.25rem;
+  --radius-card: 1.125rem;
+  --radius-pill: 980px;
+
+  /* motion — one grammar: expo ease-out, from a visible default */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-presence: cubic-bezier(0.62, 0.05, 0.01, 0.99);
-  --radius-media: 1rem;
-  --container-site: 1540px;
+  --duration-rise: 640ms;
+
+  /* layout */
+  --container-site: 1200px;
+  --container-wide: 1440px;
+  --container-prose: 720px;
 }
 
 :root {
-  --gutter: clamp(1rem, 4vw, 3rem);
-  --section-y: clamp(3.5rem, 8vw, 7rem);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-y: clamp(4.5rem, 9vw, 8.5rem);
+  --header-h: 3rem;
+  --productbar-h: 3.25rem;
+  color-scheme: light;
+  scrollbar-color: var(--color-line) transparent;
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { @apply bg-paper text-text font-sans antialiased; }
-  h1, h2, h3, h4 { @apply font-display uppercase tracking-tight text-ink; text-wrap: balance; }
-  h1 { @apply text-4xl leading-[1.05] md:text-6xl; }
-  h2 { @apply text-3xl leading-[1.1] md:text-5xl; }
-  h3 { @apply text-xl md:text-2xl; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-paper text-text font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-feature-settings: "ss01", "cv05";
+  }
+  h1, h2, h3, h4 { @apply font-display font-semibold text-ink; letter-spacing: -0.02em; text-wrap: balance; }
+  h1 { font-size: var(--text-display-xl); line-height: 1.02; letter-spacing: -0.03em; }
+  h2 { font-size: var(--text-display-lg); line-height: 1.06; letter-spacing: -0.025em; }
+  h3 { font-size: var(--text-display-md); line-height: 1.12; }
+  h4 { @apply text-xl; line-height: 1.25; }
   p { text-wrap: pretty; }
   a { @apply underline-offset-4; }
+  strong { @apply font-semibold; }
   ::selection { background: var(--color-lime); color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-lime-deep); outline-offset: 3px; border-radius: 4px; }
+  .on-dark :focus-visible, .stage :focus-visible { outline-color: var(--color-lime); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 999px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-muted); background-clip: content-box; border: 3px solid transparent; }
+  input, textarea, select, button { font: inherit; color: inherit; }
+  input::placeholder, textarea::placeholder { color: var(--color-muted); }
+  .on-dark input::placeholder, .on-dark textarea::placeholder, .stage input::placeholder, .stage textarea::placeholder { color: var(--color-muted-dark); }
+  table { border-collapse: collapse; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   }
 }
 
 @layer components {
+  /* layout */
   .page-gutter { padding-inline: var(--gutter); }
   .section-space { padding-block: var(--section-y); }
+  .section-space-sm { padding-block: calc(var(--section-y) * 0.6); }
   .container-site { @apply mx-auto w-full; max-width: var(--container-site); }
-  .eyebrow { @apply font-display text-xs uppercase tracking-[0.2em] text-lime-deep; }
-  .prose-site { @apply max-w-prose text-[1.05rem] leading-relaxed; }
-  .prose-site h2, .prose-site h3, .prose-site h4 { @apply mt-8 mb-3; }
-  .prose-site p + p { @apply mt-4; }
-  .prose-site ul { @apply my-4 list-disc pl-6; }
-  .prose-site ol { @apply my-4 list-decimal pl-6; }
-  .prose-site a { @apply text-sea underline; }
-  .prose-site blockquote { @apply my-6 border-l-4 border-lime pl-4 italic; }
+  .container-wide { @apply mx-auto w-full; max-width: var(--container-wide); }
+  .container-prose { @apply mx-auto w-full; max-width: var(--container-prose); }
 
-  .action-link { @apply inline-flex items-center gap-2 rounded-full px-5 py-3 font-display text-sm uppercase tracking-wider no-underline transition; }
-  .action-link--primary { @apply bg-lime text-ink hover:bg-lime-deep; }
-  .action-link--secondary { @apply border border-current text-ink hover:bg-ink hover:text-paper; }
-  .action-link--text { @apply px-0 py-0 text-ink underline; }
-  .on-dark .action-link--secondary { @apply text-paper hover:bg-paper hover:text-ink; }
-  .on-dark .action-link--text { @apply text-paper; }
+  /* type roles */
+  .display-xl { font-size: var(--text-display-xl); line-height: 1.02; letter-spacing: -0.03em; @apply font-display font-semibold; }
+  .display-lg { font-size: var(--text-display-lg); line-height: 1.06; letter-spacing: -0.025em; @apply font-display font-semibold; }
+  .display-md { font-size: var(--text-display-md); line-height: 1.12; letter-spacing: -0.02em; @apply font-display font-semibold; }
+  .lead { font-size: var(--text-lead); line-height: 1.45; @apply text-muted; }
+  .on-dark .lead, .stage .lead { color: var(--color-muted-dark); }
+  .caption { @apply text-sm text-muted; }
+  .on-dark .caption, .stage .caption { color: var(--color-muted-dark); }
+  /* big measurement figures: narrow width, heavy weight, tabular */
+  .figure { font-variation-settings: "wdth" 78; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums lining-nums; line-height: 0.95; }
+  .figure-unit { font-variation-settings: "wdth" 100; font-weight: 500; letter-spacing: 0; }
+  .num { font-variant-numeric: tabular-nums lining-nums; }
+  .label { @apply text-sm font-medium text-muted; }
+  .on-dark .label, .stage .label { color: var(--color-muted-dark); }
+
+  /* stages */
+  .stage { @apply bg-stage text-paper; }
+  .stage h1, .stage h2, .stage h3, .stage h4, .on-dark h1, .on-dark h2, .on-dark h3, .on-dark h4 { color: var(--color-paper); }
+  .stage-sand { @apply bg-sand; }
+
+  /* media & cards */
+  .media { border-radius: var(--radius-media); overflow: hidden; background: var(--color-sand); }
+  .on-dark .media, .stage .media { background: var(--color-stage-soft); }
+  .card { border-radius: var(--radius-card); background: var(--color-sand); }
+  .on-dark .card, .stage .card { background: var(--color-stage-soft); }
+  .hairline { border-color: var(--color-line); }
+  .on-dark .hairline, .stage .hairline { border-color: var(--color-line-dark); }
+  .elevated { box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.18), 0 2px 6px -2px rgb(0 0 0 / 0.08); }
+
+  /* prose */
+  .prose-site { max-width: 68ch; font-size: 1.0625rem; line-height: 1.6; }
+  .prose-site h2, .prose-site h3, .prose-site h4 { @apply mt-10 mb-3; }
+  .prose-site h2 { font-size: var(--text-display-md); }
+  .prose-site h3 { @apply text-2xl; }
+  .prose-site p + p { @apply mt-4; }
+  .prose-site ul { @apply my-5 list-disc pl-6; }
+  .prose-site ol { @apply my-5 list-decimal pl-6; }
+  .prose-site li + li { @apply mt-1.5; }
+  .prose-site a { color: var(--color-lime-deep); text-decoration: underline; text-decoration-thickness: 1px; }
+  .on-dark .prose-site a, .stage .prose-site a { color: var(--color-lime); }
+  .prose-site blockquote { @apply my-8 pl-5 text-xl; border-left: 1px solid var(--color-line); color: var(--color-muted); }
+
+  /* actions — pills; primary carries the brand accent on every ground */
+  .action-link { border-radius: var(--radius-pill); @apply inline-flex items-center gap-2 px-5 py-2.5 text-[0.95rem] font-medium no-underline transition-[background-color,color,transform,box-shadow] duration-200; }
+  .action-link:active { transform: translateY(1px); }
+  .action-link--primary { @apply bg-lime text-ink; }
+  .action-link--primary:hover { background: #a6d63f; }
+  .action-link--secondary { @apply bg-ink text-paper; }
+  .action-link--secondary:hover { background: var(--color-ink-soft); }
+  .on-dark .action-link--secondary, .stage .action-link--secondary { @apply bg-paper text-ink; }
+  .on-dark .action-link--secondary:hover, .stage .action-link--secondary:hover { background: #ededf0; }
+  .action-link--text { @apply px-0 py-0 gap-1; color: var(--color-lime-deep); }
+  .action-link--text:hover { text-decoration: underline; }
+  .on-dark .action-link--text, .stage .action-link--text { color: var(--color-lime); }
 
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 }
 
-@layer components {
-  @keyframes hero-enter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-  .hero-enter { animation: hero-enter 0.9s var(--ease-presence) both; }
+/* one authored motion: rise-in on scroll (JS adds .is-in); default is visible for no-JS */
+@layer utilities {
+  .rise { opacity: 1; transform: none; }
+  .js .rise { opacity: 0; transform: translateY(18px); transition: opacity var(--duration-rise) var(--ease-out-expo), transform var(--duration-rise) var(--ease-out-expo); }
+  .js .rise.is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .js .rise { opacity: 1; transform: none; transition: none; } }
 }

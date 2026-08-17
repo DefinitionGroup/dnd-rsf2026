@@ -1,34 +1,59 @@
-import { createDataAttribute } from "next-sanity";
-import { stegaClean } from "next-sanity";
+import { createDataAttribute, stegaClean } from "next-sanity";
 import { blockComponents } from "@/blocks/registry";
 import type { BlockType, PageBlock, PageDocument } from "@/blocks/types";
-import type { Locale } from "@/lib/i18n";
+import ProductBar, { type ProductBarSection } from "@/components/layout/ProductBar";
+import { t, type Locale } from "@/lib/i18n";
+import { LEGACY_STOCKISTS_URL } from "@/lib/site";
 import { dataset, isSanityConfigured, studioProjectId } from "@/sanity/env";
 
 /**
  * Renders a page's content array through the block registry.
  * - H1 discipline: hero / animatedHeadline(h1) own the H1; otherwise the first
  *   h2 of the first rich-text block is promoted (see PortableTextBlock).
+ * - In-page product bar: every block after the hero with a headline/eyebrow
+ *   becomes a jump link (its `eyebrow` is the label — eyebrows are not rendered
+ *   above headings in this design system).
  * - Presentation: each block gets a data-sanity attribute for click-to-select
  *   and drag-to-reorder overlays.
  */
-export default function PageBuilder({ page, locale }: { page: PageDocument; locale: Locale }) {
+export default function PageBuilder({ page, locale, productBar = true }: { page: PageDocument; locale: Locale; productBar?: boolean }) {
   const content = page.content ?? [];
   if (!content.length) return null;
 
   const alreadyHasH1 = content.some(
-    (block) =>
-      block._type === "heroBlock" || (block._type === "animatedHeadlineBlock" && stegaClean(block.level) === "h1"),
+    (block) => block._type === "heroBlock" || (block._type === "animatedHeadlineBlock" && stegaClean(block.level) === "h1"),
   );
   let promotedPortableTextHeading = false;
-  const seenTypes = new Set<string>(); // first block of each type gets id=<_type> for in-page anchors
 
   const attr = isSanityConfigured
     ? createDataAttribute({ id: page._id, type: "page", path: "content", projectId: studioProjectId, dataset, baseUrl: "/studio" })
     : null;
 
+  // one anchor id per block type (first occurrence)
+  const ids = new Map<string, string>();
+  const seen = new Set<string>();
+  for (const b of content) {
+    if (!seen.has(b._type)) {
+      seen.add(b._type);
+      ids.set(b._key, b._type);
+    }
+  }
+
+  const sections: ProductBarSection[] = content.flatMap((b) => {
+    const id = ids.get(b._key);
+    if (!id || b._type === "heroBlock" || b._type === "ctaBlock") return [];
+    const raw = ("eyebrow" in b && b.eyebrow) || ("headline" in b && b.headline) || "";
+    const label = stegaClean(raw ?? "");
+    return label ? [{ id, label: label.length > 28 ? `${label.slice(0, 27)}…` : label }] : [];
+  });
+
+  const hasHero = content[0]?._type === "heroBlock";
+  const cta = { label: t(locale, "findStockist"), href: LEGACY_STOCKISTS_URL };
+  const bar = <ProductBar title={page.title} sections={sections} cta={cta} />;
+
   return (
     <>
+      {productBar && !hasHero && bar}
       {content.map((block, index) => {
         const Component = blockComponents[block._type as BlockType] as
           | ((props: { block: PageBlock; locale: Locale; pageId?: string; index: number; promoteFirstHeading?: boolean }) => React.ReactNode)
@@ -41,12 +66,17 @@ export default function PageBuilder({ page, locale }: { page: PageDocument; loca
           promotedPortableTextHeading ||= promoteFirstHeading;
         }
 
-        const anchorId = seenTypes.has(block._type) ? undefined : block._type;
-        seenTypes.add(block._type);
-
         return (
-          <div key={block._key} id={anchorId} data-sanity={attr ? attr(`[_key=="${block._key}"]`).toString() : undefined} data-block={block._type}>
-            <Component block={block} locale={locale} pageId={page._id} index={index} promoteFirstHeading={promoteFirstHeading} />
+          <div key={block._key} className="contents">
+            <div
+              id={ids.get(block._key)}
+              className="scroll-mt-[calc(var(--header-h)+var(--productbar-h))]"
+              data-sanity={attr ? attr(`[_key=="${block._key}"]`).toString() : undefined}
+              data-block={block._type}
+            >
+              <Component block={block} locale={locale} pageId={page._id} index={index} promoteFirstHeading={promoteFirstHeading} />
+            </div>
+            {productBar && hasHero && index === 0 && bar}
           </div>
         );
       })}

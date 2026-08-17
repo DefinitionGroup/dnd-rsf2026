@@ -10,6 +10,8 @@ import { isSanityConfigured } from "@/sanity/env";
 import { SanityLive } from "@/sanity/lib/live";
 import { loadPageRoutes, loadSiteShell } from "@/sanity/lib/loaders";
 import type { PageRoute } from "@/lib/translations";
+import DirectionContract from "@/components/DirectionContract";
+import RiseObserver from "@/components/motion/RiseObserver";
 import "../../globals.css";
 
 export const metadata = baseMetadata;
@@ -28,6 +30,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <html lang={localeMeta(locale).htmlLang} className={fontClassNames}>
       <body>
+        {/* impeccable direction contract — kept in the emitted HTML so the finish review can audit it */}
+        <DirectionContract />
+        <RiseObserver />
         <SiteShell locale={locale} data={shell} routes={routes as PageRoute[]}>
           {children}
         </SiteShell>

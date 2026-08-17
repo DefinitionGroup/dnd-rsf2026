@@ -12,3 +12,4 @@ dist
 schema.json
 sanity.types.ts.tmp
 .scratch
+.impeccable/review/

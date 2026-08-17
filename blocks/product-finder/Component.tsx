@@ -31,6 +31,16 @@ function pickRule(rules: Rule[], effective: number): number {
   return i === -1 ? rules.length - 1 : i;
 }
 
+const RANGE_CLASS = [
+  "h-5 w-full cursor-pointer appearance-none bg-transparent",
+  // track: hairline with lime fill up to --pct
+  "[&::-webkit-slider-runnable-track]:h-0.5 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--color-lime)_var(--pct),var(--color-line-dark)_var(--pct))]",
+  "[&::-moz-range-track]:h-0.5 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--color-lime)_var(--pct),var(--color-line-dark)_var(--pct))]",
+  // thumb: white disc
+  "[&::-webkit-slider-thumb]:-mt-[9px] [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-webkit-slider-thumb]:bg-paper [&::-webkit-slider-thumb]:shadow-[0_2px_6px_rgb(0_0_0/0.4)]",
+  "[&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-paper [&::-moz-range-thumb]:shadow-[0_2px_6px_rgb(0_0_0/0.4)]",
+].join(" ");
+
 export default function ProductFinderBlock({ block }: BlockProps<"productFinderBlock">) {
   const rules = useMemo(() => (block.rules ?? []).filter((r) => r && r.resultTitle), [block.rules]);
   const options = useMemo(() => (block.loadOptions ?? []).filter((o) => o && o.label), [block.loadOptions]);
@@ -56,7 +66,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
   const rule = rules[ruleIndex];
   const gallons = Math.round(volume / LITRES_PER_US_GAL);
   const rollWeeks = typeof rule.rollWeeks === "number" ? Math.max(1, Math.round(rule.rollWeeks * rollFactor)) : null;
-  const rollRange = rollWeeks ? `≈ ${Math.max(1, rollWeeks - 1)}–${rollWeeks + 1} weeks` : null;
+  const rollRange = rollWeeks ? `${Math.max(1, rollWeeks - 1)}–${rollWeeks + 1}` : null;
   const productName = rule.product?.name ?? null;
   const productImage = rule.product?.image ?? null;
 
@@ -70,24 +80,19 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
   const pct = ((volume - min) / (max - min)) * 100;
 
   return (
-    <section className="on-dark section-space page-gutter bg-ink text-paper">
+    <section className="stage section-space page-gutter">
       <div className="container-site">
-        {(block.eyebrow || block.headline || block.intro) && (
-          <SectionHeader
-            eyebrow={block.eyebrow}
-            headline={block.headline}
-            intro={block.intro}
-            className="mb-10 md:mb-14 [&_.eyebrow]:text-lime [&_h2]:text-paper [&_p:not(.eyebrow)]:text-paper/70"
-          />
+        {(block.headline || block.intro) && (
+          <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-12 md:mb-16" />
         )}
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start lg:gap-8">
           {/* ---------- Inputs ---------- */}
-          <div className="flex flex-col gap-10 rounded-[var(--radius-media,1rem)] border border-paper/10 bg-ink-soft p-6 md:p-8">
+          <div className="card flex flex-col gap-10 p-7 md:p-8">
             {/* Volume */}
             <div>
               <div className="flex flex-wrap items-end justify-between gap-3">
-                <label htmlFor={`${uid}-volume`} className="font-display text-xs uppercase tracking-[0.2em] text-lime">
+                <label htmlFor={`${uid}-volume`} className="label">
                   {block.volumeLabel ?? "Aquarium volume"}
                 </label>
                 <div className="flex items-baseline gap-2">
@@ -106,9 +111,9 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                       if (e.target.value !== "" && Number.isFinite(n)) setVolume(clamp(Math.round(n), min, max));
                     }}
                     onBlur={() => commitVolume(Number(volumeText))}
-                    className="w-24 rounded-md border border-paper/15 bg-ink px-3 py-1.5 text-right font-display text-2xl tabular-nums text-paper focus-visible:outline-2 focus-visible:outline-lime"
+                    className="hairline num w-28 rounded-xl border bg-transparent px-3 py-2 text-right text-2xl font-semibold text-paper"
                   />
-                  <span className="font-display text-sm uppercase tracking-wider text-paper/70">l</span>
+                  <span className="figure-unit text-base text-muted-dark">l</span>
                 </div>
               </div>
 
@@ -126,11 +131,11 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                   aria-valuetext={`${volume} litres, about ${gallons} US gallons`}
                   onChange={(e) => commitVolume(Number(e.target.value))}
                   style={{ ["--pct" as string]: `${pct}%` }}
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[linear-gradient(to_right,var(--color-lime)_var(--pct),rgb(255_255_255_/_0.15)_var(--pct))] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime [&::-moz-range-thumb]:size-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-ink [&::-moz-range-thumb]:bg-lime [&::-webkit-slider-thumb]:size-6 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-ink [&::-webkit-slider-thumb]:bg-lime [&::-webkit-slider-thumb]:shadow-[0_0_0_2px_var(--color-lime)]"
+                  className={RANGE_CLASS}
                 />
-                <div className="mt-2 flex justify-between font-display text-[11px] uppercase tracking-wider text-paper/50" aria-hidden="true">
+                <div className="caption num mt-2 flex justify-between" aria-hidden="true">
                   <span>{min} l</span>
-                  <span className="text-paper/70">≈ {gallons} US gal</span>
+                  <span className="text-paper/80">≈ {gallons} US gal</span>
                   <span>{max} l</span>
                 </div>
               </div>
@@ -139,10 +144,14 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
             {/* Bioload */}
             {options.length > 0 && (
               <div>
-                <p id={`${uid}-load-label`} className="font-display text-xs uppercase tracking-[0.2em] text-lime">
+                <p id={`${uid}-load-label`} className="label">
                   {block.loadLabel ?? "Stocking / feeding"}
                 </p>
-                <div role="radiogroup" aria-labelledby={`${uid}-load-label`} className="mt-4 grid grid-cols-1 gap-2 rounded-lg border border-paper/10 bg-ink p-1 sm:grid-flow-col sm:auto-cols-fr">
+                <div
+                  role="radiogroup"
+                  aria-labelledby={`${uid}-load-label`}
+                  className="mt-4 grid grid-cols-1 gap-1 rounded-[var(--radius-pill)] bg-paper/10 p-1 sm:grid-flow-col sm:auto-cols-fr"
+                >
                   {options.map((o, i) => {
                     const selected = i === loadIndex;
                     return (
@@ -162,8 +171,8 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                             setLoadIndex((loadIndex - 1 + options.length) % options.length);
                           }
                         }}
-                        className={`relative rounded-md px-4 py-2.5 font-display text-sm uppercase tracking-wider transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-lime ${
-                          selected ? "bg-lime text-ink" : "text-paper/75 hover:bg-paper/5 hover:text-paper"
+                        className={`relative rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                          selected ? "bg-paper text-ink" : "text-muted-dark hover:text-paper"
                         }`}
                       >
                         {o.label}
@@ -174,7 +183,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
               </div>
             )}
 
-            <p className="font-display text-[11px] uppercase tracking-wider text-paper/40" aria-hidden="true">
+            <p className="caption num" aria-hidden="true">
               Effective volume {Math.round(effective)} l
             </p>
           </div>
@@ -188,45 +197,50 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -8 }}
                 transition={reduceMotion ? { duration: 0 } : { duration: 0.35, ease: EASE_PRESENCE }}
-                className="flex h-full flex-col rounded-[var(--radius-media,1rem)] border border-lime/40 bg-gradient-to-br from-lime/10 to-transparent p-6 md:p-8"
+                className="card flex h-full flex-col p-7 md:p-8"
               >
-                <p className="eyebrow !text-lime">{block.resultLabel ?? "Our recommendation"}</p>
+                <p className="label">{block.resultLabel ?? "Our recommendation"}</p>
 
-                <div className="mt-4 flex items-start gap-4">
+                <div className="mt-4 flex items-start gap-5">
                   {productImage?.asset && (
-                    <div className="relative size-20 shrink-0 overflow-hidden rounded-lg border border-paper/10 bg-paper/5 md:size-24">
+                    <div className="media relative size-20 shrink-0 md:size-24">
                       <SanityImage image={productImage} alt={productName ?? rule.resultTitle} fill sizes="96px" className="object-cover" />
                     </div>
                   )}
                   <div className="min-w-0">
-                    <h3 className="font-display text-2xl uppercase leading-tight text-paper md:text-3xl">{rule.resultTitle}</h3>
-                    {productName && stegaClean(productName) !== stegaClean(rule.resultTitle) &&<p className="mt-1 text-sm text-paper/60">{productName}</p>}
+                    <h3 className="text-2xl font-semibold leading-tight text-paper">{rule.resultTitle}</h3>
+                    {productName && stegaClean(productName) !== stegaClean(rule.resultTitle) && <p className="label mt-1">{productName}</p>}
                   </div>
                 </div>
 
-                {rule.resultBody && <p className="mt-4 text-paper/75">{rule.resultBody}</p>}
+                {rule.resultBody && <p className="mt-4 text-muted-dark">{rule.resultBody}</p>}
 
                 {(typeof rule.flowLph === "number" || rollRange) && (
-                  <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-paper/10 pt-5">
+                  <dl className="hairline mt-6 grid grid-cols-2 gap-6 border-t pt-6">
                     {typeof rule.flowLph === "number" && (
                       <div>
-                        <dt className="font-display text-[11px] uppercase tracking-[0.2em] text-paper/50">Flow</dt>
-                        <dd className="mt-1 font-display text-2xl tabular-nums text-lime">
-                          {rule.flowLph.toLocaleString("en")} <span className="text-sm text-paper/70">l/h</span>
+                        <dt className="label">Flow</dt>
+                        <dd className="mt-2 flex items-baseline gap-1.5">
+                          <span className="figure text-4xl text-lime md:text-5xl">{rule.flowLph.toLocaleString("en")}</span>
+                          <span className="figure-unit text-base text-muted-dark">l/h</span>
                         </dd>
                       </div>
                     )}
                     {rollRange && (
                       <div>
-                        <dt className="font-display text-[11px] uppercase tracking-[0.2em] text-paper/50">{block.rollLifeLabel ?? "Expected roll life"}</dt>
-                        <dd className="mt-1 font-display text-2xl tabular-nums text-lime">{rollRange}</dd>
+                        <dt className="label">{block.rollLifeLabel ?? "Expected roll life"}</dt>
+                        <dd className="mt-2 flex items-baseline gap-1.5">
+                          <span className="figure-unit text-base text-muted-dark">≈</span>
+                          <span className="figure text-4xl text-lime md:text-5xl">{rollRange}</span>
+                          <span className="figure-unit text-base text-muted-dark">weeks</span>
+                        </dd>
                       </div>
                     )}
                   </dl>
                 )}
 
                 {rule.cta?.href && rule.cta.label && (
-                  <div className="mt-auto pt-6">
+                  <div className="mt-auto pt-8">
                     <ActionLink link={rule.cta} variant="primary" />
                   </div>
                 )}
@@ -235,7 +249,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
           </div>
         </div>
 
-        {block.footnote && <p className="mt-6 max-w-3xl text-sm text-paper/50">{block.footnote}</p>}
+        {block.footnote && <p className="caption mt-8 max-w-[68ch]">{block.footnote}</p>}
       </div>
     </section>
   );

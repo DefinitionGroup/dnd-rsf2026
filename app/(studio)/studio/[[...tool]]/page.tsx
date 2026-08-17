@@ -9,7 +9,7 @@ export default function StudioPage() {
   if (!isSanityConfigured) {
     return (
       <main className="mx-auto max-w-xl px-6 py-24">
-        <p className="eyebrow mb-3">Studio prepared</p>
+        <p className="label mb-3">Studio prepared</p>
         <h1 className="text-3xl">Connect the Sanity project to mount the Studio.</h1>
         <p className="mt-4 text-muted">
           Copy <code>.env.example</code> to <code>.env.local</code> and set <code>NEXT_PUBLIC_SANITY_PROJECT_ID</code> /

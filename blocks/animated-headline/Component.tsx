@@ -10,6 +10,10 @@ const wordVariants: Variants = {
   visible: { opacity: 1, y: "0%", transition: { duration: 0.76, ease: EASE_PRESENCE } },
 };
 
+/**
+ * Word-mask headline: each word rises out of its own overflow-hidden mask.
+ * Sentence case, display-lg, left aligned. The eyebrow field is not rendered.
+ */
 export default function AnimatedHeadlineBlock({ block }: BlockProps<"animatedHeadlineBlock">) {
   const reduceMotion = useReducedMotion();
   const words = block.headline.trim().split(/\s+/);
@@ -25,21 +29,7 @@ export default function AnimatedHeadlineBlock({ block }: BlockProps<"animatedHea
       variants={{ visible: { transition: { delayChildren: 0.04, staggerChildren: 0.055 } } }}
     >
       <div className="container-site">
-        {block.eyebrow ? (
-          <span className="block overflow-hidden">
-            <motion.p className="eyebrow mb-5" variants={wordVariants}>
-              {block.eyebrow}
-            </motion.p>
-          </span>
-        ) : null}
-        <Heading
-          aria-label={block.headline}
-          className={
-            level === "h1"
-              ? "max-w-6xl text-5xl leading-[0.95] md:text-7xl lg:text-8xl"
-              : "max-w-5xl text-4xl leading-[1] md:text-6xl lg:text-7xl"
-          }
-        >
+        <Heading aria-label={block.headline} className="display-lg max-w-[24ch]">
           <span aria-hidden="true" className="flex flex-wrap gap-x-[0.28em] gap-y-1">
             {words.map((word, index) => (
               <span key={`${word}-${index}`} className="inline-block overflow-hidden pb-[0.08em]">

@@ -8,8 +8,8 @@ export default function PortableTextBlock({
   if (!block.body?.length) return null;
   return (
     <section className="section-space page-gutter bg-paper">
-      <div className="container-site">
-        <RichText value={block.body} promoteFirstHeading={promoteFirstHeading} className="prose-site mx-auto max-w-[68ch]" />
+      <div className="container-prose">
+        <RichText value={block.body} promoteFirstHeading={promoteFirstHeading} className="prose-site" />
       </div>
     </section>
   );
