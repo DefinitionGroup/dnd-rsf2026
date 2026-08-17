@@ -1,0 +1,55 @@
+{
+  "name": "dnd-rsf2026",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.7.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "typegen": "sanity schemas extract --enforce-required-fields --force && sanity typegen generate",
+    "typegen:watch": "sanity typegen generate --watch",
+    "prebuild": "pnpm typegen",
+    "sanity:dev": "sanity dev",
+    "sanity:deploy": "sanity deploy",
+    "sanity:schema:deploy": "sanity schema deploy",
+    "sanity:seed": "sanity exec scripts/seed-sanity.ts --with-user-token",
+    "sanity:seed:dry": "sanity exec scripts/seed-sanity.ts --with-user-token -- --dry-run",
+    "placeholders": "node scripts/make-placeholders.mjs"
+  },
+  "dependencies": {
+    "@portabletext/react": "^4.0.3",
+    "@portabletext/types": "^2.0.15",
+    "@sanity/client": "^7.12.1",
+    "@sanity/document-internationalization": "^6.0.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^6.3.0",
+    "motion": "^12.23.12",
+    "next": "16.2.10",
+    "next-sanity": "^13.1.1",
+    "nodemailer": "^7.0.13",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "sanity": "^6.3.0",
+    "sanity-plugin-internationalized-array": "^5.0.0",
+    "server-only": "^0.0.1",
+    "styled-components": "^6.3.9"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/nodemailer": "^6.4.24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "sharp": "^0.34.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* Brand tokens (from theaquariumsolution.com): lime on near-black, Open Sans + Roboto Condensed */
+@theme {
+  --color-lime: #99cc33;
+  --color-lime-deep: #7aa329;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #2a2a2a;
+  --color-text: #333333;
+  --color-muted: #6b7280;
+  --color-paper: #ffffff;
+  --color-sand: #f4f5f2;
+  --color-sea: #0f4c5c;
+  --color-line: #e5e7eb;
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-sans), sans-serif;
+
+  --ease-presence: cubic-bezier(0.62, 0.05, 0.01, 0.99);
+  --radius-media: 1rem;
+  --container-site: 1540px;
+}
+
+:root {
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --section-y: clamp(3.5rem, 8vw, 7rem);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-paper text-text font-sans antialiased; }
+  h1, h2, h3, h4 { @apply font-display uppercase tracking-tight text-ink; text-wrap: balance; }
+  h1 { @apply text-4xl leading-[1.05] md:text-6xl; }
+  h2 { @apply text-3xl leading-[1.1] md:text-5xl; }
+  h3 { @apply text-xl md:text-2xl; }
+  p { text-wrap: pretty; }
+  a { @apply underline-offset-4; }
+  ::selection { background: var(--color-lime); color: var(--color-ink); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+}
+
+@layer components {
+  .page-gutter { padding-inline: var(--gutter); }
+  .section-space { padding-block: var(--section-y); }
+  .container-site { @apply mx-auto w-full; max-width: var(--container-site); }
+  .eyebrow { @apply font-display text-xs uppercase tracking-[0.2em] text-lime-deep; }
+  .prose-site { @apply max-w-prose text-[1.05rem] leading-relaxed; }
+  .prose-site h2, .prose-site h3, .prose-site h4 { @apply mt-8 mb-3; }
+  .prose-site p + p { @apply mt-4; }
+  .prose-site ul { @apply my-4 list-disc pl-6; }
+  .prose-site ol { @apply my-4 list-decimal pl-6; }
+  .prose-site a { @apply text-sea underline; }
+  .prose-site blockquote { @apply my-6 border-l-4 border-lime pl-4 italic; }
+
+  .action-link { @apply inline-flex items-center gap-2 rounded-full px-5 py-3 font-display text-sm uppercase tracking-wider no-underline transition; }
+  .action-link--primary { @apply bg-lime text-ink hover:bg-lime-deep; }
+  .action-link--secondary { @apply border border-current text-ink hover:bg-ink hover:text-paper; }
+  .action-link--text { @apply px-0 py-0 text-ink underline; }
+  .on-dark .action-link--secondary { @apply text-paper hover:bg-paper hover:text-ink; }
+  .on-dark .action-link--text { @apply text-paper; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+}
+
+@layer components {
+  @keyframes hero-enter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  .hero-enter { animation: hero-enter 0.9s var(--ease-presence) both; }
+}
