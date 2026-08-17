@@ -7,31 +7,31 @@ const CLARISEA_STEPS: StepInput[] = [
   {
     title: "Water enters",
     body: "Sump water flows in through the universal inlet adaptor — 32 mm, 40 mm or 1\" hose and pipe fit without extra fittings.",
-    image: "clarisea-adapter.jpg",
+    image: "original/clarisea-inlet.jpg",
     imageAlt: "ClariSea universal inlet adaptor connected to a return pipe",
   },
   {
     title: "Fleece catches particles",
     body: "Waste, detritus, uneaten food and free-floating microalgae are trapped on the fleece before they can break down and load the water.",
-    image: "clarisea-rollers.jpg",
+    image: "original/clarisea-rollers.jpg",
     imageAlt: "Close-up of the ClariSea fleece rollers with trapped particles",
   },
   {
     title: "Float rises as fleece clogs",
     body: "As the fleece loads up, water backs up in the inlet chamber and lifts the float — the signal that a fresh section is needed.",
-    image: "clarisea-sump.jpg",
+    image: "original/clarisea-fleece-holder.jpg",
     imageAlt: "ClariSea Gen 3 sitting in a reef sump with the water level rising",
   },
   {
     title: "Smart controller advances the fleece",
     body: "The controller winds on a clean stretch automatically — or at the push of a button — so used fleece rolls neatly onto the take-up spool.",
-    image: "clarisea-controller.jpg",
+    image: "original/clarisea-motor.jpg",
     imageAlt: "ClariSea Gen 3 smart controller with its single push button",
   },
   {
     title: "Blue LED = all good",
     body: "A steady blue light means the filter is running. Alarms flag end-of-roll, jams and overflow long before they become a problem.",
-    image: "clarisea-led.jpg",
+    image: "original/clarisea-body.jpg",
     imageAlt: "Blue status LED glowing on the ClariSea controller",
   },
 ];

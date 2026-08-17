@@ -12,7 +12,7 @@ function PlusMinusIcon() {
       height="20"
       aria-hidden="true"
       focusable="false"
-      className="shrink-0 text-ink transition-transform duration-300 ease-[var(--ease-out-expo)] group-open:rotate-180"
+      className="shrink-0 text-ash transition-transform duration-300 ease-[var(--ease-out-expo)] group-open:rotate-180"
     >
       <path d="M4 10h12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <path
@@ -38,34 +38,34 @@ export default function FaqSpecBlock({ block }: BlockProps<"faqSpecBlock">) {
   const accordionName = `faq-${block._key}`;
 
   return (
-    <section className="section-space page-gutter bg-paper">
+    <section className="canvas-white section-space page-gutter">
       <div className="container-site">
         {block.headline && <SectionHeader headline={block.headline} className="mb-12 md:mb-16" />}
 
-        <div className={`grid gap-12 ${showSpecs && showFaq ? "lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16" : ""}`}>
+        <div className={`grid gap-12 items-start ${showSpecs && showFaq ? "lg:grid-cols-2" : ""}`}>
           {showSpecs && (
             <Reveal as="div">
-              <div className="card p-7 md:p-8">
-                {block.specsHeadline ? <h3 className="text-xl font-semibold">{block.specsHeadline}</h3> : null}
+              <div className="flex flex-col gap-3">
+                {block.specsHeadline ? <h4>{block.specsHeadline}</h4> : null}
                 {block.product?.name ? (
-                  <p className="label mt-1">
+                  <p className="body-sm text-ash">
                     {block.product.name}
-                    {block.product.sku ? <span className="text-muted/70"> · {block.product.sku}</span> : null}
+                    {block.product.sku ? <span> · {block.product.sku}</span> : null}
                   </p>
                 ) : null}
 
                 {specs.length > 0 && (
-                  <table className="mt-6 w-full border-collapse">
+                  <table className="mt-3 w-full border-collapse">
                     <caption className="sr-only">{block.specsHeadline ?? block.product?.name ?? "Specifications"}</caption>
                     <tbody>
                       {specs.map((spec) => (
                         <tr key={spec._key} className="hairline border-t last:border-b">
-                          <th scope="row" className="label py-3.5 pr-4 text-left align-baseline">
+                          <th scope="row" className="body-sm py-3.5 pr-4 text-left align-baseline font-normal text-ash">
                             {spec.label}
                           </th>
-                          <td className="num py-3.5 text-right align-baseline font-medium text-ink">
+                          <td className="body num py-3.5 text-right align-baseline text-carbon">
                             {spec.value}
-                            {spec.unit ? <span className="ml-1 font-normal text-muted">{spec.unit}</span> : null}
+                            {spec.unit ? <span className="figure-unit ml-1 text-ash">{spec.unit}</span> : null}
                           </td>
                         </tr>
                       ))}
@@ -74,7 +74,7 @@ export default function FaqSpecBlock({ block }: BlockProps<"faqSpecBlock">) {
                 )}
 
                 {downloads.length > 0 && (
-                  <ul className="mt-6 flex flex-col items-start gap-2" role="list">
+                  <ul className="mt-3 flex flex-col items-start gap-2" role="list">
                     {downloads.map((download) => (
                       <li key={download._key}>
                         <ActionLink link={download} variant="text" />
@@ -88,21 +88,23 @@ export default function FaqSpecBlock({ block }: BlockProps<"faqSpecBlock">) {
 
           {showFaq && (
             <Reveal as="div" delay={80}>
-              {block.faqHeadline ? <h3 className="mb-6 text-xl font-semibold">{block.faqHeadline}</h3> : null}
-              <div className="hairline border-t">
-                {faqs.map((faq) => (
-                  <details key={faq._key} name={accordionName} className="group hairline border-b">
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-lg font-medium text-ink transition-colors duration-200 hover:text-lime-deep [&::-webkit-details-marker]:hidden">
-                      <span>{faq.question}</span>
-                      <span className="mt-1 flex shrink-0 items-center" aria-hidden="true">
-                        <PlusMinusIcon />
-                      </span>
-                    </summary>
-                    <div className="pb-7 pr-12">
-                      <RichText value={faq.answer} className="prose-site text-text" />
-                    </div>
-                  </details>
-                ))}
+              <div className="flex flex-col gap-3">
+                {block.faqHeadline ? <h4>{block.faqHeadline}</h4> : null}
+                <div>
+                  {faqs.map((faq) => (
+                    <details key={faq._key} name={accordionName} className="group hairline border-b first:border-t">
+                      <summary className="body flex cursor-pointer list-none items-start justify-between gap-6 py-5 font-semibold text-carbon [&::-webkit-details-marker]:hidden">
+                        <span>{faq.question}</span>
+                        <span className="mt-0.5 flex shrink-0 items-center" aria-hidden="true">
+                          <PlusMinusIcon />
+                        </span>
+                      </summary>
+                      <div className="pb-6 pr-12">
+                        <RichText value={faq.answer} className="prose-site text-ash" />
+                      </div>
+                    </details>
+                  ))}
+                </div>
               </div>
             </Reveal>
           )}

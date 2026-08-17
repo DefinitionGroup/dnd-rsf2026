@@ -8,37 +8,43 @@ import type { BlockProps } from "@/blocks/types";
 type Tone = "paper" | "sand" | "ink";
 
 const TONE_SECTION: Record<Tone, string> = {
-  paper: "bg-paper",
-  sand: "stage-sand",
-  ink: "stage",
+  paper: "canvas-white",
+  sand: "canvas-frost",
+  ink: "canvas-dark",
 };
 
+/**
+ * Apple two-up product tile: image in `.media` 4:3 on one half, copy
+ * vertically centered on the other (28/600 title, 17px ash body, ghost link).
+ * `reverse` swaps the halves.
+ */
 export default function SplitContentBlock({ block }: BlockProps<"splitContentBlock">) {
   if (!block.image?.asset) return null;
   const toneKey = stegaClean(block.tone ?? "paper");
   const tone: Tone = toneKey === "ink" || toneKey === "sand" ? toneKey : "paper";
   const reverse = Boolean(block.reverse);
+  const bodyColor = tone === "ink" ? "text-mist" : "text-ash";
 
   return (
     <section className={`section-space page-gutter ${TONE_SECTION[tone]}`}>
-      <div className="container-site grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-        <Reveal className={`lg:col-span-7 ${reverse ? "lg:order-2" : ""}`}>
+      <div className="container-site grid items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
+        <Reveal className={reverse ? "md:order-2" : ""}>
           <div className="media relative aspect-[4/3]">
             <SanityImage
               image={block.image}
               alt={block.imageAlt}
               fill
-              sizes="(max-width: 1024px) 100vw, 58vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
         </Reveal>
 
-        <Reveal className={`lg:col-span-5 ${reverse ? "lg:order-1" : ""}`} delay={80}>
-          <h2 className="display-md whitespace-pre-line">{block.headline}</h2>
-          {block.body?.length ? <RichText value={block.body} className="prose-site mt-5" /> : null}
+        <Reveal className={`max-w-[34rem] ${reverse ? "md:order-1" : ""}`} delay={80}>
+          <h3 className="whitespace-pre-line">{block.headline}</h3>
+          {block.body?.length ? <RichText value={block.body} className={`prose-site mt-4 ${bodyColor}`} /> : null}
           {block.cta && (
-            <div className="mt-7">
+            <div className="mt-6">
               <ActionLink link={block.cta} variant="text" />
             </div>
           )}

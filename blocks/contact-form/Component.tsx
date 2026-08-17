@@ -11,8 +11,7 @@ type SubmissionState = "idle" | "submitting" | "success" | "error";
 
 const DEFAULT_STOCKIST_URL = "https://www.theaquariumsolution.com/stockists";
 
-const inputClass =
-  "hairline w-full rounded-xl border bg-paper px-4 py-3 text-base text-ink transition-colors duration-200 focus:border-ink disabled:opacity-60";
+const inputClass = "field text-carbon transition-colors duration-200 disabled:opacity-60";
 
 function CheckIcon() {
   return (
@@ -38,7 +37,7 @@ function SelectChevron() {
       height="16"
       aria-hidden="true"
       focusable="false"
-      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted"
+      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ash"
     >
       <path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -112,21 +111,23 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
   const revealTransition = reduceMotion ? { duration: 0 } : { duration: DURATION_REVEAL, ease: EASE_PRESENCE };
 
   return (
-    <section id="contact" className="section-space page-gutter scroll-mt-24 bg-paper text-text" aria-labelledby={`${fieldId}-heading`}>
-      <div className="container-site grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-        <motion.div
+    <section id="contact" className="canvas-frost section-space page-gutter scroll-mt-24" aria-labelledby={`${fieldId}-heading`}>
+      <div className="container-site">
+        <motion.header
+          className="container-text text-center"
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={revealTransition}
         >
-          <h2 id={`${fieldId}-heading`} className="max-w-[20ch] whitespace-pre-line">
+          <h2 id={`${fieldId}-heading`} className="mx-auto max-w-[24ch] whitespace-pre-line">
             {block.headline}
           </h2>
-          {block.intro ? <p className="lead mt-4 max-w-[36rem]">{block.intro}</p> : null}
-        </motion.div>
+          {block.intro ? <p className="whisper mx-auto mt-3 max-w-[42rem]">{block.intro}</p> : null}
+        </motion.header>
 
         <motion.div
+          className="mx-auto mt-12 w-full max-w-[640px] md:mt-16"
           initial={reduceMotion ? false : { opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -134,17 +135,17 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
         >
           {submissionState === "success" ? (
             <motion.div
-              className="card flex flex-col items-start gap-4 p-7 md:p-8"
+              className="tile flex flex-col items-center gap-3 text-center"
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={revealTransition}
               role="status"
             >
-              <span className="flex size-12 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true">
+              <span className="flex size-12 items-center justify-center rounded-full bg-lime text-carbon" aria-hidden="true">
                 <CheckIcon />
               </span>
-              <h3 className="text-xl font-semibold">{labels.successTitle}</h3>
-              {labels.successMessage ? <p className="text-muted">{labels.successMessage}</p> : null}
+              <h4>{labels.successTitle}</h4>
+              {labels.successMessage ? <p className="body-sm text-ash">{labels.successMessage}</p> : null}
               <button
                 type="button"
                 className="action-link action-link--text mt-2 cursor-pointer"
@@ -155,7 +156,7 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
               </button>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="relative">
+            <form onSubmit={handleSubmit} className="tile relative">
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label={labels.name} id={`${fieldId}-name`} required>
                   <input id={`${fieldId}-name`} name="name" type="text" autoComplete="name" maxLength={100} required className={inputClass} />
@@ -215,9 +216,9 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
                 <input id={`${fieldId}-website`} name="website" type="text" autoComplete="off" tabIndex={-1} />
               </div>
 
-              <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-                {labels.privacyNotice ? <p className="caption max-w-sm leading-relaxed">{labels.privacyNotice}</p> : null}
-                <div className="flex flex-wrap items-center gap-3">
+              <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                {labels.privacyNotice ? <p className="caption max-w-sm">{labels.privacyNotice}</p> : null}
+                <div className="flex flex-wrap items-center gap-3 sm:ml-auto">
                   <ActionLink link={dealerLocator} variant="secondary" />
                   <button
                     className="action-link action-link--primary cursor-pointer disabled:cursor-wait disabled:opacity-70"
@@ -233,11 +234,7 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
                 </div>
               </div>
 
-              <p
-                className={`mt-4 min-h-6 text-sm ${submissionState === "error" ? "card mt-5 px-4 py-3 text-ink" : ""}`}
-                role="status"
-                aria-live="polite"
-              >
+              <p className="body-sm mt-4 min-h-6 text-carbon" role="status" aria-live="polite">
                 {submissionState === "error" ? labels.errorMessage : ""}
               </p>
             </form>
@@ -263,10 +260,10 @@ function Field({
 }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <label htmlFor={id} className="label">
+      <label htmlFor={id} className="body-sm text-carbon">
         {label}
         {required ? (
-          <span className="text-lime-deep" aria-hidden="true">
+          <span className="text-ash" aria-hidden="true">
             {" "}
             *
           </span>

@@ -34,8 +34,8 @@ function hasSound(v: string | undefined) {
 }
 
 const SEVERITY_CHIP: Record<Severity, string> = {
-  info: "bg-lime-soft text-lime-deep",
-  warning: "bg-[#fff4cc] text-[#7a5a00]",
+  info: "bg-pebble text-carbon",
+  warning: "bg-pebble text-carbon",
   alarm: "bg-[#fde8e6] text-danger",
 };
 const SEVERITY_LABEL: Record<Severity, string> = { info: "Normal", warning: "Warning", alarm: "Alarm" };
@@ -43,7 +43,7 @@ const PATTERN_LABEL: Record<Pattern, string> = { solid: "solid", flash: "flashin
 const COLOR_LABEL: Record<LedColor, string> = { blue: "Blue", red: "Red", blueRed: "Blue / red", off: "Off" };
 
 function SeverityChip({ severity: sev }: { severity: Severity }) {
-  return <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium ${SEVERITY_CHIP[sev]}`}>{SEVERITY_LABEL[sev]}</span>;
+  return <span className={`caption shrink-0 rounded-[var(--radius-pill)] px-2.5 py-1 ${SEVERITY_CHIP[sev]}`}>{SEVERITY_LABEL[sev]}</span>;
 }
 
 function ChevronIcon({ open }: { open: boolean }) {
@@ -54,7 +54,7 @@ function ChevronIcon({ open }: { open: boolean }) {
       height="20"
       aria-hidden="true"
       focusable="false"
-      className={`shrink-0 text-muted transition-transform duration-300 ease-[var(--ease-out-expo)] ${open ? "rotate-180" : ""}`}
+      className={`shrink-0 text-ash transition-transform duration-300 ease-[var(--ease-out-expo)] ${open ? "rotate-180" : ""}`}
     >
       <path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -83,7 +83,7 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
   };
 
   return (
-    <section className="section-space page-gutter bg-paper text-text">
+    <section className="canvas-white section-space page-gutter">
       <div className="container-site">
         {(block.headline || block.intro) && <SectionHeader headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
 
@@ -124,12 +124,12 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
                         focusAndSelect(signals.length - 1);
                       }
                     }}
-                    className={`flex w-full items-center gap-4 py-5 text-left transition-colors duration-200 ${
-                      isActive ? "text-ink" : "text-ink hover:text-lime-deep"
+                    className={`flex w-full cursor-pointer items-center gap-4 py-5 text-left transition-colors duration-200 ${
+                      isActive ? "text-carbon" : "text-carbon hover:text-ash"
                     }`}
                   >
                     <MiniLed color={ledColor(s.ledColor)} />
-                    <span className="min-w-0 flex-1 text-lg font-medium leading-snug">{s.name}</span>
+                    <span className="body min-w-0 flex-1 font-semibold">{s.name}</span>
                     <SeverityChip severity={sev} />
                     <ChevronIcon open={isActive} />
                   </button>
@@ -145,25 +145,25 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
                         transition={reduceMotion ? { duration: 0 } : { duration: 0.35, ease: EASE_PRESENCE }}
                         className="overflow-hidden"
                       >
-                        <div className="grid gap-5 pb-7 pl-7 pr-2 sm:grid-cols-2">
+                        <div className="grid gap-5 pb-6 pl-7 pr-2 sm:grid-cols-2">
                           <dl className="contents">
                             <div>
-                              <dt className="label">Signal</dt>
-                              <dd className="mt-1 text-text">
+                              <dt className="body-sm text-ash">Signal</dt>
+                              <dd className="mt-1 text-carbon">
                                 LED {COLOR_LABEL[ledColor(s.ledColor)].toLowerCase()}, {PATTERN_LABEL[pattern(s.pattern)]}
                                 {s.sound ? ` · ${s.sound}` : ""}
                               </dd>
                             </div>
                             {s.meaning && (
                               <div>
-                                <dt className="label">What it means</dt>
-                                <dd className="mt-1 text-text">{s.meaning}</dd>
+                                <dt className="body-sm text-ash">What it means</dt>
+                                <dd className="mt-1 text-carbon">{s.meaning}</dd>
                               </div>
                             )}
                             {s.action && (
                               <div className="sm:col-span-2">
-                                <dt className="label">What to do</dt>
-                                <dd className="mt-1 font-medium text-ink">{s.action}</dd>
+                                <dt className="body-sm text-ash">What to do</dt>
+                                <dd className="mt-1 font-semibold text-carbon">{s.action}</dd>
                               </div>
                             )}
                           </dl>
@@ -185,82 +185,49 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
 /* Device panel                                                        */
 /* ------------------------------------------------------------------ */
 
-function DeviceKey({ children, label }: { children: React.ReactNode; label: string }) {
-  return (
-    <span className="flex h-10 flex-1 items-center justify-center gap-2 rounded-[var(--radius-pill)] bg-paper/10 text-xs font-medium text-muted-dark">
-      {children}
-      <span>{label}</span>
-    </span>
-  );
-}
-
 function Device({ signal, label, reduceMotion }: { signal: Signal; label: string | undefined; reduceMotion: boolean }) {
   const color = ledColor(signal.ledColor);
   const pat = pattern(signal.pattern);
   const sound = hasSound(signal.sound);
   const sev = severity(signal.severity);
-  const stroke = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
   return (
     <div
-      className="card on-dark relative overflow-hidden bg-stage-soft p-7 text-paper md:p-8"
+      className="tile flex flex-col gap-3"
       role="img"
       aria-label={`${label ?? "Smart controller"}: LED ${COLOR_LABEL[color].toLowerCase()} ${PATTERN_LABEL[pat]}${signal.sound ? `, ${signal.sound}` : ""}`}
     >
-      {/* Top rail */}
-      <div className="flex items-center justify-between">
-        <span className="label">{label ?? "Smart controller"}</span>
-        <span className="flex gap-1" aria-hidden="true">
-          <span className="size-1 rounded-full bg-paper/25" />
-          <span className="size-1 rounded-full bg-paper/25" />
-          <span className="size-1 rounded-full bg-paper/25" />
-        </span>
-      </div>
+      <span className="body-sm text-ash">{label ?? "Smart controller"}</span>
 
-      {/* Face */}
-      <div className="mt-6 flex items-center justify-between gap-6 rounded-[var(--radius-media)] bg-stage px-6 py-8">
+      {/* LED + speaker on the tile itself (no mock device screen) */}
+      <div className="flex items-center justify-between gap-6 border-b border-hairline px-1 py-6">
         <Led color={color} pattern={pat} reduceMotion={reduceMotion} />
-        <Speaker active={sound} reduceMotion={reduceMotion} />
-      </div>
-
-      {/* Buttons row */}
-      <div className="mt-5 flex items-center gap-2" aria-hidden="true">
-        <DeviceKey label="Play">
-          <svg viewBox="0 0 16 16" width="14" height="14" {...stroke}>
-            <path d="M5 3.5v9l7-4.5z" />
-          </svg>
-        </DeviceKey>
-        <DeviceKey label="Pause">
-          <svg viewBox="0 0 16 16" width="14" height="14" {...stroke}>
-            <path d="M5.5 3.5v9M10.5 3.5v9" />
-          </svg>
-        </DeviceKey>
-        <DeviceKey label="Advance">
-          <svg viewBox="0 0 16 16" width="14" height="14" {...stroke}>
-            <path d="M3 3.5v9l6-4.5zM12.5 3.5v9" />
-          </svg>
-        </DeviceKey>
+        <span className="caption">{sound ? "Sound: on" : "Sound: silent"}</span>
       </div>
 
       {/* Readout */}
-      <div className="hairline mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 border-t pt-5">
-        <SeverityChip severity={sev} />
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.span
-            key={signal._key}
-            initial={reduceMotion ? false : { opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE_PRESENCE }}
-            className="text-sm font-medium text-paper"
-          >
-            {signal.name}
-          </motion.span>
-        </AnimatePresence>
-        <span className="caption ml-auto">
+      <div className="mt-3 flex flex-col gap-3">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={signal._key}
+              initial={reduceMotion ? false : { opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -4 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: EASE_PRESENCE }}
+              className="body font-semibold text-carbon"
+            >
+              {signal.name}
+            </motion.span>
+          </AnimatePresence>
+          <SeverityChip severity={sev} />
+        </div>
+        <p className="caption">
           {COLOR_LABEL[color]} · {PATTERN_LABEL[pat]}
           {sound ? ` · ${signal.sound}` : " · silent"}
-        </span>
+        </p>
+        {signal.meaning && <p className="caption">{signal.meaning}</p>}
+        {signal.action && <p className="caption text-carbon">{signal.action}</p>}
       </div>
     </div>
   );
@@ -311,7 +278,7 @@ function Led({ color, pattern: pat, reduceMotion }: { color: LedColor; pattern: 
   const staticColor = color === "red" ? RED : color === "off" ? OFF : BLUE;
   return (
     <div className="flex items-center gap-4">
-      <div className="relative grid size-16 place-items-center rounded-full bg-stage-soft">
+      <div className="relative grid size-16 place-items-center rounded-full bg-onyx">
         {reduceMotion ? (
           <span
             className="block size-7 rounded-full"
@@ -324,10 +291,10 @@ function Led({ color, pattern: pat, reduceMotion }: { color: LedColor; pattern: 
           <motion.span key={`${color}-${pat}`} className="block size-7 rounded-full" initial={false} {...ledAnimation(color, pat)} style={{ willChange: "opacity, background-color, box-shadow" }} />
         )}
       </div>
-      <div className="label leading-relaxed">
-        <span className="block text-paper/50">LED</span>
-        <span className="block text-paper">{COLOR_LABEL[color]}</span>
-        <span className="block">{PATTERN_LABEL[pat]}</span>
+      <div className="body-sm leading-relaxed">
+        <span className="block text-mist">LED</span>
+        <span className="block text-white">{COLOR_LABEL[color]}</span>
+        <span className="block text-mist">{PATTERN_LABEL[pat]}</span>
       </div>
     </div>
   );
@@ -341,31 +308,5 @@ function MiniLed({ color }: { color: LedColor }) {
       className="block size-3 shrink-0 rounded-full"
       style={{ background: color === "blueRed" ? `linear-gradient(135deg, ${BLUE} 50%, ${RED} 50%)` : c, boxShadow: color === "off" ? "none" : `0 0 8px 1px ${c}` }}
     />
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Speaker                                                             */
-/* ------------------------------------------------------------------ */
-
-function Speaker({ active, reduceMotion }: { active: boolean; reduceMotion: boolean }) {
-  const animated = active && !reduceMotion;
-  const wave = (i: number) => ({
-    animate: { opacity: animated ? [0.2, 1, 0.2] : 1 },
-    transition: animated ? { duration: 1.2, repeat: Infinity, ease: "easeInOut" as const, delay: i * 0.2 } : { duration: 0.2 },
-  });
-  const waveClass = active ? "text-lime" : "text-paper/20";
-  return (
-    <div className="flex items-center gap-3" aria-hidden="true">
-      <svg viewBox="0 0 48 32" className="h-8 w-12 overflow-visible" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        {/* body */}
-        <path d="M4 12h8l10-8v24l-10-8H4z" stroke="currentColor" className={active ? "text-lime" : "text-paper/40"} />
-        {/* waves */}
-        <motion.path d="M28 11c2.5 2.5 2.5 7.5 0 10" stroke="currentColor" className={waveClass} initial={false} {...wave(0)} />
-        <motion.path d="M33 7c5 5 5 13 0 18" stroke="currentColor" className={waveClass} initial={false} {...wave(1)} />
-        <motion.path d="M38 3c7.5 7.5 7.5 18.5 0 26" stroke="currentColor" className={waveClass} initial={false} {...wave(2)} />
-      </svg>
-      <span className={`text-xs font-medium ${active ? "text-lime" : "text-muted-dark"}`}>{active ? "Sound" : "Silent"}</span>
-    </div>
   );
 }

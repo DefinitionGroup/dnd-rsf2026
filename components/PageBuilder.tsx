@@ -10,7 +10,7 @@ import { dataset, isSanityConfigured, studioProjectId } from "@/sanity/env";
  * Renders a page's content array through the block registry.
  * - H1 discipline: hero / animatedHeadline(h1) own the H1; otherwise the first
  *   h2 of the first rich-text block is promoted (see PortableTextBlock).
- * - In-page product bar: every block after the hero with a headline/eyebrow
+ * - Product bar (Apple local nav) sits directly under the global nav; every block with a headline/eyebrow
  *   becomes a jump link (its `eyebrow` is the label — eyebrows are not rendered
  *   above headings in this design system).
  * - Presentation: each block gets a data-sanity attribute for click-to-select
@@ -39,21 +39,20 @@ export default function PageBuilder({ page, locale, productBar = true }: { page:
     }
   }
 
-  const sections: ProductBarSection[] = content.flatMap((b) => {
+  const sections: ProductBarSection[] = content.slice(0, 40).flatMap((b) => {
     const id = ids.get(b._key);
     if (!id || b._type === "heroBlock" || b._type === "ctaBlock") return [];
     const raw = ("eyebrow" in b && b.eyebrow) || ("headline" in b && b.headline) || "";
     const label = stegaClean(raw ?? "");
-    return label ? [{ id, label: label.length > 28 ? `${label.slice(0, 27)}…` : label }] : [];
-  });
+    return label ? [{ id, label: label.length > 24 ? `${label.slice(0, 23)}…` : label }] : [];
+  }).slice(0, 8); // Apple local navs carry a handful of links, not a table of contents
 
-  const hasHero = content[0]?._type === "heroBlock";
   const cta = { label: t(locale, "findStockist"), href: LEGACY_STOCKISTS_URL };
   const bar = <ProductBar title={page.title} sections={sections} cta={cta} />;
 
   return (
     <>
-      {productBar && !hasHero && bar}
+      {productBar && bar}
       {content.map((block, index) => {
         const Component = blockComponents[block._type as BlockType] as
           | ((props: { block: PageBlock; locale: Locale; pageId?: string; index: number; promoteFirstHeading?: boolean }) => React.ReactNode)
@@ -76,7 +75,6 @@ export default function PageBuilder({ page, locale, productBar = true }: { page:
             >
               <Component block={block} locale={locale} pageId={page._id} index={index} promoteFirstHeading={promoteFirstHeading} />
             </div>
-            {productBar && hasHero && index === 0 && bar}
           </div>
         );
       })}

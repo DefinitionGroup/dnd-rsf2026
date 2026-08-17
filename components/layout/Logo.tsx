@@ -1,11 +1,21 @@
-/** Wordmark placeholder until the client supplies dark/light-safe logo files. Mark = the D-D monogram. */
-export default function Logo({ className = "" }: { className?: string }) {
+import Image from "next/image";
+
+/**
+ * The real D-D wordmark (white-only SVG from theaquariumsolution.com) — lives on
+ * the dark global nav. `tone="dark"` inverts it for light grounds (footer).
+ */
+export default function Logo({ className = "", tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
   return (
-    <span className={`inline-flex items-center gap-2.5 leading-none ${className}`} aria-hidden="true">
-      <span className="grid h-7 w-7 place-items-center rounded-[7px] bg-lime text-ink" style={{ fontVariationSettings: '"wdth" 80' }}>
-        <span className="text-[0.8rem] font-bold tracking-tight">D‑D</span>
-      </span>
-      <span className="text-[0.95rem] font-semibold tracking-[-0.01em]">The Aquarium Solution</span>
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+      <Image
+        src="/images/original/dd-logo.svg"
+        alt=""
+        width={50}
+        height={32}
+        className={`h-8 w-auto ${tone === "dark" ? "invert" : ""}`}
+        priority
+        unoptimized
+      />
     </span>
   );
 }

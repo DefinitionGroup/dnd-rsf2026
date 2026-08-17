@@ -73,16 +73,16 @@ export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
     ) : null;
 
   return (
-    <section className={`stage section-space ${bleed ? "" : "page-gutter"}`}>
+    <section className={`canvas-dark section-space ${bleed ? "" : "page-gutter"}`}>
       {hasHeader && (
         <div className={`container-site ${bleed ? "page-gutter" : ""}`}>
           <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-10 md:mb-14" />
         </div>
       )}
-      <figure className={bleed ? "" : "container-wide"}>
-        <div className={`relative isolate aspect-video w-full overflow-hidden bg-stage-soft ${bleed ? "" : "media"}`}>{player}</div>
+      <figure className={bleed ? "" : "container-site"}>
+        <div className={`relative isolate aspect-video w-full overflow-hidden bg-carbon ${bleed ? "" : "media"}`}>{player}</div>
         {block.caption && (
-          <figcaption className={`caption mt-4 ${bleed ? "page-gutter container-wide" : ""}`}>{block.caption}</figcaption>
+          <figcaption className={`caption mt-4 text-center ${bleed ? "page-gutter container-site" : ""}`}>{block.caption}</figcaption>
         )}
       </figure>
     </section>
@@ -118,11 +118,11 @@ function FilePlayer({
           // eslint-disable-next-line @next/next/no-img-element
           <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
         ) : (
-          <span className="absolute inset-0 bg-stage-soft" aria-hidden />
+          <span className="absolute inset-0 bg-carbon" aria-hidden />
         )}
-        <span className="elevated absolute left-1/2 top-1/2 grid size-[72px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-paper transition-transform duration-300 group-hover:scale-105">
+        <span className="absolute left-1/2 top-1/2 grid size-[72px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-carbon transition-transform duration-300 group-hover:scale-105">
           <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" className="translate-x-[2px]">
-            <path d="M8 5.5v13l10-6.5z" fill="#99cc33" />
+            <path d="M8 5.5v13l10-6.5z" fill="currentColor" />
           </svg>
         </span>
       </button>
@@ -174,23 +174,19 @@ function ExternalPlayer({
   }
 
   return (
-    <div className="on-dark absolute inset-0 text-paper">
+    <div className="absolute inset-0 text-white">
       {poster?.asset ? (
         <SanityImage image={poster} alt="" fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
       ) : (
-        <div className="absolute inset-0 bg-stage-soft" aria-hidden />
+        <div className="absolute inset-0 bg-carbon" aria-hidden />
       )}
-      {privacyNotice && (
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(to_top,rgb(11_11_12/0.7),transparent)]" aria-hidden />
-      )}
-
       <button
         type="button"
         onClick={() => setLoaded(true)}
         aria-label={`Play video: ${alt} (loads from ${providerLabel})`}
         className="group absolute inset-0 flex cursor-pointer items-center justify-center focus-visible:outline-offset-[-4px]"
       >
-        <span className="elevated flex h-[72px] w-[72px] items-center justify-center rounded-full bg-paper text-lime transition-transform duration-300 ease-out-expo group-hover:scale-105">
+        <span className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-white text-carbon transition-transform duration-300 ease-out-expo group-hover:scale-105">
           <svg viewBox="0 0 24 24" width="28" height="28" className="ml-1 fill-current" aria-hidden>
             <path d="M8 5.5v13l11-6.5z" />
           </svg>
@@ -198,8 +194,8 @@ function ExternalPlayer({
       </button>
 
       {privacyNotice && (
-        <p className="caption pointer-events-none absolute inset-x-0 bottom-0 px-5 pb-4 text-center text-xs md:text-sm">
-          {privacyNotice}
+        <p className="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center px-5">
+          <span className="caption rounded-full bg-white/10 px-3 py-1 text-white">{privacyNotice}</span>
         </p>
       )}
     </div>

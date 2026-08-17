@@ -1,14 +1,5 @@
-"use client";
-
-import { useLayoutEffect } from "react";
-
-/** Sets <html data-nav="light|dark"> so the fixed header can invert per page (page data lives below the layout). */
-export default function NavVariant({ variant }: { variant: "light" | "dark" }) {
-  useLayoutEffect(() => {
-    document.documentElement.dataset.nav = variant;
-    return () => {
-      delete document.documentElement.dataset.nav;
-    };
-  }, [variant]);
+/** Kept for API compatibility: the v3 global nav is always dark and static, so no per-page inversion is needed. */
+export default function NavVariant(_props: { variant: "light" | "dark" }) {
+  void _props;
   return null;
 }

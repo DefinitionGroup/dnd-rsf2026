@@ -12,7 +12,8 @@ const wordVariants: Variants = {
 
 /**
  * Word-mask headline: each word rises out of its own overflow-hidden mask.
- * Sentence case, display-lg, left aligned. The eyebrow field is not rendered.
+ * Apple's light large heading (heading-lg 44/400), centered on a white canvas.
+ * The eyebrow field is not rendered.
  */
 export default function AnimatedHeadlineBlock({ block }: BlockProps<"animatedHeadlineBlock">) {
   const reduceMotion = useReducedMotion();
@@ -22,15 +23,15 @@ export default function AnimatedHeadlineBlock({ block }: BlockProps<"animatedHea
 
   return (
     <motion.section
-      className="section-space page-gutter bg-paper"
+      className="canvas-white section-space page-gutter"
       initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={{ visible: { transition: { delayChildren: 0.04, staggerChildren: 0.055 } } }}
     >
-      <div className="container-site">
-        <Heading aria-label={block.headline} className="display-lg max-w-[24ch]">
-          <span aria-hidden="true" className="flex flex-wrap gap-x-[0.28em] gap-y-1">
+      <div className="container-text text-center">
+        <Heading aria-label={block.headline} className={`mx-auto max-w-[24ch] ${level === "h2" ? "heading-lg" : ""}`}>
+          <span aria-hidden="true" className="flex flex-wrap justify-center gap-x-[0.28em] gap-y-1">
             {words.map((word, index) => (
               <span key={`${word}-${index}`} className="inline-block overflow-hidden pb-[0.08em]">
                 <motion.span className="inline-block will-change-transform" variants={wordVariants}>

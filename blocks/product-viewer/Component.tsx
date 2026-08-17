@@ -255,7 +255,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
   const showHint = Boolean(block.hint) && !interacted && !isLoading;
 
   return (
-    <section className="stage section-space page-gutter">
+    <section className="canvas-dark section-space page-gutter">
       <div className="container-site">
         <SectionHeader headline={block.headline} intro={block.intro} align="center" />
 
@@ -274,7 +274,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
             onFocus={markInteracted}
-            className={`media group relative isolate aspect-square w-full touch-none select-none md:aspect-[4/3] ${
+            className={`media group relative isolate aspect-square w-full touch-none select-none bg-onyx md:aspect-[4/3] ${
               zoom > 1 ? (dragging ? "cursor-grabbing" : "cursor-move") : canRotate ? (dragging ? "cursor-grabbing" : "cursor-grab") : "cursor-zoom-in"
             }`}
           >
@@ -310,7 +310,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   initial={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: reduceMotion ? 0 : 0.4, ease: EASE_PRESENCE }}
-                  className="absolute inset-0 flex items-center justify-center bg-stage-soft/80"
+                  className="absolute inset-0 flex items-center justify-center bg-carbon/80"
                 >
                   <span className="label num">
                     Loading {Math.min(loaded, frameCount)}/{frameCount}
@@ -329,9 +329,9 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: reduceMotion ? 0 : 0.35, ease: EASE_PRESENCE }}
-                  className="pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-paper/10 px-3.5 py-1.5 text-xs font-medium text-paper"
+                  className="body-sm pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-white"
                 >
-                  <svg aria-hidden width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-lime motion-safe:animate-pulse">
+                  <svg aria-hidden width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-mist motion-safe:animate-pulse">
                     <path d="M1 6h14M4 3 1 6l3 3M12 3l3 3-3 3" />
                   </svg>
                   {block.hint}
@@ -349,7 +349,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                     cy="18"
                     r={ringR}
                     fill="none"
-                    stroke="var(--color-lime)"
+                    stroke="var(--color-white)"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeDasharray={ringC}
@@ -357,14 +357,14 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                     className="transition-[stroke-dashoffset] duration-150 ease-out motion-reduce:transition-none"
                   />
                 </svg>
-                <span className="label num text-xs">
+                <span className="caption num">
                   {String(frame + 1).padStart(2, "0")}/{String(frameCount).padStart(2, "0")}
                 </span>
               </div>
             )}
 
             {/* Zoom controls */}
-            <div className="elevated absolute right-4 top-4 flex flex-col overflow-hidden rounded-full bg-paper text-ink" onPointerDown={(e) => e.stopPropagation()}>
+            <div className="absolute right-4 top-4 flex flex-col overflow-hidden rounded-full bg-white text-carbon" onPointerDown={(e) => e.stopPropagation()}>
               <button
                 type="button"
                 aria-label="Zoom in"
@@ -373,13 +373,13 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   markInteracted();
                   applyZoom(zoomRef.current + ZOOM_STEP);
                 }}
-                className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-lime disabled:opacity-40 disabled:hover:bg-transparent"
+                className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-frost disabled:opacity-40 disabled:hover:bg-transparent"
               >
                 <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M8 3v10M3 8h10" />
                 </svg>
               </button>
-              <span className="mx-2.5 border-t border-line" aria-hidden />
+              <span className="mx-2.5 border-t border-hairline" aria-hidden />
               <button
                 type="button"
                 aria-label="Zoom out"
@@ -388,7 +388,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   markInteracted();
                   applyZoom(zoomRef.current - ZOOM_STEP);
                 }}
-                className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-lime disabled:opacity-40 disabled:hover:bg-transparent"
+                className="flex h-10 w-10 items-center justify-center transition-colors hover:bg-frost disabled:opacity-40 disabled:hover:bg-transparent"
               >
                 <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M3 8h10" />
@@ -408,12 +408,12 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
                   transition={{ duration: reduceMotion ? 0 : 0.2 }}
                   onPointerDown={(e) => e.stopPropagation()}
                   onClick={reset}
-                  className="elevated absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-xs font-medium text-ink transition-colors hover:bg-lime"
+                  className="body-sm absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-carbon transition-colors hover:bg-frost"
                 >
                   <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M2.5 7a4.5 4.5 0 1 0 1.3-3.2M2.5 1.5v3h3" />
                   </svg>
-                  Reset {zoom > 1 && <span className="num text-lime-deep">{zoom.toFixed(1)}×</span>}
+                  Reset {zoom > 1 && <span className="num text-ash">{zoom.toFixed(1)}×</span>}
                 </motion.button>
               )}
             </AnimatePresence>
@@ -430,7 +430,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
               {frames.map((_, i) => (
                 <span
                   key={i}
-                  className={`h-1 rounded-full transition-all duration-150 motion-reduce:transition-none ${i === frame ? "w-5 bg-lime" : "w-1 bg-line-dark"}`}
+                  className={`h-1 rounded-full transition-all duration-150 motion-reduce:transition-none ${i === frame ? "w-5 bg-white" : "w-1 bg-ash"}`}
                 />
               ))}
             </div>
@@ -442,8 +442,8 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
 
           {block.product && (block.product.name || block.product.tagline) && (
             <div className="mt-10 text-center">
-              {block.product.name && <h3 className="text-2xl font-semibold text-paper">{block.product.name}</h3>}
-              {block.product.tagline && <p className="mx-auto mt-2 max-w-[52ch] text-muted-dark">{block.product.tagline}</p>}
+              {block.product.name && <h4 className="text-white">{block.product.name}</h4>}
+              {block.product.tagline && <p className="body-sm mx-auto mt-2 max-w-[52ch] text-mist">{block.product.tagline}</p>}
             </div>
           )}
         </div>

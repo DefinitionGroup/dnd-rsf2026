@@ -1,15 +1,15 @@
-import { Archivo } from "next/font/google";
+import { Inter } from "next/font/google";
 
 /**
- * One family for the whole system. Archivo's width axis gives us a narrow,
- * heavy voice for measurements (.figure) and the normal width for everything
- * else — a nod to the brand's condensed heritage without a second face.
+ * Apple architecture: SF Pro renders natively on Apple devices via the system
+ * stack (-apple-system / BlinkMacSystemFont). Inter is the documented fallback
+ * for every other platform. No display face is shipped separately.
  */
-export const archivo = Archivo({
+export const inter = Inter({
   subsets: ["latin", "latin-ext"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-export const fontClassNames = archivo.variable;
+export const fontClassNames = inter.variable;

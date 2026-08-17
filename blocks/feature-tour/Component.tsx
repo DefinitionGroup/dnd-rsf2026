@@ -15,6 +15,11 @@ type Step = NonNullable<BlockOf<"featureTourBlock">["steps"]>[number];
 /* Block                                                               */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Apple feature tour: white canvas (film-dark for tone "ink"), centered header,
+ * sticky `.media` on the left, a 1px hairline rail with a carbon active segment,
+ * and steps as h3 28/600 (active carbon, idle ash) with 17px ash body.
+ */
 export default function FeatureTourBlock({ block }: BlockProps<"featureTourBlock">) {
   const steps = (block.steps ?? []).filter((s) => s?.image?.asset);
   const tone = stegaClean(block.tone) === "paper" ? "paper" : "ink";
@@ -30,10 +35,10 @@ export default function FeatureTourBlock({ block }: BlockProps<"featureTourBlock
   const segment = 100 / steps.length;
 
   return (
-    <section className={`section-space page-gutter ${dark ? "stage" : "bg-paper text-text"}`}>
+    <section className={`section-space page-gutter ${dark ? "canvas-dark" : "canvas-white"}`}>
       <div className="container-site">
         {(block.headline || block.intro) && (
-          <SectionHeader headline={block.headline} intro={block.intro} align={dark ? "center" : "left"} className="mb-14 md:mb-20" />
+          <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-14 md:mb-20" />
         )}
 
         {/* ---------- Mobile / tablet: image + copy stacked per step ---------- */}
@@ -71,13 +76,13 @@ export default function FeatureTourBlock({ block }: BlockProps<"featureTourBlock
             </div>
           </div>
 
-          {/* Progress rail: 1px hairline, one lime segment per active step */}
+          {/* Progress rail: 1px hairline, one carbon (white on dark) segment per active step */}
           <div className="relative" aria-hidden="true">
-            <div className={`absolute inset-y-0 left-1/2 w-px -translate-x-1/2 ${dark ? "bg-line-dark" : "bg-line"}`} />
+            <div className={`absolute inset-y-0 left-1/2 w-px -translate-x-1/2 ${dark ? "bg-line-dark" : "bg-hairline"}`} />
             <div className="sticky top-24 h-[calc(100svh-8rem)]">
               <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2">
                 <span
-                  className="absolute left-0 w-full bg-lime transition-[top] duration-500 ease-out-expo motion-reduce:transition-none"
+                  className={`absolute left-0 w-full transition-[top] duration-500 ease-out-expo motion-reduce:transition-none ${dark ? "bg-white" : "bg-carbon"}`}
                   style={{ top: `${active * segment}%`, height: `${segment}%` }}
                 />
               </div>
@@ -148,19 +153,20 @@ function StepBody({
   active: boolean;
   className?: string;
 }) {
-  const titleColor = active ? (dark ? "text-paper" : "text-ink") : dark ? "text-muted-dark" : "text-muted";
-  const bodyColor = active ? (dark ? "text-muted-dark" : "text-muted") : dark ? "text-muted-dark/60" : "text-muted/60";
+  const titleColor = active ? (dark ? "text-white" : "text-carbon") : dark ? "text-mist" : "text-ash";
+  const bodyColor = active ? (dark ? "text-mist" : "text-ash") : dark ? "text-mist/60" : "text-ash/60";
+  const figureColor = dark ? "text-white" : "text-carbon";
 
   return (
     <div className={`transition-colors duration-500 ${className}`}>
       <span className="sr-only">
         Step {index + 1} of {total}.
       </span>
-      <h3 className={`display-md transition-colors duration-500 ${titleColor}`}>{step.title}</h3>
-      {step.body && <p className={`mt-4 max-w-[52ch] transition-colors duration-500 ${bodyColor}`}>{step.body}</p>}
+      <h3 className={`transition-colors duration-500 ${titleColor}`}>{step.title}</h3>
+      {step.body && <p className={`body mt-3 max-w-[52ch] transition-colors duration-500 ${bodyColor}`}>{step.body}</p>}
       {step.stat && (
-        <div className={`mt-8 inline-flex items-baseline gap-3 border-t pt-5 ${dark ? "border-line-dark" : "border-line"}`}>
-          <span className={`figure text-5xl md:text-6xl ${dark ? "text-lime" : "text-lime-deep"}`}>{step.stat}</span>
+        <div className="hairline mt-8 inline-flex items-baseline gap-3 border-t pt-5">
+          <span className={`figure text-[40px] ${figureColor}`}>{step.stat}</span>
           {step.statLabel && <span className="label">{step.statLabel}</span>}
         </div>
       )}

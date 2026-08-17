@@ -1,12 +1,13 @@
 /**
- * Section header — headline + lead. The `eyebrow` field is kept in the content
- * model but is NOT rendered above the heading (it feeds the in-page product bar
- * as the section's jump-link label instead; see PageBuilder/ProductBar).
+ * Apple-architecture section header: centered, stacked, symmetric.
+ * Headline (heading 40/600) + optional whisper subhead (300 weight).
+ * `eyebrow` is accepted for API stability but never rendered above the heading
+ * (it labels the product bar's jump link instead).
  */
 export default function SectionHeader({
   headline,
   intro,
-  align = "left",
+  align = "center",
   as: Tag = "h2",
   size = "lg",
   className = "",
@@ -20,10 +21,13 @@ export default function SectionHeader({
   className?: string;
 }) {
   if (!headline && !intro) return null;
+  const center = align === "center";
   return (
-    <header className={`rise max-w-[46rem] ${align === "center" ? "mx-auto text-center" : ""} ${className}`}>
-      {headline && <Tag className={`whitespace-pre-line max-w-[20ch] ${align === "center" ? "mx-auto" : ""} ${size === "md" ? "display-md" : ""}`}>{headline}</Tag>}
-      {intro && <p className={`lead ${headline ? "mt-4" : ""} max-w-[36rem] ${align === "center" ? "mx-auto" : ""}`}>{intro}</p>}
+    <header className={`rise container-text ${center ? "text-center" : ""} ${className}`}>
+      {headline && (
+        <Tag className={`whitespace-pre-line ${size === "md" ? "display-md" : ""} ${center ? "mx-auto" : ""} max-w-[24ch]`}>{headline}</Tag>
+      )}
+      {intro && <p className={`whisper ${headline ? "mt-3" : ""} ${center ? "mx-auto" : ""} max-w-[42rem]`}>{intro}</p>}
     </header>
   );
 }

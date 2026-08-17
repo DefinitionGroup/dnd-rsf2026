@@ -6,9 +6,8 @@ import ActionLink from "@/components/ActionLink";
 export type ProductBarSection = { id: string; label: string };
 
 /**
- * Sticky in-page bar under the header (the Apple "local nav" convention):
- * page title, jump links built from the page's blocks, one primary action.
- * The block `eyebrow` fields become these labels — that is where they live now.
+ * Apple "local nav": white 52px bar under the global nav — product name (21/600)
+ * left, 12px section links right, one small filled pill. Sticky.
  */
 export default function ProductBar({
   title,
@@ -20,7 +19,6 @@ export default function ProductBar({
   cta?: { label: string; href: string } | null;
 }) {
   const [active, setActive] = useState<string | null>(null);
-  const [stuck, setStuck] = useState(false);
 
   useEffect(() => {
     const els = sections.map((s) => document.getElementById(s.id)).filter((el): el is HTMLElement => Boolean(el));
@@ -33,38 +31,29 @@ export default function ProductBar({
       { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
     );
     els.forEach((el) => io.observe(el));
-    const onScroll = () => setStuck(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      io.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => io.disconnect();
   }, [sections]);
 
   if (!sections.length && !cta) return null;
 
   return (
-    <nav
-      aria-label={`${title} sections`}
-      className={`sticky top-[var(--header-h)] z-30 border-b border-line/70 bg-paper/85 backdrop-blur-md transition-shadow ${stuck ? "shadow-[0_1px_0_0_rgb(0_0_0/0.04)]" : ""}`}
-    >
-      <div className="container-site page-gutter flex h-[var(--productbar-h)] items-center gap-6">
-        <span className="shrink-0 text-[1.05rem] font-semibold tracking-[-0.01em]">{title}</span>
-        <ul className="hidden min-w-0 flex-1 items-center gap-5 overflow-x-auto md:flex [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <nav aria-label={`${title} sections`} className="sticky top-[var(--header-h)] z-30 border-b border-hairline bg-white/90 backdrop-blur-md">
+      <div className="container-page page-gutter flex h-[var(--productbar-h)] items-center gap-6">
+        <span className="shrink-0 text-[21px] font-semibold tracking-[-0.005em]">{title}</span>
+        <ul className="ml-auto hidden items-center gap-6 overflow-x-auto md:flex [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {sections.map((s) => (
             <li key={s.id} className="shrink-0">
               <a
                 href={`#${s.id}`}
                 aria-current={active === s.id ? "true" : undefined}
-                className={`text-[0.8rem] no-underline transition-colors ${active === s.id ? "text-ink font-medium" : "text-muted hover:text-ink"}`}
+                className={`text-[12px] tracking-[-0.01em] transition-colors ${active === s.id ? "text-carbon" : "text-graphite hover:text-carbon"}`}
               >
                 {s.label}
               </a>
             </li>
           ))}
         </ul>
-        {cta && <ActionLink link={cta} variant="primary" className="ml-auto shrink-0 !px-4 !py-1.5 !text-[0.85rem]" />}
+        {cta && <ActionLink link={cta} variant="primary" size="sm" className="ml-auto shrink-0 md:ml-0" />}
       </div>
     </nav>
   );

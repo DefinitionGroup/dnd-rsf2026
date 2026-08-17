@@ -33,12 +33,12 @@ function pickRule(rules: Rule[], effective: number): number {
 
 const RANGE_CLASS = [
   "h-5 w-full cursor-pointer appearance-none bg-transparent",
-  // track: hairline with lime fill up to --pct
-  "[&::-webkit-slider-runnable-track]:h-0.5 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--color-lime)_var(--pct),var(--color-line-dark)_var(--pct))]",
-  "[&::-moz-range-track]:h-0.5 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--color-lime)_var(--pct),var(--color-line-dark)_var(--pct))]",
-  // thumb: white disc
-  "[&::-webkit-slider-thumb]:-mt-[9px] [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-webkit-slider-thumb]:bg-paper [&::-webkit-slider-thumb]:shadow-[0_2px_6px_rgb(0_0_0/0.4)]",
-  "[&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:bg-paper [&::-moz-range-thumb]:shadow-[0_2px_6px_rgb(0_0_0/0.4)]",
+  // track: hairline with carbon fill up to --pct
+  "[&::-webkit-slider-runnable-track]:h-px [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--color-carbon)_var(--pct),var(--color-hairline)_var(--pct))]",
+  "[&::-moz-range-track]:h-px [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--color-carbon)_var(--pct),var(--color-hairline)_var(--pct))]",
+  // thumb: white disc with hairline
+  "[&::-webkit-slider-thumb]:-mt-[10px] [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-hairline [&::-webkit-slider-thumb]:bg-white",
+  "[&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border [&::-moz-range-thumb]:border-solid [&::-moz-range-thumb]:border-hairline [&::-moz-range-thumb]:bg-white",
 ].join(" ");
 
 export default function ProductFinderBlock({ block }: BlockProps<"productFinderBlock">) {
@@ -80,19 +80,19 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
   const pct = ((volume - min) / (max - min)) * 100;
 
   return (
-    <section className="stage section-space page-gutter">
+    <section className="canvas-frost section-space page-gutter">
       <div className="container-site">
         {(block.headline || block.intro) && (
           <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-12 md:mb-16" />
         )}
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start lg:gap-8">
+        <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
           {/* ---------- Inputs ---------- */}
-          <div className="card flex flex-col gap-10 p-7 md:p-8">
+          <div className="tile flex flex-col gap-8">
             {/* Volume */}
             <div>
               <div className="flex flex-wrap items-end justify-between gap-3">
-                <label htmlFor={`${uid}-volume`} className="label">
+                <label htmlFor={`${uid}-volume`} className="body-sm text-ash">
                   {block.volumeLabel ?? "Aquarium volume"}
                 </label>
                 <div className="flex items-baseline gap-2">
@@ -111,9 +111,9 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                       if (e.target.value !== "" && Number.isFinite(n)) setVolume(clamp(Math.round(n), min, max));
                     }}
                     onBlur={() => commitVolume(Number(volumeText))}
-                    className="hairline num w-28 rounded-xl border bg-transparent px-3 py-2 text-right text-2xl font-semibold text-paper"
+                    className="field num w-28 py-2 text-right text-[21px] font-semibold text-carbon"
                   />
-                  <span className="figure-unit text-base text-muted-dark">l</span>
+                  <span className="figure-unit text-[17px] text-ash">l</span>
                 </div>
               </div>
 
@@ -135,7 +135,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                 />
                 <div className="caption num mt-2 flex justify-between" aria-hidden="true">
                   <span>{min} l</span>
-                  <span className="text-paper/80">≈ {gallons} US gal</span>
+                  <span className="text-carbon">≈ {gallons} US gal</span>
                   <span>{max} l</span>
                 </div>
               </div>
@@ -144,13 +144,13 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
             {/* Bioload */}
             {options.length > 0 && (
               <div>
-                <p id={`${uid}-load-label`} className="label">
+                <p id={`${uid}-load-label`} className="body-sm text-ash">
                   {block.loadLabel ?? "Stocking / feeding"}
                 </p>
                 <div
                   role="radiogroup"
                   aria-labelledby={`${uid}-load-label`}
-                  className="mt-4 grid grid-cols-1 gap-1 rounded-[var(--radius-pill)] bg-paper/10 p-1 sm:grid-flow-col sm:auto-cols-fr"
+                  className="mt-3 grid grid-cols-1 gap-1 rounded-[var(--radius-pill)] bg-pebble p-1 sm:grid-flow-col sm:auto-cols-fr"
                 >
                   {options.map((o, i) => {
                     const selected = i === loadIndex;
@@ -171,8 +171,8 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                             setLoadIndex((loadIndex - 1 + options.length) % options.length);
                           }
                         }}
-                        className={`relative rounded-[var(--radius-pill)] px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                          selected ? "bg-paper text-ink" : "text-muted-dark hover:text-paper"
+                        className={`body-sm relative cursor-pointer rounded-[var(--radius-pill)] px-4 py-2 transition-colors duration-200 ${
+                          selected ? "bg-lime text-carbon" : "text-ash hover:text-carbon"
                         }`}
                       >
                         {o.label}
@@ -189,7 +189,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
           </div>
 
           {/* ---------- Result ---------- */}
-          <div className="relative min-h-[18rem]" aria-live="polite" aria-atomic="true">
+          <div className="relative min-h-[18rem]" role="region" aria-label={block.resultLabel ?? "Our recommendation"} aria-live="polite" aria-atomic="true">
             <AnimatePresence initial={false} mode="wait">
               <motion.article
                 key={ruleIndex}
@@ -197,42 +197,40 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, y: -8 }}
                 transition={reduceMotion ? { duration: 0 } : { duration: 0.35, ease: EASE_PRESENCE }}
-                className="card flex h-full flex-col p-7 md:p-8"
+                className="tile flex h-full flex-col"
               >
-                <p className="label">{block.resultLabel ?? "Our recommendation"}</p>
-
-                <div className="mt-4 flex items-start gap-5">
+                <div className="flex items-start gap-5">
                   {productImage?.asset && (
-                    <div className="media relative size-20 shrink-0 md:size-24">
-                      <SanityImage image={productImage} alt={productName ?? rule.resultTitle} fill sizes="96px" className="object-cover" />
+                    <div className="media relative size-24 shrink-0 bg-frost md:size-28">
+                      <SanityImage image={productImage} alt={productName ?? rule.resultTitle} fill sizes="112px" className="object-contain" />
                     </div>
                   )}
                   <div className="min-w-0">
-                    <h3 className="text-2xl font-semibold leading-tight text-paper">{rule.resultTitle}</h3>
-                    {productName && stegaClean(productName) !== stegaClean(rule.resultTitle) && <p className="label mt-1">{productName}</p>}
+                    <h4 className="text-balance">{rule.resultTitle}</h4>
+                    {productName && stegaClean(productName) !== stegaClean(rule.resultTitle) && <p className="body-sm mt-1 text-ash">{productName}</p>}
                   </div>
                 </div>
 
-                {rule.resultBody && <p className="mt-4 text-muted-dark">{rule.resultBody}</p>}
+                {rule.resultBody && <p className="mt-3 text-ash">{rule.resultBody}</p>}
 
                 {(typeof rule.flowLph === "number" || rollRange) && (
                   <dl className="hairline mt-6 grid grid-cols-2 gap-6 border-t pt-6">
                     {typeof rule.flowLph === "number" && (
                       <div>
-                        <dt className="label">Flow</dt>
+                        <dt className="body-sm text-ash">Flow</dt>
                         <dd className="mt-2 flex items-baseline gap-1.5">
-                          <span className="figure text-4xl text-lime md:text-5xl">{rule.flowLph.toLocaleString("en")}</span>
-                          <span className="figure-unit text-base text-muted-dark">l/h</span>
+                          <span className="figure text-[40px] text-carbon">{rule.flowLph.toLocaleString("en")}</span>
+                          <span className="figure-unit text-[17px] text-ash">l/h</span>
                         </dd>
                       </div>
                     )}
                     {rollRange && (
                       <div>
-                        <dt className="label">{block.rollLifeLabel ?? "Expected roll life"}</dt>
+                        <dt className="body-sm text-ash">{block.rollLifeLabel ?? "Expected roll life"}</dt>
                         <dd className="mt-2 flex items-baseline gap-1.5">
-                          <span className="figure-unit text-base text-muted-dark">≈</span>
-                          <span className="figure text-4xl text-lime md:text-5xl">{rollRange}</span>
-                          <span className="figure-unit text-base text-muted-dark">weeks</span>
+                          <span className="figure-unit text-[17px] text-ash">≈</span>
+                          <span className="figure text-[40px] text-carbon">{rollRange}</span>
+                          <span className="figure-unit text-[17px] text-ash">weeks</span>
                         </dd>
                       </div>
                     )}
@@ -240,7 +238,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                 )}
 
                 {rule.cta?.href && rule.cta.label && (
-                  <div className="mt-auto pt-8">
+                  <div className="mt-auto pt-6">
                     <ActionLink link={rule.cta} variant="primary" />
                   </div>
                 )}
@@ -249,7 +247,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
           </div>
         </div>
 
-        {block.footnote && <p className="caption mt-8 max-w-[68ch]">{block.footnote}</p>}
+        {block.footnote && <p className="caption mx-auto mt-8 max-w-[68ch] text-center">{block.footnote}</p>}
       </div>
     </section>
   );

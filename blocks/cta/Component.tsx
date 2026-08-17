@@ -5,30 +5,26 @@ import type { BlockProps } from "@/blocks/types";
 
 type Tone = "lime" | "ink" | "paper";
 
-const TONE_CLASSES: Record<
-  Tone,
-  { section: string; body: string; primary: "primary" | "secondary"; secondary: "secondary" | "text" }
-> = {
-  // Lime field: the primary (lime) pill would vanish — ink pill + text link instead.
-  lime: { section: "bg-lime text-ink", body: "text-ink/75", primary: "secondary", secondary: "text" },
-  ink: { section: "stage", body: "", primary: "primary", secondary: "secondary" },
-  paper: { section: "stage-sand", body: "", primary: "primary", secondary: "secondary" },
+/** No lime field in v3: paper/lime tones sit on frost, ink on the dark film canvas. */
+const TONE_SECTION: Record<Tone, string> = {
+  lime: "canvas-frost",
+  paper: "canvas-frost",
+  ink: "canvas-dark",
 };
 
-/** Centred statement on a full-width field (ink stage / sand / lime). */
+/** Centered statement: headline 40/600 + whisper body + paired pills. */
 export default function CtaBlock({ block }: BlockProps<"ctaBlock">) {
   const toneKey = stegaClean(block.tone ?? "lime");
   const tone: Tone = toneKey === "ink" || toneKey === "paper" ? toneKey : "lime";
-  const classes = TONE_CLASSES[tone];
 
   return (
-    <section className={`section-space page-gutter ${classes.section}`}>
-      <Reveal className="mx-auto max-w-[46rem] text-center">
-        <h2 className="display-lg mx-auto max-w-[20ch] whitespace-pre-line">{block.headline}</h2>
-        {block.body && <p className={`lead mx-auto mt-5 max-w-[36rem] ${classes.body}`}>{block.body}</p>}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <ActionLink link={block.primaryCta} variant={classes.primary} />
-          <ActionLink link={block.secondaryCta} variant={classes.secondary} className={tone === "lime" ? "text-ink" : ""} />
+    <section className={`section-space page-gutter ${TONE_SECTION[tone]}`}>
+      <Reveal className="container-text text-center">
+        <h2 className="mx-auto max-w-[24ch] whitespace-pre-line">{block.headline}</h2>
+        {block.body && <p className="whisper mx-auto mt-3 max-w-[42rem]">{block.body}</p>}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <ActionLink link={block.primaryCta} variant="primary" />
+          <ActionLink link={block.secondaryCta} variant="secondary" />
         </div>
       </Reveal>
     </section>

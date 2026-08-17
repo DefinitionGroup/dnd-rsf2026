@@ -1,62 +1,60 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-17T00:00:00Z",
-  "title": "Design System: D-D The Aquarium Solution — Product Stage",
+  "generatedAt": "2026-08-18T00:00:00Z",
+  "title": "Design System: D-D The Aquarium Solution — ClariSea (v3)",
   "extensions": {
     "colorMeta": {
-      "lime": { "role": "primary", "displayName": "Brand Lime", "canonical": "#99cc33", "tonalRamp": ["#1e2a08", "#33470f", "#4b6817", "#6f9a1f", "#99cc33", "#b4db66", "#cfe899", "#eef7dc"] },
-      "lime-deep": { "role": "primary", "displayName": "Lime Deep (AA text)", "canonical": "#6f9a1f", "tonalRamp": ["#1e2a08", "#33470f", "#4b6817", "#6f9a1f", "#99cc33", "#b4db66", "#cfe899", "#eef7dc"] },
-      "lime-soft": { "role": "primary", "displayName": "Lime Soft", "canonical": "#eef7dc", "tonalRamp": ["#1e2a08", "#33470f", "#4b6817", "#6f9a1f", "#99cc33", "#b4db66", "#cfe899", "#eef7dc"] },
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1d1d1f", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "ink-soft": { "role": "neutral", "displayName": "Ink Soft", "canonical": "#2c2c2e", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "stage": { "role": "neutral", "displayName": "Stage (near-black)", "canonical": "#0b0b0c", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "stage-soft": { "role": "neutral", "displayName": "Stage Soft", "canonical": "#161618", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "text": { "role": "neutral", "displayName": "Text", "canonical": "#1d1d1f", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "muted": { "role": "neutral", "displayName": "Muted", "canonical": "#6e6e73", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "muted-dark": { "role": "neutral", "displayName": "Muted on Stage", "canonical": "#a1a1a6", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#ffffff", "tonalRamp": ["#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e5e5ea", "#ededf0", "#f5f5f7", "#ffffff"] },
-      "sand": { "role": "neutral", "displayName": "Sand", "canonical": "#f5f5f7", "tonalRamp": ["#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e5e5ea", "#ededf0", "#f5f5f7", "#ffffff"] },
-      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#d2d2d7", "tonalRamp": ["#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e5e5ea", "#ededf0", "#f5f5f7", "#ffffff"] },
-      "line-dark": { "role": "neutral", "displayName": "Hairline on Stage", "canonical": "#3a3a3c", "tonalRamp": ["#0b0b0c", "#161618", "#1d1d1f", "#2c2c2e", "#3a3a3c", "#6e6e73", "#a1a1a6", "#d2d2d7"] },
-      "sea": { "role": "tertiary", "displayName": "Sea (declared, unused in sampled surface)", "canonical": "#0f4c5c", "tonalRamp": ["#061e25", "#0a3340", "#0f4c5c", "#176c82", "#2a8ea8", "#5db0c5", "#9dd0dd", "#e0f1f5"] },
-      "danger": { "role": "tertiary", "displayName": "Danger (alarm)", "canonical": "#d1352b", "tonalRamp": ["#3a0e0b", "#6b1a14", "#9c271f", "#d1352b", "#e0645c", "#eb948e", "#f5c2be", "#fde8e6"] },
-      "warn": { "role": "tertiary", "displayName": "Warn (LED only)", "canonical": "#e6a700", "tonalRamp": ["#3d2c00", "#6b4e00", "#a37700", "#e6a700", "#f0bf3d", "#f6d47a", "#fbe6b0", "#fff4cc"] }
+      "lime": { "role": "primary", "displayName": "Lime", "canonical": "#99cc33", "tonalRamp": ["#1f2c08", "#354d0f", "#4c6d16", "#6f9a1f", "#99cc33", "#b9dd6b", "#d6ec9f", "#eef7dc"] },
+      "lime-deep": { "role": "primary", "displayName": "Lime Deep", "canonical": "#6f9a1f", "tonalRamp": ["#1a2408", "#2d3f0d", "#465f14", "#5c7e1a", "#6f9a1f", "#8ab83a", "#b3d477", "#e2efc6"] },
+      "lime-signal": { "role": "primary", "displayName": "Lime Signal", "canonical": "#b9dd6b", "tonalRamp": ["#28320f", "#44561b", "#657f28", "#87a838", "#a6c94f", "#b9dd6b", "#d3ea9c", "#eef7dc"] },
+      "onyx": { "role": "neutral", "displayName": "Onyx", "canonical": "#000000", "tonalRamp": ["#000000", "#1d1d1f", "#333333", "#474747", "#6e6e73", "#86868b", "#d2d2d7", "#f5f5f7"] },
+      "carbon": { "role": "neutral", "displayName": "Carbon", "canonical": "#1d1d1f", "tonalRamp": ["#000000", "#1d1d1f", "#333333", "#424245", "#6e6e73", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
+      "smoke": { "role": "neutral", "displayName": "Smoke", "canonical": "#333333", "tonalRamp": ["#111111", "#222222", "#333333", "#474747", "#6e6e73", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
+      "graphite": { "role": "neutral", "displayName": "Graphite", "canonical": "#474747", "tonalRamp": ["#1d1d1f", "#333333", "#474747", "#5c5c5f", "#6e6e73", "#86868b", "#a1a1a6", "#e8e8ed"] },
+      "ash": { "role": "neutral", "displayName": "Ash", "canonical": "#6e6e73", "tonalRamp": ["#1d1d1f", "#333333", "#474747", "#6e6e73", "#86868b", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
+      "mist": { "role": "neutral", "displayName": "Mist", "canonical": "#86868b", "tonalRamp": ["#1d1d1f", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#c7c7cc", "#e8e8ed", "#f5f5f7"] },
+      "pebble": { "role": "neutral", "displayName": "Pebble", "canonical": "#e8e8ed", "tonalRamp": ["#333333", "#6e6e73", "#a1a1a6", "#c7c7cc", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "#d2d2d7", "tonalRamp": ["#333333", "#424245", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
+      "line-dark": { "role": "neutral", "displayName": "Line Dark", "canonical": "#424245", "tonalRamp": ["#1d1d1f", "#2c2c2e", "#424245", "#6e6e73", "#86868b", "#a1a1a6", "#d2d2d7", "#f5f5f7"] },
+      "frost": { "role": "neutral", "displayName": "Frost", "canonical": "#f5f5f7", "tonalRamp": ["#1d1d1f", "#474747", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#ffffff", "tonalRamp": ["#1d1d1f", "#474747", "#6e6e73", "#a1a1a6", "#d2d2d7", "#e8e8ed", "#f5f5f7", "#ffffff"] },
+      "danger": { "role": "neutral", "displayName": "Danger", "canonical": "#d1352b", "tonalRamp": ["#3a0e0b", "#621813", "#8c221b", "#b02c24", "#d1352b", "#e2685f", "#f0a59f", "#fde8e6"] }
     },
     "typographyMeta": {
-      "display-xl": { "displayName": "Display XL", "purpose": "Hero h1 only, max 13ch, paper on stage." },
-      "display-lg": { "displayName": "Display LG", "purpose": "Section h2 (SectionHeader default, stat strip, CTA, animated headline), max 20ch." },
-      "display-md": { "displayName": "Display MD", "purpose": "Split-content / intro headlines, feature-tour step titles, prose h2." },
-      "title": { "displayName": "Title", "purpose": "In-block object titles: statements, product names, comparison columns, spec/FAQ headings, step titles." },
-      "lead": { "displayName": "Lead", "purpose": "One-sentence intro under a headline, max 36rem, muted (muted-dark on stage)." },
-      "body": { "displayName": "Body", "purpose": "17px reading copy; prose capped at 68ch." },
-      "figure": { "displayName": "Figure", "purpose": "Big measurements: Archivo width 78, 700, tabular; paired with figure-unit (width 100, 500) at 0.4em." },
-      "label": { "displayName": "Label", "purpose": "Stat labels, form labels, spec keys, column subtitles." },
-      "caption": { "displayName": "Caption", "purpose": "Footnotes, media captions, privacy notice, hints." },
-      "nav": { "displayName": "Nav", "purpose": "Header links, product-bar jump links, footer columns." }
+      "display": { "displayName": "Display", "purpose": "Hero h1 only; centered, ≤18ch." },
+      "heading": { "displayName": "Heading", "purpose": "Section h2 via SectionHeader; centered, ≤24ch." },
+      "heading-sm": { "displayName": "Heading Small", "purpose": "h3: split-content and feature-tour step titles." },
+      "subheading": { "displayName": "Subheading", "purpose": "h4 tile titles, product-bar title, comparison column names." },
+      "whisper": { "displayName": "Whisper", "purpose": "300-weight tagline under headlines and CTA body; ≤42rem." },
+      "body": { "displayName": "Body", "purpose": "Default 17px copy; supporting copy in ash." },
+      "body-sm": { "displayName": "Body Small", "purpose": "Tile body, table labels/cells, form labels, in-media pill labels." },
+      "caption": { "displayName": "Caption", "purpose": "Image captions, footnotes, slider bounds, severity chips, footer." },
+      "nav": { "displayName": "Nav", "purpose": "12px global-nav and product-bar links." },
+      "figure": { "displayName": "Figure", "purpose": "Tabular 600 measurements at 40px or display size; units in ash 400." }
     },
     "shadows": [
-      { "name": "elevated", "value": "0 12px 32px -12px rgb(0 0 0 / 0.18), 0 2px 6px -2px rgb(0 0 0 / 0.08)", "purpose": "Only for things that float: language menu, video play disc." },
-      { "name": "productbar-stuck", "value": "0 1px 0 0 rgb(0 0 0 / 0.04)", "purpose": "1px underline on the sticky product bar once scrolled past 24px." },
-      { "name": "focus-ring", "value": "outline: 2px solid var(--color-lime-deep); outline-offset: 3px; border-radius: 4px", "purpose": "Global focus-visible; lime on .stage/.on-dark." }
+      { "name": "product-shadow", "value": "filter: drop-shadow(3px 5px 30px rgb(0 0 0 / 0.22))", "purpose": "The only shadow in the system; product cut-outs (PNG on white) only." }
     ],
     "motion": [
-      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one easing: rise-in, hover scale, tour rail, FAQ icon." },
-      { "name": "ease-presence", "value": "cubic-bezier(0.62, 0.05, 0.01, 0.99)", "purpose": "Declared in @theme; lib/motion.ts aliases EASE_PRESENCE to ease-out-expo for JS animations (count-up)." },
-      { "name": "duration-rise", "value": "640ms", "purpose": "Rise-in: opacity 0 → 1, translateY 18px → 0, once, IntersectionObserver rootMargin 0 0 -8% 0, threshold 0.1." },
-      { "name": "stagger", "value": "≤ 80ms per item (60ms in feature list)", "purpose": "transition-delay stagger via Reveal delay prop." },
-      { "name": "duration-state", "value": "200ms", "purpose": "Pill/link/input colour and transform transitions." },
-      { "name": "duration-hover-media", "value": "300–400ms", "purpose": "Play disc scale 1.05 (300ms), product tile image scale 1.02 (400ms expo)." },
-      { "name": "duration-tour", "value": "500ms", "purpose": "Feature-tour progress rail top and title colour." },
-      { "name": "count-up", "value": "1.6s, delay index*80ms, EASE_PRESENCE", "purpose": "Stat strip figures; exact string before hydration and under reduced motion." },
-      { "name": "reduced-motion", "value": "all animation/transition ≈ 0.01ms; .rise visible; RiseObserver marks all .is-in", "purpose": "prefers-reduced-motion contract." }
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single easing; rise-in and block-native presence transitions." },
+      { "name": "duration-rise", "value": "560ms", "purpose": "Rise-in scroll reveal (opacity 0→1, translateY 14px→0), once, at 10% visibility; staggers 60–80ms." },
+      { "name": "duration-color", "value": "150ms", "purpose": "Pill background/colour/border hover transitions." },
+      { "name": "duration-presence", "value": "350ms", "purpose": "Product-finder result swap (y 12px in / −8px out)." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
       { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" },
-      { "name": "container-prose", "value": "720px" },
+      { "name": "lg", "value": "1024px" }
+    ],
+    "layout": [
+      { "name": "header-h", "value": "44px" },
+      { "name": "productbar-h", "value": "52px" },
+      { "name": "section-y", "value": "clamp(4rem, 8vw, 7rem)" },
+      { "name": "gutter", "value": "clamp(1.25rem, 4vw, 2.75rem)" },
+      { "name": "container-page", "value": "1440px" },
       { "name": "container-site", "value": "1200px" },
-      { "name": "container-wide", "value": "1440px" }
+      { "name": "container-text", "value": "980px" },
+      { "name": "container-prose", "value": "720px" }
     ]
   },
   "components": [
@@ -64,114 +62,117 @@
       "name": "Primary Pill",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Lime pill with ink text; the one place the brand accent is guaranteed to appear on every ground.",
+      "description": "Filled lime pill, the accent's only home. Always the first action.",
       "html": "<a class=\"ds-pill ds-pill-primary\" href=\"#\"><span>Which size do I need?</span></a>",
-      "css": ".ds-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.625rem 1.25rem; border-radius:980px; font: 500 .95rem/1.2 Archivo, ui-sans-serif, system-ui, sans-serif; text-decoration:none; transition: background-color .2s, color .2s, transform .2s, box-shadow .2s; } .ds-pill:active { transform: translateY(1px); } .ds-pill:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; border-radius: 980px; } .ds-pill-primary { background: var(--color-lime, #99cc33); color: var(--color-ink, #1d1d1f); } .ds-pill-primary:hover { background:#a6d63f; }"
+      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 980px; padding: 11px 15px; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; transition: background-color 150ms, color 150ms, border-color 150ms; } .ds-pill-primary { background: #99cc33; color: #1d1d1f; border: 1px solid #99cc33; } .ds-pill-primary:hover { background: #a3d63f; border-color: #a3d63f; } .ds-pill:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; }"
     },
     {
       "name": "Secondary Pill",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Ink pill with paper text on light grounds; inverts to paper/ink on the stage. Carries an external arrow when the href leaves the site.",
-      "html": "<a class=\"ds-pill ds-pill-secondary\" href=\"#\"><span>Find a stockist</span><svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"12\" height=\"12\"><path d=\"M4 2.5h5.5V8M9.5 2.5 3 9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
-      "css": ".ds-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.625rem 1.25rem; border-radius:980px; font: 500 .95rem/1.2 Archivo, ui-sans-serif, system-ui, sans-serif; text-decoration:none; transition: background-color .2s, color .2s, transform .2s; } .ds-pill:active { transform: translateY(1px); } .ds-pill:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; } .ds-pill-secondary { background: var(--color-ink, #1d1d1f); color: var(--color-paper, #fff); } .ds-pill-secondary:hover { background: var(--color-ink-soft, #2c2c2e); } .ds-stage .ds-pill-secondary { background: var(--color-paper, #fff); color: var(--color-ink, #1d1d1f); } .ds-stage .ds-pill-secondary:hover { background:#ededf0; }"
+      "description": "Outlined lime-deep pill; always paired beside a primary.",
+      "html": "<a class=\"ds-pill ds-pill-secondary\" href=\"#\"><span>Find a stockist</span></a>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 980px; padding: 11px 15px; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; transition: background-color 150ms, color 150ms, border-color 150ms; } .ds-pill-secondary { background: transparent; color: #6f9a1f; border: 1px solid #6f9a1f; } .ds-pill-secondary:hover { background: #6f9a1f; color: #ffffff; } .ds-pill:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; }"
     },
     {
-      "name": "Text Link",
+      "name": "Ghost Link",
       "kind": "button",
       "refersTo": "button-text",
-      "description": "Padding-less lime-deep link with a 12px chevron; lime on the stage; underline on hover.",
-      "html": "<a class=\"ds-textlink\" href=\"#\"><span>Learn more</span><svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"12\" height=\"12\"><path d=\"M4.5 2.5 8 6l-3.5 3.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
-      "css": ".ds-textlink { display:inline-flex; align-items:center; gap:.25rem; font: 500 .95rem/1.2 Archivo, ui-sans-serif, system-ui, sans-serif; color: var(--color-lime-deep, #6f9a1f); text-decoration:none; text-underline-offset:4px; transition: color .2s; } .ds-textlink:hover { text-decoration: underline; } .ds-textlink:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; border-radius:4px; } .ds-stage .ds-textlink { color: var(--color-lime, #99cc33); }"
+      "description": "Lime-deep text link with 1.5-stroke chevron; tertiary actions (Learn more, downloads).",
+      "html": "<a class=\"ds-ghost\" href=\"#\"><span>Learn more</span><svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"11\" height=\"11\"><path d=\"M4.5 2.5 8 6l-3.5 3.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-ghost { display: inline-flex; align-items: center; gap: 6px; color: #6f9a1f; font: 400 17px/1.17 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.022em; text-decoration: none; } .ds-ghost:hover { text-decoration: underline; } .ds-ghost:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; border-radius: 4px; }"
     },
     {
-      "name": "Text Field",
-      "kind": "input",
-      "refersTo": "input",
-      "description": "Label above in .label, paper field with hairline stroke and 12px radius; border shifts to ink on focus plus the global lime ring.",
-      "html": "<div class=\"ds-field\"><label class=\"ds-label\" for=\"ds-name\">Name <span class=\"ds-req\" aria-hidden=\"true\">*</span></label><input id=\"ds-name\" class=\"ds-input\" type=\"text\" placeholder=\"Jane Reefer\" /></div>",
-      "css": ".ds-field { display:flex; flex-direction:column; gap:.5rem; font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-label { font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-req { color: var(--color-lime-deep, #6f9a1f); } .ds-input { width:100%; padding:.75rem 1rem; font-size:1rem; color: var(--color-ink, #1d1d1f); background: var(--color-paper, #fff); border:1px solid var(--color-line, #d2d2d7); border-radius:.75rem; transition: border-color .2s; } .ds-input::placeholder { color: var(--color-muted, #6e6e73); } .ds-input:focus { border-color: var(--color-ink, #1d1d1f); } .ds-input:focus-visible { outline: 2px solid var(--color-lime-deep, #6f9a1f); outline-offset: 3px; } .ds-input:disabled { opacity:.6; }"
-    },
-    {
-      "name": "Product Bar",
-      "kind": "nav",
-      "refersTo": "product-bar",
-      "description": "Sticky in-page bar under the 48px header: page title, jump links (fed by block eyebrows), one primary pill. Paper at 85% with backdrop blur and a hairline.",
-      "html": "<nav class=\"ds-productbar\" aria-label=\"ClariSea Gen 3 sections\"><span class=\"ds-productbar-title\">ClariSea Gen 3</span><ul class=\"ds-productbar-links\"><li><a href=\"#\" aria-current=\"true\">By the numbers</a></li><li><a href=\"#\">Goodbye filter socks</a></li><li><a href=\"#\">See it run</a></li><li><a href=\"#\">Which size?</a></li></ul><a class=\"ds-productbar-cta\" href=\"#\">Find a stockist</a></nav>",
-      "css": ".ds-productbar { display:flex; align-items:center; gap:1.5rem; height:3.25rem; padding-inline: clamp(1.25rem,4vw,3rem); background: rgb(255 255 255 / .85); backdrop-filter: blur(12px); border-bottom:1px solid rgb(210 210 215 / .7); color: var(--color-ink, #1d1d1f); font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-productbar-title { flex-shrink:0; font-size:1.05rem; font-weight:600; letter-spacing:-.01em; } .ds-productbar-links { display:flex; flex:1; min-width:0; gap:1.25rem; list-style:none; margin:0; padding:0; overflow-x:auto; scrollbar-width:none; } .ds-productbar-links a { font-size:.8rem; text-decoration:none; color: var(--color-muted, #6e6e73); transition: color .2s; white-space:nowrap; } .ds-productbar-links a:hover { color: var(--color-ink, #1d1d1f); } .ds-productbar-links a[aria-current=\"true\"] { color: var(--color-ink, #1d1d1f); font-weight:500; } .ds-productbar-cta { margin-left:auto; flex-shrink:0; display:inline-flex; align-items:center; padding:.375rem 1rem; border-radius:980px; background: var(--color-lime, #99cc33); color: var(--color-ink, #1d1d1f); font-size:.85rem; font-weight:500; text-decoration:none; transition: background-color .2s; } .ds-productbar-cta:hover { background:#a6d63f; } .ds-productbar a:focus-visible { outline:2px solid var(--color-lime-deep, #6f9a1f); outline-offset:3px; border-radius:4px; }"
-    },
-    {
-      "name": "Recommended Chip",
-      "kind": "chip",
-      "refersTo": "chip-recommended",
-      "description": "Small lime pill above the highlighted comparison column; the same geometry carries the severity chips (lime-soft / #fff4cc / #fde8e6).",
-      "html": "<span class=\"ds-chip ds-chip-recommended\">Recommended</span> <span class=\"ds-chip ds-chip-info\">Normal</span> <span class=\"ds-chip ds-chip-warning\">Warning</span> <span class=\"ds-chip ds-chip-alarm\">Alarm</span>",
-      "css": ".ds-chip { display:inline-flex; align-items:center; padding:.125rem .625rem; border-radius:980px; font: 500 .75rem/1.4 Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-chip-recommended { background: var(--color-lime, #99cc33); color: var(--color-ink, #1d1d1f); } .ds-chip-info { background: var(--color-lime-soft, #eef7dc); color: var(--color-lime-deep, #6f9a1f); } .ds-chip-warning { background:#fff4cc; color:#7a5a00; } .ds-chip-alarm { background:#fde8e6; color: var(--color-danger, #d1352b); }"
-    },
-    {
-      "name": "Spec Card",
+      "name": "Tile",
       "kind": "card",
-      "refersTo": "card",
-      "description": "Sand card (stage-soft on stage), 18px radius, 28px pad, hairline rows with .label keys and tabular values. Cards hold real objects only.",
-      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">ClariSea SK-5000 G3</h3><p class=\"ds-card-sub\">Automatic fleece filter · SK5000G3</p><table class=\"ds-spec\"><tr><th>Max flow</th><td>5,000 <span>l/h</span></td></tr><tr><th>Roll length</th><td>40 <span>m</span></td></tr><tr><th>Inlet</th><td>32 · 40 · 1\" </td></tr></table></div>",
-      "css": ".ds-card { background: var(--color-sand, #f5f5f7); border-radius:1.125rem; padding:1.75rem; font-family: Archivo, ui-sans-serif, system-ui, sans-serif; color: var(--color-ink, #1d1d1f); } .ds-card-title { margin:0; font-size:1.25rem; font-weight:600; letter-spacing:-.02em; line-height:1.25; } .ds-card-sub { margin:.25rem 0 0; font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-spec { width:100%; border-collapse:collapse; margin-top:1.5rem; } .ds-spec tr { border-top:1px solid var(--color-line, #d2d2d7); } .ds-spec tr:last-child { border-bottom:1px solid var(--color-line, #d2d2d7); } .ds-spec th { text-align:left; padding:.875rem 1rem .875rem 0; font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-spec td { text-align:right; padding:.875rem 0; font-weight:500; font-variant-numeric: tabular-nums lining-nums; } .ds-spec td span { margin-left:.25rem; font-weight:400; color: var(--color-muted, #6e6e73); } .ds-stage .ds-card { background: var(--color-stage-soft, #161618); color: var(--color-paper, #fff); } .ds-stage .ds-spec tr { border-color: var(--color-line-dark, #3a3a3c); }"
+      "refersTo": "tile",
+      "description": "Apple tile: 8px, 24px padding, frost on white / white on frost; only for real objects. h4 21/600 + body-sm ash.",
+      "html": "<div class=\"ds-tile\"><h4 class=\"ds-tile-title\">Fail-safe overflow</h4><p class=\"ds-tile-body\">If the fleece runs out or the motor stops, water bypasses the roll instead of flooding the sump.</p></div>",
+      "css": ".ds-tile { background: #f5f5f7; border-radius: 8px; padding: 24px; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-tile-title { margin: 0; font-size: 21px; line-height: 1.24; font-weight: 600; letter-spacing: -0.005em; text-wrap: balance; } .ds-tile-body { margin: 12px 0 0; font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: #6e6e73; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "White input, 1px hairline, 8px, 17px; lime-deep focus outline.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-f\">Email</label><input class=\"ds-field\" id=\"ds-f\" type=\"email\" placeholder=\"name@example.com\">",
+      "css": ".ds-field-label { display: block; margin-bottom: 8px; font: 400 14px/1.29 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; color: #1d1d1f; } .ds-field { width: 100%; box-sizing: border-box; border-radius: 8px; border: 1px solid #d2d2d7; background: #ffffff; padding: 12px 14px; font: 400 17px/1.47 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; color: #1d1d1f; } .ds-field::placeholder { color: #6e6e73; } .ds-field:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 0; border-color: transparent; }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "chip",
+      "refersTo": "segmented-control",
+      "description": "Pebble pill track; selected segment is lime (the allowed selected state).",
+      "html": "<div class=\"ds-seg\" role=\"radiogroup\"><button class=\"ds-seg-opt is-selected\" role=\"radio\" aria-checked=\"true\">Light</button><button class=\"ds-seg-opt\" role=\"radio\" aria-checked=\"false\">Normal</button><button class=\"ds-seg-opt\" role=\"radio\" aria-checked=\"false\">Heavy</button></div>",
+      "css": ".ds-seg { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; padding: 4px; border-radius: 980px; background: #e8e8ed; } .ds-seg-opt { border: 0; background: transparent; border-radius: 980px; padding: 8px 16px; cursor: pointer; color: #6e6e73; font: 400 14px/1.29 -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.016em; transition: color 200ms, background-color 200ms; } .ds-seg-opt:hover { color: #1d1d1f; } .ds-seg-opt.is-selected { background: #99cc33; color: #1d1d1f; } .ds-seg-opt:focus-visible { outline: 2px solid #6f9a1f; outline-offset: 2px; }"
+    },
+    {
+      "name": "Global Nav + Product Bar",
+      "kind": "nav",
+      "refersTo": "global-nav",
+      "description": "44px carbon global nav (logo, 12px links) over a 52px white product bar (title 21/600, jump links, small lime pill).",
+      "html": "<div class=\"ds-shell\"><header class=\"ds-gnav\"><span class=\"ds-gnav-logo\">D-D</span><nav class=\"ds-gnav-links\"><a href=\"#\">ClariSea</a><a href=\"#\">Spektrum 150</a><a href=\"#\">Funktion Pump</a><a href=\"#\">KH Manager</a></nav><span class=\"ds-gnav-lang\">EN</span></header><nav class=\"ds-pbar\"><span class=\"ds-pbar-title\">ClariSea Gen 3</span><ul class=\"ds-pbar-links\"><li><a href=\"#\">By the numbers</a></li><li><a href=\"#\" aria-current=\"true\">See it run</a></li><li><a href=\"#\">Which size?</a></li></ul><a class=\"ds-pbar-cta\" href=\"#\">Find a stockist</a></nav></div>",
+      "css": ".ds-shell { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-gnav { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 44px; padding: 0 22px; background: rgba(29,29,31,0.95); color: #ffffff; } .ds-gnav-logo { font-weight: 700; font-size: 14px; letter-spacing: 0.02em; } .ds-gnav-links { display: flex; gap: 32px; } .ds-gnav-links a, .ds-gnav-lang { color: rgba(255,255,255,0.8); font-size: 12px; letter-spacing: -0.01em; text-decoration: none; transition: color 150ms; } .ds-gnav-links a:hover { color: #ffffff; } .ds-pbar { display: flex; align-items: center; gap: 24px; height: 52px; padding: 0 22px; background: rgba(255,255,255,0.9); border-bottom: 1px solid #d2d2d7; color: #1d1d1f; } .ds-pbar-title { font-size: 21px; font-weight: 600; letter-spacing: -0.005em; } .ds-pbar-links { display: flex; gap: 24px; margin: 0 0 0 auto; padding: 0; list-style: none; } .ds-pbar-links a { font-size: 12px; letter-spacing: -0.01em; color: #474747; text-decoration: none; transition: color 150ms; } .ds-pbar-links a:hover, .ds-pbar-links a[aria-current] { color: #1d1d1f; } .ds-pbar-cta { display: inline-flex; align-items: center; border-radius: 980px; padding: 6px 12px; background: #99cc33; border: 1px solid #99cc33; color: #1d1d1f; font-size: 14px; letter-spacing: -0.022em; text-decoration: none; } .ds-pbar-cta:hover { background: #a3d63f; border-color: #a3d63f; }"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "refersTo": "heading",
+      "description": "Centered h2 40/600 with the 300-weight whisper tagline; no eyebrow above.",
+      "html": "<header class=\"ds-sh\"><h2 class=\"ds-sh-h\">Everything the fleece caught.</h2><p class=\"ds-sh-whisper\">Slide to compare a fresh roll with one after weeks in the sump.</p></header>",
+      "css": ".ds-sh { text-align: center; max-width: 980px; margin: 0 auto; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-sh-h { margin: 0 auto; max-width: 24ch; font-size: clamp(2rem, 3.4vw, 2.5rem); line-height: 1.14; font-weight: 600; letter-spacing: 0.011em; text-wrap: balance; } .ds-sh-whisper { margin: 12px auto 0; max-width: 42rem; font-size: clamp(1.3125rem, 1.9vw, 1.625rem); line-height: 1.24; font-weight: 300; letter-spacing: 0.004em; }"
     },
     {
       "name": "Stat Figure",
       "kind": "custom",
       "refersTo": "figure",
-      "description": "The signature measurement: Archivo width 78 / 700 tabular figure at display-xl, unit at 0.4em in width 100 / 500, .label beneath; lime-deep on paper, lime on stage.",
-      "html": "<div class=\"ds-stat\"><div class=\"ds-figure\">5,000<span class=\"ds-figure-unit\">l/h</span></div><div class=\"ds-stat-label\">SK-5000 G3 — 1,320 gal per hour</div></div>",
-      "css": ".ds-stat { display:flex; flex-direction:column; align-items:flex-start; padding:2.5rem 0; border-top:1px solid var(--color-line, #d2d2d7); border-bottom:1px solid var(--color-line, #d2d2d7); font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-figure { font-size: clamp(2.75rem, 6vw, 5rem); font-weight:700; line-height:.95; letter-spacing:-.02em; font-variation-settings:'wdth' 78; font-variant-numeric: tabular-nums lining-nums; color: var(--color-lime-deep, #6f9a1f); } .ds-figure-unit { margin-left:.375rem; font-size:.4em; font-weight:500; letter-spacing:0; font-variation-settings:'wdth' 100; } .ds-stat-label { margin-top:1rem; font-size:.875rem; font-weight:500; color: var(--color-muted, #6e6e73); } .ds-stage .ds-figure { color: var(--color-lime, #99cc33); } .ds-stage .ds-stat { border-color: var(--color-line-dark, #3a3a3c); } .ds-stage .ds-stat-label { color: var(--color-muted-dark, #a1a1a6); }"
-    },
-    {
-      "name": "Section Header",
-      "kind": "custom",
-      "refersTo": "display-lg",
-      "description": "Headline (display-lg, max 20ch) + lead (max 36rem). No eyebrow, no number, no icon; the eyebrow field feeds the product bar instead.",
-      "html": "<header class=\"ds-sectionheader\"><h2>Goodbye filter socks.</h2><p>Automatic fleece removes waste before it breaks down — no more weekly sock washing.</p></header>",
-      "css": ".ds-sectionheader { max-width:46rem; font-family: Archivo, ui-sans-serif, system-ui, sans-serif; } .ds-sectionheader h2 { margin:0; max-width:20ch; font-size: clamp(2.25rem, 4.6vw, 3.75rem); font-weight:600; line-height:1.06; letter-spacing:-.025em; color: var(--color-ink, #1d1d1f); text-wrap: balance; } .ds-sectionheader p { margin:1rem 0 0; max-width:36rem; font-size: clamp(1.125rem, 1.4vw, 1.375rem); line-height:1.45; color: var(--color-muted, #6e6e73); text-wrap: pretty; } .ds-stage .ds-sectionheader h2 { color: var(--color-paper, #fff); } .ds-stage .ds-sectionheader p { color: var(--color-muted-dark, #a1a1a6); }"
+      "description": "Tabular 600 measurement with ash unit and body-sm label; hairline rules frame the row.",
+      "html": "<dl class=\"ds-stat\"><dd class=\"ds-stat-fig\">5,000<span class=\"ds-stat-unit\">l/h</span></dd><dt class=\"ds-stat-label\">SK-5000 G3 — 1,320 gal per hour</dt></dl>",
+      "css": ".ds-stat { margin: 0; padding: 40px 0; border-top: 1px solid #d2d2d7; border-bottom: 1px solid #d2d2d7; text-align: center; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-stat-fig { margin: 0; font-size: clamp(2.5rem, 4.6vw, 3.5rem); font-weight: 600; line-height: 1; letter-spacing: 0; font-variant-numeric: tabular-nums lining-nums; } .ds-stat-unit { margin-left: 6px; font-size: 21px; font-weight: 400; color: #6e6e73; } .ds-stat-label { margin-top: 12px; font-size: 14px; line-height: 1.29; letter-spacing: -0.016em; color: #6e6e73; }"
     }
   ],
   "narrative": {
-    "northStar": "The Product Stage",
-    "overview": "This is the category standard for aquarium hardware, played straight at the craft level of apple.com and redseafish.com. Every section puts one product on a stage, states one idea, and offers one action. Colour is almost entirely withheld: white and sand grounds, a near-black stage where the product is the picture, ink text, and a single brand lime that appears only on primary pills, key measurement figures and active states. There is one type family (Archivo, with its width axis doing the work a second face would otherwise do), a generous vertical rhythm, and one authored motion — a rise-in on scroll — plus the signature interactions each instrument-like block owns (finder slider, feature-tour rail, before/after handle, LED legend).\n\nDensity is low and confident: headlines are short, sentence-case and tightly tracked; leads are one sentence; supporting copy sits in a muted grey at 17px. Structure comes from hairlines, tone changes (paper → sand → stage) and space, not from boxes. Cards exist only when they hold a real object (spec panel, calculator, result, testimonial). Depth is tonal, with a single soft shadow reserved for things that float (menus, the video play disc).\n\nConfirmed rejections (from the direction contract, honoured by the build): no eyebrows or kickers above headings, no icon-card grids as page structure, no uppercase display type, no gradient text, no glass or glow decoration, no cream+serif editorial, no emoji or unicode glyph icons, no monospace as costume, no border-left accent bars.",
+    "northStar": "A White Room With a Single Lime Switch",
+    "overview": "This is the Apple design architecture (Refero \"Apple\") translated for reef-keeping hardware. The page is a sequence of full-bleed, centered, stacked, symmetric sections on two canvases, frost and white, alternating as the story moves; the only dark surfaces are the 44px global nav and the film/360° sections. Every section opens with a centered headline and, optionally, a light 300-weight \"whisper\" tagline; below it sits the thing itself, a photograph or product cut-out from the client's original studio photography, on white. Copy is carbon on light, ash for the supporting voice, and it stays inside a 980px column. There are no decorative colours, no gradients, no glass, no glow, and exactly one shadow (a soft drop shadow reserved for product cut-outs).\n\nColour is a switch, not a palette. Lime (#99cc33) appears only where the user can act or has chosen: the filled pill and the selected state of a segmented control. Lime-deep (#6f9a1f), which passes AA on white, draws outlined pills, ghost links, focus rings and prose links. Nothing else, no border, figure, icon or heading, is coloured. Numbers are big and tabular in carbon; icons are 1.5-stroke grayscale line SVGs; progress and slider fills are carbon on hairline. Type is SF Pro on Apple devices and Inter everywhere else, on a major-second scale from 17px with Apple's slightly positive tracking on large sizes and slightly negative tracking on body.\n\nThe system rejects the previous v2 world explicitly: no dark product stages behind copy, no card grids sitting on the canvas for text alone, no eyebrows or kickers over headings, no second accent, no 700-weight headlines, no shipped display face.",
     "keyCharacteristics": [
-      "Two grounds (paper / sand) and one near-black stage; lime is an accent, never a ground except for the CTA lime field.",
-      "One family, Archivo variable width: normal width for reading, narrow heavy tabular figures for measurements.",
-      "Section headline + lead, no eyebrow; the eyebrow field feeds the sticky product bar as the jump-link label instead.",
-      "Pills for every action; text-variant links carry a chevron; external links carry an arrow.",
-      "Hairlines (#d2d2d7 on light, #3a3a3c on stage) separate; cards contain; shadows only float.",
-      "One motion grammar: 640ms expo ease-out rise-in of 18px, staggered ≤ 80ms, visible by default without JS and under reduced motion. The hero has no entrance."
+      "Two light canvases (frost #f5f5f7 / white) alternating; dark (#000 / #1d1d1f) only for global nav and film sections.",
+      "One accent with two jobs: lime fills the primary pill and the selected state; lime-deep outlines, links, and focus rings.",
+      "Photography-led: the product render/photograph is the hero of every section; cut-outs sit on white, uncropped, object-contain.",
+      "Apple type scale from 17px, weight 600 for headings, 300 for the whisper tagline, never 700.",
+      "Two-tier navigation: 44px carbon global nav with the real D-D wordmark, 52px sticky white product bar generated from block eyebrows.",
+      "Pills 980px, everything else 8px; hairlines #d2d2d7; one product-image shadow; a single rise-in scroll motion."
     ],
     "rules": [
-      { "name": "The Lime Discipline Rule", "body": "Lime lives on the figures and the primary action, never on the ground and never as body text on white. On a lime field (CTA lime tone) the primary pill becomes the ink secondary pill and the second action becomes a text link, because a lime pill would vanish.", "section": "colors" },
-      { "name": "The Two-Ground Rule", "body": "Sections alternate paper and sand; the stage is used only where the product is the picture (hero, video, viewer, feature tour, finder instrument). Everything on a stage inherits its own vocabulary via .stage/.on-dark: headings go paper, muted goes muted-dark, hairlines go line-dark, cards and media go stage-soft, secondary pills go paper-on-ink, text links and focus rings go full lime.", "section": "colors" },
-      { "name": "The No-Eyebrow Rule", "body": "Nothing sits above a heading. The content model keeps an eyebrow field, but SectionHeader never renders it; PageBuilder uses it as the section's label in the sticky product bar (truncated at 28 characters). Headline + optional lead is the complete header.", "section": "typography" },
-      { "name": "The Sentence-Case Rule", "body": "No uppercase display or label type anywhere; tracking is negative on display and neutral on labels. Emphasis comes from weight (600) and size, not case.", "section": "typography" },
-      { "name": "The Figure Rule", "body": "Any number that is the point of a section is set as a .figure with a .figure-unit suffix and a .label beneath — never as ordinary bold body text. Numbers elsewhere (spec values, table cells) get .num for tabular alignment.", "section": "typography" },
-      { "name": "The Float-Only Shadow Rule", "body": ".elevated is for menus and controls that hover above the page. Cards, media, sections and buttons carry no shadow at rest or on hover.", "section": "elevation" },
-      { "name": "The Hairline Rule", "body": "Structure is drawn with 1px lines (line on light, line-dark on stage) — list rows, table rows, stat bands, footer legal line, FAQ details, spec rows. Never thicker, never coloured, never as a left accent bar.", "section": "elevation" }
+      { "name": "The Single Switch Rule", "body": "Lime is a fill, never a stroke or a glyph. It may only fill the primary pill and the selected state; lime-deep may only draw an outline, a link, or a focus ring. Everything else is carbon, ash, hairline, frost or white.", "section": "colors" },
+      { "name": "The Two Canvases Rule", "body": "Sections alternate frost and white; the hero is white and the first frost canvas begins with the next section. Dark canvases are for the global nav, the film section and the 360° viewer only, never as a product stage behind copy.", "section": "colors" },
+      { "name": "The Carbon Fill Rule", "body": "Progress rails, slider fills, active tour segments and how-it-works progress use carbon (white on dark), not lime. Selection is lime; progress is carbon.", "section": "colors" },
+      { "name": "The No-Eyebrow Rule", "body": "Nothing sits above a heading. SectionHeader accepts eyebrow but never renders it; the field feeds the product bar's jump-link label instead. No kickers, no section numbers except in a real sequence (how-it-works keeps its numbers).", "section": "typography" },
+      { "name": "The 600 Ceiling Rule", "body": "Headings are weight 600 and never 700; the tagline is 300; body is 400. Emphasis comes from size and canvas, not weight.", "section": "typography" },
+      { "name": "The Center Column Rule", "body": "Headline + whisper are centered in the 980px container-text; body copy caps at 42rem/68ch. Only reading blocks (portableText, 720px) are left-aligned.", "section": "typography" },
+      { "name": "The One Shadow Rule", "body": "If it isn't a product cut-out, it has no shadow. Tiles, pills, inputs, tables and popovers are flat; the locale listbox uses a 1px hairline ring instead.", "section": "elevation" }
     ],
     "dos": [
-      "Do compose every section as section-space page-gutter + a container (container-site for copy, container-wide for big media/tables, container-prose for reading), on a tone field (bg-paper, stage-sand, or .stage).",
-      "Do head a section with SectionHeader (headline + lead only) and let PageBuilder turn the block's eyebrow into the product-bar jump label.",
-      "Do set every headline measurement as .figure + .figure-unit + .label, and every table/spec number with .num.",
-      "Do use .stage only where the product is the picture (hero, video, viewer, feature tour, finder instrument) and rely on .on-dark/.stage cascades for stage colours rather than per-element overrides.",
-      "Do keep lime to primary pills, key figures, active states and the Recommended chip; use text-lime-deep for any lime text on white.",
-      "Do separate lists, rows and stat bands with 1px .hairline; reserve .card (sand / stage-soft, 18px, 28–32px pad) for real objects and .media (20px) for imagery.",
-      "Do animate entrances only with Reveal (.rise, ≤ 80ms stagger) or the block's own signature interaction, and read easing/duration from the tokens (--ease-out-expo, --duration-rise).",
-      "Do draw icons as single-stroke SVGs (1.5–1.6) reused from ActionLink / comparison-table styles."
+      "Do alternate canvas-frost and canvas-white sections; the hero is white and the next section starts frost.",
+      "Do put lime only in a filled pill fill or a selected state, and lime-deep only in outlines, links and focus rings.",
+      "Do open every section with a centered h2 (40/600, ≤24ch) and an optional 300-weight whisper tagline (≤42rem) via SectionHeader.",
+      "Do lead with the client's original photography in 8px .media frames or uncropped object-contain cut-outs on white; .product-shadow only on cut-outs.",
+      "Do use hairline (#d2d2d7) 1px rules for tables, stat rows, rails and dividers; carbon for progress and slider fills.",
+      "Do pair pills: filled primary first, outlined secondary beside it, ghost chevron links for tertiary actions.",
+      "Do keep tiles at 8px / 24px padding, frost on white and white on frost, and only for real objects (products, controls, forms, spec tables, quotes).",
+      "Do use .figure tabular 600 numbers with ash 400 units for every measurement.",
+      "Do keep icons 1.5-stroke line SVGs in ash/carbon, 11–24px.",
+      "Do rely on rise-in as the only scroll motion (560ms ease-out-expo, 14px) and honour reduced motion."
     ],
     "donts": [
-      "Don't render an eyebrow, kicker, section number or icon above a heading (how-it-works step numbers are the one exception because the sequence is information).",
-      "Don't build feature sections as same-size icon + heading + text card grids; use the two-column hairline statement list.",
-      "Don't set display or label type in uppercase, use gradient text, glass/blur decoration, glow, border-l-4 accents, monospace as costume, or emoji/unicode icons.",
-      "Don't put lime on a ground except the CTA lime field, and never pair a lime pill with a lime field.",
-      "Don't add shadows to cards, media, sections or buttons; .elevated is for floating menus and controls only.",
-      "Don't nest cards, wrap tables in an outer card, or box a section.",
-      "Don't give the hero an entrance animation, add whileInView springs to every element, or exceed an 80ms stagger.",
-      "Don't invent colours, radii or easings outside app/globals.css @theme."
+      "Don't render an eyebrow, kicker or section number above a heading (eyebrow labels the product bar's jump link only).",
+      "Don't use dark canvases outside the global nav, film/video and 360° sections; never as a product stage behind text.",
+      "Don't colour text, borders, figures or icons lime; no lime lines, no lime headings, no \"Recommended\" filled pills (use lime-deep body-sm text).",
+      "Don't add shadows, gradients, glass, glow, rings or blur beyond the two sticky bars' backdrop blur and the single product drop shadow.",
+      "Don't set headlines at weight 700, ship a separate display face, or use uppercase tracked labels.",
+      "Don't put a text-only card on the frost canvas; the canvas is the surface.",
+      "Don't crop product cut-outs or leave sections without a photograph where one exists.",
+      "Don't introduce a second accent, brand colours from imagery, or an unpaired outlined pill.",
+      "Don't add entrance motion to the hero or any motion other than rise-in and a block's own signature interaction."
     ]
   }
 }

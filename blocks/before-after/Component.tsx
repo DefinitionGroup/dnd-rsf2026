@@ -93,7 +93,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
   const hasHeader = Boolean(block.headline || block.intro);
 
   return (
-    <section className="section-space page-gutter">
+    <section className="canvas-white section-space page-gutter">
       <div className="container-site">
         <SectionHeader headline={block.headline} intro={block.intro} align="center" />
 
@@ -126,13 +126,13 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
             {/* Labels */}
             <span
               aria-hidden
-              className={`pointer-events-none absolute left-4 top-4 rounded-full bg-paper/90 px-3 py-1 text-xs font-medium text-ink transition-opacity duration-200 ${position < 12 ? "opacity-0" : "opacity-100"}`}
+              className={`body-sm hairline pointer-events-none absolute left-4 top-4 rounded-full border bg-white px-3 py-1 text-carbon transition-opacity duration-200 ${position < 12 ? "opacity-0" : "opacity-100"}`}
             >
               {beforeLabel}
             </span>
             <span
               aria-hidden
-              className={`pointer-events-none absolute right-4 top-4 rounded-full bg-paper/90 px-3 py-1 text-xs font-medium text-ink transition-opacity duration-200 ${position > 88 ? "opacity-0" : "opacity-100"}`}
+              className={`body-sm hairline pointer-events-none absolute right-4 top-4 rounded-full border bg-white px-3 py-1 text-carbon transition-opacity duration-200 ${position > 88 ? "opacity-0" : "opacity-100"}`}
             >
               {afterLabel}
             </span>
@@ -140,7 +140,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
             {/* Divider */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 w-px -translate-x-1/2 bg-paper shadow-[0_0_0_1px_rgba(0,0,0,0.12)]"
+              className="pointer-events-none absolute inset-y-0 w-px -translate-x-1/2 bg-white"
               style={{ left: `${position}%`, transition: dragging || reduceMotion ? "none" : "left 120ms ease-out" }}
             />
 
@@ -158,7 +158,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
               aria-orientation="horizontal"
               onKeyDown={onKeyDown}
               onFocus={() => setInteracted(true)}
-              className={`elevated absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-paper text-ink transition-[transform,left,background-color] duration-150 ease-out hover:bg-lime motion-reduce:transition-none ${dragging ? "scale-105 bg-lime" : ""} ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
+              className={`hairline absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border bg-white text-carbon transition-[transform,left,background-color] duration-150 ease-out hover:bg-frost motion-reduce:transition-none ${dragging ? "scale-105 bg-frost" : ""} ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
               style={{ left: `${position}%`, transition: dragging || reduceMotion ? "none" : undefined }}
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -179,11 +179,8 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: reduceMotion ? 0 : 0.35, ease: EASE_PRESENCE, delay: 0.6 }}
-                  className="pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-paper/90 px-3.5 py-1.5 text-xs font-medium text-ink"
+                  className="body-sm hairline pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border bg-white px-3.5 py-1.5 text-carbon"
                 >
-                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    <path d="M1 6h14M4 3 1 6l3 3M12 3l3 3-3 3" />
-                  </svg>
                   Drag to compare
                 </motion.span>
               )}
