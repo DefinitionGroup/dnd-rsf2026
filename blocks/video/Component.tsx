@@ -76,7 +76,7 @@ export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
     <section className={`canvas-dark section-space ${bleed ? "" : "page-gutter"}`}>
       {hasHeader && (
         <div className={`container-site ${bleed ? "page-gutter" : ""}`}>
-          <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-10 md:mb-14" />
+          <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" className="mb-10 md:mb-14" />
         </div>
       )}
       <figure className={bleed ? "" : "container-site"}>

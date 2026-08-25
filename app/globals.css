@@ -5,14 +5,15 @@
   translated for D-D The Aquarium Solution — DARK register: "a black room with a single lime switch".
   - Black canvas alternating with #1d1d1f lift sections; real white only for photo wells, pills, handles.
   - One accent, lime, used ONLY as filled-button fill and selected state; lime-deep for
-    outlined actions and inline links; never as text decoration or borders elsewhere.
+    outlined actions and inline links; plus two sanctioned exceptions: stat-strip figures
+    and the .eyebrow pill above section headlines.
   - SF Pro on Apple devices, Inter elsewhere. Major-second scale from 17px.
   - Pills 980px; cards/images/inputs 8px; no shadows except one product-image shadow.
   - Full-bleed sections, centered, stacked, symmetric. Photography is the hero.
 */
 @theme {
   /* accent (the "single switch") */
-  --color-lime: #99cc33;         /* filled buttons + selected states only */
+  --color-lime: #92d402;         /* filled buttons + selected states only */
   --color-lime-deep: #99cc33;    /* dark register: outlined actions and links use full lime */
   --color-lime-signal: #b9dd6b;  /* decorative strokes / image outlines (rare) */
 
@@ -154,6 +155,8 @@
   .num { font-variant-numeric: tabular-nums lining-nums; }
   .text-muted { color: var(--color-fg-muted); }
   .text-lime-deep { color: var(--color-lime); } /* on dark, links/outlines use full lime (9:1) */
+  /* eyebrow — very small lime label in a light pill outline, above section headlines */
+  .eyebrow { display: inline-block; border: 1px solid color-mix(in srgb, var(--color-lime) 40%, transparent); border-radius: var(--radius-pill); padding: 5px 12px; font-size: 11px; line-height: 1.2; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-lime); }
 
   /* surfaces */
   .media { border-radius: var(--radius-media); overflow: hidden; background: var(--color-canvas-alt); }
@@ -205,4 +208,8 @@
   .js .rise { opacity: 0; transform: translateY(14px); transition: opacity var(--duration-rise) var(--ease-out-expo), transform var(--duration-rise) var(--ease-out-expo); }
   .js .rise.is-in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .js .rise { opacity: 1; transform: none; transition: none; } }
+  /* load-time variant for above-the-fold copy (hero): pure CSS, no JS/observer, so no flash and no LCP cost */
+  .rise-load { animation: rise-load var(--duration-rise) var(--ease-out-expo) both; }
+  @keyframes rise-load { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .rise-load { animation: none; } }
 }

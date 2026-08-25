@@ -8,6 +8,7 @@ import type { PageDocument, SiteShell } from "@/blocks/types";
 import type { Locale } from "@/lib/i18n";
 import type { PageRoute } from "@/lib/translations";
 import { heroDemo } from "@/blocks/hero/demo";
+import { hero3dDemo } from "@/blocks/hero-3d/demo";
 import { animatedHeadlineDemo } from "@/blocks/animated-headline/demo";
 import { introDemo } from "@/blocks/intro/demo";
 import { portableTextDemo } from "@/blocks/portable-text/demo";
@@ -141,6 +142,14 @@ const clariseaPage = page({
       image: "original/clarisea-unit-dark.jpg",
       imageAlt: "ClariSea Gen 3 automatic fleece filter",
       video: { url: "/videos/clarisea-proxy.mp4", mimeType: "video/mp4" },
+      primaryCta: { label: "Which size do I need?", href: "#productFinderBlock" },
+      secondaryCta: { label: "Find a stockist", href: STOCKISTS },
+    }),
+    hero3dDemo({
+      brand: "ClariSea Gen 3 \u00b7 SK5000",
+      headline: "Here comes the fleece filter\nthat does more.",
+      summary: "Every part engineered to click into place. Scroll to assemble the SK5000.",
+      modelAlt: "Exploded 3D view of the ClariSea SK5000 fleece filter assembling into the complete unit as the page scrolls.",
       primaryCta: { label: "Which size do I need?", href: "#productFinderBlock" },
       secondaryCta: { label: "Find a stockist", href: STOCKISTS },
     }),

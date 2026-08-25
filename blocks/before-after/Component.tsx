@@ -95,7 +95,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
   return (
     <section className="canvas-white section-space page-gutter">
       <div className="container-site">
-        <SectionHeader headline={block.headline} intro={block.intro} align="center" />
+        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" />
 
         <figure className={`mx-auto max-w-5xl ${hasHeader ? "mt-12 md:mt-16" : ""}`}>
           <div

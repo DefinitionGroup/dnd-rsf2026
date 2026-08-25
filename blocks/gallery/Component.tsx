@@ -15,7 +15,7 @@ export default function GalleryBlock({ block }: BlockProps<"galleryBlock">) {
   return (
     <section className="canvas-frost section-space page-gutter">
       <div className="container-site">
-        <SectionHeader headline={block.headline} />
+        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} />
 
         <ul className={`grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 ${block.headline ? "mt-12 md:mt-16" : ""}`} role="list">
           {images.map((item, index) => {

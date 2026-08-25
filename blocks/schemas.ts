@@ -4,6 +4,7 @@
  * Add a block: create blocks/<name>/{schema.ts,Component.tsx,demo.ts} and list it below.
  */
 import { schema as heroBlock } from "./hero/schema";
+import { schema as hero3dBlock } from "./hero-3d/schema";
 import { schema as animatedHeadlineBlock } from "./animated-headline/schema";
 import { schema as introBlock } from "./intro/schema";
 import { schema as portableTextBlock } from "./portable-text/schema";
@@ -27,6 +28,7 @@ import { schema as indicatorLegendBlock } from "./indicator-legend/schema";
 
 export const blockSchemas = [
   heroBlock,
+  hero3dBlock,
   animatedHeadlineBlock,
   introBlock,
   portableTextBlock,

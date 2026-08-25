@@ -120,6 +120,7 @@ export default function ContactFormBlock({ block, locale }: BlockProps<"contactF
           viewport={{ once: true, amount: 0.3 }}
           transition={revealTransition}
         >
+          {block.eyebrow && <p className="eyebrow mb-4">{block.eyebrow}</p>}
           <h2 id={`${fieldId}-heading`} className="mx-auto max-w-[24ch] whitespace-pre-line">
             {block.headline}
           </h2>

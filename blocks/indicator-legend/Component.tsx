@@ -85,7 +85,7 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
   return (
     <section className="canvas-white section-space page-gutter">
       <div className="container-site">
-        {(block.headline || block.intro) && <SectionHeader headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
+        {(block.eyebrow || block.headline || block.intro) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           {/* ---------- Device ---------- */}

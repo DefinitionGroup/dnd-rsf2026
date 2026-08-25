@@ -34,9 +34,9 @@ export function formatNumeric(n: number, p: Parsed) {
 
 const TONES = {
   // v3: figures are carbon on white; tone is ignored except ink → dark film canvas.
-  lime: { section: "canvas-white", value: "text-fg", unit: "text-fg-muted", label: "text-fg-muted" },
-  paper: { section: "canvas-white", value: "text-fg", unit: "text-fg-muted", label: "text-fg-muted" },
-  ink: { section: "canvas-dark", value: "text-white", unit: "text-fg-muted", label: "text-fg-muted" },
+  lime: { section: "canvas-white", value: "text-lime", unit: "text-fg-muted", label: "text-fg-muted" },
+  paper: { section: "canvas-white", value: "text-lime", unit: "text-fg-muted", label: "text-fg-muted" },
+  ink: { section: "canvas-dark", value: "text-lime", unit: "text-fg-muted", label: "text-fg-muted" },
 } as const;
 
 type Tone = (typeof TONES)[keyof typeof TONES];
@@ -61,8 +61,8 @@ export default function StatStripBlock({ block }: BlockProps<"statStripBlock">) 
   return (
     <section className={`section-space page-gutter ${tone.section}`}>
       <div className="container-site">
-        <SectionHeader headline={block.headline} />
-        <dl className={`hairline grid grid-cols-2 gap-x-6 gap-y-10 border-y py-10 ${block.headline ? "mt-12 md:mt-16" : ""} ${cols}`}>
+        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} />
+        <dl className={`hairline grid grid-cols-2 gap-x-6 gap-y-10 border-y py-10 ${block.eyebrow || block.headline ? "mt-12 md:mt-16" : ""} ${cols}`}>
           {stats.map((stat, i) => (
             <Stat key={stat._key} stat={stat} index={i} tone={tone} />
           ))}
@@ -73,7 +73,8 @@ export default function StatStripBlock({ block }: BlockProps<"statStripBlock">) 
 }
 
 function Stat({ stat, index, tone }: { stat: StatItem; index: number; tone: Tone }) {
-  const parsed = parseNumeric(stat.value);
+  // Stega metadata (draft mode) would fail the strict numeric regexes; parse the clean string.
+  const parsed = parseNumeric(stegaClean(stat.value));
   return (
     <div className="flex flex-col items-center text-center">
       <dd className={`figure order-1 text-[clamp(2.5rem,4.6vw,3.5rem)] ${tone.value}`}>
@@ -107,12 +108,14 @@ function CountUp({ parsed, raw, delay }: { parsed: Parsed; raw: string; delay: n
     return () => controls.stop();
   }, [inView, reduceMotion, mv, parsed, delay]);
 
-  // Reduced motion / no JS: the author's exact string. Otherwise a MotionValue
-  // drives textContent directly (no re-render per frame).
-  if (reduceMotion || !hydrated) return <span ref={ref}>{raw}</span>;
+  // Reduced motion: the author's exact string. Otherwise one stable element —
+  // swapping the element after hydration would leave useInView's observer on the
+  // detached pre-hydration node — whose children go raw → MotionValue (drives
+  // textContent directly, no re-render per frame).
+  if (reduceMotion) return <span ref={ref}>{raw}</span>;
   return (
     <motion.span ref={ref} aria-label={raw}>
-      {text}
+      {hydrated ? text : raw}
     </motion.span>
   );
 }

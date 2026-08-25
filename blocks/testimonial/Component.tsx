@@ -16,7 +16,7 @@ export default function TestimonialBlock({ block }: BlockProps<"testimonialBlock
   return (
     <section className="canvas-frost section-space page-gutter">
       <div className="container-site">
-        <SectionHeader headline={block.headline} />
+        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} />
 
         <ul className={`grid gap-4 ${block.headline ? "mt-12 md:mt-16" : ""} ${cols}`} role="list">
           {testimonials.map((testimonial, index) => {

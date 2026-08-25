@@ -4,6 +4,7 @@
  */
 import type { BlockComponent, BlockType } from "./types";
 import HeroBlock from "./hero/Component";
+import Hero3dBlock from "./hero-3d/Component";
 import AnimatedHeadlineBlock from "./animated-headline/Component";
 import IntroBlock from "./intro/Component";
 import PortableTextBlock from "./portable-text/Component";
@@ -27,6 +28,7 @@ import IndicatorLegendBlock from "./indicator-legend/Component";
 
 export const blockComponents = {
   heroBlock: HeroBlock,
+  hero3dBlock: Hero3dBlock,
   animatedHeadlineBlock: AnimatedHeadlineBlock,
   introBlock: IntroBlock,
   portableTextBlock: PortableTextBlock,

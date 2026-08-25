@@ -11,8 +11,8 @@ import { dataset, isSanityConfigured, studioProjectId } from "@/sanity/env";
  * - H1 discipline: hero / animatedHeadline(h1) own the H1; otherwise the first
  *   h2 of the first rich-text block is promoted (see PortableTextBlock).
  * - Product bar (Apple local nav) sits directly under the global nav; every block with a headline/eyebrow
- *   becomes a jump link (its `eyebrow` is the label — eyebrows are not rendered
- *   above headings in this design system).
+ *   becomes a jump link (its `eyebrow` is the label; blocks also render it as a
+ *   small lime pill above their headline).
  * - Presentation: each block gets a data-sanity attribute for click-to-select
  *   and drag-to-reorder overlays.
  */
@@ -21,7 +21,7 @@ export default function PageBuilder({ page, locale, productBar = true }: { page:
   if (!content.length) return null;
 
   const alreadyHasH1 = content.some(
-    (block) => block._type === "heroBlock" || (block._type === "animatedHeadlineBlock" && stegaClean(block.level) === "h1"),
+    (block) => block._type === "heroBlock" || block._type === "hero3dBlock" || (block._type === "animatedHeadlineBlock" && stegaClean(block.level) === "h1"),
   );
   let promotedPortableTextHeading = false;
 

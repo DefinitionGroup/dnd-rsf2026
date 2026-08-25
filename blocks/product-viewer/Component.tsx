@@ -257,7 +257,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
   return (
     <section className="canvas-dark section-space page-gutter">
       <div className="container-site">
-        <SectionHeader headline={block.headline} intro={block.intro} align="center" />
+        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" />
 
         <div className={`mx-auto max-w-4xl ${block.headline || block.intro ? "mt-12 md:mt-16" : ""}`}>
           {/* Stage */}

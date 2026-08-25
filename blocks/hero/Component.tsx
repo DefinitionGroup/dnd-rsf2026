@@ -17,7 +17,7 @@ export default function HeroBlock({ block }: BlockProps<"heroBlock">) {
 
   return (
     <section className="canvas-white overflow-hidden">
-      <div className="container-page page-gutter pt-[clamp(3rem,7vw,5.5rem)] text-center">
+      <div className="rise-load container-page page-gutter pt-[clamp(3rem,7vw,5.5rem)] text-center">
         <h1 className="mx-auto max-w-[18ch] whitespace-pre-line">{block.headline}</h1>
         {block.summary && <p className="whisper mx-auto mt-3 max-w-[40rem]">{block.summary}</p>}
         {(block.primaryCta || block.secondaryCta || videoUrl) && (

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanity & Page-Builder Glossary</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="page">
+  <header class="lesson-head">
+    <p class="kicker">Reference · dnd-rsf2026</p>
+    <h1>Sanity &amp; page-builder glossary</h1>
+    <p class="lede">The canonical vocabulary. Every lesson uses these words exactly this way.</p>
+  </header>
+
+  <table>
+    <tr><th>Term</th><th>Meaning</th><th>In this repo</th></tr>
+    <tr><td class="term">Content Lake</td><td>Sanity's hosted database. Stores documents as JSON. Nothing visual lives here.</td><td>Project <code>z5112m0c</code>, dataset <code>production</code></td></tr>
+    <tr><td class="term">Document</td><td>One JSON record with an <code>_id</code> and <code>_type</code>. The unit of storage and publishing.</td><td><code>page</code>, <code>product</code>, <code>testimonial</code>, <code>menu</code>, <code>siteSettings</code></td></tr>
+    <tr><td class="term">Schema</td><td>Code that declares what fields each type has. Sanity stores anything; the schema tells the <em>Studio</em> what to offer editors.</td><td><code>sanity/schemaTypes/</code> + <code>blocks/*/schema.ts</code></td></tr>
+    <tr><td class="term">Studio</td><td>The editing UI — a React app generated from your schema. It is a client of the Content Lake, not the database itself.</td><td>Embedded at <code>/studio</code> (<code>sanity.config.ts</code>)</td></tr>
+    <tr><td class="term">Object type</td><td>A structured value that lives <em>inside</em> a document (no own <code>_id</code>).</td><td>Every block; <code>linkField</code>, <code>specRow</code>, <code>metadata</code></td></tr>
+    <tr><td class="term">Block</td><td><em>Our</em> word for an object type allowed in <code>page.content[]</code> — one section of a landing page.</td><td>21 of them: <code>heroBlock</code> … <code>contactFormBlock</code></td></tr>
+    <tr><td class="term">Reference</td><td>A pointer from one document/object to a document (<code>{_ref: "id"}</code>). Enables reuse: edit once, updates everywhere.</td><td><code>productListBlock.items[].product → product</code></td></tr>
+    <tr><td class="term">GROQ</td><td>Sanity's query language. Filters documents and <em>projects</em> (reshapes) them.</td><td><code>sanity/lib/queries.ts</code></td></tr>
+    <tr><td class="term">Projection</td><td>The <code>{...}</code> part of a GROQ query — chooses and renames fields, follows references with <code>-&gt;</code>.</td><td><code>productFragment</code>, per-block projections</td></tr>
+    <tr><td class="term">Portable Text</td><td>Rich text stored as a JSON array (not HTML), so it renders anywhere.</td><td><code>richText</code> fields → <code>components/RichText.tsx</code></td></tr>
+    <tr><td class="term">Asset</td><td>An uploaded image/file. Stored once, referenced by documents, served from Sanity's CDN with on-the-fly transforms.</td><td><code>image{asset-&gt;{url}}</code>, hero video file</td></tr>
+    <tr><td class="term">Dataset</td><td>A named bucket of documents inside a project (like a DB instance).</td><td><code>production</code></td></tr>
+    <tr><td class="term">Draft</td><td>Unpublished version of a document (<code>drafts.</code> id prefix). Editors see it in draft mode; visitors don't.</td><td>Presentation preview via <code>/api/draft-mode/enable</code></td></tr>
+    <tr><td class="term">Registry</td><td><em>Our</em> map from block <code>_type</code> → React component.</td><td><code>blocks/registry.tsx</code></td></tr>
+    <tr><td class="term">Resolved shape</td><td>What a query <em>returns</em> after projection — not what is stored. Components and demo content use this shape.</td><td><code>sanity.types.ts</code> (<code>PAGE_BY_SLUG_QUERY_RESULT</code>)</td></tr>
+    <tr><td class="term">Demo mode</td><td>No Sanity env vars → the site renders from hand-written content in the resolved shape.</td><td><code>content/demo.ts</code> via <code>sanity/lib/loaders.ts</code></td></tr>
+  </table>
+
+  <p class="foot">Companion diagrams: <code>docs/SCHEMA.md</code> · Authoring rules: <code>blocks/CONTRACT.md</code></p>
+</div>
+</body>
+</html>

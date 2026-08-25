@@ -12,8 +12,8 @@ const wordVariants: Variants = {
 
 /**
  * Word-mask headline: each word rises out of its own overflow-hidden mask.
- * Apple's light large heading (heading-lg 44/400), centered on a white canvas.
- * The eyebrow field is not rendered.
+ * Apple's light large heading (heading-lg 44/400), centered on a white canvas,
+ * with an optional eyebrow pill above.
  */
 export default function AnimatedHeadlineBlock({ block }: BlockProps<"animatedHeadlineBlock">) {
   const reduceMotion = useReducedMotion();
@@ -30,6 +30,7 @@ export default function AnimatedHeadlineBlock({ block }: BlockProps<"animatedHea
       variants={{ visible: { transition: { delayChildren: 0.04, staggerChildren: 0.055 } } }}
     >
       <div className="container-text text-center">
+        {block.eyebrow && <p className="eyebrow mb-4">{block.eyebrow}</p>}
         <Heading aria-label={block.headline} className={`mx-auto max-w-[24ch] ${level === "h2" ? "heading-lg" : ""}`}>
           <span aria-hidden="true" className="flex flex-wrap justify-center gap-x-[0.28em] gap-y-1">
             {words.map((word, index) => (

@@ -36,7 +36,7 @@ export default function ProductListBlock({ block }: BlockProps<"productListBlock
   return (
     <section className="canvas-frost section-space page-gutter">
       <div className="container-site">
-        <SectionHeader headline={block.headline} intro={block.intro} />
+        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} />
 
         <ul className={`grid gap-4 ${block.headline || block.intro ? "mt-12 md:mt-16" : ""} ${cols}`} role="list">
           {items.map((item, index) => {

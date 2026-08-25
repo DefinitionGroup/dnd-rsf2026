@@ -1,5 +1,6 @@
 import { stegaClean } from "next-sanity";
 import ActionLink from "@/components/ActionLink";
+import Reveal from "@/components/motion/Reveal";
 import SanityImage from "@/components/SanityImage";
 import SectionHeader from "@/components/SectionHeader";
 import type { BlockOf, BlockProps } from "@/blocks/types";
@@ -110,9 +111,10 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
   return (
     <section className="canvas-white section-space page-gutter">
       <div className="container-site">
-        {(block.headline || block.intro) && <SectionHeader headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
+        {(block.eyebrow || block.headline || block.intro) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
 
         {/* Scroll container: horizontal scroll on narrow screens, natural width on ≥md */}
+        <Reveal delay={80}>
         <div
           className="relative -mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)] pb-2 md:mx-0 md:px-0 [scrollbar-width:thin]"
           tabIndex={0}
@@ -178,6 +180,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
             )}
           </table>
         </div>
+        </Reveal>
 
         {block.footnote && <p className="caption mx-auto mt-8 max-w-[68ch] text-center">{block.footnote}</p>}
       </div>

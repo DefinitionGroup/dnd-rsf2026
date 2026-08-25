@@ -38,7 +38,7 @@ export default function FeatureTourBlock({ block }: BlockProps<"featureTourBlock
     <section className={`section-space page-gutter ${dark ? "canvas-dark" : "canvas-white"}`}>
       <div className="container-site">
         {(block.headline || block.intro) && (
-          <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-14 md:mb-20" />
+          <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" className="mb-14 md:mb-20" />
         )}
 
         {/* ---------- Mobile / tablet: image + copy stacked per step ---------- */}

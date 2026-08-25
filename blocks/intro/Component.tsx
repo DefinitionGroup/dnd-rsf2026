@@ -10,6 +10,7 @@ export default function IntroBlock({ block }: BlockProps<"introBlock">) {
   return (
     <section className="canvas-white section-space page-gutter">
       <Reveal className="container-text text-center">
+        {block.eyebrow && <p className="eyebrow mb-4">{block.eyebrow}</p>}
         <h2 className="mx-auto max-w-[24ch] whitespace-pre-line">{block.headline}</h2>
         {block.body?.length ? (
           <RichText

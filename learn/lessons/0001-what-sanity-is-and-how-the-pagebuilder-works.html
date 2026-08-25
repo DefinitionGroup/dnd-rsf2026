@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 · What Sanity is, and how the page builder works</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="page">
+
+<header class="lesson-head">
+  <p class="kicker">Lesson 1 · ~10 minutes · dnd-rsf2026</p>
+  <h1>What Sanity is, and how your page builder works</h1>
+  <p class="lede">Two ideas explain the whole system: content is <em>structured data</em>, and pages are <em>lists of typed blocks</em>. Everything else in the repo is plumbing for those two ideas.</p>
+</header>
+
+<h2>Idea 1 — Sanity stores structure, not pages</h2>
+<p>A classic CMS (the old Drupal site) stores <em>pages</em>: HTML-ish blobs with layout baked in. Sanity stores <strong>documents</strong> — plain JSON records with a type — and nothing visual at all. Your ClariSea product is literally this, sitting in a hosted database called the <strong>Content Lake</strong>:</p>
+
+<pre><code>{
+  "_id": "demo-product-clarisea-gen3",
+  "_type": "product",
+  "name": [{ "language": "en", "value": "ClariSea Gen 3" }],
+  "specs": [{ "label": [...], "value": "5,000", "unit": "l/h" }],
+  "image": { "asset": { "_ref": "image-abc123..." } }
+}</code></pre>
+
+<p>Three consequences, and they explain most of your architecture:</p>
+<ul>
+  <li><strong>The look lives in your code, not the CMS.</strong> That is why you could redesign v2 → v3 → dark without touching a single document.</li>
+  <li><strong>One fact, many places.</strong> The spec "5,000 l/h" is stored once on <code>product</code> and <em>referenced</em> by the comparison table, the finder, and the FAQ spec table. Edit once, correct everywhere.</li>
+  <li><strong>Any consumer can read it.</strong> Five languages, a future app, a print sheet — same JSON.</li>
+</ul>
+
+<div class="callout">
+  <strong>Where does the schema fit?</strong> The Content Lake would accept any JSON. The <em>schema</em> (<code>sanity/schemaTypes/</code>, <code>blocks/*/schema.ts</code>) is code that tells the <strong>Studio</strong> — the editing UI at <code>/studio</code> — which types exist, which fields they have, and what's required. The Studio is just a React app generated from that schema; it's a <em>client</em> of the database, exactly like your website is.
+</div>
+
+<h2>Idea 2 — A page is an array of typed blocks</h2>
+<p>Your <code>page</code> document has one field that matters: <code>content[]</code>. It's an array where every item is a small typed object — a <strong>block</strong>:</p>
+
+<pre><code>content: [
+  { "_type": "heroBlock",        "headline": "Here comes the fleece filter…" },
+  { "_type": "statStripBlock",   "stats": [ … ] },
+  { "_type": "productFinderBlock", "rules": [ … ] },
+  { "_type": "ctaBlock",         "primaryCta": { … } }
+]</code></pre>
+
+<p>The editor's job in the Studio is <em>composition</em>: stack blocks, fill their fields, reorder them. The frontend's job is a single mapping — for each item, look up the React component registered for its <code>_type</code> and render it:</p>
+
+<figure>
+<pre><code>Studio (editor)        Content Lake         Next.js (visitor)
+─────────────         ─────────────        ──────────────────
+compose blocks   →    page.content[]  →    PageBuilder maps each
+fill fields           (typed JSON)         _type → Component
+                                           via blocks/registry.tsx</code></pre>
+<figcaption>The whole system in one line: <code>content.map(block → registry[block._type])</code> — see <code>components/PageBuilder.tsx</code>.</figcaption>
+</figure>
+
+<p>That's why a "block" in this repo is one folder with three files, and why adding one is cheap:</p>
+<table>
+  <tr><th>File</th><th>Audience</th><th>Answers</th></tr>
+  <tr><td><code>blocks/hero/schema.ts</code></td><td>Studio (editor)</td><td>"What can be filled in?"</td></tr>
+  <tr><td><code>blocks/hero/Component.tsx</code></td><td>Visitor</td><td>"How does it look?"</td></tr>
+  <tr><td><code>blocks/hero/demo.ts</code></td><td>Dev/demo mode</td><td>"What does a filled-in one look like?"</td></tr>
+</table>
+<p>Two one-line registrations (<code>blocks/schemas.ts</code>, <code>blocks/registry.tsx</code>) plug the folder into the Studio, the page schema, TypeGen, the renderer, demo mode and the seed script.</p>
+
+<h2>The bridge between the two ideas: GROQ</h2>
+<p>The website doesn't receive documents as stored — it asks for them in the shape it wants, with <strong>GROQ</strong>. One query in <code>sanity/lib/queries.ts</code> does three jobs at once:</p>
+<pre><code>*[_type == "page" && slug.current == $slug][0]{   // 1 filter: which document
+  content[]{                                       // 2 walk the block array
+    ...,
+    _type == "productListBlock" => {               // 3 per-type projection:
+      items[]{ product->{ name, image, … } }       //   follow the reference,
+    }                                              //   resolve the image asset,
+  }                                                //   coalesce the language
+}</code></pre>
+<p>The arrow <code>-&gt;</code> is the important glyph: it <em>dereferences</em> — swaps a <code>{_ref}</code> pointer for the actual product fields. The result is the <strong>resolved shape</strong>, and it is the contract everything downstream shares: TypeGen turns it into TypeScript types, components are typed against it, and <code>content/demo.ts</code> hand-writes pages in exactly that shape so the site runs with no Sanity at all.</p>
+
+<h2>Say it back (retrieval)</h2>
+<div class="quiz">
+  <h3>Three questions, no notes</h3>
+
+  <div class="q">
+    <p class="prompt">1 · Why did three full redesigns require zero content edits?</p>
+    <button class="opt">Because the pages were reseeded after every single redesign</button>
+    <button class="opt" data-ok="1">Because documents store facts and the code owns the look</button>
+    <button class="opt">Because the Studio regenerates the layout from new schema</button>
+    <p class="why">Structured content: the Content Lake holds typed facts; components decide presentation. Redesign = new components, same documents.</p>
+  </div>
+
+  <div class="q">
+    <p class="prompt">2 · An editor drags the stat strip above the video in the Studio. What changes where?</p>
+    <button class="opt">The page component reorders its imports and then rebuilds</button>
+    <button class="opt">The registry updates the mapping of types to components</button>
+    <button class="opt" data-ok="1">The order of items inside the page document's content</button>
+    <p class="why">Composition lives in data: <code>content[]</code> is reordered; <code>PageBuilder</code> just maps over it in order.</p>
+  </div>
+
+  <div class="q">
+    <p class="prompt">3 · The comparison table shows "5,000 l/h". Where is that fact stored?</p>
+    <button class="opt">Inside the comparison block on the ClariSea page document</button>
+    <button class="opt" data-ok="1">On the product document, reached through a block reference</button>
+    <button class="opt">Inside the generated types file created by running TypeGen</button>
+    <p class="why">The block holds a reference; GROQ's <code>-&gt;</code> resolves it at query time. Edit the product once and every block that references it updates.</p>
+  </div>
+</div>
+
+<h2>Anchor it in the repo (2 minutes)</h2>
+<ol>
+  <li>Open <code>content/demo.ts</code> and find the ClariSea page — you are reading a full <code>content[]</code> array in the resolved shape.</li>
+  <li>Open <code>blocks/registry.tsx</code> — count how little code the "page builder" actually is.</li>
+  <li>Skim the diagrams in <a href="../../docs/SCHEMA.md"><code>docs/SCHEMA.md</code></a> — §2 is this lesson as a picture.</li>
+</ol>
+
+<p class="foot">
+  <strong>Primary source:</strong> the official <a href="https://www.sanity.io/docs">Sanity documentation</a> (start with "Studio" and "Content Lake"), then <a href="https://www.sanity.io/docs/groq">GROQ</a>.<br>
+  <strong>Vocabulary:</strong> <a href="../reference/0001-sanity-glossary.html">Sanity &amp; page-builder glossary</a> — every later lesson assumes these terms.<br>
+  <strong>Stuck or curious?</strong> Ask me follow-ups in the session — "why is the eyebrow not rendered?", "what exactly does coalesce do?" — that's what I'm for.
+</p>
+
+</div>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

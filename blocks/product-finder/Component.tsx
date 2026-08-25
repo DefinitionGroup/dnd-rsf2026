@@ -83,7 +83,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
     <section className="canvas-frost section-space page-gutter">
       <div className="container-site">
         {(block.headline || block.intro) && (
-          <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-12 md:mb-16" />
+          <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" className="mb-12 md:mb-16" />
         )}
 
         <div className="grid gap-6 lg:grid-cols-2 lg:items-start">

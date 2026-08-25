@@ -41,6 +41,7 @@ export default function SplitContentBlock({ block }: BlockProps<"splitContentBlo
         </Reveal>
 
         <Reveal className={`max-w-[34rem] ${reverse ? "md:order-1" : ""}`} delay={80}>
+          {block.eyebrow && <p className="eyebrow mb-4">{block.eyebrow}</p>}
           <h3 className="whitespace-pre-line">{block.headline}</h3>
           {block.body?.length ? <RichText value={block.body} className={`prose-site mt-4 ${bodyColor}`} /> : null}
           {block.cta && (

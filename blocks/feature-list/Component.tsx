@@ -14,7 +14,7 @@ export default function FeatureListBlock({ block }: BlockProps<"featureListBlock
   return (
     <section className="canvas-white section-space page-gutter">
       <div className="container-site">
-        <SectionHeader headline={block.headline} intro={block.intro} />
+        <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} />
 
         {items.length > 0 && (
           <ul className={`grid gap-4 ${block.headline || block.intro ? "mt-12 md:mt-16" : ""} ${cols}`} role="list">

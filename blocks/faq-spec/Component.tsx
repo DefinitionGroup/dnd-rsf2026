@@ -40,7 +40,7 @@ export default function FaqSpecBlock({ block }: BlockProps<"faqSpecBlock">) {
   return (
     <section className="canvas-white section-space page-gutter">
       <div className="container-site">
-        {block.headline && <SectionHeader headline={block.headline} className="mb-12 md:mb-16" />}
+        {(block.eyebrow || block.headline) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} className="mb-12 md:mb-16" />}
 
         <div className={`grid gap-12 items-start ${showSpecs && showFaq ? "lg:grid-cols-2" : ""}`}>
           {showSpecs && (

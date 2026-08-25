@@ -39,6 +39,10 @@ const pageContentFragment = /* groq */ `content[]{
     image ${imageFragment},
     video{ asset->{ _id, url, mimeType } }
   },
+  _type == "hero3dBlock" => {
+    ...,
+    model{ asset->{ _id, url, mimeType } }
+  },
   _type == "splitContentBlock" => { ..., image ${imageFragment} },
   _type == "galleryBlock" => { ..., images[] ${captionedImageFragment} },
   _type == "productListBlock" => {

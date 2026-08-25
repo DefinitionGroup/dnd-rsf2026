@@ -25,7 +25,6 @@ const TONES = {
     track: "bg-hairline",
     fill: "bg-carbon",
     titleHover: "group-hover:text-fg",
-    rule: "border-hairline",
     badge: "bg-white text-carbon",
   },
   ink: {
@@ -37,7 +36,6 @@ const TONES = {
     track: "bg-line-dark",
     fill: "bg-white",
     titleHover: "group-hover:text-white",
-    rule: "border-line-dark",
     badge: "bg-white text-carbon",
   },
 } as const;
@@ -133,7 +131,7 @@ export default function HowItWorksBlock({ block }: BlockProps<"howItWorksBlock">
       }}
     >
       <div className="container-site">
-        {(block.headline || block.intro) && <SectionHeader headline={block.headline} intro={block.intro} align="center" className="mb-12 md:mb-16" />}
+        {(block.eyebrow || block.headline || block.intro) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" className="mb-12 md:mb-16" />}
 
         <div className="grid gap-8 lg:grid-cols-12 lg:items-start lg:gap-10">
           {/* Image of the active step */}
@@ -159,7 +157,7 @@ export default function HowItWorksBlock({ block }: BlockProps<"howItWorksBlock">
                   </motion.div>
                 )}
               </AnimatePresence>
-              <div className={`body-sm num pointer-events-none absolute left-4 top-4 rounded-full border hairline px-3 py-1 ${tone.badge}`}>
+              <div className={`body-sm num pointer-events-none absolute left-4 top-4 rounded-full px-3 py-1 ${tone.badge}`}>
                 Step {active + 1} of {count}
               </div>
             </div>
@@ -176,7 +174,6 @@ export default function HowItWorksBlock({ block }: BlockProps<"howItWorksBlock">
                   total={count}
                   isActive={i === active}
                   isDone={i < active}
-                  isLast={i === count - 1}
                   tone={tone}
                   fillWidth={fillWidth}
                   id={`${baseId}-step-${i}`}
@@ -197,7 +194,6 @@ function StepItem({
   total,
   isActive,
   isDone,
-  isLast,
   tone,
   fillWidth,
   id,
@@ -208,14 +204,13 @@ function StepItem({
   total: number;
   isActive: boolean;
   isDone: boolean;
-  isLast: boolean;
   tone: (typeof TONES)[keyof typeof TONES];
   fillWidth: MotionValue<string>;
   id: string;
   onSelect: () => void;
 }) {
   return (
-    <li className={isLast ? "" : `border-b ${tone.rule}`}>
+    <li>
       <button
         type="button"
         id={id}

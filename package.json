@@ -25,6 +25,8 @@
   "dependencies": {
     "@portabletext/react": "^4.0.3",
     "@portabletext/types": "^2.0.15",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
     "@sanity/client": "^7.12.1",
     "@sanity/document-internationalization": "^6.0.0",
     "@sanity/image-url": "^2.1.1",
@@ -38,7 +40,8 @@
     "sanity": "^6.3.0",
     "sanity-plugin-internationalized-array": "^5.0.0",
     "server-only": "^0.0.1",
-    "styled-components": "^6.3.9"
+    "styled-components": "^6.3.9",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -46,6 +49,7 @@
     "@types/nodemailer": "^6.4.24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.185.4",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "playwright": "^1.62.1",

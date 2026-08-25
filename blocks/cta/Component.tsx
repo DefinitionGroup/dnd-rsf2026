@@ -20,6 +20,7 @@ export default function CtaBlock({ block }: BlockProps<"ctaBlock">) {
   return (
     <section className={`section-space page-gutter ${TONE_SECTION[tone]}`}>
       <Reveal className="container-text text-center">
+        {block.eyebrow && <p className="eyebrow mb-4">{block.eyebrow}</p>}
         <h2 className="mx-auto max-w-[24ch] whitespace-pre-line">{block.headline}</h2>
         {block.body && <p className="whisper mx-auto mt-3 max-w-[42rem]">{block.body}</p>}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">

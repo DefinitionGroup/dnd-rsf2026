@@ -1,10 +1,11 @@
 /**
  * Apple-architecture section header: centered, stacked, symmetric.
- * Headline (heading 40/600) + optional whisper subhead (300 weight).
- * `eyebrow` is accepted for API stability but never rendered above the heading
- * (it labels the product bar's jump link instead).
+ * Optional eyebrow (small lime pill) + headline (heading 40/600) + optional
+ * whisper subhead (300 weight). The eyebrow also labels the product bar's
+ * jump link (see PageBuilder).
  */
 export default function SectionHeader({
+  eyebrow,
   headline,
   intro,
   align = "center",
@@ -20,10 +21,11 @@ export default function SectionHeader({
   size?: "lg" | "md";
   className?: string;
 }) {
-  if (!headline && !intro) return null;
+  if (!eyebrow && !headline && !intro) return null;
   const center = align === "center";
   return (
     <header className={`rise container-text ${center ? "text-center" : ""} ${className}`}>
+      {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
       {headline && (
         <Tag className={`whitespace-pre-line ${size === "md" ? "display-md" : ""} ${center ? "mx-auto" : ""} max-w-[24ch]`}>{headline}</Tag>
       )}
