@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { stegaClean } from "next-sanity";
 import ActionLink from "@/components/ActionLink";
 import { resolveImageUrl } from "@/sanity/lib/image";
 import { EASE_OUT_EXPO } from "@/lib/motion";
@@ -129,7 +130,9 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
             </motion.p>
           )}
           <Heading className="display mx-auto max-w-[18ch]">
-            <MaskedWords text={block.headline} startDelay={T_WORDS} reduce={reduce} play={play} />
+            {/* stegaClean before splitting: draft-mode stega characters would otherwise
+                scatter invisible glyphs through the word masks and break lines mid-word */}
+            <MaskedWords text={stegaClean(block.headline)} startDelay={T_WORDS} reduce={reduce} play={play} />
           </Heading>
           {block.summary && (
             <motion.p {...enter(T_SUMMARY, { y: 16, blur: 8 })} className="whisper mx-auto mt-4 max-w-[40rem]">
