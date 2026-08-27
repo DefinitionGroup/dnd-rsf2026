@@ -56,3 +56,5 @@ sanity.config.ts · sanity.cli.ts (typegen config) · sanity.types.ts (generated
 See `.env.example`. `SANITY_API_READ_TOKEN` must be a **Viewer** token (it is
 exposed to the browser in draft mode). CORS origins need *Allow credentials*:
 `pnpm exec sanity cors add https://<deploy-origin> --credentials`.
+
+> Deployed from [DefinitionGroup/dnd-rsf2026](https://github.com/DefinitionGroup/dnd-rsf2026) — production: https://dnd-rsf2026.vercel.app
