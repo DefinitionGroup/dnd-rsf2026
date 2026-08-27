@@ -81,28 +81,26 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
       transition: { duration: 0.9, ease: EASE_OUT_EXPO, delay },
     };
   };
+  // Rise mode is the LCP-friendly entrance: plain 0.4s fades, 30ms stagger, no masks or blurs.
+  const fade = (i: number) => ({
+    initial: reduce ? (false as const) : { opacity: 0 },
+    animate: { opacity: play ? 1 : 0 },
+    transition: { duration: 0.4, ease: "easeOut" as const, delay: 0.1 + i * 0.03 },
+  });
+  const copy = (i: number, gridDelay: number, from?: { y?: number; blur?: number }) =>
+    entrance === "rise" ? fade(i) : enter(gridDelay, from);
 
   return (
     <section className="canvas-dark on-dark">
       <div className="relative isolate h-[calc(100svh-var(--header-h)-var(--productbar-h))] min-h-[560px] overflow-hidden bg-black">
         {/* the film — grid mode settles from a slow overscale behind the mask;
-            rise mode fades in while scaling down slowly from 1.12 (no position movement) */}
+            rise mode is a short plain fade (cheap, LCP-friendly) */}
         <motion.div
           aria-hidden={!showVideo}
           className="absolute inset-0"
-          initial={reduce ? false : entrance === "rise" ? { opacity: 0, scale: 1.12 } : { scale: 1.06 }}
-          animate={
-            entrance === "rise"
-              ? play
-                ? { opacity: 1, scale: 1 }
-                : { opacity: 0, scale: 1.12 }
-              : { scale: play ? 1 : 1.06 }
-          }
-          transition={
-            entrance === "rise"
-              ? { duration: 3.6, ease: EASE_OUT_EXPO, opacity: { duration: 1.4, ease: "easeOut" } }
-              : { duration: 2.8, ease: EASE_OUT_EXPO }
-          }
+          initial={reduce ? false : entrance === "rise" ? { opacity: 0 } : { scale: 1.06 }}
+          animate={entrance === "rise" ? { opacity: play ? 1 : 0 } : { scale: play ? 1 : 1.06 }}
+          transition={entrance === "rise" ? { duration: 0.8, ease: "easeOut" } : { duration: 2.8, ease: EASE_OUT_EXPO }}
         >
           {showVideo ? (
             <video
@@ -141,22 +139,28 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
         {/* copy cascade */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-[var(--gutter)] pb-16 pt-8 text-center">
           {block.brand && (
-            <motion.p {...enter(T_BRAND, { y: 10 })} className="eyebrow mb-5">
+            <motion.p {...copy(0, T_BRAND, { y: 10 })} className="eyebrow mb-5">
               {block.brand}
             </motion.p>
           )}
           <Heading className="display mx-auto max-w-[18ch]">
-            {/* stegaClean before splitting: draft-mode stega characters would otherwise
-                scatter invisible glyphs through the word masks and break lines mid-word */}
-            <MaskedWords text={stegaClean(block.headline)} startDelay={T_WORDS} reduce={reduce} play={play} />
+            {entrance === "rise" ? (
+              <motion.span {...fade(1)} className="block whitespace-pre-line">
+                {block.headline}
+              </motion.span>
+            ) : (
+              /* stegaClean before splitting: draft-mode stega characters would otherwise
+                 scatter invisible glyphs through the word masks and break lines mid-word */
+              <MaskedWords text={stegaClean(block.headline)} startDelay={T_WORDS} reduce={reduce} play={play} />
+            )}
           </Heading>
           {block.summary && (
-            <motion.p {...enter(T_SUMMARY, { y: 16, blur: 8 })} className="whisper mx-auto mt-4 max-w-[40rem]">
+            <motion.p {...copy(2, T_SUMMARY, { y: 16, blur: 8 })} className="whisper mx-auto mt-4 max-w-[40rem]">
               {block.summary}
             </motion.p>
           )}
           {hasCtas && (
-            <motion.div {...enter(T_CTAS)} className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <motion.div {...copy(3, T_CTAS)} className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <ActionLink link={block.primaryCta} variant="primary" />
               <ActionLink link={block.secondaryCta} variant="secondary" />
             </motion.div>
@@ -168,7 +172,7 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
             aria-hidden="true"
             initial={{ opacity: 0 }}
             animate={{ opacity: play ? 1 : 0 }}
-            transition={{ duration: 1, delay: T_HINT }}
+            transition={{ duration: 1, delay: entrance === "rise" ? 0.8 : T_HINT }}
             className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
           >
             <span className="caption tracking-[0.14em] uppercase">Scroll</span>
