@@ -93,6 +93,21 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
   return (
     <section className="canvas-dark on-dark">
       <div className="relative isolate h-[calc(100svh-var(--header-h)-var(--productbar-h))] min-h-[560px] overflow-hidden bg-black">
+        {/* static poster underlay: painted straight from the SSR HTML at high fetch
+            priority, so the hero has an LCP candidate before hydration and before
+            any entrance animation — the film fades in over it. Same URL as the
+            video's poster attribute, so the browser fetches it once. */}
+        {posterUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={posterUrl}
+            alt={showVideo ? "" : block.videoAlt}
+            aria-hidden={showVideo || undefined}
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+
         {/* the film — grid mode settles from a slow overscale behind the mask;
             rise mode is a short plain fade (cheap, LCP-friendly) */}
         <motion.div
@@ -102,7 +117,7 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
           animate={entrance === "rise" ? { opacity: play ? 1 : 0 } : { scale: play ? 1 : 1.06 }}
           transition={entrance === "rise" ? { duration: 0.8, ease: "easeOut" } : { duration: 2.8, ease: EASE_OUT_EXPO }}
         >
-          {showVideo ? (
+          {showVideo && (
             <video
               ref={videoRef}
               className="absolute inset-0 h-full w-full object-cover"
@@ -117,10 +132,7 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
             >
               <source src={videoUrl} type={block.video?.asset?.mimeType ?? undefined} />
             </video>
-          ) : posterUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={posterUrl} alt={block.videoAlt} className="absolute inset-0 h-full w-full object-cover" />
-          ) : null}
+          )}
           {shaderOn && <FilmLayer videoRef={videoRef} />}
         </motion.div>
 
