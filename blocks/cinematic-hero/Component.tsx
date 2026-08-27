@@ -8,6 +8,7 @@ import { resolveImageUrl } from "@/sanity/lib/image";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import type { BlockProps } from "@/blocks/types";
 import GridReveal from "./GridReveal";
+import GridLoop from "./GridLoop";
 
 const FilmLayer = dynamic(() => import("./FilmLayer"), { ssr: false });
 
@@ -63,6 +64,7 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
   const posterUrl = resolveImageUrl(block.poster, { width: 1920 });
   const showVideo = Boolean(videoUrl) && !reduce;
   const shaderOn = Boolean(block.shader) && showVideo;
+  const gridLoopOn = Boolean(block.gridLoop);
   const hasCtas = Boolean(block.primaryCta || block.secondaryCta);
 
   const play = started || reduce;
@@ -115,6 +117,9 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
         {/* entrance mask: black cover until the page is visible, then the flickering grid */}
         {!started && !reduce && <div aria-hidden="true" className="absolute inset-0 bg-black" />}
         {started && !reduce && !revealDone && <GridReveal onDone={() => setRevealDone(true)} />}
+
+        {/* optional persistent grid: the entrance texture stays alive in a quiet loop */}
+        {gridLoopOn && (reduce ? <GridLoop animate={false} /> : revealDone && <GridLoop animate />)}
 
         {/* copy cascade */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-[var(--gutter)] pb-16 pt-8 text-center">

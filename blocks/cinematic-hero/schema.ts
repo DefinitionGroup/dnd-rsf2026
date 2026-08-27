@@ -40,6 +40,14 @@ export const schema = defineType({
       description:
         "Renders the video through a WebGL shader — fine film grain, a feathered edge into the black canvas and a touch of lens fringing. Turn off to play the plain video.",
     }),
+    defineField({
+      name: "gridLoop",
+      title: "Persistent grid loop",
+      type: "boolean",
+      initialValue: false,
+      description:
+        "Keep the grid alive after the entrance — faint hairlines with cells breathing at different opacities, a quiet technical texture looping over the film.",
+    }),
     defineField({ name: "primaryCta", title: "Primary CTA", type: "linkField" }),
     defineField({ name: "secondaryCta", title: "Secondary CTA", type: "linkField" }),
   ],
