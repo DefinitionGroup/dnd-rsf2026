@@ -5,6 +5,7 @@
 import type { BlockComponent, BlockType } from "./types";
 import HeroBlock from "./hero/Component";
 import Hero3dBlock from "./hero-3d/Component";
+import CinematicHeroBlock from "./cinematic-hero/Component";
 import AnimatedHeadlineBlock from "./animated-headline/Component";
 import IntroBlock from "./intro/Component";
 import PortableTextBlock from "./portable-text/Component";
@@ -16,7 +17,8 @@ import ProductViewerBlock from "./product-viewer/Component";
 import BeforeAfterBlock from "./before-after/Component";
 import FeatureTourBlock from "./feature-tour/Component";
 import ComparisonTableBlock from "./comparison-table/Component";
-import FaqSpecBlock from "./faq-spec/Component";
+import SpecsBlock from "./specs/Component";
+import FaqBlock from "./faq/Component";
 import TestimonialBlock from "./testimonial/Component";
 import CtaBlock from "./cta/Component";
 import ContactFormBlock from "./contact-form/Component";
@@ -29,6 +31,7 @@ import IndicatorLegendBlock from "./indicator-legend/Component";
 export const blockComponents = {
   heroBlock: HeroBlock,
   hero3dBlock: Hero3dBlock,
+  cinematicHeroBlock: CinematicHeroBlock,
   animatedHeadlineBlock: AnimatedHeadlineBlock,
   introBlock: IntroBlock,
   portableTextBlock: PortableTextBlock,
@@ -40,7 +43,8 @@ export const blockComponents = {
   beforeAfterBlock: BeforeAfterBlock,
   featureTourBlock: FeatureTourBlock,
   comparisonTableBlock: ComparisonTableBlock,
-  faqSpecBlock: FaqSpecBlock,
+  specsBlock: SpecsBlock,
+  faqBlock: FaqBlock,
   testimonialBlock: TestimonialBlock,
   ctaBlock: CtaBlock,
   contactFormBlock: ContactFormBlock,

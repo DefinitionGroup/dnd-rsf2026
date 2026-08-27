@@ -265,20 +265,23 @@ export type VideoBlock = {
   privacyNotice?: string;
 };
 
-export type FaqSpecBlock = {
-  _type: "faqSpecBlock";
+export type FaqBlock = {
+  _type: "faqBlock";
   eyebrow?: string;
   headline?: string;
-  product?: ProductReference;
-  specsHeadline?: string;
-  showSpecs?: boolean;
-  faqHeadline?: string;
   faqs?: Array<{
     question: string;
     answer: RichText;
     _type: "faqItem";
     _key: string;
   }>;
+};
+
+export type SpecsBlock = {
+  _type: "specsBlock";
+  eyebrow?: string;
+  headline?: string;
+  product?: ProductReference;
   downloads?: Array<
     {
       _key: string;
@@ -446,6 +449,29 @@ export type AnimatedHeadlineBlock = {
   eyebrow?: string;
   headline: string;
   level: "h1" | "h2";
+};
+
+export type CinematicHeroBlock = {
+  _type: "cinematicHeroBlock";
+  brand?: string;
+  headline: string;
+  summary?: string;
+  video?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  poster?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  videoAlt: string;
+  shader?: boolean;
+  primaryCta?: LinkField;
+  secondaryCta?: LinkField;
 };
 
 export type Hero3dBlock = {
@@ -638,6 +664,9 @@ export type Page = {
       } & Hero3dBlock)
     | ({
         _key: string;
+      } & CinematicHeroBlock)
+    | ({
+        _key: string;
       } & AnimatedHeadlineBlock)
     | ({
         _key: string;
@@ -671,7 +700,10 @@ export type Page = {
       } & ComparisonTableBlock)
     | ({
         _key: string;
-      } & FaqSpecBlock)
+      } & SpecsBlock)
+    | ({
+        _key: string;
+      } & FaqBlock)
     | ({
         _key: string;
       } & VideoBlock)
@@ -872,7 +904,8 @@ export type AllSanitySchemaTypes =
   | HowItWorksBlock
   | SanityFileAssetReference
   | VideoBlock
-  | FaqSpecBlock
+  | FaqBlock
+  | SpecsBlock
   | ComparisonTableBlock
   | FeatureTourBlock
   | BeforeAfterBlock
@@ -884,6 +917,7 @@ export type AllSanitySchemaTypes =
   | PortableTextBlock
   | IntroBlock
   | AnimatedHeadlineBlock
+  | CinematicHeroBlock
   | Hero3dBlock
   | HeroBlock
   | SpecRow
@@ -917,7 +951,7 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/lib/queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_type == "page" && language == $locale && isHomepage == true][0]{  _id,  _updatedAt,  title,  "slug": slug.current,  language,  isHomepage,  navbarVariant,  metadata{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl},  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,  "translations": *[_type == "translation.metadata" && references(^._id)][0]    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },  content[]{  ...,  _type == "heroBlock" => {    ...,    image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    video{ asset->{ _id, url, mimeType } }  },  _type == "hero3dBlock" => {    ...,    model{ asset->{ _id, url, mimeType } }  },  _type == "splitContentBlock" => { ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productListBlock" => {    ...,    items[]{ _key, link, product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} }  },  _type == "productViewerBlock" => {    ...,    frames[] {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl}  },  _type == "beforeAfterBlock" => { ..., before {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }}, after {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "featureTourBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} } },  _type == "faqSpecBlock" => { ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} },  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } } },  _type == "testimonialBlock" => {    ...,    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }  }}}
+// Query: *[_type == "page" && language == $locale && isHomepage == true][0]{  _id,  _updatedAt,  title,  "slug": slug.current,  language,  isHomepage,  navbarVariant,  metadata{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl},  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,  "translations": *[_type == "translation.metadata" && references(^._id)][0]    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },  content[]{  ...,  _type == "heroBlock" => {    ...,    image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    video{ asset->{ _id, url, mimeType } }  },  _type == "hero3dBlock" => {    ...,    model{ asset->{ _id, url, mimeType } }  },  _type == "cinematicHeroBlock" => {    ...,    video{ asset->{ _id, url, mimeType } },    poster {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }}  },  _type == "splitContentBlock" => { ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productListBlock" => {    ...,    items[]{ _key, link, product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} }  },  _type == "productViewerBlock" => {    ...,    frames[] {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl}  },  _type == "beforeAfterBlock" => { ..., before {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }}, after {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "featureTourBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} } },  _type == "specsBlock" => { ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} },  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } } },  _type == "testimonialBlock" => {    ...,    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }  }}}
 export type HOME_PAGE_QUERY_RESULT = {
   _id: string;
   _updatedAt: string;
@@ -1043,6 +1077,36 @@ export type HOME_PAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "cinematicHeroBlock";
+        brand?: string;
+        headline: string;
+        summary?: string;
+        video: {
+          asset: {
+            _id: string;
+            url: string;
+            mimeType: string;
+          } | null;
+        } | null;
+        poster: {
+          asset: {
+            _id: string;
+            url: string;
+            lqip: string | null;
+            dimensions: SanityImageDimensions | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        videoAlt: string;
+        shader?: boolean;
+        primaryCta?: LinkField;
+        secondaryCta?: LinkField;
+      }
+    | {
+        _key: string;
         _type: "comparisonTableBlock";
         eyebrow?: string;
         headline?: string;
@@ -1146,71 +1210,15 @@ export type HOME_PAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
-        _type: "faqSpecBlock";
+        _type: "faqBlock";
         eyebrow?: string;
         headline?: string;
-        product: {
-          _id: string;
-          slug: string;
-          name: string | null;
-          tagline: string | null;
-          body: RichText | null;
-          category: string | null;
-          sku: string | null;
-          image: {
-            asset: {
-              _id: string;
-              url: string;
-              lqip: string | null;
-              dimensions: SanityImageDimensions | null;
-            } | null;
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          } | null;
-          imageAlt: string | null;
-          gallery: Array<{
-            _key: string;
-            alt: string;
-            caption: string | null;
-            image: {
-              asset: {
-                _id: string;
-                url: string;
-                lqip: string | null;
-                dimensions: SanityImageDimensions | null;
-              } | null;
-              media?: unknown;
-              hotspot?: SanityImageHotspot;
-              crop?: SanityImageCrop;
-              _type: "image";
-            };
-          }> | null;
-          specs: Array<{
-            _key: string;
-            label: string | null;
-            value: string;
-            unit: string | null;
-          }> | null;
-          legacyUrl: string | null;
-          manualUrl: string | null;
-          videoUrl: string | null;
-        } | null;
-        specsHeadline?: string;
-        showSpecs?: boolean;
-        faqHeadline?: string;
         faqs?: Array<{
           question: string;
           answer: RichText;
           _type: "faqItem";
           _key: string;
         }>;
-        downloads?: Array<
-          {
-            _key: string;
-          } & LinkField
-        >;
       }
     | {
         _key: string;
@@ -1564,6 +1572,65 @@ export type HOME_PAGE_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "specsBlock";
+        eyebrow?: string;
+        headline?: string;
+        product: {
+          _id: string;
+          slug: string;
+          name: string | null;
+          tagline: string | null;
+          body: RichText | null;
+          category: string | null;
+          sku: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string;
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          imageAlt: string | null;
+          gallery: Array<{
+            _key: string;
+            alt: string;
+            caption: string | null;
+            image: {
+              asset: {
+                _id: string;
+                url: string;
+                lqip: string | null;
+                dimensions: SanityImageDimensions | null;
+              } | null;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+          }> | null;
+          specs: Array<{
+            _key: string;
+            label: string | null;
+            value: string;
+            unit: string | null;
+          }> | null;
+          legacyUrl: string | null;
+          manualUrl: string | null;
+          videoUrl: string | null;
+        } | null;
+        downloads?: Array<
+          {
+            _key: string;
+          } & LinkField
+        >;
+      }
+    | {
+        _key: string;
         _type: "splitContentBlock";
         eyebrow?: string;
         headline: string;
@@ -1651,7 +1718,7 @@ export type HOME_PAGE_QUERY_RESULT = {
 
 // Source: sanity/lib/queries.ts
 // Variable: PAGE_BY_SLUG_QUERY
-// Query: coalesce(    *[_type == "page" && language == $locale && slug.current == $slug][0],    *[_type == "page" && language == "en" && slug.current == $slug][0]  ){  _id,  _updatedAt,  title,  "slug": slug.current,  language,  isHomepage,  navbarVariant,  metadata{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl},  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,  "translations": *[_type == "translation.metadata" && references(^._id)][0]    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },  content[]{  ...,  _type == "heroBlock" => {    ...,    image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    video{ asset->{ _id, url, mimeType } }  },  _type == "hero3dBlock" => {    ...,    model{ asset->{ _id, url, mimeType } }  },  _type == "splitContentBlock" => { ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productListBlock" => {    ...,    items[]{ _key, link, product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} }  },  _type == "productViewerBlock" => {    ...,    frames[] {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl}  },  _type == "beforeAfterBlock" => { ..., before {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }}, after {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "featureTourBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} } },  _type == "faqSpecBlock" => { ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} },  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } } },  _type == "testimonialBlock" => {    ...,    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }  }}}
+// Query: coalesce(    *[_type == "page" && language == $locale && slug.current == $slug][0],    *[_type == "page" && language == "en" && slug.current == $slug][0]  ){  _id,  _updatedAt,  title,  "slug": slug.current,  language,  isHomepage,  navbarVariant,  metadata{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl},  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,  "translations": *[_type == "translation.metadata" && references(^._id)][0]    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },  content[]{  ...,  _type == "heroBlock" => {    ...,    image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    video{ asset->{ _id, url, mimeType } }  },  _type == "hero3dBlock" => {    ...,    model{ asset->{ _id, url, mimeType } }  },  _type == "cinematicHeroBlock" => {    ...,    video{ asset->{ _id, url, mimeType } },    poster {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }}  },  _type == "splitContentBlock" => { ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productListBlock" => {    ...,    items[]{ _key, link, product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} }  },  _type == "productViewerBlock" => {    ...,    frames[] {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},    product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl}  },  _type == "beforeAfterBlock" => { ..., before {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }}, after {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "featureTourBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} } },  _type == "specsBlock" => { ..., product-> {  _id,  "slug": slug.current,  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),  category,  sku,  image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }},  imageAlt,  gallery[] { _key, alt, caption, image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  "specs": specs[]{    _key,    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),    value,    unit  },  legacyUrl,  manualUrl,  videoUrl} },  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} },  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } },  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {  ...,  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }} } } },  _type == "testimonialBlock" => {    ...,    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }  }}}
 export type PAGE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _updatedAt: string;
@@ -1777,6 +1844,36 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
       }
     | {
         _key: string;
+        _type: "cinematicHeroBlock";
+        brand?: string;
+        headline: string;
+        summary?: string;
+        video: {
+          asset: {
+            _id: string;
+            url: string;
+            mimeType: string;
+          } | null;
+        } | null;
+        poster: {
+          asset: {
+            _id: string;
+            url: string;
+            lqip: string | null;
+            dimensions: SanityImageDimensions | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        } | null;
+        videoAlt: string;
+        shader?: boolean;
+        primaryCta?: LinkField;
+        secondaryCta?: LinkField;
+      }
+    | {
+        _key: string;
         _type: "comparisonTableBlock";
         eyebrow?: string;
         headline?: string;
@@ -1880,71 +1977,15 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
       }
     | {
         _key: string;
-        _type: "faqSpecBlock";
+        _type: "faqBlock";
         eyebrow?: string;
         headline?: string;
-        product: {
-          _id: string;
-          slug: string;
-          name: string | null;
-          tagline: string | null;
-          body: RichText | null;
-          category: string | null;
-          sku: string | null;
-          image: {
-            asset: {
-              _id: string;
-              url: string;
-              lqip: string | null;
-              dimensions: SanityImageDimensions | null;
-            } | null;
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            _type: "image";
-          } | null;
-          imageAlt: string | null;
-          gallery: Array<{
-            _key: string;
-            alt: string;
-            caption: string | null;
-            image: {
-              asset: {
-                _id: string;
-                url: string;
-                lqip: string | null;
-                dimensions: SanityImageDimensions | null;
-              } | null;
-              media?: unknown;
-              hotspot?: SanityImageHotspot;
-              crop?: SanityImageCrop;
-              _type: "image";
-            };
-          }> | null;
-          specs: Array<{
-            _key: string;
-            label: string | null;
-            value: string;
-            unit: string | null;
-          }> | null;
-          legacyUrl: string | null;
-          manualUrl: string | null;
-          videoUrl: string | null;
-        } | null;
-        specsHeadline?: string;
-        showSpecs?: boolean;
-        faqHeadline?: string;
         faqs?: Array<{
           question: string;
           answer: RichText;
           _type: "faqItem";
           _key: string;
         }>;
-        downloads?: Array<
-          {
-            _key: string;
-          } & LinkField
-        >;
       }
     | {
         _key: string;
@@ -2295,6 +2336,65 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
         alt: string;
         hint?: string;
         autoRotate?: boolean;
+      }
+    | {
+        _key: string;
+        _type: "specsBlock";
+        eyebrow?: string;
+        headline?: string;
+        product: {
+          _id: string;
+          slug: string;
+          name: string | null;
+          tagline: string | null;
+          body: RichText | null;
+          category: string | null;
+          sku: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string;
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          imageAlt: string | null;
+          gallery: Array<{
+            _key: string;
+            alt: string;
+            caption: string | null;
+            image: {
+              asset: {
+                _id: string;
+                url: string;
+                lqip: string | null;
+                dimensions: SanityImageDimensions | null;
+              } | null;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              _type: "image";
+            };
+          }> | null;
+          specs: Array<{
+            _key: string;
+            label: string | null;
+            value: string;
+            unit: string | null;
+          }> | null;
+          legacyUrl: string | null;
+          manualUrl: string | null;
+          videoUrl: string | null;
+        } | null;
+        downloads?: Array<
+          {
+            _key: string;
+          } & LinkField
+        >;
       }
     | {
         _key: string;
@@ -2521,8 +2621,8 @@ export type PRODUCTS_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "page" && language == $locale && isHomepage == true][0]{\n  _id,\n  _updatedAt,\n  title,\n  "slug": slug.current,\n  language,\n  isHomepage,\n  navbarVariant,\n  metadata{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n},\n  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,\n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },\n  content[]{\n  ...,\n  _type == "heroBlock" => {\n    ...,\n    image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    video{ asset->{ _id, url, mimeType } }\n  },\n  _type == "hero3dBlock" => {\n    ...,\n    model{ asset->{ _id, url, mimeType } }\n  },\n  _type == "splitContentBlock" => { ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productListBlock" => {\n    ...,\n    items[]{ _key, link, product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} }\n  },\n  _type == "productViewerBlock" => {\n    ...,\n    frames[] {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n}\n  },\n  _type == "beforeAfterBlock" => { ..., before {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n}, after {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "featureTourBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} } },\n  _type == "faqSpecBlock" => { ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} },\n  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } } },\n  _type == "testimonialBlock" => {\n    ...,\n    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }\n  }\n}\n}': HOME_PAGE_QUERY_RESULT;
-    'coalesce(\n    *[_type == "page" && language == $locale && slug.current == $slug][0],\n    *[_type == "page" && language == "en" && slug.current == $slug][0]\n  ){\n  _id,\n  _updatedAt,\n  title,\n  "slug": slug.current,\n  language,\n  isHomepage,\n  navbarVariant,\n  metadata{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n},\n  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,\n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },\n  content[]{\n  ...,\n  _type == "heroBlock" => {\n    ...,\n    image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    video{ asset->{ _id, url, mimeType } }\n  },\n  _type == "hero3dBlock" => {\n    ...,\n    model{ asset->{ _id, url, mimeType } }\n  },\n  _type == "splitContentBlock" => { ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productListBlock" => {\n    ...,\n    items[]{ _key, link, product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} }\n  },\n  _type == "productViewerBlock" => {\n    ...,\n    frames[] {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n}\n  },\n  _type == "beforeAfterBlock" => { ..., before {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n}, after {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "featureTourBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} } },\n  _type == "faqSpecBlock" => { ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} },\n  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } } },\n  _type == "testimonialBlock" => {\n    ...,\n    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }\n  }\n}\n}': PAGE_BY_SLUG_QUERY_RESULT;
+    '*[_type == "page" && language == $locale && isHomepage == true][0]{\n  _id,\n  _updatedAt,\n  title,\n  "slug": slug.current,\n  language,\n  isHomepage,\n  navbarVariant,\n  metadata{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n},\n  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,\n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },\n  content[]{\n  ...,\n  _type == "heroBlock" => {\n    ...,\n    image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    video{ asset->{ _id, url, mimeType } }\n  },\n  _type == "hero3dBlock" => {\n    ...,\n    model{ asset->{ _id, url, mimeType } }\n  },\n  _type == "cinematicHeroBlock" => {\n    ...,\n    video{ asset->{ _id, url, mimeType } },\n    poster {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n}\n  },\n  _type == "splitContentBlock" => { ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productListBlock" => {\n    ...,\n    items[]{ _key, link, product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} }\n  },\n  _type == "productViewerBlock" => {\n    ...,\n    frames[] {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n}\n  },\n  _type == "beforeAfterBlock" => { ..., before {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n}, after {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "featureTourBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} } },\n  _type == "specsBlock" => { ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} },\n  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } } },\n  _type == "testimonialBlock" => {\n    ...,\n    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }\n  }\n}\n}': HOME_PAGE_QUERY_RESULT;
+    'coalesce(\n    *[_type == "page" && language == $locale && slug.current == $slug][0],\n    *[_type == "page" && language == "en" && slug.current == $slug][0]\n  ){\n  _id,\n  _updatedAt,\n  title,\n  "slug": slug.current,\n  language,\n  isHomepage,\n  navbarVariant,\n  metadata{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n},\n  "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id,\n  "translations": *[_type == "translation.metadata" && references(^._id)][0]\n    .translations[defined(value)]{ language, "slug": value->slug.current, "isHomepage": value->isHomepage },\n  content[]{\n  ...,\n  _type == "heroBlock" => {\n    ...,\n    image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    video{ asset->{ _id, url, mimeType } }\n  },\n  _type == "hero3dBlock" => {\n    ...,\n    model{ asset->{ _id, url, mimeType } }\n  },\n  _type == "cinematicHeroBlock" => {\n    ...,\n    video{ asset->{ _id, url, mimeType } },\n    poster {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n}\n  },\n  _type == "splitContentBlock" => { ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "galleryBlock" => { ..., images[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productListBlock" => {\n    ...,\n    items[]{ _key, link, product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} }\n  },\n  _type == "productViewerBlock" => {\n    ...,\n    frames[] {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n    product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n}\n  },\n  _type == "beforeAfterBlock" => { ..., before {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n}, after {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "featureTourBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} } },\n  _type == "specsBlock" => { ..., product-> {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n} },\n  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  _type == "howItWorksBlock" => { ..., steps[]{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } },\n  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} } } },\n  _type == "testimonialBlock" => {\n    ...,\n    "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }\n  }\n}\n}': PAGE_BY_SLUG_QUERY_RESULT;
     '*[_type == "page" && defined(slug.current)] | order(language asc, slug.current asc){\n    _id,\n    _updatedAt,\n    title,\n    "slug": slug.current,\n    language,\n    isHomepage,\n    "groupId": *[_type == "translation.metadata" && references(^._id)][0]._id\n  }': PAGE_ROUTES_QUERY_RESULT;
     '{\n    "settings": *[_type == "siteSettings"][0]{\n      _id,\n      brandName,\n      "description": coalesce(description[language == $locale][0].value, description[language == "en"][0].value),\n      email,\n      phone,\n      legacySiteUrl,\n      dealerLocatorUrl,\n      socialLinks,\n      defaultMetadata{ ..., image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} }\n    },\n    "menu": coalesce(\n      *[_type == "menu" && language == $locale][0],\n      *[_type == "menu" && language == "en"][0]\n    ){ _id, language, items, cta, footerLinks }\n  }': SITE_SHELL_QUERY_RESULT;
     '*[_type == "product"] | order(category asc) {\n  _id,\n  "slug": slug.current,\n  "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value),\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == "en"][0].value),\n  "body": coalesce(body[language == $locale][0].value, body[language == "en"][0].value),\n  category,\n  sku,\n  image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n},\n  imageAlt,\n  gallery[] { _key, alt, caption, image {\n  ...,\n  asset->{ _id, url, "lqip": metadata.lqip, "dimensions": metadata.dimensions }\n} },\n  "specs": specs[]{\n    _key,\n    "label": coalesce(label[language == $locale][0].value, label[language == "en"][0].value),\n    value,\n    unit\n  },\n  legacyUrl,\n  manualUrl,\n  videoUrl\n}': PRODUCTS_QUERY_RESULT;

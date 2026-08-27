@@ -12,7 +12,7 @@ const DEFAULT_DURATION = 6;
 
 /**
  * Apple "how it works": frost canvas (film-dark for tone "ink"); the steps list
- * lives in a white `.tile` (a real object), numbers `.body-sm text-fg-muted`, titles
+ * lives in a white `.tile` (a real object), numbers in pebble circles (active: lime), titles
  * h4 21/600, body `.body-sm text-fg-muted`, progress = hairline with a carbon fill.
  */
 const TONES = {
@@ -220,7 +220,12 @@ function StepItem({
         tabIndex={isActive ? 0 : -1}
         className="group flex w-full cursor-pointer gap-4 py-5 text-left"
       >
-        <span className={`body-sm num w-6 shrink-0 pt-1 ${tone.number}`} aria-hidden>
+        <span
+          className={`body-sm num grid size-7 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
+            isActive ? "bg-lime text-carbon" : `bg-pebble ${tone.number}`
+          }`}
+          aria-hidden
+        >
           {index + 1}
         </span>
         <span className="min-w-0 flex-1">

@@ -9,6 +9,7 @@ import type { Locale } from "@/lib/i18n";
 import type { PageRoute } from "@/lib/translations";
 import { heroDemo } from "@/blocks/hero/demo";
 import { hero3dDemo } from "@/blocks/hero-3d/demo";
+import { cinematicHeroDemo } from "@/blocks/cinematic-hero/demo";
 import { animatedHeadlineDemo } from "@/blocks/animated-headline/demo";
 import { introDemo } from "@/blocks/intro/demo";
 import { portableTextDemo } from "@/blocks/portable-text/demo";
@@ -20,7 +21,8 @@ import { productViewerDemo } from "@/blocks/product-viewer/demo";
 import { beforeAfterDemo } from "@/blocks/before-after/demo";
 import { featureTourDemo } from "@/blocks/feature-tour/demo";
 import { comparisonTableDemo } from "@/blocks/comparison-table/demo";
-import { faqSpecDemo } from "@/blocks/faq-spec/demo";
+import { specsDemo } from "@/blocks/specs/demo";
+import { faqDemo } from "@/blocks/faq/demo";
 import { testimonialDemo } from "@/blocks/testimonial/demo";
 import { ctaDemo } from "@/blocks/cta/demo";
 import { contactFormDemo } from "@/blocks/contact-form/demo";
@@ -135,6 +137,14 @@ const clariseaPage = page({
     image: "original/clarisea-banner.jpg",
   },
   content: [
+    cinematicHeroDemo({
+      brand: "ClariSea Gen 3",
+      headline: "Clear water,\nrunning itself.",
+      summary: "The fleece advances, the float rises, the controller takes over — filtration you watch once, then forget.",
+      videoAlt: "ClariSea Gen 3 fleece filter running in a reef sump",
+      primaryCta: { label: "Which size do I need?", href: "#productFinderBlock" },
+      secondaryCta: { label: "Find a stockist", href: STOCKISTS },
+    }),
     heroDemo({
       brand: "ClariSea Gen 3 · Automatic fleece filter",
       headline: "Here comes the fleece filter\nthat does more.",
@@ -241,20 +251,23 @@ const clariseaPage = page({
         { file: "original/clarisea-body.jpg", alt: "Fully pre-assembled ClariSea Gen 3 body", caption: "Fully assembled body" },
       ],
     }),
-    faqSpecDemo({
+    specsDemo({
       eyebrow: "Details",
-      headline: "Specs and answers.",
+      headline: "Technical specifications",
       product: clarisea,
+      downloads: [
+        { label: "Quick start guide (PDF)", href: "https://www.theaquariumsolution.com/product/3078/409" },
+        { label: "Gen 3 parts list (PDF)", href: "https://www.theaquariumsolution.com/product/3078/409" },
+      ],
+    }),
+    faqDemo({
+      headline: "Frequently asked questions",
       faqs: [
         { question: "Which model do I need?", answer: ["Match the recommended flow to your return-pump throughput and sump water depth (5–20 cm submerged, 10 cm optimal). As a guide: SK-3000 G3 up to about 600 l, SK-5000 G3 up to about 1,200 l. Use the finder above."] },
         { question: "How often do I change the roll?", answer: ["A 40 m roll typically lasts eight to ten weeks. The controller alerts you when the roll is empty; the drop-in holder means you change it without lifting the unit out of the sump."] },
         { question: "Does it work in freshwater?", answer: ["Yes — ClariSea Gen 3 fits both freshwater and saltwater systems, including fish-breeding and coral-propagation set-ups."] },
         { question: "What does the water bypass do?", answer: ["It lets you decide how much of the flow passes through the fleece — handy when feeding, medicating or tuning overall flow."] },
         { question: "What happens if the fleece jams?", answer: ["The controller stops advancing, flashes red and sounds an alarm; the integrated fail-safe overflow lets water pass so your return pump never runs dry."] },
-      ],
-      downloads: [
-        { label: "Quick start guide (PDF)", href: "https://www.theaquariumsolution.com/product/3078/409" },
-        { label: "Gen 3 parts list (PDF)", href: "https://www.theaquariumsolution.com/product/3078/409" },
       ],
     }),
     ctaDemo({
@@ -318,16 +331,19 @@ const spektrumPage = page({
         { file: "reef-corals.jpg", alt: "Corals under Spektrum light", caption: "Result" },
       ],
     }),
-    faqSpecDemo({
+    specsDemo({
       eyebrow: "Details",
-      headline: "Specs and answers.",
+      headline: "Technical specifications",
       product: spektrum150,
+      downloads: [{ label: "Manual (PDF)", href: "https://www.theaquariumsolution.com/product/8438/545" }],
+    }),
+    faqDemo({
+      headline: "Frequently asked questions",
       faqs: [
         { question: "How many Spektrum 150s do I need?", answer: ["One unit covers roughly 60 × 60 cm at SPS intensity; for mixed reefs you can stretch to 75 × 60 cm. Overlap units by 10 cm for even PAR."] },
         { question: "Does it need a fan?", answer: ["No. The aluminium body is the heatsink; the light stays below 45 °C at full power."] },
         { question: "Can I control several lights together?", answer: ["Yes — group them in the app and they share one schedule."] },
       ],
-      downloads: [{ label: "Manual (PDF)", href: "https://www.theaquariumsolution.com/product/8438/545" }],
     }),
     ctaDemo({ eyebrow: "Next step", headline: "See Spektrum in a store near you.", primaryCta: { label: "Find a stockist", href: STOCKISTS }, secondaryCta: { label: "Ask a question", href: "/en/contact" }, tone: "lime" }),
   ],
@@ -392,10 +408,13 @@ const funktionPage = page({
       tone: "sand",
       cta: { label: "Find a stockist", href: STOCKISTS },
     }),
-    faqSpecDemo({
+    specsDemo({
       eyebrow: "Details",
-      headline: "Specs and answers.",
+      headline: "Technical specifications",
       product: funktionPump,
+    }),
+    faqDemo({
+      headline: "Frequently asked questions",
       faqs: [
         { question: "Which size for my sump?", answer: ["Aim for 5–10× tank volume per hour through the sump. A 400 l tank is happy on the Funktion 4000 throttled to about 60 %."] },
         { question: "Can it run externally?", answer: ["Yes — all sizes are rated for in-line use with the supplied barbed fittings."] },
@@ -469,16 +488,19 @@ const khPage = page({
         { title: "Less testing", text: "Reagent lasts for months; you read a graph instead of a test kit." },
       ],
     }),
-    faqSpecDemo({
+    specsDemo({
       eyebrow: "Details",
-      headline: "Specs and answers.",
+      headline: "Technical specifications",
       product: khManager,
+      downloads: [{ label: "Manual (PDF)", href: "https://www.theaquariumsolution.com/product/8339/418" }],
+    }),
+    faqDemo({
+      headline: "Frequently asked questions",
       faqs: [
         { question: "Which dosing pumps does it control?", answer: ["Any doser with a 0–10 V or dry-contact input, plus our own D-D doser natively over the app."] },
         { question: "How often do I replace reagent?", answer: ["At 12 tests a day a 500 ml bottle lasts about three months."] },
         { question: "Does it need calibration?", answer: ["It self-calibrates against the reference solution every 30 tests."] },
       ],
-      downloads: [{ label: "Manual (PDF)", href: "https://www.theaquariumsolution.com/product/8339/418" }],
     }),
     testimonialDemo({
       testimonials: [{ quote: "Set it up on a Sunday, stopped worrying on Monday. My KH graph is a flat line now.", name: "Jonas W.", role: "Reef keeper", company: "Hamburg" }],
@@ -503,7 +525,36 @@ const contactPage = page({
   ],
 });
 
-const pages: PageDocument[] = [home, clariseaPage, spektrumPage, funktionPage, khPage, contactPage];
+const cinematicPage = page({
+  id: "cinematic",
+  title: "ClariSea — The Film",
+  slug: "cinematic",
+  navbarVariant: "dark",
+  metadata: {
+    title: "ClariSea Gen 3 — the film | The Aquarium Solution",
+    description: "Watch the fleece advance, the float rise and the controller take over — ClariSea Gen 3 in motion.",
+    image: "clarisea-video-poster.jpg",
+  },
+  content: [
+    cinematicHeroDemo({
+      brand: "ClariSea Gen 3",
+      headline: "Clear water,\nrunning itself.",
+      summary: "The fleece advances, the float rises, the controller takes over — filtration you watch once, then forget.",
+      videoAlt: "ClariSea Gen 3 fleece filter running in a reef sump",
+      primaryCta: { label: "Which size do I need?", href: "/en/clarisea#productFinderBlock" },
+      secondaryCta: { label: "Find a stockist", href: STOCKISTS },
+    }),
+    introDemo({
+      eyebrow: "Why ClariSea",
+      headline: "Every claim in that film points at a part you can touch.",
+      body: [
+        "Automatic fleece advance, a fail-safe overflow and a controller that doses attention so you don't have to. No filter socks, no guesswork.",
+      ],
+    }),
+  ],
+});
+
+const pages: PageDocument[] = [home, clariseaPage, spektrumPage, funktionPage, khPage, contactPage, cinematicPage];
 
 /* ------------------------------------------------------------- shell */
 

@@ -43,6 +43,11 @@ const pageContentFragment = /* groq */ `content[]{
     ...,
     model{ asset->{ _id, url, mimeType } }
   },
+  _type == "cinematicHeroBlock" => {
+    ...,
+    video{ asset->{ _id, url, mimeType } },
+    poster ${imageFragment}
+  },
   _type == "splitContentBlock" => { ..., image ${imageFragment} },
   _type == "galleryBlock" => { ..., images[] ${captionedImageFragment} },
   _type == "productListBlock" => {
@@ -57,7 +62,7 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "beforeAfterBlock" => { ..., before ${imageFragment}, after ${imageFragment} },
   _type == "featureTourBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
   _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> ${productFragment} } },
-  _type == "faqSpecBlock" => { ..., product-> ${productFragment} },
+  _type == "specsBlock" => { ..., product-> ${productFragment} },
   _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster ${imageFragment} },
   _type == "howItWorksBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
   _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image ${imageFragment} } } },

@@ -10,7 +10,8 @@ import type { BlockProps } from "@/blocks/types";
  * if present, is offered as a ghost link to the video section rather than
  * played behind text.
  */
-export default function HeroBlock({ block }: BlockProps<"heroBlock">) {
+export default function HeroBlock({ block, index }: BlockProps<"heroBlock">) {
+  const Heading = index === 0 ? "h1" : "h2";
   const videoUrl = resolveVideoUrl(block.video);
   const hasImage = Boolean(block.image?.asset);
   if (!videoUrl && !hasImage) return null;
@@ -18,7 +19,7 @@ export default function HeroBlock({ block }: BlockProps<"heroBlock">) {
   return (
     <section className="canvas-white overflow-hidden">
       <div className="rise-load container-page page-gutter pt-[clamp(3rem,7vw,5.5rem)] text-center">
-        <h1 className="mx-auto max-w-[18ch] whitespace-pre-line">{block.headline}</h1>
+        <Heading className="display mx-auto max-w-[18ch] whitespace-pre-line">{block.headline}</Heading>
         {block.summary && <p className="whisper mx-auto mt-3 max-w-[40rem]">{block.summary}</p>}
         {(block.primaryCta || block.secondaryCta || videoUrl) && (
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { stegaClean } from "next-sanity";
 import SectionHeader from "@/components/SectionHeader";
@@ -46,21 +46,6 @@ function SeverityChip({ severity: sev }: { severity: Severity }) {
   return <span className={`caption shrink-0 rounded-[var(--radius-pill)] px-2.5 py-1 ${SEVERITY_CHIP[sev]}`}>{SEVERITY_LABEL[sev]}</span>;
 }
 
-function ChevronIcon({ open }: { open: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      width="20"
-      height="20"
-      aria-hidden="true"
-      focusable="false"
-      className={`shrink-0 text-fg-muted transition-transform duration-300 ease-[var(--ease-out-expo)] ${open ? "rotate-180" : ""}`}
-    >
-      <path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 /* Block                                                               */
 /* ------------------------------------------------------------------ */
@@ -69,7 +54,6 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
   const signals = (block.signals ?? []).filter((s) => s && s.name);
   const [selected, setSelected] = useState(0);
   const reduceMotion = useReducedMotion();
-  const uid = useId();
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   if (signals.length === 0) return null;
@@ -87,18 +71,12 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
       <div className="container-site">
         {(block.eyebrow || block.headline || block.intro) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
-          {/* ---------- Device ---------- */}
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <Device signal={active} label={block.deviceLabel} reduceMotion={Boolean(reduceMotion)} />
-          </div>
-
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
           {/* ---------- Signal list ---------- */}
-          <ul className="hairline flex flex-col border-t" aria-label={block.headline ?? "Indicator states"}>
+          <ul className="hairline flex flex-col self-start border-t" aria-label={block.headline ?? "Indicator states"}>
             {signals.map((s, i) => {
               const isActive = i === selected;
               const sev = severity(s.severity);
-              const panelId = `${uid}-panel-${i}`;
               return (
                 <li key={s._key} className="hairline border-b">
                   <button
@@ -107,7 +85,6 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
                     }}
                     type="button"
                     aria-pressed={isActive}
-                    aria-controls={panelId}
                     onClick={() => setSelected(i)}
                     onKeyDown={(e) => {
                       if (e.key === "ArrowDown") {
@@ -125,56 +102,22 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
                       }
                     }}
                     className={`flex w-full cursor-pointer items-center gap-4 py-5 text-left transition-colors duration-200 ${
-                      isActive ? "text-fg" : "text-fg hover:text-fg-muted"
+                      isActive ? "text-fg" : "text-fg-muted hover:text-fg"
                     }`}
                   >
                     <MiniLed color={ledColor(s.ledColor)} />
                     <span className="body min-w-0 flex-1 font-semibold">{s.name}</span>
                     <SeverityChip severity={sev} />
-                    <ChevronIcon open={isActive} />
                   </button>
-
-                  <AnimatePresence initial={false}>
-                    {isActive && (
-                      <motion.div
-                        id={panelId}
-                        key="panel"
-                        initial={reduceMotion ? false : { height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { height: 0, opacity: 0 }}
-                        transition={reduceMotion ? { duration: 0 } : { duration: 0.35, ease: EASE_PRESENCE }}
-                        className="overflow-hidden"
-                      >
-                        <div className="grid gap-5 pb-6 pl-7 pr-2 sm:grid-cols-2">
-                          <dl className="contents">
-                            <div>
-                              <dt className="body-sm text-fg-muted">Signal</dt>
-                              <dd className="mt-1 text-fg">
-                                LED {COLOR_LABEL[ledColor(s.ledColor)].toLowerCase()}, {PATTERN_LABEL[pattern(s.pattern)]}
-                                {s.sound ? ` · ${s.sound}` : ""}
-                              </dd>
-                            </div>
-                            {s.meaning && (
-                              <div>
-                                <dt className="body-sm text-fg-muted">What it means</dt>
-                                <dd className="mt-1 text-fg">{s.meaning}</dd>
-                              </div>
-                            )}
-                            {s.action && (
-                              <div className="sm:col-span-2">
-                                <dt className="body-sm text-fg-muted">What to do</dt>
-                                <dd className="mt-1 font-semibold text-fg">{s.action}</dd>
-                              </div>
-                            )}
-                          </dl>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </li>
               );
             })}
           </ul>
+
+          {/* ---------- Device ---------- */}
+          <div className="max-lg:order-first lg:sticky lg:top-24 lg:self-start">
+            <Device signal={active} label={block.deviceLabel} reduceMotion={Boolean(reduceMotion)} />
+          </div>
         </div>
       </div>
     </section>
