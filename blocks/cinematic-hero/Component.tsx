@@ -86,19 +86,23 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
     <section className="canvas-dark on-dark">
       <div className="relative isolate h-[calc(100svh-var(--header-h)-var(--productbar-h))] min-h-[560px] overflow-hidden bg-black">
         {/* the film — grid mode settles from a slow overscale behind the mask;
-            rise mode scales & fades the frame up from the bottom third */}
+            rise mode fades in while scaling down slowly from 1.12 (no position movement) */}
         <motion.div
           aria-hidden={!showVideo}
           className="absolute inset-0"
-          initial={reduce ? false : entrance === "rise" ? { opacity: 0, y: "30%", scale: 1.12 } : { scale: 1.06 }}
+          initial={reduce ? false : entrance === "rise" ? { opacity: 0, scale: 1.12 } : { scale: 1.06 }}
           animate={
             entrance === "rise"
               ? play
-                ? { opacity: 1, y: "0%", scale: 1 }
-                : { opacity: 0, y: "30%", scale: 1.12 }
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 1.12 }
               : { scale: play ? 1 : 1.06 }
           }
-          transition={entrance === "rise" ? { duration: 1.6, ease: EASE_OUT_EXPO } : { duration: 2.8, ease: EASE_OUT_EXPO }}
+          transition={
+            entrance === "rise"
+              ? { duration: 3.6, ease: EASE_OUT_EXPO, opacity: { duration: 1.4, ease: "easeOut" } }
+              : { duration: 2.8, ease: EASE_OUT_EXPO }
+          }
         >
           {showVideo ? (
             <video
