@@ -1,0 +1,3770 @@
+[
+  {
+    "options": {
+      "apiVersion": "2025-02-19",
+      "languages": [
+        {
+          "id": "en",
+          "title": "English"
+        },
+        {
+          "id": "de",
+          "title": "Deutsch"
+        },
+        {
+          "id": "fr",
+          "title": "Français"
+        },
+        {
+          "id": "pl",
+          "title": "Polski"
+        },
+        {
+          "id": "ja",
+          "title": "日本語"
+        }
+      ]
+    },
+    "validation": [
+      {
+        "level": "error",
+        "rules": [
+          {
+            "flag": "custom"
+          }
+        ]
+      }
+    ],
+    "of": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "type": "internationalizedArrayReferenceValue",
+        "title": "Internationalized array reference"
+      }
+    ],
+    "name": "internationalizedArrayReference",
+    "type": "array",
+    "title": "Internationalized array"
+  },
+  {
+    "fields": [
+      {
+        "weak": false,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "to": [
+          {
+            "type": "page"
+          },
+          {
+            "type": "menu"
+          }
+        ],
+        "name": "value",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      }
+    ],
+    "name": "internationalizedArrayReferenceValue",
+    "type": "object",
+    "title": "Internationalized array reference"
+  },
+  {
+    "liveEdit": true,
+    "fields": [
+      {
+        "options": {
+          "apiVersion": "2025-02-19",
+          "languages": [
+            {
+              "id": "en",
+              "title": "English"
+            },
+            {
+              "id": "de",
+              "title": "Deutsch"
+            },
+            {
+              "id": "fr",
+              "title": "Français"
+            },
+            {
+              "id": "pl",
+              "title": "Polski"
+            },
+            {
+              "id": "ja",
+              "title": "日本語"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "translations",
+        "type": "internationalizedArrayReference"
+      },
+      {
+        "options": {
+          "list": [
+            "page",
+            "menu"
+          ]
+        },
+        "description": "Optional: Used to filter the reference fields above so all translations share the same types.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "readOnly": "conditional",
+        "name": "schemaTypes",
+        "type": "array"
+      }
+    ],
+    "name": "translation.metadata",
+    "type": "document",
+    "title": "Translation metadata"
+  },
+  {
+    "options": {
+      "apiVersion": "2025-10-15",
+      "languages": [
+        {
+          "id": "en",
+          "title": "English"
+        },
+        {
+          "id": "de",
+          "title": "Deutsch"
+        },
+        {
+          "id": "fr",
+          "title": "Français"
+        },
+        {
+          "id": "pl",
+          "title": "Polski"
+        },
+        {
+          "id": "ja",
+          "title": "日本語"
+        }
+      ]
+    },
+    "validation": [
+      {
+        "level": "error",
+        "rules": [
+          {
+            "flag": "custom"
+          }
+        ]
+      }
+    ],
+    "of": [
+      {
+        "type": "internationalizedArrayStringValue",
+        "title": "Internationalized array string"
+      }
+    ],
+    "name": "internationalizedArrayString",
+    "type": "array",
+    "title": "Internationalized array"
+  },
+  {
+    "options": {
+      "apiVersion": "2025-10-15",
+      "languages": [
+        {
+          "id": "en",
+          "title": "English"
+        },
+        {
+          "id": "de",
+          "title": "Deutsch"
+        },
+        {
+          "id": "fr",
+          "title": "Français"
+        },
+        {
+          "id": "pl",
+          "title": "Polski"
+        },
+        {
+          "id": "ja",
+          "title": "日本語"
+        }
+      ]
+    },
+    "validation": [
+      {
+        "level": "error",
+        "rules": [
+          {
+            "flag": "custom"
+          }
+        ]
+      }
+    ],
+    "of": [
+      {
+        "type": "internationalizedArrayTextValue",
+        "title": "Internationalized array text"
+      }
+    ],
+    "name": "internationalizedArrayText",
+    "type": "array",
+    "title": "Internationalized array"
+  },
+  {
+    "options": {
+      "apiVersion": "2025-10-15",
+      "languages": [
+        {
+          "id": "en",
+          "title": "English"
+        },
+        {
+          "id": "de",
+          "title": "Deutsch"
+        },
+        {
+          "id": "fr",
+          "title": "Français"
+        },
+        {
+          "id": "pl",
+          "title": "Polski"
+        },
+        {
+          "id": "ja",
+          "title": "日本語"
+        }
+      ]
+    },
+    "validation": [
+      {
+        "level": "error",
+        "rules": [
+          {
+            "flag": "custom"
+          }
+        ]
+      }
+    ],
+    "of": [
+      {
+        "type": "internationalizedArrayRichTextValue",
+        "title": "Internationalized array richText"
+      }
+    ],
+    "name": "internationalizedArrayRichText",
+    "type": "array",
+    "title": "Internationalized array"
+  },
+  {
+    "fields": [
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      }
+    ],
+    "name": "internationalizedArrayStringValue",
+    "type": "object",
+    "title": "Internationalized array string"
+  },
+  {
+    "fields": [
+      {
+        "name": "value",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      }
+    ],
+    "name": "internationalizedArrayTextValue",
+    "type": "object",
+    "title": "Internationalized array text"
+  },
+  {
+    "fields": [
+      {
+        "name": "value",
+        "type": "richText"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      }
+    ],
+    "name": "internationalizedArrayRichTextValue",
+    "type": "object",
+    "title": "Internationalized array richText"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Internal path (/en/spektrum-150), anchor (#specs) or full URL (legacy site, dealer locator).",
+        "name": "href",
+        "type": "string",
+        "title": "URL or path"
+      }
+    ],
+    "name": "linkField",
+    "type": "object",
+    "title": "Link"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "SEO title"
+      },
+      {
+        "rows": 3,
+        "name": "description",
+        "type": "text",
+        "title": "SEO description"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Social image"
+      }
+    ],
+    "name": "metadata",
+    "type": "object"
+  },
+  {
+    "of": [
+      {
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bulleted list"
+          },
+          {
+            "value": "number",
+            "title": "Numbered list"
+          }
+        ],
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "level": "error",
+                      "rules": [
+                        {
+                          "flag": "presence",
+                          "constraint": "required"
+                        }
+                      ]
+                    }
+                  ],
+                  "name": "href",
+                  "type": "string",
+                  "title": "URL or path"
+                }
+              ],
+              "name": "link",
+              "type": "object"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Italic"
+            },
+            {
+              "value": "code",
+              "title": "Code"
+            },
+            {
+              "value": "underline",
+              "title": "Underline"
+            },
+            {
+              "value": "strike-through",
+              "title": "Strike"
+            }
+          ]
+        },
+        "of": [],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h2",
+            "title": "Heading 2"
+          },
+          {
+            "value": "h3",
+            "title": "Heading 3"
+          },
+          {
+            "value": "h4",
+            "title": "Heading 4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "type": "block"
+      }
+    ],
+    "name": "richText",
+    "type": "array",
+    "title": "Rich text"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "alt",
+        "type": "string",
+        "title": "Alt text"
+      },
+      {
+        "name": "caption",
+        "type": "string"
+      }
+    ],
+    "name": "captionedImage",
+    "type": "object",
+    "title": "Image"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "apiVersion": "2025-10-15",
+          "languages": [
+            {
+              "id": "en",
+              "title": "English"
+            },
+            {
+              "id": "de",
+              "title": "Deutsch"
+            },
+            {
+              "id": "fr",
+              "title": "Français"
+            },
+            {
+              "id": "pl",
+              "title": "Polski"
+            },
+            {
+              "id": "ja",
+              "title": "日本語"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "label",
+        "type": "internationalizedArrayString"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "unit",
+        "type": "string"
+      }
+    ],
+    "name": "specRow",
+    "type": "object",
+    "title": "Specification"
+  },
+  {
+    "fields": [
+      {
+        "description": "Small line above the headline, e.g. product family.",
+        "name": "brand",
+        "type": "string",
+        "title": "Brand signal"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "rows": 3,
+        "name": "summary",
+        "type": "text",
+        "title": "Supporting sentence"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "description": "Hero background when no video is selected; also the video poster and reduced-motion fallback.",
+        "name": "image",
+        "type": "image",
+        "title": "Fallback / poster image"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Optional full-bleed video. MP4 or WebM; muted, looping, inline.",
+        "name": "video",
+        "type": "file",
+        "title": "Background video"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "imageAlt",
+        "type": "string",
+        "title": "Media alternative text"
+      },
+      {
+        "name": "primaryCta",
+        "type": "linkField",
+        "title": "Primary CTA"
+      },
+      {
+        "name": "secondaryCta",
+        "type": "linkField",
+        "title": "Secondary CTA"
+      }
+    ],
+    "name": "heroBlock",
+    "type": "object",
+    "title": "Hero"
+  },
+  {
+    "description": "Scroll-pinned hero: the product model assembles from an exploded view as the visitor scrolls.",
+    "fields": [
+      {
+        "description": "Small line above the headline, e.g. product family.",
+        "name": "brand",
+        "type": "string",
+        "title": "Brand signal"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "rows": 3,
+        "name": "summary",
+        "type": "text",
+        "title": "Supporting sentence"
+      },
+      {
+        "options": {
+          "accept": ".glb,model/gltf-binary"
+        },
+        "description": "Optional override. Compressed glTF binary (meshopt). Defaults to the bundled ClariSea model.",
+        "name": "model",
+        "type": "file",
+        "title": "3D model (.glb)"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Describes the 3D scene for assistive technology.",
+        "name": "modelAlt",
+        "type": "string",
+        "title": "Model alternative text"
+      },
+      {
+        "name": "primaryCta",
+        "type": "linkField",
+        "title": "Primary CTA"
+      },
+      {
+        "name": "secondaryCta",
+        "type": "linkField",
+        "title": "Secondary CTA"
+      }
+    ],
+    "name": "hero3dBlock",
+    "type": "object",
+    "title": "Hero — 3D assembly"
+  },
+  {
+    "description": "Full-viewport film hero: the background video is revealed through a flickering grid mask, then headline, tagline and pills enter word by word.",
+    "fields": [
+      {
+        "description": "Small pill above the headline, e.g. product family.",
+        "name": "brand",
+        "type": "string",
+        "title": "Brand signal"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "rows": 3,
+        "name": "summary",
+        "type": "text",
+        "title": "Supporting sentence"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Short, loopable clip (muted). H.264 MP4 or WebM, ideally under 10 MB.",
+        "name": "video",
+        "type": "file",
+        "title": "Background video"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "First frame stand-in — shown while the video loads and for visitors who prefer reduced motion.",
+        "name": "poster",
+        "type": "image",
+        "title": "Poster image"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Describes the footage for assistive technology.",
+        "name": "videoAlt",
+        "type": "string",
+        "title": "Video description"
+      },
+      {
+        "initialValue": true,
+        "description": "Renders the video through a WebGL shader — fine film grain, a feathered edge into the black canvas and a touch of lens fringing. Turn off to play the plain video.",
+        "name": "shader",
+        "type": "boolean",
+        "title": "WebGL film treatment"
+      },
+      {
+        "initialValue": "grid",
+        "options": {
+          "list": [
+            {
+              "title": "Grid raster — flickering cell reveal (+ optional loop below)",
+              "value": "grid"
+            },
+            {
+              "title": "Film rise — video scales & fades up from below, copy follows",
+              "value": "rise"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "entrance",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "description": "Grid raster only: keep the grid alive after the entrance — faint hairlines with cells breathing at different opacities, a quiet technical texture looping over the film.",
+        "hidden": "conditional",
+        "name": "gridLoop",
+        "type": "boolean",
+        "title": "Persistent grid loop"
+      },
+      {
+        "name": "primaryCta",
+        "type": "linkField",
+        "title": "Primary CTA"
+      },
+      {
+        "name": "secondaryCta",
+        "type": "linkField",
+        "title": "Secondary CTA"
+      }
+    ],
+    "name": "cinematicHeroBlock",
+    "type": "object",
+    "title": "Hero — cinematic film"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "initialValue": "h2",
+        "options": {
+          "list": [
+            {
+              "title": "H1 — page heading",
+              "value": "h1"
+            },
+            {
+              "title": "H2 — section heading",
+              "value": "h2"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "h1",
+                  "h2"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Use H1 only when this is the main page heading.",
+        "name": "level",
+        "type": "string",
+        "title": "Heading level"
+      }
+    ],
+    "name": "animatedHeadlineBlock",
+    "type": "object",
+    "title": "Animated headline"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "name": "body",
+        "type": "richText"
+      }
+    ],
+    "name": "introBlock",
+    "type": "object",
+    "title": "Editorial intro"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "body",
+        "type": "richText",
+        "title": "Text"
+      }
+    ],
+    "name": "portableTextBlock",
+    "type": "object",
+    "title": "Rich text"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 2,
+                "name": "text",
+                "type": "text"
+              }
+            ],
+            "type": "object",
+            "name": "featureItem"
+          }
+        ],
+        "name": "items",
+        "type": "array"
+      }
+    ],
+    "name": "featureListBlock",
+    "type": "object",
+    "title": "Feature list"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "name": "body",
+        "type": "richText"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "imageAlt",
+        "type": "string",
+        "title": "Image alt text"
+      },
+      {
+        "initialValue": false,
+        "name": "reverse",
+        "type": "boolean",
+        "title": "Place image first"
+      },
+      {
+        "initialValue": "paper",
+        "options": {
+          "list": [
+            {
+              "title": "Paper (white)",
+              "value": "paper"
+            },
+            {
+              "title": "Sand (light grey)",
+              "value": "sand"
+            },
+            {
+              "title": "Ink (dark)",
+              "value": "ink"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "tone",
+        "type": "string"
+      },
+      {
+        "name": "cta",
+        "type": "linkField",
+        "title": "Optional CTA"
+      }
+    ],
+    "name": "splitContentBlock",
+    "type": "object",
+    "title": "Split content"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "type": "captionedImage",
+            "title": "Image"
+          }
+        ],
+        "name": "images",
+        "type": "array"
+      }
+    ],
+    "name": "galleryBlock",
+    "type": "object",
+    "title": "Gallery"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "to": [
+                  {
+                    "type": "product"
+                  }
+                ],
+                "name": "product",
+                "type": "reference"
+              },
+              {
+                "description": "Where the card links to: a landing page (/en/spektrum-150), an anchor, or the product page on the main site. Falls back to the product's legacy URL.",
+                "name": "link",
+                "type": "linkField",
+                "title": "Link target"
+              }
+            ],
+            "type": "object",
+            "name": "productListItem"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Products"
+      }
+    ],
+    "name": "productListBlock",
+    "type": "object",
+    "title": "Product list"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "description": "Optional; frames below override the product gallery.",
+        "to": [
+          {
+            "type": "product"
+          }
+        ],
+        "name": "product",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "layout": "grid"
+        },
+        "description": "12–36 evenly spaced frames for a smooth spin. One frame = zoom-only viewer.",
+        "of": [
+          {
+            "options": {
+              "hotspot": false
+            },
+            "type": "image"
+          }
+        ],
+        "name": "frames",
+        "type": "array",
+        "title": "Frames (in rotation order)"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "alt",
+        "type": "string",
+        "title": "Alt text"
+      },
+      {
+        "initialValue": "Drag to rotate · scroll to zoom",
+        "name": "hint",
+        "type": "string",
+        "title": "Interaction hint"
+      },
+      {
+        "initialValue": true,
+        "name": "autoRotate",
+        "type": "boolean",
+        "title": "Auto-rotate until interaction"
+      }
+    ],
+    "name": "productViewerBlock",
+    "type": "object",
+    "title": "360° / zoom viewer"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "before",
+        "type": "image",
+        "title": "Before image"
+      },
+      {
+        "initialValue": "Before",
+        "name": "beforeLabel",
+        "type": "string",
+        "title": "Before label"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "after",
+        "type": "image",
+        "title": "After image"
+      },
+      {
+        "initialValue": "After",
+        "name": "afterLabel",
+        "type": "string",
+        "title": "After label"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "alt",
+        "type": "string",
+        "title": "Alt text (describes the comparison)"
+      },
+      {
+        "initialValue": 50,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ]
+          }
+        ],
+        "name": "startPosition",
+        "type": "number",
+        "title": "Initial handle position (%)"
+      },
+      {
+        "name": "caption",
+        "type": "string"
+      }
+    ],
+    "name": "beforeAfterBlock",
+    "type": "object",
+    "title": "Before / after slider"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 2
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "body",
+                "type": "text"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "image",
+                "type": "image",
+                "title": "Image for this step"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "imageAlt",
+                "type": "string",
+                "title": "Image alt"
+              },
+              {
+                "description": "e.g. 150 W",
+                "name": "stat",
+                "type": "string",
+                "title": "Stat (optional)"
+              },
+              {
+                "name": "statLabel",
+                "type": "string",
+                "title": "Stat label"
+              }
+            ],
+            "type": "object",
+            "name": "featureTourStep"
+          }
+        ],
+        "name": "steps",
+        "type": "array"
+      },
+      {
+        "initialValue": "ink",
+        "options": {
+          "list": [
+            {
+              "title": "Ink (dark)",
+              "value": "ink"
+            },
+            {
+              "title": "Paper",
+              "value": "paper"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "tone",
+        "type": "string"
+      }
+    ],
+    "name": "featureTourBlock",
+    "type": "object",
+    "title": "Feature tour (scroll)"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "initialValue": "Feature",
+        "name": "rowHeader",
+        "type": "string",
+        "title": "First column header"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 2
+              },
+              {
+                "flag": "max",
+                "constraint": 4
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "name": "subtitle",
+                "type": "string"
+              },
+              {
+                "to": [
+                  {
+                    "type": "product"
+                  }
+                ],
+                "name": "product",
+                "type": "reference",
+                "title": "Product (optional)"
+              },
+              {
+                "initialValue": false,
+                "name": "highlight",
+                "type": "boolean",
+                "title": "Highlight this column"
+              },
+              {
+                "name": "cta",
+                "type": "linkField",
+                "title": "CTA"
+              }
+            ],
+            "type": "object",
+            "name": "comparisonColumn"
+          }
+        ],
+        "name": "columns",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "label",
+                "type": "string"
+              },
+              {
+                "name": "hint",
+                "type": "string",
+                "title": "Hint / tooltip"
+              },
+              {
+                "description": "Use 'yes' / 'no' for check / cross icons, '—' for n/a, or any text. Fill only the first cell (leave the rest out) to span that value across all columns — for shared specs that apply to every column.",
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "cells",
+                "type": "array",
+                "title": "Cells (one per column, in order)"
+              }
+            ],
+            "type": "object",
+            "name": "comparisonRow"
+          }
+        ],
+        "name": "rows",
+        "type": "array"
+      },
+      {
+        "rows": 2,
+        "name": "footnote",
+        "type": "text"
+      }
+    ],
+    "name": "comparisonTableBlock",
+    "type": "object",
+    "title": "Comparison table"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "initialValue": "Technical specifications",
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "to": [
+          {
+            "type": "product"
+          }
+        ],
+        "name": "product",
+        "type": "reference",
+        "title": "Product (for specs)"
+      },
+      {
+        "of": [
+          {
+            "type": "linkField",
+            "title": "Link"
+          }
+        ],
+        "name": "downloads",
+        "type": "array",
+        "title": "Downloads (manuals, datasheets)"
+      }
+    ],
+    "name": "specsBlock",
+    "type": "object",
+    "title": "Specifications"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "initialValue": "Frequently asked questions",
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "question",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "answer",
+                "type": "richText"
+              }
+            ],
+            "type": "object",
+            "name": "faqItem"
+          }
+        ],
+        "name": "faqs",
+        "type": "array",
+        "title": "Questions"
+      }
+    ],
+    "name": "faqBlock",
+    "type": "object",
+    "title": "FAQ"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "initialValue": "file",
+        "options": {
+          "list": [
+            {
+              "title": "Uploaded file",
+              "value": "file"
+            },
+            {
+              "title": "External URL (YouTube / Vimeo)",
+              "value": "external"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "file",
+                  "external"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "source",
+        "type": "string"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "hidden": "conditional",
+        "name": "file",
+        "type": "file",
+        "title": "Video file"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "YouTube or Vimeo watch/share URL",
+        "hidden": "conditional",
+        "name": "url",
+        "type": "url",
+        "title": "Video URL"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Shown before play (required for external videos: nothing loads from YouTube until the visitor clicks).",
+        "name": "poster",
+        "type": "image",
+        "title": "Poster image"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "alt",
+        "type": "string",
+        "title": "Alt / description"
+      },
+      {
+        "name": "caption",
+        "type": "string"
+      },
+      {
+        "initialValue": "contained",
+        "options": {
+          "list": [
+            {
+              "title": "Contained (16:9 card)",
+              "value": "contained"
+            },
+            {
+              "title": "Full-bleed",
+              "value": "bleed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "layout",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "name": "autoplay",
+        "type": "boolean",
+        "title": "Autoplay muted loop (uploaded files only)"
+      },
+      {
+        "initialValue": "The video is loaded from YouTube/Vimeo only after you click play.",
+        "name": "privacyNotice",
+        "type": "string",
+        "title": "Privacy notice (external)"
+      }
+    ],
+    "name": "videoBlock",
+    "type": "object",
+    "title": "Video"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 2
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "body",
+                "type": "text"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "name": "image",
+                "type": "image"
+              },
+              {
+                "name": "imageAlt",
+                "type": "string",
+                "title": "Image alt"
+              },
+              {
+                "initialValue": 6,
+                "name": "durationSeconds",
+                "type": "number",
+                "title": "Auto-advance after (s)"
+              }
+            ],
+            "type": "object",
+            "name": "howItWorksStep"
+          }
+        ],
+        "name": "steps",
+        "type": "array"
+      },
+      {
+        "initialValue": true,
+        "name": "autoplay",
+        "type": "boolean",
+        "title": "Auto-advance"
+      },
+      {
+        "initialValue": "paper",
+        "options": {
+          "list": [
+            {
+              "title": "Paper",
+              "value": "paper"
+            },
+            {
+              "title": "Ink (dark)",
+              "value": "ink"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "tone",
+        "type": "string"
+      }
+    ],
+    "name": "howItWorksBlock",
+    "type": "object",
+    "title": "How it works (stepper)"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "initialValue": "Aquarium volume",
+        "name": "volumeLabel",
+        "type": "string",
+        "title": "Volume input label"
+      },
+      {
+        "initialValue": 50,
+        "name": "volumeMin",
+        "type": "number",
+        "title": "Volume min (litres)"
+      },
+      {
+        "initialValue": 1500,
+        "name": "volumeMax",
+        "type": "number",
+        "title": "Volume max (litres)"
+      },
+      {
+        "initialValue": 400,
+        "name": "volumeDefault",
+        "type": "number",
+        "title": "Volume default (litres)"
+      },
+      {
+        "initialValue": "Stocking / feeding",
+        "name": "loadLabel",
+        "type": "string",
+        "title": "Bioload input label"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "label",
+                "type": "string"
+              },
+              {
+                "initialValue": 1,
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      },
+                      {
+                        "flag": "min",
+                        "constraint": 0.1
+                      }
+                    ]
+                  }
+                ],
+                "description": "1 = as is; 1.3 = treat the tank as 30 % larger (heavy feeding).",
+                "name": "factor",
+                "type": "number",
+                "title": "Volume multiplier"
+              },
+              {
+                "initialValue": 1,
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      },
+                      {
+                        "flag": "min",
+                        "constraint": 0.1
+                      }
+                    ]
+                  }
+                ],
+                "description": "1 = base roll life; 0.7 = rolls last 30 % less.",
+                "name": "rollFactor",
+                "type": "number",
+                "title": "Roll-life multiplier"
+              }
+            ],
+            "type": "object",
+            "name": "loadOption"
+          }
+        ],
+        "name": "loadOptions",
+        "type": "array",
+        "title": "Bioload options"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "Leave empty for 'anything larger'.",
+                "name": "maxEffectiveVolume",
+                "type": "number",
+                "title": "Up to effective volume (litres)"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "resultTitle",
+                "type": "string",
+                "title": "Result title"
+              },
+              {
+                "rows": 2,
+                "name": "resultBody",
+                "type": "text",
+                "title": "Result body"
+              },
+              {
+                "name": "flowLph",
+                "type": "number",
+                "title": "Flow (l/h)"
+              },
+              {
+                "name": "rollWeeks",
+                "type": "number",
+                "title": "Base roll life (weeks)"
+              },
+              {
+                "to": [
+                  {
+                    "type": "product"
+                  }
+                ],
+                "name": "product",
+                "type": "reference"
+              },
+              {
+                "name": "cta",
+                "type": "linkField",
+                "title": "CTA"
+              }
+            ],
+            "type": "object",
+            "name": "finderRule"
+          }
+        ],
+        "name": "rules",
+        "type": "array",
+        "title": "Rules (checked in order; first match wins)"
+      },
+      {
+        "initialValue": "Our recommendation",
+        "name": "resultLabel",
+        "type": "string",
+        "title": "Result label"
+      },
+      {
+        "initialValue": "Expected roll life",
+        "name": "rollLifeLabel",
+        "type": "string",
+        "title": "Roll-life label"
+      },
+      {
+        "rows": 2,
+        "name": "footnote",
+        "type": "text"
+      }
+    ],
+    "name": "productFinderBlock",
+    "type": "object",
+    "title": "Product finder (calculator)"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 2
+              },
+              {
+                "flag": "max",
+                "constraint": 6
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "description": "Numbers count up on scroll (e.g. 5000, 8–10, 40).",
+                "name": "value",
+                "type": "string"
+              },
+              {
+                "name": "prefix",
+                "type": "string"
+              },
+              {
+                "description": "e.g. l/h, m, weeks",
+                "name": "suffix",
+                "type": "string",
+                "title": "Suffix / unit"
+              },
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "label",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "stat"
+          }
+        ],
+        "name": "stats",
+        "type": "array"
+      },
+      {
+        "initialValue": "lime",
+        "options": {
+          "list": [
+            {
+              "title": "Lime",
+              "value": "lime"
+            },
+            {
+              "title": "Ink (dark)",
+              "value": "ink"
+            },
+            {
+              "title": "Paper",
+              "value": "paper"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "tone",
+        "type": "string"
+      }
+    ],
+    "name": "statStripBlock",
+    "type": "object",
+    "title": "Stat strip"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ]
+                  }
+                ],
+                "name": "name",
+                "type": "string",
+                "title": "State"
+              },
+              {
+                "initialValue": "blue",
+                "options": {
+                  "list": [
+                    {
+                      "title": "Blue",
+                      "value": "blue"
+                    },
+                    {
+                      "title": "Red",
+                      "value": "red"
+                    },
+                    {
+                      "title": "Blue / red alternating",
+                      "value": "blueRed"
+                    },
+                    {
+                      "title": "Off",
+                      "value": "off"
+                    }
+                  ]
+                },
+                "name": "ledColor",
+                "type": "string",
+                "title": "LED colour"
+              },
+              {
+                "initialValue": "solid",
+                "options": {
+                  "list": [
+                    {
+                      "title": "Solid",
+                      "value": "solid"
+                    },
+                    {
+                      "title": "Flash",
+                      "value": "flash"
+                    },
+                    {
+                      "title": "Slow pulse",
+                      "value": "pulse"
+                    }
+                  ]
+                },
+                "name": "pattern",
+                "type": "string"
+              },
+              {
+                "description": "e.g. 'Beep every 5 s' or 'None'",
+                "name": "sound",
+                "type": "string"
+              },
+              {
+                "rows": 2,
+                "name": "meaning",
+                "type": "text",
+                "title": "What it means"
+              },
+              {
+                "rows": 2,
+                "name": "action",
+                "type": "text",
+                "title": "What to do"
+              },
+              {
+                "initialValue": "info",
+                "options": {
+                  "list": [
+                    {
+                      "title": "Normal",
+                      "value": "info"
+                    },
+                    {
+                      "title": "Warning",
+                      "value": "warning"
+                    },
+                    {
+                      "title": "Alarm",
+                      "value": "alarm"
+                    }
+                  ]
+                },
+                "name": "severity",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "signal"
+          }
+        ],
+        "name": "signals",
+        "type": "array"
+      },
+      {
+        "initialValue": "Smart controller",
+        "name": "deviceLabel",
+        "type": "string",
+        "title": "Device label"
+      }
+    ],
+    "name": "indicatorLegendBlock",
+    "type": "object",
+    "title": "Indicator / alarm legend"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "type": "testimonial"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to testimonial"
+          }
+        ],
+        "name": "testimonials",
+        "type": "array"
+      }
+    ],
+    "name": "testimonialBlock",
+    "type": "object",
+    "title": "Testimonials"
+  },
+  {
+    "fields": [
+      {
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "rows": 3,
+        "name": "body",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "primaryCta",
+        "type": "linkField",
+        "title": "Primary CTA"
+      },
+      {
+        "name": "secondaryCta",
+        "type": "linkField",
+        "title": "Secondary CTA"
+      },
+      {
+        "initialValue": "lime",
+        "options": {
+          "list": [
+            {
+              "title": "Lime",
+              "value": "lime"
+            },
+            {
+              "title": "Ink (dark)",
+              "value": "ink"
+            },
+            {
+              "title": "Paper",
+              "value": "paper"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "tone",
+        "type": "string"
+      }
+    ],
+    "name": "ctaBlock",
+    "type": "object",
+    "title": "Call to action"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Contact",
+        "name": "eyebrow",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "headline",
+        "type": "text"
+      },
+      {
+        "rows": 3,
+        "name": "intro",
+        "type": "text",
+        "title": "Introduction"
+      },
+      {
+        "description": "Shown next to the form; defaults to the stockists page on the main site.",
+        "name": "dealerLocatorCta",
+        "type": "linkField",
+        "title": "Dealer locator link"
+      },
+      {
+        "initialValue": "Name",
+        "name": "nameLabel",
+        "type": "string",
+        "title": "Name"
+      },
+      {
+        "initialValue": "Company or shop (optional)",
+        "name": "companyLabel",
+        "type": "string",
+        "title": "Company / shop"
+      },
+      {
+        "initialValue": "Email",
+        "name": "emailLabel",
+        "type": "string",
+        "title": "Email"
+      },
+      {
+        "initialValue": "Phone (optional)",
+        "name": "phoneLabel",
+        "type": "string",
+        "title": "Phone"
+      },
+      {
+        "initialValue": "Country",
+        "name": "countryLabel",
+        "type": "string",
+        "title": "Country"
+      },
+      {
+        "initialValue": "I am interested in",
+        "name": "interestLabel",
+        "type": "string",
+        "title": "Interest"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "interestOptions",
+        "type": "array",
+        "title": "Interest options"
+      },
+      {
+        "initialValue": "Message",
+        "name": "messageLabel",
+        "type": "string",
+        "title": "Message"
+      },
+      {
+        "initialValue": "Send enquiry",
+        "name": "submitLabel",
+        "type": "string",
+        "title": "Submit button"
+      },
+      {
+        "rows": 2,
+        "initialValue": "We only use your details to answer this enquiry.",
+        "name": "privacyNotice",
+        "type": "text",
+        "title": "Privacy note"
+      },
+      {
+        "initialValue": "Thank you — we have received your message.",
+        "name": "successTitle",
+        "type": "string",
+        "title": "Success title"
+      },
+      {
+        "rows": 2,
+        "initialValue": "We will get back to you as soon as possible.",
+        "name": "successMessage",
+        "type": "text",
+        "title": "Success message"
+      },
+      {
+        "rows": 2,
+        "initialValue": "We could not send your message. Please try again.",
+        "name": "errorMessage",
+        "type": "text",
+        "title": "Error message"
+      }
+    ],
+    "name": "contactFormBlock",
+    "type": "object",
+    "title": "Contact form"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "apiVersion": "2025-10-15",
+          "languages": [
+            {
+              "id": "en",
+              "title": "English"
+            },
+            {
+              "id": "de",
+              "title": "Deutsch"
+            },
+            {
+              "id": "fr",
+              "title": "Français"
+            },
+            {
+              "id": "pl",
+              "title": "Polski"
+            },
+            {
+              "id": "ja",
+              "title": "日本語"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "internationalizedArrayString"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Shared across locales (used for anchors and ids, not routing).",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "apiVersion": "2025-10-15",
+          "languages": [
+            {
+              "id": "en",
+              "title": "English"
+            },
+            {
+              "id": "de",
+              "title": "Deutsch"
+            },
+            {
+              "id": "fr",
+              "title": "Français"
+            },
+            {
+              "id": "pl",
+              "title": "Polski"
+            },
+            {
+              "id": "ja",
+              "title": "日本語"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "tagline",
+        "type": "internationalizedArrayString"
+      },
+      {
+        "options": {
+          "apiVersion": "2025-10-15",
+          "languages": [
+            {
+              "id": "en",
+              "title": "English"
+            },
+            {
+              "id": "de",
+              "title": "Deutsch"
+            },
+            {
+              "id": "fr",
+              "title": "Français"
+            },
+            {
+              "id": "pl",
+              "title": "Polski"
+            },
+            {
+              "id": "ja",
+              "title": "日本語"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "body",
+        "type": "internationalizedArrayRichText",
+        "title": "Description"
+      },
+      {
+        "description": "e.g. Lighting, Pumps, Water chemistry",
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "sku",
+        "type": "string",
+        "title": "SKU / model"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Primary image"
+      },
+      {
+        "name": "imageAlt",
+        "type": "string",
+        "title": "Primary image alt"
+      },
+      {
+        "of": [
+          {
+            "type": "captionedImage",
+            "title": "Image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "type": "specRow",
+            "title": "Specification"
+          }
+        ],
+        "name": "specs",
+        "type": "array",
+        "title": "Specifications"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "legacyUrl",
+        "type": "url",
+        "title": "Product page on theaquariumsolution.com"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "manualUrl",
+        "type": "url",
+        "title": "Manual / datasheet URL"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "videoUrl",
+        "type": "url",
+        "title": "Video URL (YouTube etc.)"
+      }
+    ],
+    "name": "product",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "English",
+              "value": "en"
+            },
+            {
+              "title": "Deutsch",
+              "value": "de"
+            },
+            {
+              "title": "Français",
+              "value": "fr"
+            },
+            {
+              "title": "Polski",
+              "value": "pl"
+            },
+            {
+              "title": "日本語",
+              "value": "ja"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "en",
+                  "de",
+                  "fr",
+                  "pl",
+                  "ja"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "readOnly": true,
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      },
+      {
+        "rows": 5,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "quote",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "title": "Company / shop / tank"
+      },
+      {
+        "initialValue": false,
+        "name": "approved",
+        "type": "boolean",
+        "title": "Approved for publication"
+      }
+    ],
+    "name": "testimonial",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "English",
+              "value": "en"
+            },
+            {
+              "title": "Deutsch",
+              "value": "de"
+            },
+            {
+              "title": "Français",
+              "value": "fr"
+            },
+            {
+              "title": "Polski",
+              "value": "pl"
+            },
+            {
+              "title": "日本語",
+              "value": "ja"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "en",
+                  "de",
+                  "fr",
+                  "pl",
+                  "ja"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "readOnly": true,
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "type": "linkField",
+            "title": "Link"
+          }
+        ],
+        "name": "items",
+        "type": "array"
+      },
+      {
+        "name": "cta",
+        "type": "linkField",
+        "title": "Primary CTA"
+      },
+      {
+        "of": [
+          {
+            "type": "linkField",
+            "title": "Link"
+          }
+        ],
+        "name": "footerLinks",
+        "type": "array",
+        "title": "Footer links"
+      }
+    ],
+    "name": "menu",
+    "type": "document",
+    "title": "Navigation"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "brandName",
+        "type": "string",
+        "title": "Brand name"
+      },
+      {
+        "options": {
+          "apiVersion": "2025-10-15",
+          "languages": [
+            {
+              "id": "en",
+              "title": "English"
+            },
+            {
+              "id": "de",
+              "title": "Deutsch"
+            },
+            {
+              "id": "fr",
+              "title": "Français"
+            },
+            {
+              "id": "pl",
+              "title": "Polski"
+            },
+            {
+              "id": "ja",
+              "title": "日本語"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "description",
+        "type": "internationalizedArrayText"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "email",
+        "type": "array",
+        "title": "Contact email(s)"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "phone",
+        "type": "array",
+        "title": "Phone number(s)"
+      },
+      {
+        "initialValue": "https://www.theaquariumsolution.com",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "legacySiteUrl",
+        "type": "url",
+        "title": "Main website URL"
+      },
+      {
+        "initialValue": "https://www.theaquariumsolution.com/stockists",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "dealerLocatorUrl",
+        "type": "url",
+        "title": "Dealer locator URL"
+      },
+      {
+        "of": [
+          {
+            "type": "linkField",
+            "title": "Link"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "array",
+        "title": "Social links"
+      },
+      {
+        "name": "defaultMetadata",
+        "type": "metadata",
+        "title": "Default metadata"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document",
+    "title": "Site settings"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "English",
+              "value": "en"
+            },
+            {
+              "title": "Deutsch",
+              "value": "de"
+            },
+            {
+              "title": "Français",
+              "value": "fr"
+            },
+            {
+              "title": "Polski",
+              "value": "pl"
+            },
+            {
+              "title": "日本語",
+              "value": "ja"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "en",
+                  "de",
+                  "fr",
+                  "pl",
+                  "ja"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "readOnly": true,
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "documentInternationalization": {
+            "exclude": true
+          }
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "Localized per language. Not copied when creating a translation — generate it from the translated title.",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "description": "Optional: the product this landing page is about (used for JSON-LD and defaults).",
+        "to": [
+          {
+            "type": "product"
+          }
+        ],
+        "name": "product",
+        "type": "reference"
+      },
+      {
+        "initialValue": false,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "description": "One homepage per language.",
+        "name": "isHomepage",
+        "type": "boolean",
+        "title": "Homepage"
+      },
+      {
+        "initialValue": "light",
+        "options": {
+          "list": [
+            {
+              "title": "Light text (over dark hero)",
+              "value": "light"
+            },
+            {
+              "title": "Dark text",
+              "value": "dark"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "navbarVariant",
+        "type": "string",
+        "title": "Navigation contrast"
+      },
+      {
+        "name": "metadata",
+        "type": "metadata"
+      },
+      {
+        "options": {
+          "insertMenu": {
+            "views": [
+              {
+                "name": "grid"
+              },
+              {
+                "name": "list"
+              }
+            ]
+          }
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "type": "heroBlock",
+            "title": "Hero"
+          },
+          {
+            "description": "Scroll-pinned hero: the product model assembles from an exploded view as the visitor scrolls.",
+            "type": "hero3dBlock",
+            "title": "Hero — 3D assembly"
+          },
+          {
+            "description": "Full-viewport film hero: the background video is revealed through a flickering grid mask, then headline, tagline and pills enter word by word.",
+            "type": "cinematicHeroBlock",
+            "title": "Hero — cinematic film"
+          },
+          {
+            "type": "animatedHeadlineBlock",
+            "title": "Animated headline"
+          },
+          {
+            "type": "introBlock",
+            "title": "Editorial intro"
+          },
+          {
+            "type": "portableTextBlock",
+            "title": "Rich text"
+          },
+          {
+            "type": "featureListBlock",
+            "title": "Feature list"
+          },
+          {
+            "type": "splitContentBlock",
+            "title": "Split content"
+          },
+          {
+            "type": "galleryBlock",
+            "title": "Gallery"
+          },
+          {
+            "type": "productListBlock",
+            "title": "Product list"
+          },
+          {
+            "type": "productViewerBlock",
+            "title": "360° / zoom viewer"
+          },
+          {
+            "type": "beforeAfterBlock",
+            "title": "Before / after slider"
+          },
+          {
+            "type": "featureTourBlock",
+            "title": "Feature tour (scroll)"
+          },
+          {
+            "type": "comparisonTableBlock",
+            "title": "Comparison table"
+          },
+          {
+            "type": "specsBlock",
+            "title": "Specifications"
+          },
+          {
+            "type": "faqBlock",
+            "title": "FAQ"
+          },
+          {
+            "type": "videoBlock",
+            "title": "Video"
+          },
+          {
+            "type": "howItWorksBlock",
+            "title": "How it works (stepper)"
+          },
+          {
+            "type": "productFinderBlock",
+            "title": "Product finder (calculator)"
+          },
+          {
+            "type": "statStripBlock",
+            "title": "Stat strip"
+          },
+          {
+            "type": "indicatorLegendBlock",
+            "title": "Indicator / alarm legend"
+          },
+          {
+            "type": "testimonialBlock",
+            "title": "Testimonials"
+          },
+          {
+            "type": "ctaBlock",
+            "title": "Call to action"
+          },
+          {
+            "type": "contactFormBlock",
+            "title": "Contact form"
+          }
+        ],
+        "name": "content",
+        "type": "array",
+        "title": "Page builder"
+      }
+    ],
+    "name": "page",
+    "type": "document",
+    "title": "Landing page"
+  }
+]

@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit",
     "typegen": "sanity schemas extract --enforce-required-fields --force && sanity typegen generate",
     "typegen:watch": "sanity typegen generate --watch",
-    "prebuild": "pnpm typegen",
+    "prebuild": "pnpm typegen && sanity manifest extract --path public/studio/static",
     "sanity:dev": "sanity dev",
     "sanity:deploy": "sanity deploy",
     "sanity:schema:deploy": "sanity schema deploy",
