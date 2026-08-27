@@ -470,6 +470,7 @@ export type CinematicHeroBlock = {
   };
   videoAlt: string;
   shader?: boolean;
+  entrance?: "grid" | "rise";
   gridLoop?: boolean;
   primaryCta?: LinkField;
   secondaryCta?: LinkField;
@@ -1103,6 +1104,7 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
         videoAlt: string;
         shader?: boolean;
+        entrance?: "grid" | "rise";
         gridLoop?: boolean;
         primaryCta?: LinkField;
         secondaryCta?: LinkField;
@@ -1871,6 +1873,7 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
         } | null;
         videoAlt: string;
         shader?: boolean;
+        entrance?: "grid" | "rise";
         gridLoop?: boolean;
         primaryCta?: LinkField;
         secondaryCta?: LinkField;

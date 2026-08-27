@@ -15,8 +15,10 @@ const FilmLayer = dynamic(() => import("./FilmLayer"), { ssr: false });
 
 /**
  * Cinematic film hero: the background video owns the whole first viewport and
- * arrives through a grid-mask entrance — black cells flicker away in random
- * order under faint hairlines while the film settles from a slow 1.06→1 scale.
+ * arrives through one of two entrances (schema toggle): the grid raster —
+ * black cells flicker away in random order under faint hairlines while the
+ * film settles from a slow 1.06→1 scale — or the film rise, where the frame
+ * scales and fades up from the bottom third of the viewport.
  * Copy follows in a staggered cascade: brand pill, headline word by word
  * through clip masks, tagline out of a blur, then the pills. The optional
  * WebGL layer (schema toggle) re-projects the video with film grain, a hint of
@@ -65,7 +67,9 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
   const posterUrl = resolveImageUrl(block.poster, { width: 1920 });
   const showVideo = Boolean(videoUrl) && !reduce;
   const shaderOn = Boolean(block.shader) && showVideo;
-  const gridLoopOn = Boolean(block.gridLoop);
+  // Entrance mode: "grid" = flicker-mask raster reveal; "rise" = the film scales & fades up from below.
+  const entrance = stegaClean(block.entrance) === "rise" ? "rise" : "grid";
+  const gridLoopOn = Boolean(block.gridLoop) && entrance === "grid";
   const hasCtas = Boolean(block.primaryCta || block.secondaryCta);
 
   const play = started || reduce;
@@ -81,13 +85,20 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
   return (
     <section className="canvas-dark on-dark">
       <div className="relative isolate h-[calc(100svh-var(--header-h)-var(--productbar-h))] min-h-[560px] overflow-hidden bg-black">
-        {/* the film */}
+        {/* the film — grid mode settles from a slow overscale behind the mask;
+            rise mode scales & fades the frame up from the bottom third */}
         <motion.div
           aria-hidden={!showVideo}
           className="absolute inset-0"
-          initial={reduce ? false : { scale: 1.06 }}
-          animate={{ scale: play ? 1 : 1.06 }}
-          transition={{ duration: 2.8, ease: EASE_OUT_EXPO }}
+          initial={reduce ? false : entrance === "rise" ? { opacity: 0, y: "30%", scale: 1.12 } : { scale: 1.06 }}
+          animate={
+            entrance === "rise"
+              ? play
+                ? { opacity: 1, y: "0%", scale: 1 }
+                : { opacity: 0, y: "30%", scale: 1.12 }
+              : { scale: play ? 1 : 1.06 }
+          }
+          transition={entrance === "rise" ? { duration: 1.6, ease: EASE_OUT_EXPO } : { duration: 2.8, ease: EASE_OUT_EXPO }}
         >
           {showVideo ? (
             <video
@@ -115,9 +126,10 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
         <div aria-hidden="true" className="absolute inset-0 bg-black/25" />
         <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
 
-        {/* entrance mask: black cover until the page is visible, then the flickering grid */}
-        {!started && !reduce && <div aria-hidden="true" className="absolute inset-0 bg-black" />}
-        {started && !reduce && !revealDone && <GridReveal onDone={() => setRevealDone(true)} />}
+        {/* grid-raster entrance: black cover until the page is visible, then the flickering grid
+            (rise mode needs no cover — its film wrapper starts at opacity 0) */}
+        {entrance === "grid" && !started && !reduce && <div aria-hidden="true" className="absolute inset-0 bg-black" />}
+        {entrance === "grid" && started && !reduce && !revealDone && <GridReveal onDone={() => setRevealDone(true)} />}
 
         {/* optional persistent grid: the entrance texture stays alive in a quiet loop */}
         {gridLoopOn && (reduce ? <GridLoop animate={false} /> : revealDone && <GridLoop animate />)}

@@ -12,7 +12,9 @@ export function cinematicHeroDemo(input: {
   videoAlt: string;
   /** WebGL film treatment (grain, edge feather, lens fringe). Default on. */
   shader?: boolean;
-  /** Persistent grid loop after the entrance (breathing cells + hairlines). Default on in demos. */
+  /** Entrance mode: grid-raster flicker reveal or film rise from below. Default grid. */
+  entrance?: "grid" | "rise";
+  /** Persistent grid loop after the grid entrance (breathing cells + hairlines). Default on in demos. */
   gridLoop?: boolean;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
@@ -36,6 +38,7 @@ export function cinematicHeroDemo(input: {
     poster: img(input.poster ?? "clarisea-video-poster.jpg", { width: 1920, height: 1080 }),
     videoAlt: input.videoAlt,
     shader: input.shader ?? true,
+    entrance: input.entrance ?? "grid",
     gridLoop: input.gridLoop ?? true,
     primaryCta: input.primaryCta ? link(input.primaryCta.label, input.primaryCta.href) : undefined,
     secondaryCta: input.secondaryCta ? link(input.secondaryCta.label, input.secondaryCta.href) : undefined,

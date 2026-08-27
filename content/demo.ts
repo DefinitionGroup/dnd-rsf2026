@@ -541,6 +541,7 @@ const cinematicPage = page({
       headline: "Clear water,\nrunning itself.",
       summary: "The fleece advances, the float rises, the controller takes over — filtration you watch once, then forget.",
       videoAlt: "ClariSea Gen 3 fleece filter running in a reef sump",
+      entrance: "rise",
       primaryCta: { label: "Which size do I need?", href: "/en/clarisea#productFinderBlock" },
       secondaryCta: { label: "Find a stockist", href: STOCKISTS },
     }),

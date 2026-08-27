@@ -41,12 +41,26 @@ export const schema = defineType({
         "Renders the video through a WebGL shader — fine film grain, a feathered edge into the black canvas and a touch of lens fringing. Turn off to play the plain video.",
     }),
     defineField({
+      name: "entrance",
+      title: "Entrance",
+      type: "string",
+      initialValue: "grid",
+      options: {
+        list: [
+          { title: "Grid raster — flickering cell reveal (+ optional loop below)", value: "grid" },
+          { title: "Film rise — video scales & fades up from below, copy follows", value: "rise" },
+        ],
+        layout: "radio",
+      },
+    }),
+    defineField({
       name: "gridLoop",
       title: "Persistent grid loop",
       type: "boolean",
       initialValue: false,
+      hidden: ({ parent }) => parent?.entrance === "rise",
       description:
-        "Keep the grid alive after the entrance — faint hairlines with cells breathing at different opacities, a quiet technical texture looping over the film.",
+        "Grid raster only: keep the grid alive after the entrance — faint hairlines with cells breathing at different opacities, a quiet technical texture looping over the film.",
     }),
     defineField({ name: "primaryCta", title: "Primary CTA", type: "linkField" }),
     defineField({ name: "secondaryCta", title: "Secondary CTA", type: "linkField" }),
