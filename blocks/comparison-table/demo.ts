@@ -13,7 +13,10 @@ export type ComparisonColumnInput = {
 export type ComparisonRowInput = {
   label: string;
   hint?: string;
-  /** One value per column, in order. `yes`/`no` → icons, `—` → n/a, anything else → text. */
+  /**
+   * One value per column, in order. `yes`/`no` → icons, `—` → n/a, anything else → text.
+   * A single value (with the rest omitted) spans across all columns — for shared specs.
+   */
   cells: string[];
 };
 
@@ -57,6 +60,7 @@ export function comparisonTableDemo(input: {
     { label: "Dry-run protection", cells: ["—", "yes", "yes"] },
     { label: "Automatic alkalinity dosing", cells: ["no", "no", "yes"] },
     { label: "Warranty", cells: ["3 years", "2 years", "2 years"] },
+    { label: "Systems", hint: "Shared across the range", cells: ["Freshwater & saltwater"] },
   ];
 
   return {

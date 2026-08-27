@@ -145,6 +145,9 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
             <tbody>
               {rows.map((row, ri) => {
                 const last = ri === rows.length - 1 && !hasCta;
+                const values = (row.cells ?? []).map((c) => stegaClean(c ?? "").trim());
+                // Shared spec: only the first cell is filled → span it across all columns.
+                const spanning = values.length > 0 && values[0] !== "" && values.slice(1).every((v) => v === "");
                 return (
                   <tr key={row._key}>
                     <th
@@ -156,11 +159,17 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
                       <span className="block">{row.label}</span>
                       {row.hint && <span className="caption mt-1 block">{row.hint}</span>}
                     </th>
-                    {columns.map((col, ci) => (
-                      <td key={col._key} className={`hairline px-4 py-4 text-center align-top md:px-5 ${last ? "" : "border-b"}`}>
-                        <CellValue value={row.cells?.[ci]} />
+                    {spanning ? (
+                      <td colSpan={columns.length} className={`hairline px-4 py-4 text-center align-top md:px-5 ${last ? "" : "border-b"}`}>
+                        <CellValue value={row.cells?.[0]} />
                       </td>
-                    ))}
+                    ) : (
+                      columns.map((col, ci) => (
+                        <td key={col._key} className={`hairline px-4 py-4 text-center align-top md:px-5 ${last ? "" : "border-b"}`}>
+                          <CellValue value={row.cells?.[ci]} />
+                        </td>
+                      ))
+                    )}
                   </tr>
                 );
               })}

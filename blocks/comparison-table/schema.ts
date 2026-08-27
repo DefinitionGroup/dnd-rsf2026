@@ -49,7 +49,8 @@ export const schema = defineType({
               title: "Cells (one per column, in order)",
               type: "array",
               of: [defineArrayMember({ type: "string" })],
-              description: "Use 'yes' / 'no' for check / cross icons, '—' for n/a, or any text.",
+              description:
+                "Use 'yes' / 'no' for check / cross icons, '—' for n/a, or any text. Fill only the first cell (leave the rest out) to span that value across all columns — for shared specs that apply to every column.",
             }),
           ],
           preview: { select: { title: "label", cells: "cells" }, prepare: ({ title, cells }) => ({ title, subtitle: (cells ?? []).join(" · ") }) },
