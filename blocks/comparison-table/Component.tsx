@@ -4,6 +4,7 @@ import Reveal from "@/components/motion/Reveal";
 import SanityImage from "@/components/SanityImage";
 import SectionHeader from "@/components/SectionHeader";
 import type { BlockOf, BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 type Column = NonNullable<BlockOf<"comparisonTableBlock">["columns"]>[number];
 
@@ -109,7 +110,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
   const captionId = `comparison-${block._key}-caption`;
 
   return (
-    <section className="canvas-white section-space page-gutter">
+    <section className={`${backgroundClass(block.background, "canvas-white")} section-space page-gutter`}>
       <div className="container-site">
         {(block.eyebrow || block.headline || block.intro) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
 

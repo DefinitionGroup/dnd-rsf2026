@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 /** Interactive legend for a device's LED / sound signals: pick a state, see the LED animate + what to do. */
 export const schema = defineType({
@@ -32,6 +33,7 @@ export const schema = defineType({
       validation: (Rule) => Rule.min(1),
     }),
     defineField({ name: "deviceLabel", title: "Device label", type: "string", initialValue: "Smart controller" }),
+    backgroundField(),
   ],
   preview: { select: { headline: "headline" }, prepare: ({ headline }) => ({ title: "Indicator legend", subtitle: headline || "LED & alarm states" }) },
 });

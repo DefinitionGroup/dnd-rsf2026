@@ -6,6 +6,7 @@ import SanityImage from "@/components/SanityImage";
 import SectionHeader from "@/components/SectionHeader";
 import { EASE_PRESENCE } from "@/lib/motion";
 import type { BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -93,7 +94,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
   const hasHeader = Boolean(block.headline || block.intro);
 
   return (
-    <section className="canvas-white section-space page-gutter">
+    <section className={`${backgroundClass(block.background, "canvas-white")} section-space page-gutter`}>
       <div className="container-site">
         <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" />
 

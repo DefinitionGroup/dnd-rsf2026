@@ -54,3 +54,32 @@ export function pt(...paragraphs: string[]): RichText {
 export function link(label: string, href: string) {
   return { _type: "linkField" as const, label, href };
 }
+
+export type BackdropInput = {
+  /** Canvas override: "black" or "gray". Unset keeps the block's default. */
+  background?: "black" | "gray";
+  /** File under /public/images — laid behind the copy under a scrim. */
+  backgroundImage?: string;
+  /** File under /public/videos — loops over the background image. */
+  backgroundVideo?: { url: string; mimeType?: string };
+  /** Scrim strength, 0–100. Lower lets the media pop. */
+  backgroundMuted?: number;
+};
+
+/** The background field group in the resolved query shape, for blocks that offer a backdrop. */
+export function backdrop(input: BackdropInput) {
+  return {
+    background: input.background,
+    backgroundImage: input.backgroundImage ? img(input.backgroundImage, { width: 1920, height: 1080 }) : null,
+    backgroundVideo: input.backgroundVideo
+      ? {
+          asset: {
+            _id: `demo-video-${input.backgroundVideo.url.replace(/^\/videos\//, "").replace(/\.[a-z0-9]+$/i, "")}`,
+            url: input.backgroundVideo.url,
+            mimeType: input.backgroundVideo.mimeType ?? "video/mp4",
+          },
+        }
+      : null,
+    backgroundMuted: input.backgroundMuted,
+  };
+}

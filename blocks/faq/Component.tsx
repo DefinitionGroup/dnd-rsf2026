@@ -2,6 +2,7 @@ import RichText from "@/components/RichText";
 import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/components/motion/Reveal";
 import type { BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 function PlusMinusIcon() {
   return (
@@ -33,7 +34,7 @@ export default function FaqBlock({ block }: BlockProps<"faqBlock">) {
   const accordionName = `faq-${block._key}`;
 
   return (
-    <section className="canvas-white section-space page-gutter">
+    <section className={`${backgroundClass(block.background, "canvas-white")} section-space page-gutter`}>
       <div className="container-site">
         {(block.eyebrow || block.headline) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} className="mb-12 md:mb-16" />}
 

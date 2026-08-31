@@ -6,6 +6,7 @@ import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransf
 import { EASE_PRESENCE } from "@/lib/motion";
 import SectionHeader from "@/components/SectionHeader";
 import type { BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 type Parsed = { target: number; decimals: number; group: "" | "," | "."; decimal: "." | "," };
 
@@ -59,7 +60,7 @@ export default function StatStripBlock({ block }: BlockProps<"statStripBlock">) 
             : "sm:grid-cols-3 lg:grid-cols-6";
 
   return (
-    <section className={`section-space page-gutter ${tone.section}`}>
+    <section className={`section-space page-gutter ${backgroundClass(block.background, tone.section)}`}>
       <div className="container-site">
         <SectionHeader eyebrow={block.eyebrow} headline={block.headline} />
         <dl className={`hairline grid grid-cols-2 gap-x-6 gap-y-10 border-y py-10 ${block.eyebrow || block.headline ? "mt-12 md:mt-16" : ""} ${cols}`}>

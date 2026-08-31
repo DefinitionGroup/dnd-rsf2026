@@ -62,8 +62,51 @@ export const schema = defineType({
       description:
         "Grid raster only: keep the grid alive after the entrance — faint hairlines with cells breathing at different opacities, a quiet technical texture looping over the film.",
     }),
-    defineField({ name: "primaryCta", title: "Primary CTA", type: "linkField" }),
-    defineField({ name: "secondaryCta", title: "Secondary CTA", type: "linkField" }),
+    defineField({
+      name: "videoButton",
+      title: "Use a video button instead of the CTAs",
+      type: "boolean",
+      description: "On: the primary/secondary pills are replaced by one button that opens the film in an overlay player.",
+      initialValue: false,
+    }),
+    defineField({
+      name: "videoButtonLabel",
+      title: "Video button label",
+      type: "string",
+      initialValue: "Play video",
+      hidden: ({ parent }) => !parent?.videoButton,
+    }),
+    defineField({
+      name: "overlaySource",
+      title: "Overlay video source",
+      type: "string",
+      initialValue: "file",
+      options: {
+        list: [
+          { title: "Uploaded file", value: "file" },
+          { title: "External URL (YouTube / Vimeo)", value: "external" },
+        ],
+        layout: "radio",
+      },
+      hidden: ({ parent }) => !parent?.videoButton,
+    }),
+    defineField({
+      name: "overlayVideo",
+      title: "Overlay video file",
+      type: "file",
+      description: "The full film the button opens — usually longer than the looping background clip. Falls back to the background video when left empty.",
+      options: { accept: "video/mp4,video/webm,video/quicktime" },
+      hidden: ({ parent }) => !parent?.videoButton || parent?.overlaySource === "external",
+    }),
+    defineField({
+      name: "overlayVideoUrl",
+      title: "Overlay video URL",
+      type: "url",
+      description: "YouTube or Vimeo watch/share URL. Nothing loads from the provider until the visitor opens the overlay.",
+      hidden: ({ parent }) => !parent?.videoButton || parent?.overlaySource !== "external",
+    }),
+    defineField({ name: "primaryCta", title: "Primary CTA", type: "linkField", hidden: ({ parent }) => Boolean(parent?.videoButton) }),
+    defineField({ name: "secondaryCta", title: "Secondary CTA", type: "linkField", hidden: ({ parent }) => Boolean(parent?.videoButton) }),
   ],
   preview: {
     select: { headline: "headline", media: "poster" },

@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 export const schema = defineType({
   name: "ctaBlock",
@@ -17,6 +18,7 @@ export const schema = defineType({
       initialValue: "lime",
       options: { list: [{ title: "Lime", value: "lime" }, { title: "Ink (dark)", value: "ink" }, { title: "Paper", value: "paper" }], layout: "radio" },
     }),
+    backgroundField(),
   ],
   preview: {
     select: { headline: "headline", eyebrow: "eyebrow" },

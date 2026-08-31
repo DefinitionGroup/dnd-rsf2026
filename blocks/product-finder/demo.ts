@@ -1,4 +1,4 @@
-import { key, link } from "@/content/demo-helpers";
+import { backdrop, key, link, type BackdropInput } from "@/content/demo-helpers";
 import { clarisea } from "@/content/demo-products";
 import type { BlockOf, ProductSummary } from "@/blocks/types";
 
@@ -10,7 +10,7 @@ function ruleProduct(p: ProductSummary | undefined | null): RuleProduct {
   return { _id: p._id, slug: p.slug, name: p.name, image: p.image };
 }
 
-export type ProductFinderDemoInput = {
+export type ProductFinderDemoInput = BackdropInput & {
   eyebrow?: string;
   headline?: string;
   intro?: string;
@@ -70,6 +70,7 @@ export function productFinderDemo(input: ProductFinderDemoInput = {}): BlockOf<"
   return {
     _key: key("finder"),
     _type: "productFinderBlock",
+    ...backdrop(input),
     eyebrow: input.eyebrow ?? "Which ClariSea?",
     headline: input.headline ?? "Find the right\nfleece filter",
     intro: input.intro ?? "Tell us your aquarium volume and how heavily you feed — we'll point you to the ClariSea Gen 3 that fits and how long a roll should last.",

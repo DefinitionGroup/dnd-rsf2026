@@ -1,12 +1,36 @@
 "use client";
 
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
-import type { MotionValue } from "motion/react";
+import { useMotionValue, type MotionValue } from "motion/react";
 
 const DEFAULT_MODEL_URL = "/models/clarisea.glb";
+
+/** How far the model may be tilted by hand, in radians (~26°). */
+const MAX_PITCH = 0.45;
+/** Cap on flick spin-down speed, rad/s. */
+const MAX_SPIN = 6;
+/** Beyond this much hand rotation the reset button has something to undo. */
+const ROTATED_EPSILON = 0.03;
+/** One arrow-key press. */
+const KEY_STEP = Math.PI / 12;
+
+/** Hand-driven orbit on top of the scroll-driven pose. MotionValues, not state:
+ *  DOM pointer/key handlers write them, the frame loop reads them, React never
+ *  re-renders for either. */
+type Orbit = {
+  /** where the hand wants the model, radians */
+  targetYaw: MotionValue<number>;
+  targetPitch: MotionValue<number>;
+  /** yaw velocity carried over from a flick, rad/s */
+  spin: MotionValue<number>;
+  /** 1 while a pointer is down on the stage */
+  dragging: MotionValue<number>;
+};
+
+const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
 /** Per-mesh assembly data: rest pose + exploded offset + stagger window. */
 type PartTrack = {
@@ -70,18 +94,33 @@ function buildTracks(scene: THREE.Object3D): { tracks: PartTrack[]; center: THRE
   return { tracks, center, size };
 }
 
-function ClariSeaModel({ progress, reduceMotion, url }: { progress: MotionValue<number>; reduceMotion: boolean; url: string }) {
+function ClariSeaModel({
+  progress,
+  reduceMotion,
+  url,
+  orbit,
+  interactive,
+}: {
+  progress: MotionValue<number>;
+  reduceMotion: boolean;
+  url: string;
+  orbit: Orbit;
+  interactive: boolean;
+}) {
   const { scene } = useGLTF(url);
   const groupRef = useRef<THREE.Group>(null);
   const damped = useRef(reduceMotion ? 1 : 0);
+  /** damped, rendered orbit — chases the MotionValue targets */
+  const pose = useRef({ yaw: 0, pitch: 0 });
   const scratch = useRef(new THREE.Vector3());
 
   const { tracks, center } = useMemo(() => buildTracks(scene), [scene]);
 
   useFrame((state, delta) => {
+    const dt = Math.min(delta, 0.1);
     const target = reduceMotion ? 1 : progress.get();
     // critically-damped chase: stays glued to the scroll, but never steps
-    damped.current = THREE.MathUtils.damp(damped.current, target, 7, Math.min(delta, 0.1));
+    damped.current = THREE.MathUtils.damp(damped.current, target, 7, dt);
     const p = damped.current;
 
     for (const track of tracks) {
@@ -91,14 +130,31 @@ function ClariSeaModel({ progress, reduceMotion, url }: { progress: MotionValue<
       track.mesh.position.copy(scratch.current.copy(track.explodedOffset).multiplyScalar(explode).add(track.basePosition));
     }
 
+    // Hand orbit: chase the drag target. The targets are zeroed the moment
+    // scrolling takes the timeline back, so the same chase unwinds it.
+    const dragging = orbit.dragging.get() === 1;
+    const spin = orbit.spin.get();
+    if (interactive && !dragging && Math.abs(spin) > 1e-4) {
+      orbit.targetYaw.set(orbit.targetYaw.get() + spin * dt);
+      orbit.spin.set(spin * Math.pow(0.015, dt)); // exponential spin-down, frame-rate independent
+    }
+    const chase = interactive ? 14 : 8;
+    pose.current.yaw = THREE.MathUtils.damp(pose.current.yaw, orbit.targetYaw.get(), chase, dt);
+    pose.current.pitch = THREE.MathUtils.damp(pose.current.pitch, orbit.targetPitch.get(), chase, dt);
+
     const group = groupRef.current;
     if (group) {
       // half-turn sweep while assembling, then a calm idle drift; the end pose
       // (front of the device facing the camera) is fixed, the start sits 180° back
       const endY = 0.7 - Math.PI / 2;
-      group.rotation.y = endY - Math.PI * (1 - p) + Math.sin(state.clock.elapsedTime * 0.12) * 0.03;
+      // the idle sway steps aside while a hand is on the model, so a drag reads as 1:1
+      const idle = dragging ? 0 : Math.sin(state.clock.elapsedTime * 0.12) * 0.03;
+      group.rotation.y = endY - Math.PI * (1 - p) + idle + pose.current.yaw;
+      // Euler XYZ: yaw spins the device on its own axis, pitch then tilts the
+      // whole thing toward the camera — orbit-controls feel without the camera rig
+      group.rotation.x = pose.current.pitch;
       // the exploded cloud hangs a little lower, rising home as it assembles
-      group.position.y = THREE.MathUtils.lerp(-0.1, 0, p) + Math.sin(state.clock.elapsedTime * 0.5) * 0.004;
+      group.position.y = THREE.MathUtils.lerp(-0.1, 0, p) + (dragging ? 0 : Math.sin(state.clock.elapsedTime * 0.5) * 0.004);
     }
 
     // camera pulls in as the device comes together
@@ -121,31 +177,171 @@ function ClariSeaModel({ progress, reduceMotion, url }: { progress: MotionValue<
 
 /**
  * Full-bleed R3F canvas. `progress` is the raw scroll progress (0 = exploded,
- * 1 = assembled) driven by the pinned section in Component.tsx.
+ * 1 = assembled) driven by the pinned section in Component.tsx. Once the model
+ * is whole, `interactive` hands it over: drag (or arrow keys) to rotate,
+ * `resetSignal` to put it back.
  */
 export default function AssemblyScene({
   progress,
   reduceMotion,
   modelUrl,
   label,
+  interactive = false,
+  resetSignal = 0,
+  onRotatedChange,
+  describedBy,
+  roleDescription,
 }: {
   progress: MotionValue<number>;
   reduceMotion: boolean;
   modelUrl?: string | null;
   label: string;
+  interactive?: boolean;
+  resetSignal?: number;
+  onRotatedChange?: (rotated: boolean) => void;
+  describedBy?: string;
+  roleDescription?: string;
 }) {
   const url = modelUrl || DEFAULT_MODEL_URL;
+  const targetYaw = useMotionValue(0);
+  const targetPitch = useMotionValue(0);
+  const spin = useMotionValue(0);
+  const draggingMv = useMotionValue(0);
+  const orbit: Orbit = useMemo(
+    () => ({ targetYaw, targetPitch, spin, dragging: draggingMv }),
+    [targetYaw, targetPitch, spin, draggingMv],
+  );
+  const pointer = useRef<{ id: number; x: number; y: number; t: number } | null>(null);
+  const rotated = useRef(false);
+  const [dragging, setDragging] = useState(false);
+
+  /** Tell the parent whether there is any hand rotation left to undo. */
+  const syncRotated = useCallback(() => {
+    const moved = Math.abs(targetYaw.get()) > ROTATED_EPSILON || Math.abs(targetPitch.get()) > ROTATED_EPSILON;
+    if (moved !== rotated.current) {
+      rotated.current = moved;
+      onRotatedChange?.(moved);
+    }
+  }, [targetYaw, targetPitch, onRotatedChange]);
+
+  const zeroOrbit = useCallback(() => {
+    targetYaw.set(0);
+    targetPitch.set(0);
+    spin.set(0);
+    rotated.current = false;
+  }, [targetYaw, targetPitch, spin]);
+
+  // Reset is a signal, not a command: the frame loop eases the model home.
+  useEffect(() => {
+    if (!resetSignal) return;
+    zeroOrbit();
+  }, [resetSignal, zeroOrbit]);
+
+  // Scrolling back up takes the timeline over again — drop any hand rotation.
+  // (The parent clears its own `rotated` flag off the same scroll threshold.)
+  useEffect(() => {
+    if (interactive) return;
+    pointer.current = null;
+    draggingMv.set(0);
+    zeroOrbit();
+  }, [interactive, draggingMv, zeroOrbit]);
+
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!interactive) return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    // capture can throw for a pointer the browser has already released
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {}
+    pointer.current = { id: event.pointerId, x: event.clientX, y: event.clientY, t: event.timeStamp };
+    draggingMv.set(1);
+    spin.set(0);
+    setDragging(true);
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const p = pointer.current;
+    if (!p || p.id !== event.pointerId) return;
+    const el = event.currentTarget;
+    const dx = event.clientX - p.x;
+    const dy = event.clientY - p.y;
+    const dt = Math.max(event.timeStamp - p.t, 1) / 1000;
+    p.x = event.clientX;
+    p.y = event.clientY;
+    p.t = event.timeStamp;
+
+    // dragging the full stage width ≈ one full turn
+    const dYaw = (dx / Math.max(el.clientWidth, 1)) * Math.PI * 2;
+    targetYaw.set(targetYaw.get() + dYaw);
+    targetPitch.set(clamp(targetPitch.get() + (dy / Math.max(el.clientHeight, 1)) * Math.PI * 0.8, -MAX_PITCH, MAX_PITCH));
+    spin.set(clamp(dYaw / dt, -MAX_SPIN, MAX_SPIN));
+    syncRotated();
+  };
+
+  // Unconditional cleanup: a drag interrupted by scrolling out of the grab zone
+  // still has to release capture and drop the grabbing cursor.
+  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    try {
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    } catch {}
+    if (pointer.current?.id === event.pointerId) pointer.current = null;
+    draggingMv.set(0);
+    setDragging(false);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!interactive) return;
+    let handled = true;
+    switch (event.key) {
+      case "ArrowLeft":
+        targetYaw.set(targetYaw.get() - KEY_STEP);
+        break;
+      case "ArrowRight":
+        targetYaw.set(targetYaw.get() + KEY_STEP);
+        break;
+      case "ArrowUp":
+        targetPitch.set(clamp(targetPitch.get() - KEY_STEP * 0.5, -MAX_PITCH, MAX_PITCH));
+        break;
+      case "ArrowDown":
+        targetPitch.set(clamp(targetPitch.get() + KEY_STEP * 0.5, -MAX_PITCH, MAX_PITCH));
+        break;
+      case "0":
+      case "Home":
+        targetYaw.set(0);
+        targetPitch.set(0);
+        break;
+      default:
+        handled = false;
+    }
+    if (handled) {
+      event.preventDefault();
+      spin.set(0);
+      syncRotated();
+    }
+  };
+
   return (
     <Canvas
       aria-label={label}
-      role="img"
+      role={interactive ? "application" : "img"}
+      aria-roledescription={interactive ? roleDescription : undefined}
+      aria-describedby={interactive ? describedBy : undefined}
+      tabIndex={interactive ? 0 : -1}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onKeyDown={onKeyDown}
+      className={`select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-lime ${
+        interactive ? (dragging ? "cursor-grabbing" : "cursor-grab") : ""
+      }`}
       dpr={[1, 2]}
       camera={{ fov: 35, position: [0.95, 0.42, 1.95], near: 0.05, far: 20 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       style={{ touchAction: "pan-y" }}
     >
       <Suspense fallback={null}>
-        <ClariSeaModel progress={progress} reduceMotion={reduceMotion} url={url} />
+        <ClariSeaModel progress={progress} reduceMotion={reduceMotion} url={url} orbit={orbit} interactive={interactive} />
         {/* studio-in-a-black-room: neutral strips + one lime accent, no network HDRIs */}
         <Environment resolution={256} frames={1}>
           <Lightformer intensity={3.4} position={[0, 3, 4]} rotation-x={-Math.PI / 4} scale={[4, 2, 1]} />

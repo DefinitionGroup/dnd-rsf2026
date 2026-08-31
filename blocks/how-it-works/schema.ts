@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 /** Animated stepper: auto-advancing timeline of steps with image + copy; click to jump. */
 export const schema = defineType({
@@ -31,6 +32,7 @@ export const schema = defineType({
     }),
     defineField({ name: "autoplay", title: "Auto-advance", type: "boolean", initialValue: true }),
     defineField({ name: "tone", title: "Tone", type: "string", initialValue: "paper", options: { list: [{ title: "Paper", value: "paper" }, { title: "Ink (dark)", value: "ink" }], layout: "radio" } }),
+    backgroundField(),
   ],
   preview: {
     select: { headline: "headline", media: "steps.0.image" },

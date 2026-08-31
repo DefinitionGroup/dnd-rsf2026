@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 /**
  * Comparison table. v1: freeform columns + rows so it can compare products,
@@ -59,6 +60,7 @@ export const schema = defineType({
       validation: (Rule) => Rule.min(1),
     }),
     defineField({ name: "footnote", title: "Footnote", type: "text", rows: 2 }),
+    backgroundField(),
   ],
   preview: {
     select: { headline: "headline" },

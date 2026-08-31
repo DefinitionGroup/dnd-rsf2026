@@ -6,6 +6,8 @@ import { stegaClean } from "next-sanity";
 import ActionLink from "@/components/ActionLink";
 import SanityImage from "@/components/SanityImage";
 import SectionHeader from "@/components/SectionHeader";
+import SectionBackdrop, { hasBackdrop } from "@/components/SectionBackdrop";
+import { backgroundClass } from "@/lib/section-background";
 import { EASE_PRESENCE } from "@/lib/motion";
 import type { BlockOf, BlockProps } from "@/blocks/types";
 
@@ -22,6 +24,23 @@ function num(value: number | undefined | null, fallback: number) {
   return typeof value === "number" && Number.isFinite(value) ? value : fallback;
 }
 
+function toGallons(litres: number) {
+  return Math.round(litres / LITRES_PER_US_GAL);
+}
+
+/** Litres lead, US gallons sit underneath in grey — stacked, so the two ends of
+ *  the scale can never crowd each other however long the numbers get. */
+function Volume({ litres, align = "start" }: { litres: number; align?: "start" | "end" }) {
+  return (
+    <span className={`flex flex-col ${align === "end" ? "items-end text-right" : "items-start"}`}>
+      <span className="whitespace-nowrap text-fg">
+        {litres.toLocaleString("en")} <span className="figure-unit">L</span>
+      </span>
+      <span className="figure-unit whitespace-nowrap text-fg-muted">≈ {toGallons(litres).toLocaleString("en")} US gal</span>
+    </span>
+  );
+}
+
 /** First rule (in order) whose limit is empty or ≥ the effective volume. */
 function pickRule(rules: Rule[], effective: number): number {
   const i = rules.findIndex((r) => {
@@ -32,12 +51,17 @@ function pickRule(rules: Rule[], effective: number): number {
 }
 
 const RANGE_CLASS = [
-  "h-5 w-full cursor-pointer appearance-none bg-transparent",
-  // track: hairline with fg fill up to --pct
-  "[&::-webkit-slider-runnable-track]:h-px [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--color-fg)_var(--pct),var(--color-hairline)_var(--pct))]",
-  "[&::-moz-range-track]:h-px [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--color-fg)_var(--pct),var(--color-hairline)_var(--pct))]",
-  // thumb: white disc with hairline
-  "[&::-webkit-slider-thumb]:-mt-[10px] [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-hairline [&::-webkit-slider-thumb]:bg-white",
+  // The input sits transparent on top of a drawn track (see below). Vendor track
+  // pseudo-elements stay invisible: a 1px gradient track rounds away to nothing on
+  // some Android device pixel ratios, and if a browser ignores the pseudo-element
+  // styling entirely we still fall back to a UA thumb on a track that is real DOM.
+  "absolute inset-0 h-full w-full cursor-pointer appearance-none bg-transparent",
+  "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime",
+  "[&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:bg-transparent",
+  "[&::-moz-range-track]:h-1 [&::-moz-range-track]:bg-transparent",
+  "[&::-moz-range-progress]:h-1 [&::-moz-range-progress]:bg-transparent",
+  // thumb: white disc, centred on the 4px track ((4 - 20) / 2 = -8)
+  "[&::-webkit-slider-thumb]:-mt-2 [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-hairline [&::-webkit-slider-thumb]:bg-white",
   "[&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border [&::-moz-range-thumb]:border-solid [&::-moz-range-thumb]:border-hairline [&::-moz-range-thumb]:bg-white",
 ].join(" ");
 
@@ -64,7 +88,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
   const effective = volume * factor;
   const ruleIndex = pickRule(rules, effective);
   const rule = rules[ruleIndex];
-  const gallons = Math.round(volume / LITRES_PER_US_GAL);
+  const gallons = toGallons(volume);
   const rollWeeks = typeof rule.rollWeeks === "number" ? Math.max(1, Math.round(rule.rollWeeks * rollFactor)) : null;
   const rollRange = rollWeeks ? `${Math.max(1, rollWeeks - 1)}–${rollWeeks + 1}` : null;
   const productName = rule.product?.name ?? null;
@@ -78,69 +102,26 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
   };
 
   const pct = ((volume - min) / (max - min)) * 100;
+  const media = { image: block.backgroundImage, video: block.backgroundVideo, muted: block.backgroundMuted };
+  const backdrop = hasBackdrop(media);
 
   return (
-    <section className="canvas-frost section-space page-gutter">
-      <div className="container-site">
+    <section
+      className={`${backgroundClass(block.background, "canvas-frost")} section-space page-gutter ${
+        backdrop ? "relative isolate overflow-hidden on-dark" : ""
+      }`}
+    >
+      <SectionBackdrop {...media} />
+      <div className="container-site relative">
         {(block.headline || block.intro) && (
           <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" className="mb-12 md:mb-16" />
         )}
 
-        <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+        {/* items-stretch (the grid default) keeps the input tile and the result card
+            the same height instead of each sizing to its own content */}
+        <div className="grid gap-6 lg:grid-cols-2">
           {/* ---------- Inputs ---------- */}
-          <div className="tile flex flex-col gap-8">
-            {/* Volume */}
-            <div>
-              <div className="flex flex-wrap items-end justify-between gap-3">
-                <label htmlFor={`${uid}-volume`} className="body-sm text-fg-muted">
-                  {block.volumeLabel ?? "Aquarium volume"}
-                </label>
-                <div className="flex items-baseline gap-2">
-                  <input
-                    id={`${uid}-volume-number`}
-                    type="number"
-                    inputMode="numeric"
-                    min={min}
-                    max={max}
-                    step={1}
-                    value={volumeText}
-                    aria-label={`${block.volumeLabel ?? "Aquarium volume"} in litres`}
-                    onChange={(e) => {
-                      setVolumeText(e.target.value);
-                      const n = Number(e.target.value);
-                      if (e.target.value !== "" && Number.isFinite(n)) setVolume(clamp(Math.round(n), min, max));
-                    }}
-                    onBlur={() => commitVolume(Number(volumeText))}
-                    className="field num w-28 py-2 text-right text-[21px] font-semibold text-fg"
-                  />
-                  <span className="figure-unit text-[17px] text-fg-muted">l</span>
-                </div>
-              </div>
-
-              <div className="relative mt-5">
-                <input
-                  id={`${uid}-volume`}
-                  type="range"
-                  min={min}
-                  max={max}
-                  step={step}
-                  value={volume}
-                  aria-valuemin={min}
-                  aria-valuemax={max}
-                  aria-valuenow={volume}
-                  aria-valuetext={`${volume} litres, about ${gallons} US gallons`}
-                  onChange={(e) => commitVolume(Number(e.target.value))}
-                  style={{ ["--pct" as string]: `${pct}%` }}
-                  className={RANGE_CLASS}
-                />
-                <div className="caption num mt-2 flex justify-between" aria-hidden="true">
-                  <span>{min} l</span>
-                  <span className="text-fg">≈ {gallons} US gal</span>
-                  <span>{max} l</span>
-                </div>
-              </div>
-            </div>
-
+          <div className="tile flex h-full flex-col gap-8">
             {/* Bioload */}
             {options.length > 0 && (
               <div>
@@ -183,8 +164,66 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
               </div>
             )}
 
+            {/* Volume */}
+            <div>
+              {/* Label sits over the readout, both centred on the tile. */}
+              <div className="text-center">
+                <label htmlFor={`${uid}-volume`} className="body-sm block text-fg-muted">
+                  {block.volumeLabel ?? "Aquarium volume"}
+                </label>
+                <div className="mt-3 flex flex-wrap items-baseline justify-center gap-2">
+                  <input
+                    id={`${uid}-volume-number`}
+                    type="number"
+                    inputMode="numeric"
+                    min={min}
+                    max={max}
+                    step={1}
+                    value={volumeText}
+                    aria-label={`${block.volumeLabel ?? "Aquarium volume"} in litres`}
+                    onChange={(e) => {
+                      setVolumeText(e.target.value);
+                      const n = Number(e.target.value);
+                      if (e.target.value !== "" && Number.isFinite(n)) setVolume(clamp(Math.round(n), min, max));
+                    }}
+                    onBlur={() => commitVolume(Number(volumeText))}
+                    className="field num w-28 py-2 text-right text-[21px] font-semibold text-fg"
+                  />
+                  <span className="figure-unit text-[17px] text-fg">L</span>
+                  <span className="figure-unit whitespace-nowrap text-[17px] text-fg-muted">≈ {gallons.toLocaleString("en")} US gal</span>
+                </div>
+              </div>
+
+              <div className="relative mt-6 h-5">
+                {/* Drawn track: plain elements at 4px, so it is visible at any device
+                    pixel ratio and does not depend on vendor pseudo-element painting. */}
+                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 overflow-hidden rounded-full bg-hairline">
+                  <div className="h-full rounded-full bg-fg" style={{ width: `${pct}%` }} />
+                </div>
+                <input
+                  id={`${uid}-volume`}
+                  type="range"
+                  min={min}
+                  max={max}
+                  step={step}
+                  value={volume}
+                  aria-valuemin={min}
+                  aria-valuemax={max}
+                  aria-valuenow={volume}
+                  aria-valuetext={`${volume} litres, about ${gallons} US gallons`}
+                  onChange={(e) => commitVolume(Number(e.target.value))}
+                  className={RANGE_CLASS}
+                />
+              </div>
+
+              <div className="caption num mt-3 flex items-start justify-between gap-4" aria-hidden="true">
+                <Volume litres={min} align="start" />
+                <Volume litres={max} align="end" />
+              </div>
+            </div>
+
             <p className="caption num" aria-hidden="true">
-              Effective volume {Math.round(effective)} l
+              Effective volume {Math.round(effective).toLocaleString("en")} L
             </p>
           </div>
 
@@ -220,7 +259,7 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                         <dt className="body-sm text-fg-muted">Flow</dt>
                         <dd className="mt-2 flex items-baseline gap-1.5">
                           <span className="figure text-[clamp(1.625rem,7vw,2.5rem)] text-fg">{rule.flowLph.toLocaleString("en")}</span>
-                          <span className="figure-unit text-[17px] text-fg-muted">l/h</span>
+                          <span className="figure-unit text-[17px] text-fg-muted">L/h</span>
                         </dd>
                       </div>
                     )}

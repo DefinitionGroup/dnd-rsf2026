@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 export const schema = defineType({
   name: "statStripBlock",
@@ -27,6 +28,7 @@ export const schema = defineType({
       validation: (Rule) => Rule.min(2).max(6),
     }),
     defineField({ name: "tone", title: "Tone", type: "string", initialValue: "lime", options: { list: [{ title: "Lime", value: "lime" }, { title: "Ink (dark)", value: "ink" }, { title: "Paper", value: "paper" }], layout: "radio" } }),
+    backgroundField(),
   ],
   preview: { select: { headline: "headline" }, prepare: ({ headline }) => ({ title: "Stat strip", subtitle: headline || "Key numbers" }) },
 });

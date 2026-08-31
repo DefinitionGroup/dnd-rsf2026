@@ -16,6 +16,13 @@ export function cinematicHeroDemo(input: {
   entrance?: "grid" | "rise";
   /** Persistent grid loop after the grid entrance (breathing cells + hairlines). Default on in demos. */
   gridLoop?: boolean;
+  /** Swap the two CTA pills for one button that opens the film in an overlay. */
+  videoButton?: boolean;
+  videoButtonLabel?: string;
+  /** Overlay player source. Defaults to the uploaded file (falling back to the background video). */
+  overlaySource?: "file" | "external";
+  overlayVideo?: { url: string; mimeType?: string };
+  overlayVideoUrl?: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
 }): BlockOf<"cinematicHeroBlock"> {
@@ -40,6 +47,19 @@ export function cinematicHeroDemo(input: {
     shader: input.shader ?? true,
     entrance: input.entrance ?? "grid",
     gridLoop: input.gridLoop ?? true,
+    videoButton: input.videoButton,
+    videoButtonLabel: input.videoButtonLabel,
+    overlaySource: input.overlaySource,
+    overlayVideo: input.overlayVideo
+      ? {
+          asset: {
+            _id: `demo-video-${input.overlayVideo.url.replace(/^\/videos\//, "").replace(/\.[a-z0-9]+$/i, "")}`,
+            url: input.overlayVideo.url,
+            mimeType: input.overlayVideo.mimeType ?? "video/mp4",
+          },
+        }
+      : null,
+    overlayVideoUrl: input.overlayVideoUrl,
     primaryCta: input.primaryCta ? link(input.primaryCta.label, input.primaryCta.href) : undefined,
     secondaryCta: input.secondaryCta ? link(input.secondaryCta.label, input.secondaryCta.href) : undefined,
   };

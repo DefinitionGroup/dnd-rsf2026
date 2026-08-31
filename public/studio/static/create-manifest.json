@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-08-27T15:59:03.630Z",
+  "createdAt": "2026-08-31T11:55:02.736Z",
   "studioVersion": "6.9.2",
   "version": 3,
   "workspaces": [
@@ -13,7 +13,7 @@
       },
       "name": "aquarium",
       "projectId": "z5112m0c",
-      "schema": "24a7f08e.create-schema.json",
+      "schema": "ca93931e.create-schema.json",
       "title": "The Aquarium Solution",
       "tools": "7e62c866.create-tools.json"
     }

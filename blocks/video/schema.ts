@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 /** Video: uploaded file (autoplay/loop capable) or external YouTube/Vimeo (privacy click-to-load). */
 export const schema = defineType({
@@ -25,6 +26,7 @@ export const schema = defineType({
     defineField({ name: "layout", title: "Layout", type: "string", initialValue: "contained", options: { list: [{ title: "Contained (16:9 card)", value: "contained" }, { title: "Full-bleed", value: "bleed" }], layout: "radio" } }),
     defineField({ name: "autoplay", title: "Autoplay muted loop (uploaded files only)", type: "boolean", initialValue: false }),
     defineField({ name: "privacyNotice", title: "Privacy notice (external)", type: "string", initialValue: "The video is loaded from YouTube/Vimeo only after you click play." }),
+    backgroundField(),
   ],
   preview: {
     select: { headline: "headline", media: "poster", source: "source" },

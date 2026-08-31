@@ -37,7 +37,8 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "heroBlock" => {
     ...,
     image ${imageFragment},
-    video{ asset->{ _id, url, mimeType } }
+    video{ asset->{ _id, url, mimeType } },
+    overlayVideo{ asset->{ _id, url, mimeType } }
   },
   _type == "hero3dBlock" => {
     ...,
@@ -46,7 +47,13 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "cinematicHeroBlock" => {
     ...,
     video{ asset->{ _id, url, mimeType } },
+    overlayVideo{ asset->{ _id, url, mimeType } },
     poster ${imageFragment}
+  },
+  _type == "introBlock" => {
+    ...,
+    backgroundImage ${imageFragment},
+    backgroundVideo{ asset->{ _id, url, mimeType } }
   },
   _type == "splitContentBlock" => { ..., image ${imageFragment} },
   _type == "galleryBlock" => { ..., images[] ${captionedImageFragment} },
@@ -65,7 +72,12 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "specsBlock" => { ..., product-> ${productFragment} },
   _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster ${imageFragment} },
   _type == "howItWorksBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
-  _type == "productFinderBlock" => { ..., rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image ${imageFragment} } } },
+  _type == "productFinderBlock" => {
+    ...,
+    backgroundImage ${imageFragment},
+    backgroundVideo{ asset->{ _id, url, mimeType } },
+    rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image ${imageFragment} } }
+  },
   _type == "testimonialBlock" => {
     ...,
     "testimonials": testimonials[@->approved == true]->{ _id, quote, name, role, company }

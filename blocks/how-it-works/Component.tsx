@@ -7,6 +7,7 @@ import SanityImage from "@/components/SanityImage";
 import SectionHeader from "@/components/SectionHeader";
 import { EASE_PRESENCE } from "@/lib/motion";
 import type { BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 const DEFAULT_DURATION = 6;
 
@@ -122,7 +123,7 @@ export default function HowItWorksBlock({ block }: BlockProps<"howItWorksBlock">
   return (
     <section
       ref={sectionRef}
-      className={`section-space page-gutter ${tone.section}`}
+      className={`section-space page-gutter ${backgroundClass(block.background, tone.section)}`}
       onPointerEnter={() => setPaused(true)}
       onPointerLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}

@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 export const schema = defineType({
   name: "beforeAfterBlock",
@@ -15,6 +16,7 @@ export const schema = defineType({
     defineField({ name: "alt", title: "Alt text (describes the comparison)", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "startPosition", title: "Initial handle position (%)", type: "number", initialValue: 50, validation: (Rule) => Rule.min(0).max(100) }),
     defineField({ name: "caption", title: "Caption", type: "string" }),
+    backgroundField(),
   ],
   preview: {
     select: { headline: "headline", media: "after" },

@@ -5,7 +5,10 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { stegaClean } from "next-sanity";
 import ActionLink from "@/components/ActionLink";
+import VideoOverlayButton from "@/components/VideoOverlayButton";
 import { resolveImageUrl } from "@/sanity/lib/image";
+import { resolveOverlayVideo } from "@/lib/overlay-video";
+import { t } from "@/lib/i18n";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import type { BlockProps } from "@/blocks/types";
 import GridReveal from "./GridReveal";
@@ -50,7 +53,7 @@ const T_SUMMARY = 1.6;
 const T_CTAS = 1.9;
 const T_HINT = 2.6;
 
-export default function CinematicHeroBlock({ block, index }: BlockProps<"cinematicHeroBlock">) {
+export default function CinematicHeroBlock({ block, index, locale }: BlockProps<"cinematicHeroBlock">) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduce = useReducedMotion() ?? false;
   // false during SSR and while the tab is hidden — the SSR HTML keeps the black cover so the film never flashes unmasked
@@ -71,6 +74,19 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
   const entrance = stegaClean(block.entrance) === "rise" ? "rise" : "grid";
   const gridLoopOn = Boolean(block.gridLoop) && entrance === "grid";
   const hasCtas = Boolean(block.primaryCta || block.secondaryCta);
+  // `videoButton` swaps the CTA pills for one button that opens the full film in
+  // an overlay — the looping background clip stays a background clip.
+  const overlay = block.videoButton
+    ? resolveOverlayVideo(
+        {
+          overlaySource: stegaClean(block.overlaySource),
+          overlayVideo: block.overlayVideo,
+          overlayVideoUrl: stegaClean(block.overlayVideoUrl),
+          fallbackVideo: block.video,
+        },
+        posterUrl,
+      )
+    : null;
 
   const play = started || reduce;
   const enter = (delay: number, from: { y?: number; blur?: number } = {}) => {
@@ -171,11 +187,22 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
               {block.summary}
             </motion.p>
           )}
-          {hasCtas && (
+          {overlay ? (
             <motion.div {...copy(3, T_CTAS)} className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <ActionLink link={block.primaryCta} variant="primary" />
-              <ActionLink link={block.secondaryCta} variant="secondary" />
+              <VideoOverlayButton
+                label={block.videoButtonLabel || t(locale, "playVideo")}
+                video={overlay}
+                alt={block.videoAlt}
+                locale={locale}
+              />
             </motion.div>
+          ) : (
+            hasCtas && (
+              <motion.div {...copy(3, T_CTAS)} className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <ActionLink link={block.primaryCta} variant="primary" />
+                <ActionLink link={block.secondaryCta} variant="secondary" />
+              </motion.div>
+            )
           )}
         </div>
 
@@ -187,7 +214,7 @@ export default function CinematicHeroBlock({ block, index }: BlockProps<"cinemat
             transition={{ duration: 1, delay: entrance === "rise" ? 0.8 : T_HINT }}
             className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
           >
-            <span className="caption tracking-[0.14em] uppercase">Scroll</span>
+            <span className="caption tracking-[0.14em] uppercase">{t(locale, "scrollHint")}</span>
             <span className="block h-8 w-px overflow-hidden bg-hairline">
               <motion.span
                 className="block h-3 w-px bg-lime"

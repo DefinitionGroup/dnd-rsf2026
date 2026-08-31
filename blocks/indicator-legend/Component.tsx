@@ -6,6 +6,7 @@ import { stegaClean } from "next-sanity";
 import SectionHeader from "@/components/SectionHeader";
 import { EASE_PRESENCE } from "@/lib/motion";
 import type { BlockOf, BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 type Signal = NonNullable<BlockOf<"indicatorLegendBlock">["signals"]>[number];
 type LedColor = "blue" | "red" | "blueRed" | "off";
@@ -67,7 +68,7 @@ export default function IndicatorLegendBlock({ block }: BlockProps<"indicatorLeg
   };
 
   return (
-    <section className="canvas-white section-space page-gutter">
+    <section className={`${backgroundClass(block.background, "canvas-white")} section-space page-gutter`}>
       <div className="container-site">
         {(block.eyebrow || block.headline || block.intro) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} className="mb-12 md:mb-16" />}
 

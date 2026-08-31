@@ -1,6 +1,7 @@
 import SectionHeader from "@/components/SectionHeader";
 import GalleryGrid from "@/blocks/gallery/GalleryGrid";
 import type { BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 /**
  * Apple gallery: 3-col grid (2-col on md) of square `.media` frames on a white
@@ -12,7 +13,7 @@ export default function GalleryBlock({ block }: BlockProps<"galleryBlock">) {
   if (!images.length) return null;
 
   return (
-    <section className="canvas-frost section-space page-gutter">
+    <section className={`${backgroundClass(block.background, "canvas-frost")} section-space page-gutter`}>
       <div className="container-site">
         <SectionHeader eyebrow={block.eyebrow} headline={block.headline} />
         <GalleryGrid images={images} className={block.headline ? "mt-12 md:mt-16" : ""} />

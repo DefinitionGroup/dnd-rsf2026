@@ -2,6 +2,7 @@ import { stegaClean } from "next-sanity";
 import ActionLink from "@/components/ActionLink";
 import Reveal from "@/components/motion/Reveal";
 import type { BlockProps } from "@/blocks/types";
+import { backgroundClass } from "@/lib/section-background";
 
 type Tone = "lime" | "ink" | "paper";
 
@@ -18,7 +19,7 @@ export default function CtaBlock({ block }: BlockProps<"ctaBlock">) {
   const tone: Tone = toneKey === "ink" || toneKey === "paper" ? toneKey : "lime";
 
   return (
-    <section className={`section-space page-gutter ${TONE_SECTION[tone]}`}>
+    <section className={`section-space page-gutter ${backgroundClass(block.background, TONE_SECTION[tone])}`}>
       <Reveal className="container-text text-center">
         {block.eyebrow && <p className="eyebrow mb-4">{block.eyebrow}</p>}
         <h2 className="mx-auto max-w-[24ch] whitespace-pre-line">{block.headline}</h2>

@@ -725,11 +725,85 @@
         "title": "Media alternative text"
       },
       {
+        "initialValue": false,
+        "description": "On: the primary/secondary pills are replaced by one button that opens the video in an overlay player.",
+        "name": "videoButton",
+        "type": "boolean",
+        "title": "Use a video button instead of the CTAs"
+      },
+      {
+        "initialValue": "Play video",
+        "hidden": "conditional",
+        "name": "videoButtonLabel",
+        "type": "string",
+        "title": "Video button label"
+      },
+      {
+        "initialValue": "file",
+        "options": {
+          "list": [
+            {
+              "title": "Uploaded file",
+              "value": "file"
+            },
+            {
+              "title": "External URL (YouTube / Vimeo)",
+              "value": "external"
+            }
+          ],
+          "layout": "radio"
+        },
+        "hidden": "conditional",
+        "name": "overlaySource",
+        "type": "string",
+        "title": "Overlay video source"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "The film the button opens. Falls back to the background video above when left empty.",
+        "hidden": "conditional",
+        "name": "overlayVideo",
+        "type": "file",
+        "title": "Overlay video file"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "YouTube or Vimeo watch/share URL. Nothing loads from the provider until the visitor opens the overlay.",
+        "hidden": "conditional",
+        "name": "overlayVideoUrl",
+        "type": "url",
+        "title": "Overlay video URL"
+      },
+      {
+        "hidden": "conditional",
         "name": "primaryCta",
         "type": "linkField",
         "title": "Primary CTA"
       },
       {
+        "hidden": "conditional",
         "name": "secondaryCta",
         "type": "linkField",
         "title": "Secondary CTA"
@@ -911,11 +985,85 @@
         "title": "Persistent grid loop"
       },
       {
+        "initialValue": false,
+        "description": "On: the primary/secondary pills are replaced by one button that opens the film in an overlay player.",
+        "name": "videoButton",
+        "type": "boolean",
+        "title": "Use a video button instead of the CTAs"
+      },
+      {
+        "initialValue": "Play video",
+        "hidden": "conditional",
+        "name": "videoButtonLabel",
+        "type": "string",
+        "title": "Video button label"
+      },
+      {
+        "initialValue": "file",
+        "options": {
+          "list": [
+            {
+              "title": "Uploaded file",
+              "value": "file"
+            },
+            {
+              "title": "External URL (YouTube / Vimeo)",
+              "value": "external"
+            }
+          ],
+          "layout": "radio"
+        },
+        "hidden": "conditional",
+        "name": "overlaySource",
+        "type": "string",
+        "title": "Overlay video source"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "The full film the button opens — usually longer than the looping background clip. Falls back to the background video when left empty.",
+        "hidden": "conditional",
+        "name": "overlayVideo",
+        "type": "file",
+        "title": "Overlay video file"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "description": "YouTube or Vimeo watch/share URL. Nothing loads from the provider until the visitor opens the overlay.",
+        "hidden": "conditional",
+        "name": "overlayVideoUrl",
+        "type": "url",
+        "title": "Overlay video URL"
+      },
+      {
+        "hidden": "conditional",
         "name": "primaryCta",
         "type": "linkField",
         "title": "Primary CTA"
       },
       {
+        "hidden": "conditional",
         "name": "secondaryCta",
         "type": "linkField",
         "title": "Secondary CTA"
@@ -1013,8 +1161,102 @@
         "type": "text"
       },
       {
+        "initialValue": false,
+        "description": "Off: the headline wraps at a tight 24-character measure (Apple intro rhythm). On: it runs to 40 characters — for longer sentences that read better on fewer lines.",
+        "name": "wideHeadline",
+        "type": "boolean",
+        "title": "Wide headline"
+      },
+      {
         "name": "body",
         "type": "richText"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Sits behind the copy under a scrim. Also the still frame for a background video.",
+        "name": "backgroundImage",
+        "type": "image",
+        "title": "Background image"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Muted and looping. Plays over the background image; visitors who prefer reduced motion keep the still.",
+        "name": "backgroundVideo",
+        "type": "file",
+        "title": "Background video"
+      },
+      {
+        "initialValue": 60,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ]
+          }
+        ],
+        "description": "How far the scrim dims the media. Lower lets the image or video pop; 0 removes the scrim entirely. Raise it if the copy is hard to read.",
+        "hidden": "conditional",
+        "name": "backgroundMuted",
+        "type": "number",
+        "title": "Background muting (%)"
+      },
+      {
+        "initialValue": "none",
+        "options": {
+          "list": [
+            {
+              "title": "Normal — as tall as the content",
+              "value": "none"
+            },
+            {
+              "title": "Half viewport (50vh)",
+              "value": "50"
+            },
+            {
+              "title": "Three-quarter viewport (75vh)",
+              "value": "75"
+            },
+            {
+              "title": "Full viewport (100vh)",
+              "value": "100"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Give the section room to breathe — useful when it carries a background image or video. The copy centres in whatever height you pick.",
+        "name": "minHeight",
+        "type": "string",
+        "title": "Minimum height"
       }
     ],
     "name": "introBlock",
@@ -1247,6 +1489,24 @@
         ],
         "name": "images",
         "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
       }
     ],
     "name": "galleryBlock",
@@ -1516,6 +1776,24 @@
       },
       {
         "name": "caption",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
         "type": "string"
       }
     ],
@@ -1798,6 +2076,24 @@
         "rows": 2,
         "name": "footnote",
         "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
       }
     ],
     "name": "comparisonTableBlock",
@@ -1894,6 +2190,24 @@
         "name": "faqs",
         "type": "array",
         "title": "Questions"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
       }
     ],
     "name": "faqBlock",
@@ -2047,6 +2361,24 @@
         "name": "privacyNotice",
         "type": "string",
         "title": "Privacy notice (external)"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
       }
     ],
     "name": "videoBlock",
@@ -2152,6 +2484,24 @@
           "layout": "radio"
         },
         "name": "tone",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
         "type": "string"
       }
     ],
@@ -2380,6 +2730,65 @@
         "rows": 2,
         "name": "footnote",
         "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Sits behind the copy under a scrim. Also the still frame for a background video.",
+        "name": "backgroundImage",
+        "type": "image",
+        "title": "Background image"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Muted and looping. Plays over the background image; visitors who prefer reduced motion keep the still.",
+        "name": "backgroundVideo",
+        "type": "file",
+        "title": "Background video"
+      },
+      {
+        "initialValue": 60,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ]
+          }
+        ],
+        "description": "How far the scrim dims the media. Lower lets the image or video pop; 0 removes the scrim entirely. Raise it if the copy is hard to read.",
+        "hidden": "conditional",
+        "name": "backgroundMuted",
+        "type": "number",
+        "title": "Background muting (%)"
       }
     ],
     "name": "productFinderBlock",
@@ -2484,6 +2893,24 @@
           "layout": "radio"
         },
         "name": "tone",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
         "type": "string"
       }
     ],
@@ -2636,6 +3063,24 @@
         "name": "deviceLabel",
         "type": "string",
         "title": "Device label"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
       }
     ],
     "name": "indicatorLegendBlock",
@@ -2751,6 +3196,24 @@
           "layout": "radio"
         },
         "name": "tone",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
         "type": "string"
       }
     ],

@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 export const schema = defineType({
   name: "galleryBlock",
@@ -8,6 +9,7 @@ export const schema = defineType({
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
     defineField({ name: "headline", title: "Headline", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "images", title: "Images", type: "array", of: [defineArrayMember({ type: "captionedImage" })], validation: (Rule) => Rule.min(1) }),
+    backgroundField(),
   ],
   preview: {
     select: { headline: "headline", eyebrow: "eyebrow" },

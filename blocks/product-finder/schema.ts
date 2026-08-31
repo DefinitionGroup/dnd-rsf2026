@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { backgroundField, backgroundMediaFields } from "@/blocks/background-field";
 
 /**
  * Product finder / calculator. Editors describe inputs and an ordered rules
@@ -61,6 +62,8 @@ export const schema = defineType({
     defineField({ name: "resultLabel", title: "Result label", type: "string", initialValue: "Our recommendation" }),
     defineField({ name: "rollLifeLabel", title: "Roll-life label", type: "string", initialValue: "Expected roll life" }),
     defineField({ name: "footnote", title: "Footnote", type: "text", rows: 2 }),
+    backgroundField(),
+    ...backgroundMediaFields(),
   ],
   preview: { select: { headline: "headline" }, prepare: ({ headline }) => ({ title: "Product finder", subtitle: headline || "Calculator" }) },
 });
