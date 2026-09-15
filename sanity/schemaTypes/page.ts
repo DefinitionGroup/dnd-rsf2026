@@ -4,6 +4,18 @@ import { apiVersion } from "@/sanity/env";
 import { blockTypeNames } from "@/blocks/schemas";
 import { languageField } from "./fields/language";
 
+/** Published id of a document, whatever prefix it carries (`drafts.`, `versions.<release>.`). */
+const publishedIdOf = (id: string | undefined) => id?.replace(/^(drafts\.|versions\.[^.]+\.)/, "") ?? "";
+
+/**
+ * GROQ fragment: exclude every representation of the current document — the
+ * published copy, its draft and any release version (`versions.<release>.<id>`).
+ * Orphaned release versions are invisible in Studio but still count in raw queries.
+ * Spelled out with string functions on purpose: `path()` with a computed argument
+ * and `sanity::versionOf()` both silently dropped *every* version document.
+ */
+const NOT_SAME_DOCUMENT = `!(_id in [$publishedId, $draftId]) && !(string::startsWith(_id, "versions.") && array::join(string::split(_id, ".")[2..-1], ".") == $publishedId)`;
+
 function HomepageIcon() {
   return createElement(
     "svg",
@@ -41,10 +53,10 @@ export const page = defineType({
         documentInternationalization: { exclude: true },
         isUnique: async (value, context) => {
           const document = context.document;
-          const id = document?._id.replace(/^drafts\./, "");
+          const id = publishedIdOf(document?._id);
           const client = context.getClient({ apiVersion });
           const count = await client.fetch<number>(
-            `count(*[_type == "page" && language == $language && slug.current == $slug && !(_id in [$publishedId, $draftId])])`,
+            `count(*[_type == "page" && language == $language && slug.current == $slug && ${NOT_SAME_DOCUMENT}])`,
             { language: document?.language, slug: value, publishedId: id, draftId: `drafts.${id}` },
           );
           return count === 0;
@@ -71,10 +83,10 @@ export const page = defineType({
         Rule.custom(async (value, context) => {
           if (!value) return true;
           const document = context.document;
-          const id = document?._id.replace(/^drafts\./, "");
+          const id = publishedIdOf(document?._id);
           const client = context.getClient({ apiVersion });
           const count = await client.fetch<number>(
-            `count(*[_type == "page" && language == $language && isHomepage == true && !(_id in [$publishedId, $draftId])])`,
+            `count(*[_type == "page" && language == $language && isHomepage == true && ${NOT_SAME_DOCUMENT}])`,
             { language: document?.language, publishedId: id, draftId: `drafts.${id}` },
           );
           return count === 0 || "Another homepage already exists for this language.";
