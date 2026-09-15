@@ -1,11 +1,22 @@
 import type { StructureResolver } from "sanity/structure";
 import { LOCALES } from "@/lib/i18n";
+import { isStudioAdmin } from "./env";
 
 const singletonTypes = new Set(["siteSettings"]);
 const handled = new Set(["page", "product", "testimonial", "menu", "siteSettings", "translation.metadata"]);
 
-export const structure: StructureResolver = (S) =>
-  S.list()
+/** Pages flagged `adminOnly` are listed only for Studio admins (NEXT_PUBLIC_SANITY_ADMIN_EMAILS). */
+const ADMIN_FILTER = "adminOnly == true";
+const EDITOR_FILTER = "adminOnly != true";
+
+export const structure: StructureResolver = (S, { currentUser }) => {
+  const admin = isStudioAdmin(currentUser);
+  const visible = admin ? "" : ` && ${EDITOR_FILTER}`;
+  const pageTemplates = LOCALES.map((locale) =>
+    S.initialValueTemplateItem("page-by-language", { language: locale.id }),
+  );
+
+  return S.list()
     .title("The Aquarium Solution")
     .items([
       S.listItem()
@@ -14,7 +25,30 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title("Landing pages")
             .items([
-              S.documentTypeListItem("page").title("All pages"),
+              S.listItem()
+                .title("All pages")
+                .id("pages-all")
+                .child(
+                  S.documentList()
+                    .title("All pages")
+                    .schemaType("page")
+                    .filter(`_type == "page"${visible}`)
+                    .initialValueTemplates(pageTemplates),
+                ),
+              ...(admin
+                ? [
+                    S.listItem()
+                      .title("Admin pages")
+                      .id("pages-admin")
+                      .child(
+                        S.documentList()
+                          .title("Admin pages")
+                          .schemaType("page")
+                          .filter(`_type == "page" && ${ADMIN_FILTER}`)
+                          .initialValueTemplates(pageTemplates),
+                      ),
+                  ]
+                : []),
               S.divider(),
               ...LOCALES.map((locale) =>
                 S.listItem()
@@ -24,7 +58,7 @@ export const structure: StructureResolver = (S) =>
                     S.documentList()
                       .title(`${locale.title} pages`)
                       .schemaType("page")
-                      .filter('_type == "page" && language == $language')
+                      .filter(`_type == "page" && language == $language${visible}`)
                       .params({ language: locale.id })
                       .initialValueTemplates([S.initialValueTemplateItem("page-by-language", { language: locale.id })]),
                   ),
@@ -43,3 +77,4 @@ export const structure: StructureResolver = (S) =>
         (item) => !singletonTypes.has(item.getId() || "") && !handled.has(item.getId() || ""),
       ),
     ]);
+};

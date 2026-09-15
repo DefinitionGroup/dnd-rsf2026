@@ -12,3 +12,17 @@ export const isSanityConfigured = Boolean(projectId && dataset);
 // used to compile the disconnected Studio shell and the client instance; nothing
 // fetches with it unless isSanityConfigured is true.
 export const studioProjectId = projectId || "abcdefgh";
+
+/**
+ * Studio administrators (comma-separated emails in NEXT_PUBLIC_SANITY_ADMIN_EMAILS).
+ * Only these users see pages flagged `adminOnly` in the Studio structure.
+ * Public on purpose: the Studio runs in the browser. This is UI gating, not
+ * access control — anyone with a Viewer role can still reach the API.
+ */
+export const adminEmails = (process.env.NEXT_PUBLIC_SANITY_ADMIN_EMAILS || "")
+  .split(",")
+  .map((email) => email.trim().toLowerCase())
+  .filter(Boolean);
+
+export const isStudioAdmin = (user: { email?: string | null } | null | undefined) =>
+  Boolean(user?.email && adminEmails.includes(user.email.toLowerCase()));

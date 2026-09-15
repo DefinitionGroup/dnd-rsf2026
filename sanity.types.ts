@@ -712,6 +712,7 @@ export type Page = {
   slug: Slug;
   product?: ProductReference;
   isHomepage?: boolean;
+  adminOnly?: boolean;
   navbarVariant?: "light" | "dark";
   metadata?: Metadata;
   content?: Array<

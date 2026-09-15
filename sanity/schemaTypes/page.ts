@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { createElement } from "react";
-import { apiVersion } from "@/sanity/env";
+import { apiVersion, isStudioAdmin } from "@/sanity/env";
 import { blockTypeNames } from "@/blocks/schemas";
 import { languageField } from "./fields/language";
 
@@ -29,6 +29,19 @@ function HomepageIcon() {
   );
 }
 
+function AdminIcon() {
+  return createElement(
+    "svg",
+    { "aria-label": "Admin only", fill: "none", height: "1em", role: "img", viewBox: "0 0 25 25", width: "1em" },
+    createElement("path", {
+      d: "M8.5 11.5V8.5C8.5 6.29 10.29 4.5 12.5 4.5C14.71 4.5 16.5 6.29 16.5 8.5V11.5M6.5 11.5H18.5V19.5H6.5V11.5Z",
+      stroke: "currentColor",
+      strokeLinejoin: "round",
+      strokeWidth: 1.2,
+    }),
+  );
+}
+
 export const page = defineType({
   name: "page",
   title: "Landing page",
@@ -39,6 +52,8 @@ export const page = defineType({
     { name: "settings", title: "Settings" },
     { name: "seo", title: "SEO" },
   ],
+  // Editors can open an admin page via search; keep it read-only for them.
+  readOnly: ({ currentUser, document }) => Boolean(document?.adminOnly) && !isStudioAdmin(currentUser),
   fields: [
     defineField({ name: "title", title: "Title", type: "string", group: "basic", validation: (Rule) => Rule.required() }),
     { ...languageField, group: "basic" },
@@ -93,6 +108,15 @@ export const page = defineType({
         }),
     }),
     defineField({
+      name: "adminOnly",
+      title: "Admin only",
+      type: "boolean",
+      group: "settings",
+      initialValue: false,
+      description: "Hidden from editors in the Studio. Only administrators listed in NEXT_PUBLIC_SANITY_ADMIN_EMAILS see it.",
+      hidden: ({ currentUser }) => !isStudioAdmin(currentUser),
+    }),
+    defineField({
       name: "navbarVariant",
       title: "Navigation contrast",
       type: "string",
@@ -112,11 +136,11 @@ export const page = defineType({
     }),
   ],
   preview: {
-    select: { title: "title", language: "language", homepage: "isHomepage", slug: "slug.current" },
-    prepare: ({ title, language, homepage, slug }) => ({
+    select: { title: "title", language: "language", homepage: "isHomepage", slug: "slug.current", adminOnly: "adminOnly" },
+    prepare: ({ title, language, homepage, slug, adminOnly }) => ({
       title,
-      subtitle: `${language?.toUpperCase() || ""}${homepage ? " · Homepage" : slug ? ` · /${slug}` : ""}`,
-      media: homepage ? HomepageIcon : undefined,
+      subtitle: `${language?.toUpperCase() || ""}${homepage ? " · Homepage" : slug ? ` · /${slug}` : ""}${adminOnly ? " · Admin" : ""}`,
+      media: adminOnly ? AdminIcon : homepage ? HomepageIcon : undefined,
     }),
   },
 });
