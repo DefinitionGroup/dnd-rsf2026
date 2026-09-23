@@ -3,6 +3,7 @@
  *
  *   pnpm sanity:seed          # uploads images + createOrReplace documents
  *   pnpm sanity:seed:dry      # prints the documents, no writes
+ *   pnpm sanity:seed -- --only=rowaphos   # just that page (by demo id) + its product; nothing else is touched
  *
  * Runs via `sanity exec … --with-user-token` (CLI login), so no write token is
  * needed. Converts the *resolved* demo shapes back into stored document shapes:
@@ -19,6 +20,10 @@ import { demoProducts } from "../content/demo-products";
 import { apiVersion } from "../sanity/env";
 
 const dryRun = process.argv.includes("--dry-run");
+/** `--only=<demo page id>[,<id>]` seeds just those pages and the products they reference. */
+const only = process.argv.find((a) => a.startsWith("--only="))?.slice("--only=".length).split(",").filter(Boolean);
+const seedPages = only ? demoPages.filter((p) => only.some((id) => p._id === `demo-page-en-${id}`)) : demoPages;
+const seedProducts = only ? demoProducts.filter((p) => seedPages.some((page) => page.product?._id === p._id)) : demoProducts;
 const client = getCliClient({ apiVersion });
 
 type Doc = Record<string, unknown> & { _id: string; _type: string };
@@ -107,7 +112,7 @@ function buildDocuments() {
   const testimonials: Doc[] = [];
   const ctx = { testimonials };
 
-  const products: Doc[] = demoProducts.map((p) => ({
+  const products: Doc[] = seedProducts.map((p) => ({
     _id: p._id,
     _type: "product",
     name: i18n("String", p.name),
@@ -125,7 +130,7 @@ function buildDocuments() {
     videoUrl: p.videoUrl ?? undefined,
   }));
 
-  const pages: Doc[] = demoPages.map((page) => {
+  const pages: Doc[] = seedPages.map((page) => {
     const { _id, title, slug, language, isHomepage, navbarVariant, metadata, product, content } = page;
     return {
       _id,
@@ -140,6 +145,12 @@ function buildDocuments() {
       content: withKeys(toStored(content, ctx), "c"),
     } as Doc;
   });
+
+  const unique = new Map<string, Doc>();
+  if (only) {
+    for (const d of [...products, ...testimonials, ...pages]) unique.set(d._id, d);
+    return [...unique.values()];
+  }
 
   const shell = getDemoShell("en");
   const settings: Doc = {
@@ -163,7 +174,6 @@ function buildDocuments() {
     footerLinks: withKeys(shell.menu?.footerLinks ?? [], "f"),
   };
 
-  const unique = new Map<string, Doc>();
   for (const d of [...products, ...testimonials, settings, menu, ...pages]) unique.set(d._id, d);
   return [...unique.values()];
 }
@@ -171,7 +181,8 @@ function buildDocuments() {
 /* --------------------------------------------------------------- main */
 
 async function main() {
-  collectImages([demoPages, demoProducts, getDemoShell("en")]);
+  if (only && seedPages.length === 0) throw new Error(`--only matched no demo page: ${only.join(", ")}`);
+  collectImages(only ? [seedPages, seedProducts] : [demoPages, demoProducts, getDemoShell("en")]);
 
   for (const url of imageUrls) {
     if (dryRun) {

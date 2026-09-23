@@ -118,3 +118,38 @@ export const clarisea: ProductSummary = {
   videoUrl: null,
 };
 demoProducts.push(clarisea);
+
+export const rowaphos: ProductSummary = {
+  _id: "demo-product-rowaphos",
+  slug: "rowaphos",
+  name: "RowaPhos",
+  tagline: "The phosphate remover that means business — globally proven phosphate control at exceptional value for money.",
+  body: pt(
+    "RowaPhos is a unique ferric hydroxide material that removes phosphate and silicate from both freshwater and saltwater systems. It was originally patented and chemically engineered in Germany, and delivers the largest adsorption capacity of any commercial phosphate remover: 25 g of phosphate per kg in saltwater and 20 g per kg in freshwater.",
+    "It keeps working at low concentrations, even below 0.05 ppm, and does not leach phosphate back into the system once saturated.",
+    "Five sizes, from 100 ml up to a 5 kg commercial pack.",
+  ),
+  category: "Water chemistry",
+  sku: "RP10 / RP25 / RP50 / RP100 / RP500KG",
+  image: img("original/rowaphos-4-tub.png", { width: 600, height: 488 }),
+  imageAlt: "RowaPhos phosphate remover in four pack sizes",
+  gallery: [
+    captioned("original/rowaphos-group.png", "The RowaPhos range, from 100 ml to the 5 kg commercial pack", "Five sizes"),
+    captioned("original/rowaphos-media.png", "RowaPhos ferric hydroxide granules", "Ferric hydroxide media"),
+    captioned("original/fmr75.jpg", "D-D FMR75 fluidised media reactor", "Best with the FMR75 reactor"),
+  ],
+  specs: [
+    spec("Material", "Ferric hydroxide (patented, made in Germany)"),
+    spec("Removes", "Phosphate (PO₄) and silicate"),
+    spec("Adsorption capacity, saltwater", "25", "g PO₄/kg"),
+    spec("Adsorption capacity, freshwater", "20", "g PO₄/kg"),
+    spec("Effective down to", "< 0.05", "ppm PO₄"),
+    spec("Recommended dose, saltwater", "25 g per 100", "l"),
+    spec("Sizes", "100 ml · 250 ml · 500 ml · 1,000 ml · 5 kg"),
+    spec("Systems", "Freshwater & saltwater"),
+  ],
+  legacyUrl: "https://www.theaquariumsolution.com/product/17/96",
+  manualUrl: "https://www.theaquariumsolution.com/sites/default/files/downloads/What%20is%20Rowaphos%20_14.pdf",
+  videoUrl: null,
+};
+demoProducts.push(rowaphos);

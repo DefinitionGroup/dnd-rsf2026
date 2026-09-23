@@ -32,7 +32,7 @@ import { howItWorksDemo } from "@/blocks/how-it-works/demo";
 import { productFinderDemo } from "@/blocks/product-finder/demo";
 import { indicatorLegendDemo } from "@/blocks/indicator-legend/demo";
 import { img, link } from "./demo-helpers";
-import { clarisea, funktionPump, khManager, spektrum150 } from "./demo-products";
+import { clarisea, funktionPump, khManager, rowaphos, spektrum150 } from "./demo-products";
 
 const STOCKISTS = "https://www.theaquariumsolution.com/stockists";
 
@@ -100,6 +100,7 @@ const home = page({
       intro: "Four ways to make a reef clearer, more stable, more colourful and quieter.",
       items: [
         { product: clarisea, link: { label: "ClariSea Gen 3", href: "/en/clarisea" } },
+        { product: rowaphos, link: { label: "RowaPhos", href: "/en/rowaphos" } },
         { product: spektrum150, link: { label: "Spektrum 150", href: "/en/spektrum-150" } },
         { product: funktionPump, link: { label: "Funktion Return Pump", href: "/en/funktion-return-pump" } },
         { product: khManager, link: { label: "KH Manager", href: "/en/kh-manager" } },
@@ -272,6 +273,162 @@ const clariseaPage = page({
     }),
     ctaDemo({
       eyebrow: "ClariSea Gen 3",
+      headline: "Simply the clever choice.",
+      body: "Available through specialist aquarium retailers worldwide.",
+      primaryCta: { label: "Find a stockist", href: STOCKISTS },
+      secondaryCta: { label: "Ask us a question", href: "/en/contact" },
+      tone: "ink",
+    }),
+  ],
+});
+
+const ROWAPHOS_DOWNLOADS = "https://www.theaquariumsolution.com/sites/default/files/downloads";
+
+const rowaphosPage = page({
+  id: "rowaphos",
+  title: "RowaPhos",
+  slug: "rowaphos",
+  product: rowaphos,
+  metadata: {
+    title: "RowaPhos phosphate remover | The Aquarium Solution",
+    description: "The phosphate remover that means business: patented ferric hydroxide that removes phosphate and silicate from freshwater and saltwater — 25 g PO₄ per kg, effective below 0.05 ppm, no leaching. Five sizes, 100 ml to 5 kg.",
+    image: "original/rowaphos-reef-plant.jpg",
+  },
+  content: [
+    heroDemo({
+      brand: "RowaPhos by D-D · Phosphate remover",
+      headline: "Here comes the phosphate remover\nthat means business.",
+      summary: "The clever choice for clean water and a globally proven leader in phosphate control — all at exceptional value for money.",
+      image: "original/rowaphos-group.png",
+      imageAlt: "RowaPhos phosphate remover — the range from 100 ml to the 5 kg commercial pack",
+      primaryCta: { label: "How much do I need?", href: "#productFinderBlock" },
+      secondaryCta: { label: "Find a stockist", href: STOCKISTS },
+    }),
+    statStripDemo({
+      eyebrow: "RowaPhos by the numbers",
+      stats: [
+        { value: "25", suffix: "g/kg", label: "Phosphate adsorbed per kg in saltwater" },
+        { value: "20", suffix: "g/kg", label: "Phosphate adsorbed per kg in freshwater" },
+        { value: "0.05", prefix: "<", suffix: "ppm", label: "Still removing phosphate at low concentrations" },
+        { value: "5", suffix: "sizes", label: "From 100 ml up to a 5 kg commercial pack" },
+      ],
+    }),
+    introDemo({
+      eyebrow: "Freshwater and saltwater",
+      headline: "A unique ferric hydroxide that removes phosphate and silicate — from reef tanks to planted aquariums.",
+      wideHeadline: true,
+      body: [
+        "RowaPhos was originally patented and chemically engineered in Germany, where it was first developed for treating mains water. It delivers the largest adsorption capacity when compared to other commercial phosphate removers.",
+      ],
+      background: "black",
+      backgroundImage: "original/rowaphos-reef-plant.jpg",
+      backgroundMuted: 55,
+      minHeight: "75",
+    }),
+    splitContentDemo({
+      eyebrow: "Feed your fish, not your algae",
+      headline: "Cleaner water, stronger corals, fewer algae.",
+      body: [
+        "Phosphate feeds nuisance algae, which can overrun plants and expensive corals — and in the reef aquarium it holds back the calcification corals need to build their skeletons.",
+        "RowaPhos is easy to use, improves water quality, supports SPS growth and curbs nuisance algae.",
+        "Since algae rarely takes a day off, regular use of RowaPhos is highly recommended.",
+      ],
+      image: "original/rowaphos-media.png",
+      imageAlt: "RowaPhos ferric hydroxide granules",
+    }),
+    featureListDemo({
+      eyebrow: "Why RowaPhos",
+      headline: "Engineered to out-adsorb the rest.",
+      items: [
+        { title: "Largest adsorption capacity", text: "A whopping 25 g of phosphate per kg in saltwater and 20 g per kg in freshwater." },
+        { title: "Keeps working at low levels", text: "Continues to remove phosphate effectively even below 0.05 ppm." },
+        { title: "No leaching", text: "Does not release phosphate back into the system when saturated — so there is no rush to remove exhausted media." },
+        { title: "Phosphate and silicate", text: "One media for both — in freshwater and saltwater aquariums alike." },
+        { title: "Independently tested", text: "In tests by the Technical University of Berlin on the five most commonly used phosphate removers, the others reached only 30–40 % of RowaPhos' removal capacity by weight." },
+        { title: "Patented — not a copy", text: "Only Rowa make RowaPhos. Other iron-based media have a different chemical structure and different properties." },
+      ],
+    }),
+    splitContentDemo({
+      eyebrow: "For best results",
+      headline: "RowaPhos + the FMR75 reactor.",
+      body: [
+        "Run RowaPhos in D-D's FMR75 fluidised media reactor and dose 25 g per 100 l in saltwater.",
+        "And of course follow the instructions — removing phosphate too fast can stress corals.",
+      ],
+      image: "original/fmr75.jpg",
+      imageAlt: "D-D FMR75 fluidised media reactor",
+      reverse: true,
+      tone: "sand",
+      cta: { label: "About the FMR75", href: "https://www.theaquariumsolution.com/products/fmr75-fluidised-reactors" },
+    }),
+    productFinderDemo({
+      eyebrow: "Which size?",
+      headline: "Find your RowaPhos pack in ten seconds.",
+      intro: "Tell us your system volume and water type — we recommend the pack that removes 3 ppm of phosphate from it.",
+      volumeLabel: "System volume",
+      volumeMin: 50,
+      volumeMax: 6000,
+      volumeDefault: 400,
+      loadLabel: "Water type",
+      loadOptions: [
+        { label: "Saltwater", factor: 1, rollFactor: 1 },
+        { label: "Freshwater", factor: 0.5, rollFactor: 1 },
+      ],
+      rules: [
+        { maxEffectiveVolume: 400, resultTitle: "RowaPhos 100 ml (RP10)", resultBody: "Removes 3 ppm of phosphate from about 400 l of saltwater or 800 l of freshwater. Media bag included.", product: rowaphos, cta: { label: "Find a stockist", href: STOCKISTS } },
+        { maxEffectiveVolume: 1000, resultTitle: "RowaPhos 250 ml (RP25)", resultBody: "Removes 3 ppm of phosphate from about 1,000 l of saltwater or 2,000 l of freshwater. Media bag included.", product: rowaphos, cta: { label: "Find a stockist", href: STOCKISTS } },
+        { maxEffectiveVolume: 2000, resultTitle: "RowaPhos 500 ml (RP50)", resultBody: "Removes 3 ppm of phosphate from about 2,000 l of saltwater or 4,000 l of freshwater.", product: rowaphos, cta: { label: "Find a stockist", href: STOCKISTS } },
+        { maxEffectiveVolume: 4000, resultTitle: "RowaPhos 1,000 ml (RP100)", resultBody: "Removes 3 ppm of phosphate from about 4,000 l of saltwater or 8,000 l of freshwater.", product: rowaphos, cta: { label: "Find a stockist", href: STOCKISTS } },
+        { maxEffectiveVolume: 20000, resultTitle: "RowaPhos 5 kg commercial pack (RP500KG)", resultBody: "Removes 3 ppm of phosphate from about 20,000 l of saltwater or 40,000 l of freshwater — for large systems, ponds and stores.", product: rowaphos, cta: { label: "Find a stockist", href: STOCKISTS } },
+        { resultTitle: "Talk to us about your system", resultBody: "Tell us about your system and we will help you plan the right quantity.", cta: { label: "Talk to us", href: "/en/contact" } },
+      ],
+      footnote: "Guide values based on removing 3 ppm of phosphate (PO₄). For the ongoing dose in saltwater, use 25 g per 100 l and follow the instructions — removing phosphate too fast can stress corals.",
+    }),
+    comparisonTableDemo({
+      eyebrow: "Five sizes",
+      headline: "From 100 ml right up to 5 kg.",
+      intro: "Same patented media in every pack — pick the size that suits your system.",
+      rowHeader: "Pack",
+      columns: [
+        { title: "100 ml", subtitle: "RP10", cta: { label: "Find a stockist", href: STOCKISTS } },
+        { title: "250 ml", subtitle: "RP25", cta: { label: "Find a stockist", href: STOCKISTS } },
+        { title: "500 ml", subtitle: "RP50", cta: { label: "Find a stockist", href: STOCKISTS } },
+        { title: "1,000 ml", subtitle: "RP100", cta: { label: "Find a stockist", href: STOCKISTS } },
+        { title: "5 kg", subtitle: "RP500KG · commercial", cta: { label: "Find a stockist", href: STOCKISTS } },
+      ],
+      rows: [
+        { label: "Saltwater", hint: "Removes 3 ppm PO₄ from approx.", cells: ["400 l", "1,000 l", "2,000 l", "4,000 l", "20,000 l"] },
+        { label: "Freshwater", hint: "Removes 3 ppm PO₄ from approx.", cells: ["800 l", "2,000 l", "4,000 l", "8,000 l", "40,000 l"] },
+        { label: "Saltwater (US gal)", cells: ["105", "265", "525", "1,050", "5,250"] },
+        { label: "Freshwater (US gal)", cells: ["210", "530", "1,050", "2,100", "10,500"] },
+        { label: "Media bag included", cells: ["yes", "yes", "no", "no", "no"] },
+      ],
+      footnote: "Use with D-D's FMR75 fluidised media reactor for best results.",
+    }),
+    specsDemo({
+      eyebrow: "Details",
+      headline: "Technical specifications",
+      product: rowaphos,
+      downloads: [
+        { label: "What is RowaPhos? (PDF)", href: `${ROWAPHOS_DOWNLOADS}/What%20is%20Rowaphos%20_14.pdf` },
+        { label: "Fluidising RowaPhos (PDF)", href: `${ROWAPHOS_DOWNLOADS}/dd%20saltwater%20rowa%20v4.pdf` },
+        { label: "RowaPhos test report (PDF)", href: `${ROWAPHOS_DOWNLOADS}/Rowaphos%20Test%20Report%20.pdf` },
+        { label: "Removal comparison (PDF)", href: `${ROWAPHOS_DOWNLOADS}/RowaPhos%20removal%20Comparrison.pdf` },
+      ],
+    }),
+    faqDemo({
+      headline: "Frequently asked questions",
+      faqs: [
+        { question: "How much RowaPhos should I use?", answer: ["In saltwater, dose 25 g per 100 l — ideally in D-D's FMR75 fluidised media reactor. Follow the instructions: removing phosphate too fast can stress corals."] },
+        { question: "Does it work in freshwater?", answer: ["Yes. RowaPhos removes phosphate and silicate from freshwater and saltwater systems. In freshwater it adsorbs 20 g of phosphate per kg, so each pack treats roughly twice the volume."] },
+        { question: "Will it leach phosphate back when it is exhausted?", answer: ["No. RowaPhos does not release phosphate back into the system when saturated, so there is no need to remove exhausted media immediately."] },
+        { question: "Does it still work when my phosphate is already low?", answer: ["Yes — RowaPhos continues to remove phosphate effectively even below 0.05 ppm."] },
+        { question: "Should I use it all the time?", answer: ["Regular use is highly recommended. Algae rarely takes a day off, and constant use keeps nuisance algae in check."] },
+        { question: "Is it the same as other iron-based phosphate removers?", answer: ["No. RowaPhos is a patented ferric hydroxide made only by Rowa. Other iron-based media have a different chemical structure and different properties."] },
+      ],
+    }),
+    ctaDemo({
+      eyebrow: "RowaPhos",
       headline: "Simply the clever choice.",
       body: "Available through specialist aquarium retailers worldwide.",
       primaryCta: { label: "Find a stockist", href: STOCKISTS },
@@ -555,7 +712,7 @@ const cinematicPage = page({
   ],
 });
 
-const pages: PageDocument[] = [home, clariseaPage, spektrumPage, funktionPage, khPage, contactPage, cinematicPage];
+const pages: PageDocument[] = [home, clariseaPage, rowaphosPage, spektrumPage, funktionPage, khPage, contactPage, cinematicPage];
 
 /* ------------------------------------------------------------- shell */
 
@@ -584,6 +741,7 @@ const shell: SiteShell = {
     language: "en",
     items: [
       { _key: "m0", ...link("ClariSea", "/en/clarisea") },
+      { _key: "m4", ...link("RowaPhos", "/en/rowaphos") },
       { _key: "m1", ...link("Spektrum 150", "/en/spektrum-150") },
       { _key: "m2", ...link("Funktion Pump", "/en/funktion-return-pump") },
       { _key: "m3", ...link("KH Manager", "/en/kh-manager") },
