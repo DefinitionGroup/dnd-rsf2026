@@ -191,7 +191,7 @@ components:
 
 This is the Apple design architecture (Refero "Apple") translated for reef-keeping hardware, in its dark register. The page is a sequence of full-bleed, centered, stacked, symmetric sections on two canvases, black (#000) and a #1d1d1f lift, alternating as the story moves; the hero, film and 360° sections sit on black and the first lift begins with the next section. Every section opens with a centered white headline and, optionally, a light 300-weight "whisper" tagline in fg; below it sits the thing itself, a photograph or product cut from the client's own dark studio photography, feathered into black. Copy is fg (#f5f5f7) on black, ash (#86868b) for the supporting voice, and it stays inside a 980px column. There are no decorative colours, no gradients, no glass, no glow, and exactly one shadow (a soft drop shadow reserved for product cut-outs). Real white is reserved for headings, photo wells, pill labels, the before/after handle and the slider thumb.
 
-Colour is a switch, not a palette. Lime (#99cc33) appears where the user can act or has chosen: the filled pill, the selected segment of a segmented control, and, because full lime passes 9:1 on black, also the outlined secondary pill, ghost links, prose links and focus rings. `lime-deep` is kept as a token name but resolves to the same lime on this branch. Nothing else, no border, figure, icon or heading, is coloured. Numbers are big and tabular in fg; icons are 1.5-stroke line SVGs in ash/fg; progress and slider fills are fg on hairline (#424245). Type is SF Pro on Apple devices and Inter everywhere else, on a major-second scale from 17px with Apple's slightly positive tracking on large sizes and slightly negative tracking on body.
+Colour is a switch, not a palette. Lime (#99cc33) appears where the user can act or has chosen: the filled pill, the selected segment of a segmented control, and, because full lime passes 9:1 on black, also the outlined secondary pill, ghost links, prose links and focus rings. `lime-deep` is kept as a token name but resolves to the same lime on this branch. The one typographic exception is the `h4` subheading, which is set in lime. Nothing else, no border, figure, icon or other heading, is coloured. Numbers are big and tabular in fg; icons are 1.5-stroke line SVGs in ash/fg; progress and slider fills are fg on hairline (#424245). Type is SF Pro on Apple devices and Inter everywhere else, on a major-second scale from 17px with Apple's slightly positive tracking on large sizes and slightly negative tracking on body.
 
 The system rejects the previous v2 world explicitly: no dark-glow product stages behind copy, no card grids sitting on the canvas for text alone, no eyebrows or kickers over headings, no second accent, no 700-weight headlines, no shipped display face. Dark here is a flat black room, not a lit stage.
 
@@ -208,7 +208,7 @@ The system rejects the previous v2 world explicitly: no dark-glow product stages
 Apple's dark neutral ramp with a single lime switch; the ramp itself is the palette.
 
 ### Primary
-- **Lime** (#99cc33): the accent's home. Filled primary pill fill (carbon text), the selected segment of a segmented control, the success mark in the contact form, text-selection highlight (black text), and, on this dark register, the outlined secondary pill's border and text, ghost text links, prose links and every `:focus-visible` ring. Hover on the filled pill lightens to #a3d63f; hover on the outlined pill fills lime with black text. Never headings, figures, icons or rules.
+- **Lime** (#99cc33): the accent's home. Filled primary pill fill (carbon text), the selected segment of a segmented control, the success mark in the contact form, text-selection highlight (black text), and, on this dark register, the outlined secondary pill's border and text, ghost text links, prose links, every `:focus-visible` ring and `h4` subheadings. Hover on the filled pill lightens to #a3d63f; hover on the outlined pill fills lime with black text. Never h1–h3, figures, icons or rules.
 - **Lime Deep** (#99cc33): token retained for the light register's AA companion; on this branch it equals lime and `.text-lime-deep` renders full lime (9:1 on black).
 - **Lime Signal** (#b9dd6b): declared for rare decorative strokes/image outlines; not used on the built page.
 
@@ -216,7 +216,7 @@ Apple's dark neutral ramp with a single lime switch; the ramp itself is the pale
 - **Onyx / Canvas** (#000000): the primary canvas (`.canvas-white` resolves to black), the hero, film and 360° sections, the product bar ground (80% + blur), the LED chip disc, and tiles/`.media` wells on lift sections.
 - **Carbon / Canvas-alt / Frost** (#1d1d1f): the lift canvas (`.canvas-frost`), the global nav ground (90% + blur) and mobile nav sheet, the footer, tiles, `.media` wells and `.field` fills on black sections, and the text colour inside a lime pill.
 - **Foreground** (#f5f5f7): body text on both canvases; the whisper tagline; slider and progress fills; active tour titles on non-film canvases.
-- **White** (#ffffff): headings h1–h4, global-nav links on hover, active product-bar links, footer column heads, pill labels inside media, before/after handle, slider thumb.
+- **White** (#ffffff): headings h1–h3, global-nav links on hover, active product-bar links, footer column heads, pill labels inside media, before/after handle, slider thumb.
 - **Ash / Fg-muted** (#86868b): supporting body, tile body, table labels, captions, `.lead`, `.label`, placeholders, inactive tour steps, product-bar links at rest, icon strokes, figure units. AA on both #000 and #1d1d1f.
 - **Mist** (#a1a1a6): ash's slightly brighter role inside `.dark`/`.canvas-dark` contexts (`.lead`, `.caption`, `.label`, stat units on film sections).
 - **Pebble / Fill** (#2c2c2e): segmented-control track, severity chips, disabled fills.
@@ -224,7 +224,7 @@ Apple's dark neutral ramp with a single lime switch; the ramp itself is the pale
 - **Danger** (#ff453a): alarm severity text in the indicator legend only, on the alarm well (#3a1c1a).
 
 ### Named Rules
-**The Single Switch Rule.** Lime is the only colour. It may fill the primary pill and the selected state, and on this dark register it may also draw an outline, a link or a focus ring; it may never colour a heading, figure, icon, rule or background wash. Everything else is fg, ash, hairline, lift or black.
+**The Single Switch Rule.** Lime is the only colour. It may fill the primary pill and the selected state, and on this dark register it may also draw an outline, a link or a focus ring; it also colours `h4` subheadings; it may never colour any other heading, a figure, icon, rule or background wash. Everything else is fg, ash, hairline, lift or black.
 
 **The Two Canvases Rule.** Sections alternate black and lift; the hero, film and 360° sections are black and the first lift begins with the next section. There is no third canvas and no product "stage" with a glow or vignette behind copy.
 
@@ -244,7 +244,7 @@ Apple's dark neutral ramp with a single lime switch; the ramp itself is the pale
 - **Display** (600, clamp(2.5rem, 4.6vw, 3.5rem) ≈ 40–56px, 1.07, +0.011em, white): the hero `h1`, centered, `max-w-[18ch]`, `text-wrap: balance`.
 - **Heading** (600, clamp(2rem, 3.4vw, 2.5rem) ≈ 32–40px, 1.14, +0.011em, white): every section `h2` via `SectionHeader`, centered, `max-w-[24ch]`. `.heading-lg` (400, up to 44px) exists for the animated headline's light large heading.
 - **Heading-sm** (600, 28px, 1.18, +0.007em): `h3`, split-content and feature-tour step titles (ash when inactive).
-- **Subheading** (600, 21px, 1.24, −0.005em): `h4` tile titles, product-bar title, comparison column names, FAQ/spec headlines. `.subheading` (400) is the testimonial quote voice.
+- **Subheading** (600, 21px, 1.24, −0.005em, lime): `h4` tile titles, product-bar title, comparison column names, FAQ/spec headlines. `.subheading` (400) is the testimonial quote voice.
 - **Whisper** (300, clamp(21px, 1.9vw, 26px), 1.24, +0.004em, fg): the tagline under headlines and the CTA body; `max-w-[40–42rem]`.
 - **Body** (400, 17px, 1.47, −0.016em, fg): default; supporting copy takes `text-fg-muted`; prose measure 68ch.
 - **Body-sm** (400, 14px, 1.29, −0.016em): tile body, table labels and cells, form labels, step numbers, pill labels inside media, small pill.
@@ -304,7 +304,7 @@ Two radii and nothing in between: pills are fully round (980px) and every rectan
 - **Background:** lift on a black section, black on a lift section; automatic via `.canvas-frost .tile`.
 - **Shadow Strategy:** none.
 - **Border:** none; internal rows use hairline top/bottom borders.
-- **Internal Padding:** 24px; element gap 12px (`mt-3`); h4 title (white) + `body-sm text-fg-muted` body.
+- **Internal Padding:** 24px; element gap 12px (`mt-3`); h4 title (lime) + `body-sm text-fg-muted` body.
 - **Rule:** a tile is a real object: a product (product list, comparison), a control panel (finder inputs/result, LED panel), a form, a spec table, a steps list. A text-only card is never placed on the canvas where the canvas itself is the surface.
 
 ### Media
@@ -350,7 +350,7 @@ One authored scroll motion: rise-in. `Reveal`/`SectionHeader` add `.rise`; `Rise
 ### Don't:
 - **Don't** render an eyebrow, kicker or section number above a heading (`eyebrow` labels the product bar's jump link only).
 - **Don't** introduce a light canvas, a white surface, or white-background product renders on this branch; white is for headings, pill labels, handles and thumbs.
-- **Don't** colour headings, figures, icons or rules lime; no lime lines, no lime washes, no "Recommended" filled pills (use lime `body-sm` text).
+- **Don't** colour h1–h3, figures, icons or rules lime (h4 is the one lime heading); no lime lines, no lime washes, no "Recommended" filled pills (use lime `body-sm` text).
 - **Don't** add shadows, gradients, glass, glow, vignettes, rings or blur beyond the two sticky bars' backdrop blur, the LED's own pulse and the single product drop shadow.
 - **Don't** set headlines at weight 700, ship a separate display face, or use uppercase tracked labels.
 - **Don't** put a text-only card on the canvas; the canvas is the surface.

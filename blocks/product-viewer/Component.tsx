@@ -442,7 +442,7 @@ export default function ProductViewerBlock({ block }: BlockProps<"productViewerB
 
           {block.product && (block.product.name || block.product.tagline) && (
             <div className="mt-10 text-center">
-              {block.product.name && <h4 className="text-white">{block.product.name}</h4>}
+              {block.product.name && <h4>{block.product.name}</h4>}
               {block.product.tagline && <p className="body-sm mx-auto mt-2 max-w-[52ch] text-fg-muted">{block.product.tagline}</p>}
             </div>
           )}

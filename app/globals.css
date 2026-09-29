@@ -6,7 +6,7 @@
   - Black canvas alternating with #1d1d1f lift sections; real white only for photo wells, pills, handles.
   - One accent, lime, used ONLY as filled-button fill and selected state; lime-deep for
     outlined actions and inline links; plus two sanctioned exceptions: stat-strip figures
-    and the .eyebrow pill above section headlines.
+    and the .eyebrow pill above section headlines, and h4 subheadings.
   - SF Pro on Apple devices, Inter elsewhere. Major-second scale from 17px.
   - Pills 980px; cards/images/inputs 8px; no shadows except one product-image shadow.
   - Full-bleed sections, centered, stacked, symmetric. Photography is the hero.
@@ -91,7 +91,7 @@
   h1 { font-size: clamp(2.5rem, 4.6vw, 3.5rem); line-height: 1.07; font-weight: 600; letter-spacing: 0.011em; }   /* display 56 */
   h2 { font-size: clamp(2rem, 3.4vw, 2.5rem); line-height: 1.14; font-weight: 600; letter-spacing: 0.011em; }      /* heading 40 */
   h3 { font-size: 1.75rem; line-height: 1.18; font-weight: 600; letter-spacing: 0.007em; }                          /* heading-sm 28 */
-  h4 { font-size: 1.3125rem; line-height: 1.24; font-weight: 600; letter-spacing: -0.005em; }                        /* subheading 21 */
+  h4 { font-size: 1.3125rem; line-height: 1.24; font-weight: 600; letter-spacing: -0.005em; color: var(--color-lime); } /* subheading 21, lime */
   p { text-wrap: pretty; }
   a { color: inherit; text-decoration: none; }
   strong { font-weight: 600; }
@@ -124,12 +124,12 @@
   .canvas-frost { background: var(--color-canvas-alt); }
   .canvas-white { background: var(--color-canvas); }
   .canvas-dark { background: var(--color-onyx); color: var(--color-fg); }
-  .canvas-dark h1, .canvas-dark h2, .canvas-dark h3, .canvas-dark h4 { color: var(--color-white); }
+  .canvas-dark h1, .canvas-dark h2, .canvas-dark h3 { color: var(--color-white); }
   .dark { color: var(--color-fg); }
-  .dark h1, .dark h2, .dark h3, .dark h4 { color: var(--color-white); }
+  .dark h1, .dark h2, .dark h3 { color: var(--color-white); }
   /* legacy aliases from v2 kept for block code that still uses them */
   .stage { background: var(--color-onyx); color: var(--color-fg); }
-  .stage h1, .stage h2, .stage h3, .stage h4, .on-dark h1, .on-dark h2, .on-dark h3, .on-dark h4 { color: var(--color-white); }
+  .stage h1, .stage h2, .stage h3, .on-dark h1, .on-dark h2, .on-dark h3 { color: var(--color-white); }
   .stage-sand { background: var(--color-canvas-alt); }
 
   /* type roles (Apple scale) */

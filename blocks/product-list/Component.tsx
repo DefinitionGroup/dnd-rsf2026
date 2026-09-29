@@ -56,7 +56,7 @@ export default function ProductListBlock({ block }: BlockProps<"productListBlock
                   ) : null}
                 </span>
                 <span className="flex flex-1 flex-col pt-3">
-                  <h4 className="text-fg">{product.name}</h4>
+                  <h4>{product.name}</h4>
                   {product.tagline ? <span className="body-sm mt-1 block text-fg-muted">{product.tagline}</span> : null}
                   {href ? (
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-lime-deep group-hover:underline">
