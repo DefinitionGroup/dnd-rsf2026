@@ -2,6 +2,7 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { createElement } from "react";
 import { apiVersion, isStudioAdmin } from "@/sanity/env";
 import { blockTypeNames } from "@/blocks/schemas";
+import { PageBuilderInput } from "@/sanity/components/page-builder/PageBuilderInput";
 import { languageField } from "./fields/language";
 
 /** Published id of a document, whatever prefix it carries (`drafts.`, `versions.<release>.`). */
@@ -132,6 +133,8 @@ export const page = defineType({
       group: "content",
       of: blockTypeNames.map((type) => defineArrayMember({ type })),
       options: { insertMenu: { views: [{ name: "grid" }, { name: "list" }] } },
+      // Adds "Import blocks from another page" below the default array input.
+      components: { input: PageBuilderInput },
       validation: (Rule) => Rule.min(1),
     }),
   ],
