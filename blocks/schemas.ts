@@ -23,6 +23,7 @@ import { schema as testimonialBlock } from "./testimonial/schema";
 import { schema as ctaBlock } from "./cta/schema";
 import { schema as contactFormBlock } from "./contact-form/schema";
 import { schema as videoBlock } from "./video/schema";
+import { schema as mediaBlock } from "./media/schema";
 import { schema as howItWorksBlock } from "./how-it-works/schema";
 import { schema as productFinderBlock } from "./product-finder/schema";
 import { schema as statStripBlock } from "./stat-strip/schema";
@@ -38,6 +39,7 @@ export const blockSchemas = [
   featureListBlock,
   splitContentBlock,
   galleryBlock,
+  mediaBlock,
   productListBlock,
   productViewerBlock,
   beforeAfterBlock,

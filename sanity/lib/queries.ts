@@ -71,6 +71,7 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> ${productFragment} } },
   _type == "specsBlock" => { ..., product-> ${productFragment} },
   _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster ${imageFragment} },
+  _type == "mediaBlock" => { ..., image ${imageFragment}, video{ asset->{ _id, url, mimeType } }, poster ${imageFragment} },
   _type == "howItWorksBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
   _type == "productFinderBlock" => {
     ...,

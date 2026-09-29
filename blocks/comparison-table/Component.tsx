@@ -108,6 +108,8 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
 
   const hasCta = columns.some((c) => c.cta?.href && c.cta?.label);
   const captionId = `comparison-${block._key}-caption`;
+  // The sticky label column must be opaque in the section's own canvas colour.
+  const stickyBg = stegaClean(block.background) === "gray" ? "bg-canvas-alt" : "bg-canvas";
 
   return (
     <section className={`${backgroundClass(block.background, "canvas-white")} section-space page-gutter`}>
@@ -129,7 +131,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
 
             <thead>
               <tr className="align-bottom">
-                <th scope="col" className="hairline sticky left-0 z-10 min-w-[10rem] border-b bg-canvas px-4 pb-6 pt-2 text-left md:min-w-[14rem] md:px-5">
+                <th scope="col" className={`hairline sticky left-0 z-10 min-w-[10rem] border-b ${stickyBg} px-4 pb-6 pt-2 text-left md:min-w-[14rem] md:px-5`}>
                   <span className="sr-only">{block.rowHeader ?? "Feature"}</span>
                 </th>
                 {columns.map((col) => {
@@ -153,7 +155,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
                   <tr key={row._key}>
                     <th
                       scope="row"
-                      className={`hairline body-sm sticky left-0 z-10 bg-canvas px-4 py-4 text-left align-top font-normal text-fg-muted md:px-5 ${
+                      className={`hairline body-sm sticky left-0 z-10 ${stickyBg} px-4 py-4 text-left align-top font-normal text-fg-muted md:px-5 ${
                         last ? "" : "border-b"
                       }`}
                     >
@@ -179,7 +181,7 @@ export default function ComparisonTableBlock({ block }: BlockProps<"comparisonTa
             {hasCta && (
               <tfoot>
                 <tr>
-                  <td className="sticky left-0 z-10 bg-canvas px-4 py-6 md:px-5" aria-hidden="true" />
+                  <td className={`sticky left-0 z-10 ${stickyBg} px-4 py-6 md:px-5`} aria-hidden="true" />
                   {columns.map((col) => (
                     <td key={col._key} className="px-4 py-6 text-center align-top md:px-5">
                       <ActionLink link={col.cta} variant="text" />

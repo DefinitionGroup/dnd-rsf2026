@@ -105,6 +105,7 @@ flowchart LR
             pt[portableTextBlock]
             split[splitContentBlock]
             gallery[galleryBlock]
+            media[mediaBlock]
             video[videoBlock]
             ba[beforeAfterBlock]
         end
@@ -160,6 +161,7 @@ flowchart LR
 | `portableTextBlock` | Long-form rich text (first h2 may be promoted to h1) | `body`\* (richText) | — | — | server |
 | `splitContentBlock` | Image + copy two-up, reversible, toned | `headline`\*, `body`, `image`\*, `imageAlt`\*, `reverse`, `tone`, `cta` | — | image | server |
 | `galleryBlock` | Grid of captioned images | `headline`\*, `images[]` (captionedImage) | — | image | server |
+| `mediaBlock` | One centred image or uploaded video; fit natural / cover (hotspot) / contain; width and screen-height caps per breakpoint | `mediaType`\* image/video, `image`/`video`, `poster`, `autoplay`, `loop`, `alt`\*, `caption`, `fit`\*, `aspectRatio`, `maxWidth`, `maxWidthMobile`, `height`, `heightMobile`, `spacing` | — | image, file | server (+ client video) |
 | `videoBlock` | Uploaded file or privacy click-to-load YouTube/Vimeo | `source`\* file/external, `file`/`url`, `poster`, `alt`\*, `caption`, `layout`, `autoplay`, `privacyNotice` | — | file, image | client |
 | `beforeAfterBlock` | Draggable comparison slider | `before`\*, `after`\*, labels, `alt`\*, `startPosition`, `caption` | — | image ×2 | client |
 | `featureTourBlock` | Scroll-driven tour: sticky media, steps animate in | `steps[] {title\*, body, image\*, imageAlt\*, stat, statLabel}` (min 2), `tone` | — | image per step | client |
@@ -229,6 +231,7 @@ flowchart TB
 | galleryBlock | `images[]{_key, alt, caption, image{asset->}}` |
 | featureTourBlock, howItWorksBlock | `steps[]{..., image{asset->}}` |
 | videoBlock | `file{asset->{_id,url,mimeType}}`, `poster{asset->}` |
+| mediaBlock | `image{asset->}`, `video{asset->{_id,url,mimeType}}`, `poster{asset->}` |
 | productViewerBlock | `frames[]{asset->}`, `product->{productFragment}` |
 | productListBlock | `items[]{_key, link, product->{productFragment}}` |
 | comparisonTableBlock | `columns[]{..., product->{productFragment}}` |

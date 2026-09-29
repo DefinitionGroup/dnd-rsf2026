@@ -153,3 +153,41 @@ export const rowaphos: ProductSummary = {
   videoUrl: null,
 };
 demoProducts.push(rowaphos);
+
+export const fmr75: ProductSummary = {
+  _id: "demo-product-fmr75",
+  slug: "fmr75",
+  name: "FMR75",
+  tagline: "The media reactor that ticks every box — plug and play, flexible to fit, at exceptional value for money.",
+  body: pt(
+    "The FMR75 fluidised media reactor fluidises a whole range of media in freshwater and saltwater aquariums: RowaPhos and other phosphate removers, bio pellets (up to 700 ml), carbon, and biological sand as a fluidised sand filter.",
+    "A dished base spreads the flow through 360° with no dead spots, perforated plates above and below keep the media where it belongs, and the central feed tube stays put when the lid comes off — so topping up is simple.",
+    "Two versions: the FMR75 reactor, and the FMR75 KIT with a 1,000 l/h feed pump. Both come with tubing, a non-return valve, a flow adjustment tap, two grades of media sponge and cable ties.",
+  ),
+  category: "Filtration",
+  sku: "FMR75 / FMR75KIT",
+  image: img("original/fmr75-kit.png", { width: 967, height: 1047 }),
+  imageAlt: "D-D FMR75 fluidised media reactor with its box and the FMR75 KIT feed pump",
+  gallery: [
+    captioned("original/fmr75-reactor.png", "D-D FMR75 fluidised media reactor", "FMR75 — 128 × 94 × 440 mm"),
+    captioned("original/fmr75-fittings.png", "FMR75 fittings: three lengths of clear tubing, a non-return valve, a flow adjustment tap and cable ties", "Everything you need to install it"),
+    captioned("original/fmr75-kit-fittings.png", "FMR75 KIT: 1,000 l/h feed pump with tubing, non-return valve, flow tap and cable ties", "FMR75 KIT — feed pump included"),
+  ],
+  specs: [
+    spec("Dimensions (incl. fittings and lid)", "128 × 94 × 440", "mm"),
+    spec("Reaction tube outer diameter", "80", "mm"),
+    spec("Tube height between perforated plates", "340", "mm"),
+    spec("Hangs on glass up to", "25", "mm"),
+    spec("Pipe", "17 mm OD × 14 mm ID"),
+    spec("Hang-on height", "Made for a 15\" sump — stands in smaller, hangs on taller"),
+    spec("Bio pellet capacity", "up to 700", "ml"),
+    spec("Feed pump (FMR75 KIT only)", "1,000", "l/h"),
+    spec("Pump size (H × W × L)", "100 × 60 × 90", "mm"),
+    spec("Suitable for", "RowaPhos & phosphate removers · bio pellets · carbon · biological sand"),
+    spec("Systems", "Freshwater & saltwater"),
+  ],
+  legacyUrl: "https://www.theaquariumsolution.com/products/fmr75-fluidised-reactors",
+  manualUrl: "https://www.theaquariumsolution.com/sites/default/files/downloads/FMR-%2075%20Operating%20Instructions%20v2_0.pdf",
+  videoUrl: null,
+};
+demoProducts.push(fmr75);

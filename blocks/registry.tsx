@@ -23,6 +23,7 @@ import TestimonialBlock from "./testimonial/Component";
 import CtaBlock from "./cta/Component";
 import ContactFormBlock from "./contact-form/Component";
 import VideoBlock from "./video/Component";
+import MediaBlock from "./media/Component";
 import HowItWorksBlock from "./how-it-works/Component";
 import ProductFinderBlock from "./product-finder/Component";
 import StatStripBlock from "./stat-strip/Component";
@@ -49,6 +50,7 @@ export const blockComponents = {
   ctaBlock: CtaBlock,
   contactFormBlock: ContactFormBlock,
   videoBlock: VideoBlock,
+  mediaBlock: MediaBlock,
   howItWorksBlock: HowItWorksBlock,
   productFinderBlock: ProductFinderBlock,
   statStripBlock: StatStripBlock,

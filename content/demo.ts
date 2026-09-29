@@ -31,8 +31,9 @@ import { statStripDemo } from "@/blocks/stat-strip/demo";
 import { howItWorksDemo } from "@/blocks/how-it-works/demo";
 import { productFinderDemo } from "@/blocks/product-finder/demo";
 import { indicatorLegendDemo } from "@/blocks/indicator-legend/demo";
+import { mediaDemo } from "@/blocks/media/demo";
 import { img, link } from "./demo-helpers";
-import { clarisea, funktionPump, khManager, rowaphos, spektrum150 } from "./demo-products";
+import { clarisea, fmr75, funktionPump, khManager, rowaphos, spektrum150 } from "./demo-products";
 
 const STOCKISTS = "https://www.theaquariumsolution.com/stockists";
 
@@ -76,14 +77,14 @@ const home = page({
   isHomepage: true,
   metadata: {
     title: "The Aquarium Solution | Reef equipment by D-D",
-    description: "Filtration, lighting, pumps and water chemistry engineered for reef aquariums. Discover ClariSea, Spektrum, Funktion and KH Manager.",
+    description: "Filtration and water-quality equipment for reef aquariums: ClariSea Gen 3 automatic fleece filters, RowaPhos phosphate remover and the FMR75 fluidised media reactor.",
     image: "hero-reef.jpg",
   },
   content: [
     heroDemo({
       brand: "D-D The Aquarium Solution",
       headline: "Equipment that lets the reef\ndo the talking.",
-      summary: "Full-spectrum lighting, silent DC pumps and automatic alkalinity control — designed by reef keepers, built for the long run.",
+      summary: "Automatic fleece filtration, phosphate control that means business and a media reactor that ticks every box — designed by reef keepers, built for the long run.",
       image: "original/clarisea-banner.jpg",
       imageAlt: "ClariSea Gen 3 automatic fleece filters",
       primaryCta: { label: "Explore products", href: "#products" },
@@ -97,16 +98,13 @@ const home = page({
     productListDemo({
       eyebrow: "Products",
       headline: "Choose your upgrade.",
-      intro: "Four ways to make a reef clearer, more stable, more colourful and quieter.",
+      intro: "An automatic fleece filter, a phosphate remover and the reactor to run it in — three ways to clearer water and a more stable reef.",
       items: [
-        { product: clarisea, link: { label: "ClariSea Gen 3", href: "/en/clarisea" } },
-        { product: rowaphos, link: { label: "RowaPhos", href: "/en/rowaphos" } },
-        { product: spektrum150, link: { label: "Spektrum 150", href: "/en/spektrum-150" } },
-        { product: funktionPump, link: { label: "Funktion Return Pump", href: "/en/funktion-return-pump" } },
-        { product: khManager, link: { label: "KH Manager", href: "/en/kh-manager" } },
+        { product: clarisea, link: { label: "Explore", href: "/en/clarisea" } },
+        { product: rowaphos, link: { label: "Explore", href: "/en/rowaphos" } },
+        { product: fmr75, link: { label: "Explore", href: "/en/fmr75" } },
       ],
     }),
-    comparisonTableDemo({ eyebrow: "At a glance", headline: "Which one first?", intro: "All three play together; here is how they differ." }),
     testimonialDemo({
       eyebrow: "Reef keepers say",
       headline: "Trusted on tanks from 60 to 6,000 litres.",
@@ -359,7 +357,7 @@ const rowaphosPage = page({
       imageAlt: "D-D FMR75 fluidised media reactor",
       reverse: true,
       tone: "sand",
-      cta: { label: "About the FMR75", href: "https://www.theaquariumsolution.com/products/fmr75-fluidised-reactors" },
+      cta: { label: "About the FMR75", href: "/en/fmr75" },
     }),
     productFinderDemo({
       eyebrow: "Which size?",
@@ -429,6 +427,175 @@ const rowaphosPage = page({
     }),
     ctaDemo({
       eyebrow: "RowaPhos",
+      headline: "Simply the clever choice.",
+      body: "Available through specialist aquarium retailers worldwide.",
+      primaryCta: { label: "Find a stockist", href: STOCKISTS },
+      secondaryCta: { label: "Ask us a question", href: "/en/contact" },
+      tone: "ink",
+    }),
+  ],
+});
+
+const FMR75_MANUAL = "https://www.theaquariumsolution.com/sites/default/files/downloads/FMR-%2075%20Operating%20Instructions%20v2_0.pdf";
+
+const fmr75Page = page({
+  id: "fmr75",
+  title: "FMR75",
+  slug: "fmr75",
+  product: fmr75,
+  metadata: {
+    title: "FMR75 fluidised media reactor | The Aquarium Solution",
+    description: "The media reactor that ticks every box: fluidise RowaPhos, bio pellets (up to 700 ml), carbon and sand in freshwater or saltwater. Even 360° flow, no media loss, top up without emptying — as reactor or KIT with a 1,000 l/h pump.",
+    image: "original/fmr75-og.jpg",
+  },
+  content: [
+    heroDemo({
+      brand: "FMR75 by D-D · Fluidised media reactor",
+      headline: "Here comes the media reactor\nthat ticks every box.",
+      summary: "The clever choice for fluidising RowaPhos, bio pellets, carbon and sand — complete in the box, flexible to fit, and all at exceptional value for money.",
+      image: "original/fmr75-kit-hero.png",
+      imageAlt: "D-D FMR75 fluidised media reactor with its box and the 1,000 l/h feed pump from the FMR75 KIT",
+      primaryCta: { label: "Reactor or KIT?", href: "#comparisonTableBlock" },
+      secondaryCta: { label: "Find a stockist", href: STOCKISTS },
+    }),
+    statStripDemo({
+      eyebrow: "FMR75 by the numbers",
+      stats: [
+        { value: "700", suffix: "ml", label: "Bio pellet capacity" },
+        { value: "340", suffix: "mm", label: "Fluidising column between the perforated plates" },
+        { value: "360", suffix: "°", label: "Even flow from the dished base — no dead spots" },
+        { value: "25", suffix: "mm", label: "Thickest tank or sump glass it hangs on" },
+      ],
+    }),
+    introDemo({
+      eyebrow: "Freshwater and saltwater",
+      headline: "One compact reactor for a whole range of media — RowaPhos, bio pellets, carbon and sand.",
+      wideHeadline: true,
+      body: [
+        "Many smaller reactors look good, are packaged well and are competitively priced — but when you get down to using them, they just do not tick all of the boxes. D-D spent a lot of time ironing out the bugs to make the FMR75 flexible, and ideal for every hobbyist.",
+        "It is affordable enough for a small tank, or for several units on a larger system — with no compromise on design or build. After all, it is no good having the best reactor in the world if it breaks after five minutes.",
+      ],
+    }),
+    mediaDemo({
+      image: "original/fmr75-reactor.png",
+      imageSize: { width: 345, height: 886 },
+      alt: "The FMR75 fluidised media reactor: a clear 80 mm reaction tube between a black lid with hang-on bracket and a black base, green media sponges top and bottom",
+      caption: "128 × 94 × 440 mm — small enough for the smallest nano, with the capacity for larger systems.",
+      fit: "natural",
+      height: "80",
+      heightMobile: "66",
+      maxWidth: "720",
+      spacing: "small",
+    }),
+    featureListDemo({
+      eyebrow: "Why the FMR75",
+      headline: "Engineered to fix what other reactors get wrong.",
+      items: [
+        { title: "Efficient fluidisation", text: "The dished base spreads an even flow from the central downpipe through 360° — no dead spots." },
+        { title: "Fast restart, no compacting", text: "A lower perforated diffusion plate holds the media when the pump is off, leaving an empty plenum below for faster fluidisation on restart." },
+        { title: "Media stays in the reactor", text: "An upper perforated plate and a fine sponge hold back all but the finest particles — even in the surge when the pump starts." },
+        { title: "Top up without emptying", text: "The central feed tube is separate from the lid, so tube and media stay put while you top up. No screws to undo either: the lid screws on and seals with a replaceable multi-stage seal." },
+        { title: "Stand it, hang it, clamp it", text: "In the sump, beside it, hung on it — or clamped straight onto the tank with the bracket built into the lid. Inlet and outlet fit in several positions, so pipework runs where your system needs it." },
+        { title: "No back-siphon", text: "The supplied non-return valve stops water and media siphoning back through the pump in a power cut — simple but effective." },
+      ],
+    }),
+    splitContentDemo({
+      eyebrow: "Plug & play",
+      headline: "Everything you need is in the box.",
+      body: [
+        "How often do you buy a piece of equipment, only to find you do not have all the parts to install it?",
+        "The FMR75 comes with three lengths of clear tubing, a non-return valve, a flow adjustment tap, two grades of media sponge and eight cable ties. The FMR75 KIT adds a 1,000 l/h feed pump.",
+      ],
+      image: "original/fmr75-fittings.png",
+      imageAlt: "FMR75 fittings: three lengths of clear tubing, a flow adjustment tap, a non-return valve and cable ties",
+    }),
+    splitContentDemo({
+      eyebrow: "Installation",
+      headline: "Set up right, first time.",
+      body: [
+        "- Fit the flow tap on the IN side, as close to the pump as possible — if it ever weeps under pressure, it simply drips back into the sump.",
+        "- Push the non-return valve onto the end of the OUT pipe, upright so the ball engages. Not sure which way round? Blow through it.",
+        "- Inside the sump is best: any small weep stays in the system. Running it outside? Bond the elbows with aquarium silicone and secure every hose with the cable ties supplied.",
+      ],
+      image: "original/fmr75-kit-fittings.png",
+      imageAlt: "FMR75 KIT feed pump with the flow adjustment tap, non-return valve, tubing and cable ties",
+      reverse: true,
+      tone: "sand",
+      cta: { label: "Operating instructions (PDF)", href: FMR75_MANUAL },
+    }),
+    comparisonTableDemo({
+      eyebrow: "FMR75 or FMR75 KIT?",
+      headline: "Two versions, one clever design.",
+      intro: "Same reactor, same fittings. The KIT adds a feed pump specified for bio pellets.",
+      rowHeader: "Version",
+      columns: [
+        { title: "FMR75", subtitle: "Reactor · add the pump of your choice", cta: { label: "Find a stockist", href: STOCKISTS } },
+        { title: "FMR75 KIT", subtitle: "Reactor + 1,000 l/h feed pump", highlight: true, cta: { label: "Find a stockist", href: STOCKISTS } },
+      ],
+      rows: [
+        { label: "Reactor with lid, perforated plates and feed tube", cells: ["yes", "yes"] },
+        { label: "Tubing, non-return valve and flow tap", cells: ["yes", "yes"] },
+        { label: "Fine and coarse media sponges", cells: ["yes", "yes"] },
+        { label: "Feed pump", cells: ["no", "1,000 l/h"] },
+        { label: "Best for", cells: ["RowaPhos and other media that need gentle fluidisation", "Bio pellets"] },
+        { label: "Dimensions", hint: "Including fittings and lid", cells: ["128 × 94 × 440 mm"] },
+        { label: "Freshwater & saltwater", cells: ["yes", "yes"] },
+      ],
+      footnote: "The KIT pump is specified for bio pellets and can deliver more flow than a small charge of RowaPhos needs — for gentle fluidisation, choose the FMR75 and a smaller pump.",
+    }),
+    comparisonTableDemo({
+      eyebrow: "Set up for your media",
+      headline: "One reactor, three set-ups.",
+      intro: "Fit the sponges — or leave them out — to suit what you run.",
+      rowHeader: "Media",
+      columns: [
+        { title: "RowaPhos", subtitle: "and other phosphate removers" },
+        { title: "Bio pellets", subtitle: "up to 700 ml" },
+        { title: "Carbon", subtitle: "and other media" },
+      ],
+      rows: [
+        { label: "Upper fine sponge", cells: ["yes", "no", "yes"] },
+        { label: "Lower coarse sponge", cells: ["no", "no", "yes"] },
+        { label: "Fluidise", cells: ["Gently", "yes", "no"] },
+        { label: "Feed flow", hint: "Guide value", cells: ["approx. 500 l/h", "Strong — the KIT pump is specified for pellets", "Just enough to flow through"] },
+        { label: "Recommended version", cells: ["FMR75 + a smaller pump", "FMR75 KIT", "FMR75 or FMR75 KIT"] },
+      ],
+      footnote: "With bio pellets, the perforated plate keeps them in without the upper sponge. Carbon is best left unfluidised to prevent abrasion. Other media may need a little experimentation.",
+      background: "gray",
+    }),
+    splitContentDemo({
+      eyebrow: "For best results",
+      headline: "FMR75 + RowaPhos.",
+      body: [
+        "RowaPhos needs gentle fluidisation — run it in the FMR75 with a smaller pump of your choice and dose 25 g per 100 l in saltwater.",
+        "Fit the upper fine sponge, leave the lower one out, and follow the instructions — removing phosphate too fast can stress corals.",
+      ],
+      image: "original/rowaphos-4-tub.png",
+      imageAlt: "RowaPhos phosphate remover in four pack sizes",
+      cta: { label: "About RowaPhos", href: "/en/rowaphos" },
+    }),
+    specsDemo({
+      eyebrow: "Details",
+      headline: "Technical specifications",
+      product: fmr75,
+      downloads: [{ label: "FMR75 operating instructions (PDF)", href: FMR75_MANUAL }],
+    }),
+    faqDemo({
+      headline: "Frequently asked questions",
+      faqs: [
+        { question: "FMR75 or FMR75 KIT — which do I need?", answer: ["The KIT adds a 1,000 l/h feed pump, specified for fluidising bio pellets. For media that need gentle fluidisation, such as RowaPhos, choose the FMR75 and a smaller pump of your choice."] },
+        { question: "What can I run in it?", answer: ["RowaPhos and other phosphate removers, bio pellets (up to 700 ml), carbon, and biological sand as a fluidised sand filter — in freshwater and saltwater aquariums."] },
+        { question: "Which sponges do I fit?", answer: ["No sponges for most bio pellets — the upper perforated plate holds them in. The upper fine sponge only for RowaPhos. Upper fine and lower coarse sponges for carbon and other media."] },
+        { question: "Should I fluidise carbon?", answer: ["No. Carbon does not need to tumble — set the flow so it stays put, which prevents abrasion."] },
+        { question: "Will media wash out when the pump starts?", answer: ["The upper perforated plate and fine sponge hold back all but the finest particles during the start-up surge. With bio pellets, leave the upper sponge out — the plate still keeps them in."] },
+        { question: "Do I need the non-return valve?", answer: ["If the reactor sits above the water level, yes: fit it on the OUT side and it stops water and media siphoning back through the pump when the power goes off. Hung level with the aquarium's water line, the reactor cannot drain down, so the valve is not needed."] },
+        { question: "Can I install it outside the sump?", answer: ["Yes. Once you have settled the position, set the elbows at the right angle, bond them to the lid spigots with aquarium silicone or solvent-weld adhesive, and secure every hose with the cable ties supplied. Inside the sump is still best — any small weep stays in the system."] },
+        { question: "The media will not fluidise — what is wrong?", answer: ["Check the pipes: the feed must go into the spigot in the centre of the lid. No flow at all with the pump running? The non-return valve is probably the wrong way round."] },
+        { question: "The KIT pump hums when I turn the tap down — what now?", answer: ["Throttling the pump hard can stall its impeller. Fit a T-piece and a second valve (not included) in the feed line to divert the excess flow back to the sump, so the pump can run unrestricted."] },
+      ],
+    }),
+    ctaDemo({
+      eyebrow: "FMR75",
       headline: "Simply the clever choice.",
       body: "Available through specialist aquarium retailers worldwide.",
       primaryCta: { label: "Find a stockist", href: STOCKISTS },
@@ -712,7 +879,7 @@ const cinematicPage = page({
   ],
 });
 
-const pages: PageDocument[] = [home, clariseaPage, rowaphosPage, spektrumPage, funktionPage, khPage, contactPage, cinematicPage];
+const pages: PageDocument[] = [home, clariseaPage, rowaphosPage, fmr75Page, spektrumPage, funktionPage, khPage, contactPage, cinematicPage];
 
 /* ------------------------------------------------------------- shell */
 
@@ -742,9 +909,7 @@ const shell: SiteShell = {
     items: [
       { _key: "m0", ...link("ClariSea", "/en/clarisea") },
       { _key: "m4", ...link("RowaPhos", "/en/rowaphos") },
-      { _key: "m1", ...link("Spektrum 150", "/en/spektrum-150") },
-      { _key: "m2", ...link("Funktion Pump", "/en/funktion-return-pump") },
-      { _key: "m3", ...link("KH Manager", "/en/kh-manager") },
+      { _key: "m5", ...link("FMR75", "/en/fmr75") },
     ],
     cta: link("Find a stockist", STOCKISTS),
     footerLinks: [{ _key: "f1", ...link("Contact", "/en/contact") }],

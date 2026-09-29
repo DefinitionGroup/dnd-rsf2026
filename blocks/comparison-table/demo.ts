@@ -28,6 +28,8 @@ export function comparisonTableDemo(input: {
   columns?: ComparisonColumnInput[];
   rows?: ComparisonRowInput[];
   footnote?: string;
+  /** Canvas override; unset keeps the block's default. */
+  background?: "black" | "gray";
 } = {}): BlockOf<"comparisonTableBlock"> {
   const columns: ComparisonColumnInput[] = input.columns ?? [
     {
@@ -87,5 +89,6 @@ export function comparisonTableDemo(input: {
       cells: r.cells,
     })),
     footnote: input.footnote ?? "Specifications are typical values measured at 25 °C. Power draw depends on the selected schedule and flow setting.",
+    background: input.background,
   };
 }
