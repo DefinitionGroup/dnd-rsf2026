@@ -135,7 +135,6 @@ export function ProductsPanel({
   if (!current) return null;
 
   const groups = visibleGroups(current, houseOnly);
-  const lines = counts.get(current._key) ?? 0;
   const houseHere = countLines(current, true);
   const track = groups.length >= 4 ? "repeat(auto-fill, minmax(204px, 1fr))" : `repeat(${groups.length}, minmax(204px, 312px))`;
   const rise = entrance === "rise" ? "mm-rise" : "";
@@ -215,9 +214,6 @@ export function ProductsPanel({
 
       <div className="mm-main">
         <div className={`mm-prod-head ${rise}`} data-i="1">
-          <p className="mm-label">
-            <strong>{current.title}</strong>&nbsp;·&nbsp;{lines} {lines === 1 ? t(locale, "productLine") : t(locale, "productLines")}
-          </p>
           {house && (
             <button type="button" className="mm-only" aria-pressed={houseOnly} disabled={!houseHere && !houseOnly} onClick={toggleHouse}>
               <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

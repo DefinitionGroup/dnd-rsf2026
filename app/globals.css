@@ -227,7 +227,6 @@
   .mm-panel { display: grid; grid-template-columns: 236px minmax(0, 1fr); column-gap: 32px; }
   .mm-panel > * { min-width: 0; }
   .mm-label { font-size: 12px; line-height: 1.33; letter-spacing: -0.01em; color: var(--color-ash); }
-  .mm-label strong { color: var(--color-fg); font-weight: 600; }
   .mm-head { display: flex; align-items: center; min-height: 28px; }
   /* left: categories as the big list */
   .mm-cats { display: flex; flex-direction: column; gap: 1px; margin-top: 10px; }
@@ -241,7 +240,7 @@
   .mm-all:hover svg { transform: translateX(2px); }
   /* right: product lines in group columns, a hairline away from the categories */
   .mm-main { border-left: 1px solid var(--color-hairline); padding-left: 32px; }
-  .mm-prod-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 28px; }
+  .mm-prod-head { display: flex; align-items: center; justify-content: flex-end; min-height: 28px; }
   .mm-only { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px 5px 10px; border-radius: var(--radius-pill); background: var(--color-pebble); color: var(--color-ash); font-size: 12px; line-height: 1.33; letter-spacing: -0.01em; white-space: nowrap; transition: color 200ms var(--ease-curtain), background-color 200ms var(--ease-curtain); }
   .mm-only:hover { color: var(--color-fg); }
   .mm-only[aria-pressed="true"] { background: var(--color-lime); color: var(--color-carbon); }
