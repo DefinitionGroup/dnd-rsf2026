@@ -213,7 +213,7 @@ export function ProductsPanel({
         )}
       </div>
 
-      <div>
+      <div className="mm-main">
         <div className={`mm-prod-head ${rise}`} data-i="1">
           <p className="mm-label">
             <strong>{current.title}</strong>&nbsp;·&nbsp;{lines} {lines === 1 ? t(locale, "productLine") : t(locale, "productLines")}

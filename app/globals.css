@@ -224,7 +224,7 @@
   .mm-swap { animation: mm-swap 350ms var(--ease-out-expo) both; }
   @keyframes mm-swap { from { opacity: 0; transform: translateY(12px); } }
 
-  .mm-panel { display: grid; grid-template-columns: 236px minmax(0, 1fr); column-gap: 64px; }
+  .mm-panel { display: grid; grid-template-columns: 236px minmax(0, 1fr); column-gap: 32px; }
   .mm-panel > * { min-width: 0; }
   .mm-label { font-size: 12px; line-height: 1.33; letter-spacing: -0.01em; color: var(--color-ash); }
   .mm-label strong { color: var(--color-fg); font-weight: 600; }
@@ -239,7 +239,8 @@
   .mm-all:hover { text-decoration: underline; }
   .mm-all svg { transition: transform 200ms var(--ease-out-expo); }
   .mm-all:hover svg { transform: translateX(2px); }
-  /* right: product lines in group columns */
+  /* right: product lines in group columns, a hairline away from the categories */
+  .mm-main { border-left: 1px solid var(--color-hairline); padding-left: 32px; }
   .mm-prod-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 28px; }
   .mm-only { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px 5px 10px; border-radius: var(--radius-pill); background: var(--color-pebble); color: var(--color-ash); font-size: 12px; line-height: 1.33; letter-spacing: -0.01em; white-space: nowrap; transition: color 200ms var(--ease-curtain), background-color 200ms var(--ease-curtain); }
   .mm-only:hover { color: var(--color-fg); }
@@ -250,7 +251,7 @@
   .mm-only:disabled { opacity: 0.35; pointer-events: none; }
   .mm-groups { display: grid; grid-template-columns: var(--mm-track, repeat(auto-fill, minmax(204px, 1fr))); column-gap: 32px; row-gap: 28px; align-items: start; margin-top: 22px; }
   .mm-group { min-width: 0; }
-  .mm-group-title { margin-bottom: 9px; font-family: var(--font-sans); font-size: 12px; font-weight: 400; line-height: 1.33; letter-spacing: -0.01em; color: var(--color-ash); }
+  .mm-group-title { margin-bottom: 8px; border-bottom: 1px solid var(--color-hairline); padding-bottom: 8px; font-family: var(--font-sans); font-size: 12px; font-weight: 400; line-height: 1.33; letter-spacing: -0.01em; color: var(--color-ash); }
   .mm-item { display: flex; align-items: baseline; gap: 10px; padding-block: 3px; }
   .mm-code { flex: none; width: 52px; font-size: 12px; line-height: 1.33; letter-spacing: -0.01em; color: var(--color-ash); transition: color 200ms var(--ease-curtain); }
   .mm-name { flex: 1; min-width: 0; font-size: 14px; line-height: 1.36; letter-spacing: -0.016em; color: var(--color-ash); transition: color 200ms var(--ease-curtain); }
@@ -264,6 +265,7 @@
   /* below lg the panel lives in the mobile menu sheet: categories scroll sideways, one column of lines */
   @media (width < 64rem) {
     .mm-panel { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+    .mm-main { border-left: 0; padding-left: 0; }
     .mm-cats { flex-direction: row; gap: 4px; margin: 12px calc(var(--gutter) * -1) 0; padding-inline: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; }
     .mm-cats::-webkit-scrollbar { display: none; }
     .mm-cat { flex: 0 0 auto; margin-left: 0; padding: 8px 14px; font-size: 15px; scroll-snap-align: start; }
