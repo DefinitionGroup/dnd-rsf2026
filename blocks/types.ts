@@ -11,6 +11,10 @@ export type ProductSummary = PRODUCTS_QUERY_RESULT[number];
 export type SiteShell = SITE_SHELL_QUERY_RESULT;
 export type SiteSettings = NonNullable<SiteShell["settings"]>;
 export type MenuDocument = NonNullable<SiteShell["menu"]>;
+export type ProductMenuDocument = NonNullable<SiteShell["productMenu"]>;
+export type ProductMenuCategory = NonNullable<ProductMenuDocument["categories"]>[number];
+export type ProductMenuGroup = NonNullable<ProductMenuCategory["groups"]>[number];
+export type ProductMenuItem = NonNullable<ProductMenuGroup["items"]>[number];
 
 /** Image as projected by `imageFragment` (asset resolved). */
 export type ResolvedImage = NonNullable<BlockOf<"heroBlock">["image"]>;

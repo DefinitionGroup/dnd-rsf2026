@@ -39,7 +39,7 @@ export default defineConfig({
     structureTool({ structure }),
     documentInternationalization({
       supportedLanguages: sanityLanguages,
-      schemaTypes: ["page", "menu"],
+      schemaTypes: ["page", "menu", "productMenu"],
       languageField: "language",
     }),
     internationalizedArray({

@@ -25,5 +25,7 @@ export const resolve: PresentationPluginOptions["resolve"] = {
     }),
     siteSettings: defineLocations({ message: "Site settings apply to every page.", tone: "caution" }),
     menu: defineLocations({ message: "Navigation applies to every page of this language.", tone: "caution" }),
+    productMenu: defineLocations({ message: "The Products menu opens from the navigation on every page of this language.", tone: "caution" }),
+    brand: defineLocations({ message: "Brands label product lines in the Products menu.", tone: "caution" }),
   },
 };

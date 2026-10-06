@@ -75,6 +75,9 @@
           },
           {
             "type": "menu"
+          },
+          {
+            "type": "productMenu"
           }
         ],
         "name": "value",
@@ -147,7 +150,8 @@
         "options": {
           "list": [
             "page",
-            "menu"
+            "menu",
+            "productMenu"
           ]
         },
         "description": "Optional: Used to filter the reference fields above so all translations share the same types.",
@@ -1512,6 +1516,417 @@
     "name": "galleryBlock",
     "type": "object",
     "title": "Gallery"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "image",
+        "options": {
+          "list": [
+            {
+              "title": "Image",
+              "value": "image"
+            },
+            {
+              "title": "Video",
+              "value": "video"
+            }
+          ],
+          "layout": "radio",
+          "direction": "horizontal"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "image",
+                  "video"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "mediaType",
+        "type": "string",
+        "title": "Type"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "description": "With 'Fill the frame', the hotspot decides what stays in view.",
+        "hidden": "conditional",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "description": "MP4 (H.264) plays everywhere. Keep loops short and small.",
+        "hidden": "conditional",
+        "name": "video",
+        "type": "file",
+        "title": "Video file"
+      },
+      {
+        "description": "Shown before the video plays and to visitors who prefer reduced motion. Use a still from the video.",
+        "hidden": "conditional",
+        "name": "poster",
+        "type": "image",
+        "title": "Poster image"
+      },
+      {
+        "initialValue": true,
+        "description": "Plays muted while on screen, with a small pause button. Off: visitors press play and get sound and controls.",
+        "hidden": "conditional",
+        "name": "autoplay",
+        "type": "boolean",
+        "fieldset": "video"
+      },
+      {
+        "initialValue": true,
+        "hidden": "conditional",
+        "name": "loop",
+        "type": "boolean",
+        "fieldset": "video"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "What the image or video shows, for screen readers.",
+        "name": "alt",
+        "type": "string",
+        "title": "Alternative text"
+      },
+      {
+        "name": "caption",
+        "type": "string"
+      },
+      {
+        "initialValue": "natural",
+        "options": {
+          "list": [
+            {
+              "title": "Original proportions — nothing cropped",
+              "value": "natural"
+            },
+            {
+              "title": "Fill the frame (cover) — edges may be cropped",
+              "value": "cover"
+            },
+            {
+              "title": "Fit inside the frame (contain) — nothing cropped, space may show",
+              "value": "contain"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "natural",
+                  "cover",
+                  "contain"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "fit",
+        "type": "string"
+      },
+      {
+        "initialValue": "16/9",
+        "options": {
+          "list": [
+            {
+              "title": "21:9 — cinema",
+              "value": "21/9"
+            },
+            {
+              "title": "16:9 — widescreen",
+              "value": "16/9"
+            },
+            {
+              "title": "3:2",
+              "value": "3/2"
+            },
+            {
+              "title": "4:3",
+              "value": "4/3"
+            },
+            {
+              "title": "1:1 — square",
+              "value": "1/1"
+            },
+            {
+              "title": "4:5 — portrait",
+              "value": "4/5"
+            },
+            {
+              "title": "9:16 — tall",
+              "value": "9/16"
+            }
+          ]
+        },
+        "description": "Shape of the frame wherever the height is set to Auto.",
+        "hidden": "conditional",
+        "name": "aspectRatio",
+        "type": "string",
+        "title": "Frame proportions"
+      },
+      {
+        "initialValue": "1200",
+        "options": {
+          "list": [
+            {
+              "title": "Small — 480 px",
+              "value": "480"
+            },
+            {
+              "title": "Narrow — 720 px",
+              "value": "720"
+            },
+            {
+              "title": "Text column — 980 px",
+              "value": "980"
+            },
+            {
+              "title": "Content — 1200 px",
+              "value": "1200"
+            },
+            {
+              "title": "Wide — 1440 px",
+              "value": "1440"
+            },
+            {
+              "title": "Edge to edge",
+              "value": "full"
+            }
+          ]
+        },
+        "name": "maxWidth",
+        "type": "string",
+        "title": "Max width — desktop",
+        "fieldset": "size"
+      },
+      {
+        "initialValue": "100",
+        "options": {
+          "list": [
+            {
+              "title": "50%",
+              "value": "50"
+            },
+            {
+              "title": "66%",
+              "value": "66"
+            },
+            {
+              "title": "75%",
+              "value": "75"
+            },
+            {
+              "title": "90%",
+              "value": "90"
+            },
+            {
+              "title": "100% (inside the margins)",
+              "value": "100"
+            },
+            {
+              "title": "Edge to edge",
+              "value": "full"
+            }
+          ]
+        },
+        "name": "maxWidthMobile",
+        "type": "string",
+        "title": "Max width — mobile",
+        "fieldset": "size"
+      },
+      {
+        "initialValue": "auto",
+        "options": {
+          "list": [
+            {
+              "title": "Auto",
+              "value": "auto"
+            },
+            {
+              "title": "25% of the screen",
+              "value": "25"
+            },
+            {
+              "title": "50% of the screen",
+              "value": "50"
+            },
+            {
+              "title": "66% of the screen",
+              "value": "66"
+            },
+            {
+              "title": "80% of the screen",
+              "value": "80"
+            },
+            {
+              "title": "Full screen (100%)",
+              "value": "100"
+            }
+          ]
+        },
+        "description": "Original proportions: the most it may take. Fill / Fit: the frame's height.",
+        "name": "height",
+        "type": "string",
+        "title": "Height — desktop",
+        "fieldset": "size"
+      },
+      {
+        "initialValue": "same",
+        "options": {
+          "list": [
+            {
+              "title": "Same as desktop",
+              "value": "same"
+            },
+            {
+              "title": "Auto",
+              "value": "auto"
+            },
+            {
+              "title": "25% of the screen",
+              "value": "25"
+            },
+            {
+              "title": "50% of the screen",
+              "value": "50"
+            },
+            {
+              "title": "66% of the screen",
+              "value": "66"
+            },
+            {
+              "title": "80% of the screen",
+              "value": "80"
+            },
+            {
+              "title": "Full screen (100%)",
+              "value": "100"
+            }
+          ]
+        },
+        "name": "heightMobile",
+        "type": "string",
+        "title": "Height — mobile",
+        "fieldset": "size"
+      },
+      {
+        "initialValue": "default",
+        "options": {
+          "list": [
+            {
+              "title": "Default",
+              "value": "default"
+            },
+            {
+              "title": "Small",
+              "value": "small"
+            },
+            {
+              "title": "None — sits flush against its neighbours",
+              "value": "none"
+            }
+          ],
+          "layout": "radio",
+          "direction": "horizontal"
+        },
+        "name": "spacing",
+        "type": "string",
+        "title": "Spacing above and below"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "video",
+        "title": "Video playback",
+        "options": {
+          "columns": 2
+        }
+      },
+      {
+        "name": "size",
+        "description": "The media always sits centred.",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "mediaBlock",
+    "type": "object",
+    "title": "Media"
   },
   {
     "fields": [
@@ -3968,6 +4383,300 @@
             ]
           }
         ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 10
+              }
+            ]
+          }
+        ],
+        "description": "Shown in the brand column of the Products menu, e.g. “AI” for AquaIllumination.",
+        "name": "code",
+        "type": "string",
+        "title": "Short label"
+      },
+      {
+        "initialValue": false,
+        "description": "Own-brand product lines are highlighted in the Products menu and kept by its “only” filter.",
+        "name": "house",
+        "type": "boolean",
+        "title": "Own brand"
+      }
+    ],
+    "name": "brand",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "to": [
+          {
+            "type": "brand"
+          }
+        ],
+        "name": "brand",
+        "type": "reference"
+      },
+      {
+        "description": "Landing page path (/en/fmr75) or the product page on theaquariumsolution.com. Leave empty to list it without a link.",
+        "name": "href",
+        "type": "string",
+        "title": "URL or path"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 14
+              }
+            ]
+          }
+        ],
+        "description": "Small pill after the name, e.g. “Ending” or “New”.",
+        "name": "badge",
+        "type": "string"
+      }
+    ],
+    "name": "productMenuItem",
+    "type": "object",
+    "title": "Product line"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "of": [
+          {
+            "type": "productMenuItem",
+            "title": "Product line"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Product lines"
+      }
+    ],
+    "name": "productMenuGroup",
+    "type": "object",
+    "title": "Group"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ]
+          }
+        ],
+        "description": "Columns inside the category, e.g. “Wave Pumps”. Shown in this order.",
+        "of": [
+          {
+            "type": "productMenuGroup",
+            "title": "Group"
+          }
+        ],
+        "name": "groups",
+        "type": "array"
+      }
+    ],
+    "name": "productMenuCategory",
+    "type": "object",
+    "title": "Category"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "English",
+              "value": "en"
+            },
+            {
+              "title": "Deutsch",
+              "value": "de"
+            },
+            {
+              "title": "Français",
+              "value": "fr"
+            },
+            {
+              "title": "Polski",
+              "value": "pl"
+            },
+            {
+              "title": "日本語",
+              "value": "ja"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "en",
+                  "de",
+                  "fr",
+                  "pl",
+                  "ja"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "readOnly": true,
+        "hidden": true,
+        "name": "language",
+        "type": "string"
+      },
+      {
+        "initialValue": "Products",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "The global-nav entry that opens the menu.",
+        "name": "label",
+        "type": "string",
+        "title": "Nav label"
+      },
+      {
+        "description": "The list down the left of the menu. The first one opens by default.",
+        "of": [
+          {
+            "type": "productMenuCategory",
+            "title": "Category"
+          }
+        ],
+        "name": "categories",
+        "type": "array"
+      },
+      {
+        "description": "e.g. “All products”.",
+        "name": "allProductsLink",
+        "type": "linkField",
+        "title": "Link under the categories"
+      }
+    ],
+    "name": "productMenu",
+    "type": "document",
+    "title": "Products menu"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
         "name": "title",
         "type": "string"
       },
@@ -4075,6 +4784,14 @@
         "title": "Homepage"
       },
       {
+        "initialValue": false,
+        "description": "Hidden from editors in the Studio. Only administrators listed in NEXT_PUBLIC_SANITY_ADMIN_EMAILS see it.",
+        "hidden": "conditional",
+        "name": "adminOnly",
+        "type": "boolean",
+        "title": "Admin only"
+      },
+      {
         "initialValue": "light",
         "options": {
           "list": [
@@ -4161,6 +4878,26 @@
             "title": "Gallery"
           },
           {
+            "fieldsets": [
+              {
+                "name": "video",
+                "title": "Video playback",
+                "options": {
+                  "columns": 2
+                }
+              },
+              {
+                "name": "size",
+                "description": "The media always sits centred.",
+                "options": {
+                  "columns": 2
+                }
+              }
+            ],
+            "type": "mediaBlock",
+            "title": "Media"
+          },
+          {
             "type": "productListBlock",
             "title": "Product list"
           },
@@ -4226,6 +4963,7 @@
         "title": "Page builder"
       }
     ],
+    "readOnly": "conditional",
     "name": "page",
     "type": "document",
     "title": "Landing page"

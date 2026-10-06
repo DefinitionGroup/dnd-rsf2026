@@ -145,7 +145,24 @@ export const SITE_SHELL_QUERY = defineQuery(
     "menu": coalesce(
       *[_type == "menu" && language == $locale][0],
       *[_type == "menu" && language == "en"][0]
-    ){ _id, language, items, cta, footerLinks }
+    ){ _id, language, items, cta, footerLinks },
+    "productMenu": coalesce(
+      *[_type == "productMenu" && language == $locale][0],
+      *[_type == "productMenu" && language == "en"][0]
+    ){
+      _id,
+      label,
+      allProductsLink,
+      categories[]{
+        _key,
+        title,
+        groups[]{
+          _key,
+          title,
+          items[]{ _key, name, href, badge, brand->{ _id, name, code, house } }
+        }
+      }
+    }
   }`,
 );
 

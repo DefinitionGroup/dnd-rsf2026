@@ -3,7 +3,7 @@ import { LOCALES } from "@/lib/i18n";
 import { isStudioAdmin } from "./env";
 
 const singletonTypes = new Set(["siteSettings"]);
-const handled = new Set(["page", "product", "testimonial", "menu", "siteSettings", "translation.metadata"]);
+const handled = new Set(["page", "product", "testimonial", "menu", "productMenu", "brand", "siteSettings", "translation.metadata"]);
 
 /** Pages flagged `adminOnly` are listed only for Studio admins (NEXT_PUBLIC_SANITY_ADMIN_EMAILS). */
 const ADMIN_FILTER = "adminOnly == true";
@@ -69,6 +69,8 @@ export const structure: StructureResolver = (S, { currentUser }) => {
       S.documentTypeListItem("testimonial").title("Testimonials"),
       S.divider(),
       S.documentTypeListItem("menu").title("Navigation"),
+      S.documentTypeListItem("productMenu").title("Products menu"),
+      S.documentTypeListItem("brand").title("Brands"),
       S.listItem()
         .title("Site settings")
         .id("siteSettings")

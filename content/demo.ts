@@ -33,6 +33,7 @@ import { productFinderDemo } from "@/blocks/product-finder/demo";
 import { indicatorLegendDemo } from "@/blocks/indicator-legend/demo";
 import { mediaDemo } from "@/blocks/media/demo";
 import { img, link } from "./demo-helpers";
+import { demoProductMenu } from "./demo-product-menu";
 import { clarisea, fmr75, funktionPump, khManager, rowaphos, spektrum150 } from "./demo-products";
 
 const STOCKISTS = "https://www.theaquariumsolution.com/stockists";
@@ -914,6 +915,7 @@ const shell: SiteShell = {
     cta: link("Find a stockist", STOCKISTS),
     footerLinks: [{ _key: "f1", ...link("Contact", "/en/contact") }],
   },
+  productMenu: demoProductMenu,
 };
 
 /* ------------------------------------------------------------ getters */

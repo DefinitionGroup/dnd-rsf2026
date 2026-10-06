@@ -7,7 +7,7 @@ import SiteHeader from "./SiteHeader";
 export default function SiteShell({ children, locale, data, routes }: { children: React.ReactNode; locale: Locale; data: SiteShellData; routes: PageRoute[] }) {
   return (
     <>
-      <SiteHeader locale={locale} menu={data.menu} settings={data.settings} routes={routes} />
+      <SiteHeader locale={locale} menu={data.menu} productMenu={data.productMenu} settings={data.settings} routes={routes} />
       <main id="main">{children}</main>
       <SiteFooter locale={locale} menu={data.menu} settings={data.settings} />
     </>

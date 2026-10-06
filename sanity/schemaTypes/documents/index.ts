@@ -1,6 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { languageField } from "../fields/language";
 import { product } from "./product";
+import { productMenuTypes } from "./product-menu";
 
 export const testimonial = defineType({
   name: "testimonial",
@@ -52,4 +53,4 @@ export const siteSettings = defineType({
   preview: { select: { title: "brandName" } },
 });
 
-export const documentTypes = [product, testimonial, menu, siteSettings];
+export const documentTypes = [product, testimonial, menu, siteSettings, ...productMenuTypes];

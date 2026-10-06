@@ -4,6 +4,7 @@
  *   pnpm sanity:seed          # uploads images + createOrReplace documents
  *   pnpm sanity:seed:dry      # prints the documents, no writes
  *   pnpm sanity:seed -- --only=rowaphos   # just that page (by demo id) + its product; nothing else is touched
+ *   pnpm sanity:seed -- --only=product-menu   # just the nav's Products menu + its brands
  *
  * Runs via `sanity exec … --with-user-token` (CLI login), so no write token is
  * needed. Converts the *resolved* demo shapes back into stored document shapes:
@@ -16,12 +17,14 @@ import { createReadStream, existsSync } from "node:fs";
 import { basename, resolve } from "node:path";
 import { getCliClient } from "sanity/cli";
 import { demoPages, getDemoShell } from "../content/demo";
+import { demoBrands } from "../content/demo-product-menu";
 import { demoProducts } from "../content/demo-products";
 import { apiVersion } from "../sanity/env";
 
 const dryRun = process.argv.includes("--dry-run");
-/** `--only=<demo page id>[,<id>]` seeds just those pages and the products they reference. */
+/** `--only=<demo page id>[,<id>]` seeds just those pages and the products they reference; `product-menu` the Products menu. */
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice("--only=".length).split(",").filter(Boolean);
+const seedProductMenu = !only || only.includes("product-menu");
 const seedPages = only ? demoPages.filter((p) => only.some((id) => p._id === `demo-page-en-${id}`)) : demoPages;
 const seedProducts = only ? demoProducts.filter((p) => seedPages.some((page) => page.product?._id === p._id)) : demoProducts;
 const client = getCliClient({ apiVersion });
@@ -146,13 +149,15 @@ function buildDocuments() {
     } as Doc;
   });
 
+  const shell = getDemoShell("en");
+  const productMenu = seedProductMenu ? buildProductMenu(shell.productMenu) : [];
+
   const unique = new Map<string, Doc>();
   if (only) {
-    for (const d of [...products, ...testimonials, ...pages]) unique.set(d._id, d);
+    for (const d of [...products, ...testimonials, ...productMenu, ...pages]) unique.set(d._id, d);
     return [...unique.values()];
   }
 
-  const shell = getDemoShell("en");
   const settings: Doc = {
     _id: "siteSettings",
     _type: "siteSettings",
@@ -174,14 +179,46 @@ function buildDocuments() {
     footerLinks: withKeys(shell.menu?.footerLinks ?? [], "f"),
   };
 
-  for (const d of [...products, ...testimonials, settings, menu, ...pages]) unique.set(d._id, d);
+  for (const d of [...products, ...testimonials, settings, menu, ...productMenu, ...pages]) unique.set(d._id, d);
   return [...unique.values()];
+}
+
+/** Brand documents + the en Products menu, with items referencing their brand. */
+function buildProductMenu(menu: ReturnType<typeof getDemoShell>["productMenu"]): Doc[] {
+  if (!menu) return [];
+  const brands: Doc[] = demoBrands.map((b) => ({ _id: b._id, _type: "brand", name: b.name, code: b.code, house: b.house ?? false }));
+  const doc: Doc = {
+    _id: menu._id,
+    _type: "productMenu",
+    language: "en",
+    label: menu.label,
+    allProductsLink: menu.allProductsLink ?? undefined,
+    categories: (menu.categories ?? []).map((c) => ({
+      _key: c._key,
+      _type: "productMenuCategory",
+      title: c.title,
+      groups: (c.groups ?? []).map((g) => ({
+        _key: g._key,
+        _type: "productMenuGroup",
+        title: g.title,
+        items: (g.items ?? []).map((i) => ({
+          _key: i._key,
+          _type: "productMenuItem",
+          name: i.name,
+          brand: ref(i.brand._id),
+          href: i.href ?? undefined,
+          badge: i.badge ?? undefined,
+        })),
+      })),
+    })),
+  };
+  return [...brands, doc];
 }
 
 /* --------------------------------------------------------------- main */
 
 async function main() {
-  if (only && seedPages.length === 0) throw new Error(`--only matched no demo page: ${only.join(", ")}`);
+  if (only && seedPages.length === 0 && !seedProductMenu) throw new Error(`--only matched no demo page: ${only.join(", ")}`);
   collectImages(only ? [seedPages, seedProducts] : [demoPages, demoProducts, getDemoShell("en")]);
 
   for (const url of imageUrls) {
