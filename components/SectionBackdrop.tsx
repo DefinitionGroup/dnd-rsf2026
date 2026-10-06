@@ -1,3 +1,4 @@
+import BackdropVideo from "@/components/BackdropVideo";
 import SanityImage from "@/components/SanityImage";
 import { resolveImageUrl } from "@/sanity/lib/image";
 import type { ResolvedImage, ResolvedVideo } from "@/blocks/types";
@@ -37,19 +38,7 @@ export default function SectionBackdrop({ image, video, muted }: BackdropMedia) 
   return (
     <div aria-hidden="true" className="absolute inset-0 -z-10">
       {hasImage && <SanityImage image={image} alt="" fill sizes="100vw" className="object-cover" />}
-      {videoUrl && (
-        <video
-          className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={resolveImageUrl(image, { width: 1920 })}
-        >
-          <source src={videoUrl} type={video?.asset?.mimeType ?? undefined} />
-        </video>
-      )}
+      {videoUrl && <BackdropVideo src={videoUrl} mimeType={video?.asset?.mimeType} poster={resolveImageUrl(image, { width: 1920 })} />}
       {dim > 0 && <div className="absolute inset-0" style={{ backgroundColor: `rgba(0,0,0,${dim})` }} />}
     </div>
   );
