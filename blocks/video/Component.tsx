@@ -10,15 +10,30 @@ import { parseEmbed, type Embed } from "@/lib/video-embed";
 import type { BlockProps } from "@/blocks/types";
 import { backgroundClass } from "@/lib/section-background";
 
+/** `layout` keeps its stored values: "contained" is the container width (default), "bleed" edge to edge. */
+const SIZE = {
+  bleed: { figure: "", sizes: "100vw" },
+  contained: { figure: "container-site", sizes: "(min-width: 1280px) 1200px, 100vw" },
+  small: { figure: "mx-auto w-full max-w-[880px]", sizes: "(min-width: 960px) 880px, 100vw" },
+} as const;
+
+type Size = keyof typeof SIZE;
+
+/**
+ * One 16:9 frame: a film (uploaded or YouTube/Vimeo) behind its image, or — with no
+ * video — the image on its own. Sized edge to edge, to the container (default) or small.
+ */
 export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
   const source = stegaClean(block.source);
-  const layout = stegaClean(block.layout) === "bleed" ? "bleed" : "contained";
+  const layout = stegaClean(block.layout);
+  const size: Size = layout && layout in SIZE ? (layout as Size) : "contained";
   const embed = source === "external" ? parseEmbed(block.url) : null;
   const fileUrl = source === "file" ? block.file?.asset?.url : undefined;
-  if (!fileUrl && !embed) return null;
+  const hasImage = Boolean(block.poster?.asset);
+  if (!fileUrl && !embed && !hasImage) return null;
 
   const hasHeader = Boolean(block.headline || block.intro);
-  const bleed = layout === "bleed";
+  const bleed = size === "bleed";
 
   const player =
     source === "file" && fileUrl ? (
@@ -30,8 +45,10 @@ export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
         alt={block.alt}
       />
     ) : embed ? (
-      <ExternalPlayer embed={embed} poster={block.poster} alt={block.alt} privacyNotice={block.privacyNotice} />
-    ) : null;
+      <ExternalPlayer embed={embed} poster={block.poster} alt={block.alt} privacyNotice={block.privacyNotice} sizes={SIZE[size].sizes} />
+    ) : (
+      <SanityImage image={block.poster} alt={block.alt} fill sizes={SIZE[size].sizes} className="object-cover" />
+    );
 
   return (
     <section className={`${backgroundClass(block.background, "canvas-dark")} section-space ${bleed ? "" : "page-gutter"}`}>
@@ -40,7 +57,7 @@ export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
           <SectionHeader eyebrow={block.eyebrow} headline={block.headline} intro={block.intro} align="center" className="mb-10 md:mb-14" />
         </div>
       )}
-      <figure className={bleed ? "" : "container-site"}>
+      <figure className={SIZE[size].figure}>
         <div className={`relative isolate aspect-video w-full overflow-hidden bg-carbon ${bleed ? "" : "media"}`}>{player}</div>
         {block.caption && (
           <figcaption className={`caption mt-4 text-center ${bleed ? "page-gutter container-site" : ""}`}>{block.caption}</figcaption>
@@ -112,11 +129,13 @@ function ExternalPlayer({
   poster,
   alt,
   privacyNotice,
+  sizes,
 }: {
   embed: Embed;
   poster: BlockProps<"videoBlock">["block"]["poster"];
   alt: string;
   privacyNotice?: string;
+  sizes: string;
 }) {
   const [loaded, setLoaded] = useState(false);
   const providerLabel = embed.provider === "youtube" ? "YouTube" : "Vimeo";
@@ -137,7 +156,7 @@ function ExternalPlayer({
   return (
     <div className="absolute inset-0 text-white">
       {poster?.asset ? (
-        <SanityImage image={poster} alt="" fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
+        <SanityImage image={poster} alt="" fill sizes={sizes} className="object-cover" />
       ) : (
         <div className="absolute inset-0 bg-carbon" aria-hidden />
       )}

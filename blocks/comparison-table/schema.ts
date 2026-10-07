@@ -32,7 +32,7 @@ export const schema = defineType({
           preview: { select: { title: "title", subtitle: "subtitle" } },
         }),
       ],
-      validation: (Rule) => Rule.min(2).max(4),
+      validation: (Rule) => Rule.min(2).max(5),
     }),
     defineField({
       name: "rows",

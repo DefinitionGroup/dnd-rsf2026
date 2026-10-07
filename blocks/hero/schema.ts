@@ -21,6 +21,21 @@ export const schema = defineType({
         }),
     }),
     defineField({
+      name: "imageSize",
+      title: "Image size",
+      type: "string",
+      initialValue: "container",
+      options: {
+        list: [
+          { title: "Full screen — edge to edge", value: "full" },
+          { title: "Container width", value: "container" },
+          { title: "Small — 880 px", value: "small" },
+        ],
+        layout: "radio",
+      },
+      hidden: ({ parent }) => !parent?.image,
+    }),
+    defineField({
       name: "video",
       title: "Background video",
       type: "file",

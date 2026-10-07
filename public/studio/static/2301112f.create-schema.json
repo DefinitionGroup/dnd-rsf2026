@@ -704,6 +704,30 @@
         "title": "Fallback / poster image"
       },
       {
+        "initialValue": "container",
+        "options": {
+          "list": [
+            {
+              "title": "Full screen — edge to edge",
+              "value": "full"
+            },
+            {
+              "title": "Container width",
+              "value": "container"
+            },
+            {
+              "title": "Small — 880 px",
+              "value": "small"
+            }
+          ],
+          "layout": "radio"
+        },
+        "hidden": "conditional",
+        "name": "imageSize",
+        "type": "string",
+        "title": "Image size"
+      },
+      {
         "options": {
           "accept": "video/mp4,video/webm,video/quicktime"
         },
@@ -2377,7 +2401,7 @@
               },
               {
                 "flag": "max",
-                "constraint": 4
+                "constraint": 5
               }
             ]
           }
@@ -2679,12 +2703,14 @@
           }
         ],
         "name": "source",
-        "type": "string"
+        "type": "string",
+        "title": "Video source"
       },
       {
         "options": {
           "accept": "video/mp4,video/webm,video/quicktime"
         },
+        "description": "Optional — leave empty to show the image on its own.",
         "hidden": "conditional",
         "name": "file",
         "type": "file",
@@ -2712,7 +2738,7 @@
             ]
           }
         ],
-        "description": "YouTube or Vimeo watch/share URL",
+        "description": "Optional. YouTube or Vimeo watch/share URL",
         "hidden": "conditional",
         "name": "url",
         "type": "url",
@@ -2722,10 +2748,20 @@
         "options": {
           "hotspot": true
         },
-        "description": "Shown before play (required for external videos: nothing loads from YouTube until the visitor clicks).",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "description": "On its own when there is no video; otherwise the frame shown before play (needed for external videos: nothing loads from YouTube until the visitor clicks).",
         "name": "poster",
         "type": "image",
-        "title": "Poster image"
+        "title": "Image"
       },
       {
         "validation": [
@@ -2752,21 +2788,27 @@
         "options": {
           "list": [
             {
-              "title": "Contained (16:9 card)",
+              "title": "Full width — edge to edge",
+              "value": "bleed"
+            },
+            {
+              "title": "Container width",
               "value": "contained"
             },
             {
-              "title": "Full-bleed",
-              "value": "bleed"
+              "title": "Small — 880 px",
+              "value": "small"
             }
           ],
           "layout": "radio"
         },
         "name": "layout",
-        "type": "string"
+        "type": "string",
+        "title": "Size"
       },
       {
         "initialValue": false,
+        "hidden": "conditional",
         "name": "autoplay",
         "type": "boolean",
         "title": "Autoplay muted loop (uploaded files only)"
@@ -2798,7 +2840,7 @@
     ],
     "name": "videoBlock",
     "type": "object",
-    "title": "Video"
+    "title": "Image / video"
   },
   {
     "fields": [
@@ -4927,7 +4969,7 @@
           },
           {
             "type": "videoBlock",
-            "title": "Video"
+            "title": "Image / video"
           },
           {
             "type": "howItWorksBlock",

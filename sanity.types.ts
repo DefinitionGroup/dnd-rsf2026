@@ -324,7 +324,7 @@ export type VideoBlock = {
   };
   alt: string;
   caption?: string;
-  layout?: "contained" | "bleed";
+  layout?: "bleed" | "contained" | "small";
   autoplay?: boolean;
   privacyNotice?: string;
   background?: "black" | "gray";
@@ -633,6 +633,7 @@ export type HeroBlock = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  imageSize?: "full" | "container" | "small";
   video?: {
     asset?: SanityFileAssetReference;
     media?: unknown;
@@ -1514,6 +1515,7 @@ export type HOME_PAGE_QUERY_RESULT = {
           crop?: SanityImageCrop;
           _type: "image";
         } | null;
+        imageSize?: "container" | "full" | "small";
         video: {
           asset: {
             _id: string;
@@ -2009,7 +2011,7 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
         alt: string;
         caption?: string;
-        layout?: "bleed" | "contained";
+        layout?: "bleed" | "contained" | "small";
         autoplay?: boolean;
         privacyNotice?: string;
         background?: "black" | "gray";
@@ -2406,6 +2408,7 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
           crop?: SanityImageCrop;
           _type: "image";
         } | null;
+        imageSize?: "container" | "full" | "small";
         video: {
           asset: {
             _id: string;
@@ -2901,7 +2904,7 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
         } | null;
         alt: string;
         caption?: string;
-        layout?: "bleed" | "contained";
+        layout?: "bleed" | "contained" | "small";
         autoplay?: boolean;
         privacyNotice?: string;
         background?: "black" | "gray";

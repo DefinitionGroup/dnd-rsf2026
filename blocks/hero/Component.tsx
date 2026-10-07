@@ -8,10 +8,19 @@ import { resolveVideoUrl } from "@/sanity/lib/video";
 import { t } from "@/lib/i18n";
 import type { BlockProps } from "@/blocks/types";
 
+/** Product render width: edge to edge, the page container (default) or a small centred 880 px. */
+const IMAGE_SIZE = {
+  full: { frame: "", inner: "w-full", sizes: "100vw" },
+  container: { frame: "container-page page-gutter", inner: "w-full", sizes: "(min-width: 1440px) 1440px, 100vw" },
+  small: { frame: "container-page page-gutter", inner: "mx-auto w-full max-w-[880px]", sizes: "(min-width: 960px) 880px, 100vw" },
+} as const;
+
+type ImageSize = keyof typeof IMAGE_SIZE;
+
 /**
  * Apple product hero: full-bleed white canvas (renders sit on white); headline (display 56/600),
  * tagline in the 300-weight whisper voice, two centered pills, and the product
- * render below at full width — "the device IS the hero". A background video,
+ * render below — "the device IS the hero" — sized by the editor (`imageSize`). A background video,
  * if present, is offered as a ghost link to the video section rather than
  * played behind text.
  *
@@ -23,6 +32,8 @@ export default function HeroBlock({ block, index, locale }: BlockProps<"heroBloc
   const videoUrl = resolveVideoUrl(block.video);
   const hasImage = Boolean(block.image?.asset);
   if (!videoUrl && !hasImage) return null;
+  const sizeKey = stegaClean(block.imageSize);
+  const imageSize = IMAGE_SIZE[sizeKey && sizeKey in IMAGE_SIZE ? (sizeKey as ImageSize) : "container"];
 
   const overlay = block.videoButton
     ? resolveOverlayVideo(
@@ -61,9 +72,9 @@ export default function HeroBlock({ block, index, locale }: BlockProps<"heroBloc
         )}
       </div>
       {hasImage && (
-        <div className="container-page page-gutter mt-[clamp(2rem,5vw,4rem)]">
-          <div className="mx-auto w-full max-w-[880px]">
-            <SanityImage image={block.image} alt={block.imageAlt} priority sizes="(min-width: 960px) 880px, 100vw" className="h-auto w-full object-contain" />
+        <div className={`${imageSize.frame} mt-[clamp(2rem,5vw,4rem)]`}>
+          <div className={imageSize.inner}>
+            <SanityImage image={block.image} alt={block.imageAlt} priority sizes={imageSize.sizes} className="h-auto w-full object-contain" />
           </div>
         </div>
       )}

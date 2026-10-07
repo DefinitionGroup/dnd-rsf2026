@@ -14,7 +14,7 @@ export function videoDemo(
     poster?: string;
     alt?: string;
     caption?: string;
-    layout?: "contained" | "bleed";
+    layout?: "contained" | "bleed" | "small";
     autoplay?: boolean;
     privacyNotice?: string;
   } = {},
