@@ -154,6 +154,21 @@
             "productMenu"
           ]
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "page",
+                  "menu",
+                  "productMenu"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Optional: Used to filter the reference fields above so all translations share the same types.",
         "of": [
           {
@@ -722,6 +737,21 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "full",
+                  "container",
+                  "small"
+                ]
+              }
+            ]
+          }
+        ],
         "hidden": "conditional",
         "name": "imageSize",
         "type": "string",
@@ -781,6 +811,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "file",
+                  "external"
+                ]
+              }
+            ]
+          }
+        ],
         "hidden": "conditional",
         "name": "overlaySource",
         "type": "string",
@@ -1001,6 +1045,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "grid",
+                  "rise"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "entrance",
         "type": "string"
       },
@@ -1041,6 +1099,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "file",
+                  "external"
+                ]
+              }
+            ]
+          }
+        ],
         "hidden": "conditional",
         "name": "overlaySource",
         "type": "string",
@@ -1213,6 +1285,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -1281,6 +1367,22 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "none",
+                  "50",
+                  "75",
+                  "100"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Give the section room to breathe — useful when it carries a background image or video. The copy centres in whatever height you pick.",
         "name": "minHeight",
         "type": "string",
@@ -1463,6 +1565,21 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "paper",
+                  "sand",
+                  "ink"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "tone",
         "type": "string"
       },
@@ -1532,6 +1649,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -1738,6 +1869,25 @@
             }
           ]
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "21/9",
+                  "16/9",
+                  "3/2",
+                  "4/3",
+                  "1/1",
+                  "4/5",
+                  "9/16"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Shape of the frame wherever the height is set to Auto.",
         "hidden": "conditional",
         "name": "aspectRatio",
@@ -1774,6 +1924,24 @@
             }
           ]
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "480",
+                  "720",
+                  "980",
+                  "1200",
+                  "1440",
+                  "full"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "maxWidth",
         "type": "string",
         "title": "Max width — desktop",
@@ -1809,6 +1977,24 @@
             }
           ]
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "50",
+                  "66",
+                  "75",
+                  "90",
+                  "100",
+                  "full"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "maxWidthMobile",
         "type": "string",
         "title": "Max width — mobile",
@@ -1844,6 +2030,24 @@
             }
           ]
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "auto",
+                  "25",
+                  "50",
+                  "66",
+                  "80",
+                  "100"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Original proportions: the most it may take. Fill / Fit: the frame's height.",
         "name": "height",
         "type": "string",
@@ -1884,6 +2088,25 @@
             }
           ]
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "same",
+                  "auto",
+                  "25",
+                  "50",
+                  "66",
+                  "80",
+                  "100"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "heightMobile",
         "type": "string",
         "title": "Height — mobile",
@@ -1909,6 +2132,21 @@
           "layout": "radio",
           "direction": "horizontal"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "default",
+                  "small",
+                  "none"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "spacing",
         "type": "string",
         "title": "Spacing above and below"
@@ -1927,6 +2165,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -2231,6 +2483,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -2360,6 +2626,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "ink",
+                  "paper"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "tone",
         "type": "string"
       }
@@ -2530,6 +2810,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -2644,6 +2938,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -2802,6 +3110,21 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "bleed",
+                  "contained",
+                  "small"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "layout",
         "type": "string",
         "title": "Size"
@@ -2833,6 +3156,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -2940,6 +3277,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "paper",
+                  "ink"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "tone",
         "type": "string"
       },
@@ -2957,6 +3308,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -3202,6 +3567,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -3349,6 +3728,21 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "lime",
+                  "ink",
+                  "paper"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "tone",
         "type": "string"
       },
@@ -3366,6 +3760,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -3444,6 +3852,22 @@
                     }
                   ]
                 },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          "blue",
+                          "red",
+                          "blueRed",
+                          "off"
+                        ]
+                      }
+                    ]
+                  }
+                ],
                 "name": "ledColor",
                 "type": "string",
                 "title": "LED colour"
@@ -3466,6 +3890,21 @@
                     }
                   ]
                 },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          "solid",
+                          "flash",
+                          "pulse"
+                        ]
+                      }
+                    ]
+                  }
+                ],
                 "name": "pattern",
                 "type": "string"
               },
@@ -3504,6 +3943,21 @@
                     }
                   ]
                 },
+                "validation": [
+                  {
+                    "level": "error",
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          "info",
+                          "warning",
+                          "alarm"
+                        ]
+                      }
+                    ]
+                  }
+                ],
                 "name": "severity",
                 "type": "string"
               }
@@ -3535,6 +3989,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -3652,6 +4120,21 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "lime",
+                  "ink",
+                  "paper"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "tone",
         "type": "string"
       },
@@ -3669,6 +4152,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
@@ -3853,6 +4350,9 @@
           {
             "level": "error",
             "rules": [
+              {
+                "flag": "custom"
+              },
               {
                 "flag": "custom"
               },
@@ -4788,6 +5288,9 @@
                 "flag": "custom"
               },
               {
+                "flag": "custom"
+              },
+              {
                 "flag": "presence",
                 "constraint": "required"
               }
@@ -4848,6 +5351,20 @@
           ],
           "layout": "radio"
         },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "light",
+                  "dark"
+                ]
+              }
+            ]
+          }
+        ],
         "name": "navbarVariant",
         "type": "string",
         "title": "Navigation contrast"

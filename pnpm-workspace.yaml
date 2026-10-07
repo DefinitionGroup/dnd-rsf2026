@@ -6,3 +6,8 @@ onlyBuiltDependencies:
   - esbuild
   - sharp
   - unrs-resolver
+overrides:
+  # 6.13.0 imports @codemirror/streamparser without declaring it, which breaks
+  # the Vision tool's build. Pinned to the broken version only, so a fixed
+  # 6.13.x gets picked up; drop this once upstream ships one.
+  '@codemirror/language@6.13.0': 6.12.4
