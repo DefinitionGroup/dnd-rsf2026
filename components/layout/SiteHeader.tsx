@@ -67,7 +67,7 @@ export default function SiteHeader({
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:z-50 focus:rounded-full focus:bg-lime focus:px-3 focus:py-1.5 focus:text-carbon">
         {t(locale, "skipToContent")}
       </a>
-      <div className="container-page page-gutter flex h-[var(--header-h)] items-center justify-between gap-6">
+      <div className="container-page page-gutter flex h-[var(--header-h)] items-center gap-6 lg:gap-12">
         <Link href={`/${locale}`} aria-label={brand} onClick={closeAll} className="shrink-0">
           <Logo />
         </Link>
@@ -81,7 +81,7 @@ export default function SiteHeader({
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-3">
           <div className="relative">
             <button
               type="button"
