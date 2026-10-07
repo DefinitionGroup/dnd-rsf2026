@@ -3523,6 +3523,14 @@
                 "type": "reference"
               },
               {
+                "options": {
+                  "hotspot": true
+                },
+                "description": "Optional — the pack shot for this result. Leave empty to use the product's primary image.",
+                "name": "image",
+                "type": "image"
+              },
+              {
                 "name": "cta",
                 "type": "linkField",
                 "title": "CTA"

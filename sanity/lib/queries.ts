@@ -77,7 +77,7 @@ const pageContentFragment = /* groq */ `content[]{
     ...,
     backgroundImage ${imageFragment},
     backgroundVideo{ asset->{ _id, url, mimeType } },
-    rules[]{ ..., product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image ${imageFragment} } }
+    rules[]{ ..., image ${imageFragment}, product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image ${imageFragment} } }
   },
   _type == "testimonialBlock" => {
     ...,

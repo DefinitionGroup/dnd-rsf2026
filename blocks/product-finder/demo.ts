@@ -95,6 +95,7 @@ export function productFinderDemo(input: ProductFinderDemoInput = {}): BlockOf<"
       flowLph: r.flowLph,
       rollWeeks: r.rollWeeks,
       product: ruleProduct(r.product),
+      image: null,
       cta: r.cta ? link(r.cta.label, r.cta.href) : undefined,
     })),
     resultLabel: input.resultLabel ?? "Our recommendation",

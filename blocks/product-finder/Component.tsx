@@ -92,7 +92,9 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
   const rollWeeks = typeof rule.rollWeeks === "number" ? Math.max(1, Math.round(rule.rollWeeks * rollFactor)) : null;
   const rollRange = rollWeeks ? `${Math.max(1, rollWeeks - 1)}–${rollWeeks + 1}` : null;
   const productName = rule.product?.name ?? null;
-  const productImage = rule.product?.image ?? null;
+  // The result's own pack shot when the editor set one; otherwise the product's primary image.
+  const ownImage = Boolean(rule.image?.asset);
+  const resultImage = ownImage ? rule.image : (rule.product?.image ?? null);
 
   const commitVolume = (raw: number) => {
     if (!Number.isFinite(raw)) return;
@@ -239,9 +241,9 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
                 className="tile flex h-full flex-col"
               >
                 <div className="flex items-start gap-5">
-                  {productImage?.asset && (
+                  {resultImage?.asset && (
                     <div className="media relative size-24 shrink-0 bg-frost md:size-28">
-                      <SanityImage image={productImage} alt={productName ?? rule.resultTitle} fill sizes="112px" className="object-contain" />
+                      <SanityImage image={resultImage} alt={ownImage ? rule.resultTitle : (productName ?? rule.resultTitle)} fill sizes="112px" className="object-contain" />
                     </div>
                   )}
                   <div className="min-w-0">
