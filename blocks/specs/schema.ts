@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { backgroundField } from "@/blocks/background-field";
 
 /** Product spec table. Specs come from the referenced product. */
 export const schema = defineType({
@@ -10,6 +11,7 @@ export const schema = defineType({
     defineField({ name: "headline", title: "Headline", type: "string", initialValue: "Technical specifications" }),
     defineField({ name: "product", title: "Product (for specs)", type: "reference", to: [{ type: "product" }] }),
     defineField({ name: "downloads", title: "Downloads (manuals, datasheets)", type: "array", of: [defineArrayMember({ type: "linkField" })] }),
+    backgroundField(),
   ],
   preview: {
     select: { headline: "headline" },

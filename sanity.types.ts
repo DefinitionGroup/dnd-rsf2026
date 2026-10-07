@@ -362,6 +362,7 @@ export type SpecsBlock = {
       _key: string;
     } & LinkField
   >;
+  background?: "black" | "gray";
 };
 
 export type ComparisonTableBlock = {
@@ -1951,6 +1952,7 @@ export type HOME_PAGE_QUERY_RESULT = {
             _key: string;
           } & LinkField
         >;
+        background?: "black" | "gray";
       }
     | {
         _key: string;
@@ -2856,6 +2858,7 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
             _key: string;
           } & LinkField
         >;
+        background?: "black" | "gray";
       }
     | {
         _key: string;

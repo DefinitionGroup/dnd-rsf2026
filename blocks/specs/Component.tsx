@@ -1,6 +1,7 @@
 import ActionLink from "@/components/ActionLink";
 import SectionHeader from "@/components/SectionHeader";
 import Reveal from "@/components/motion/Reveal";
+import { backgroundClass } from "@/lib/section-background";
 import type { BlockProps } from "@/blocks/types";
 
 export default function SpecsBlock({ block }: BlockProps<"specsBlock">) {
@@ -9,7 +10,7 @@ export default function SpecsBlock({ block }: BlockProps<"specsBlock">) {
   if (specs.length === 0 && downloads.length === 0) return null;
 
   return (
-    <section className="canvas-white section-space page-gutter">
+    <section className={`${backgroundClass(block.background, "canvas-white")} section-space page-gutter`}>
       <div className="container-site">
         {(block.eyebrow || block.headline) && <SectionHeader eyebrow={block.eyebrow} headline={block.headline} className="mb-12 md:mb-16" />}
 

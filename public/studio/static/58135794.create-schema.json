@@ -2864,6 +2864,38 @@
         "name": "downloads",
         "type": "array",
         "title": "Downloads (manuals, datasheets)"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Black",
+              "value": "black"
+            },
+            {
+              "title": "Grey",
+              "value": "gray"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "black",
+                  "gray"
+                ]
+              }
+            ]
+          }
+        ],
+        "description": "Leave empty to keep this block's default canvas.",
+        "name": "background",
+        "type": "string"
       }
     ],
     "name": "specsBlock",
