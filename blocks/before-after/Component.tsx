@@ -127,13 +127,13 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
             {/* Labels */}
             <span
               aria-hidden
-              className={`body-sm hairline pointer-events-none absolute left-4 top-4 rounded-full border bg-white px-3 py-1 text-carbon transition-opacity duration-200 ${position < 12 ? "opacity-0" : "opacity-100"}`}
+              className={`body-sm pointer-events-none absolute left-4 top-4 rounded-full bg-carbon px-3 py-1 text-lime transition-opacity duration-200 ${position < 12 ? "opacity-0" : "opacity-100"}`}
             >
               {beforeLabel}
             </span>
             <span
               aria-hidden
-              className={`body-sm hairline pointer-events-none absolute right-4 top-4 rounded-full border bg-white px-3 py-1 text-carbon transition-opacity duration-200 ${position > 88 ? "opacity-0" : "opacity-100"}`}
+              className={`body-sm pointer-events-none absolute right-4 top-4 rounded-full bg-carbon px-3 py-1 text-lime transition-opacity duration-200 ${position > 88 ? "opacity-0" : "opacity-100"}`}
             >
               {afterLabel}
             </span>
@@ -141,7 +141,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
             {/* Divider */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 w-px -translate-x-1/2 bg-white"
+              className="pointer-events-none absolute inset-y-0 w-px -translate-x-1/2 bg-lime"
               style={{ left: `${position}%`, transition: dragging || reduceMotion ? "none" : "left 120ms ease-out" }}
             />
 
@@ -159,7 +159,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
               aria-orientation="horizontal"
               onKeyDown={onKeyDown}
               onFocus={() => setInteracted(true)}
-              className={`hairline absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border bg-white text-carbon transition-[transform,left,background-color] duration-150 ease-out hover:bg-frost motion-reduce:transition-none ${dragging ? "scale-105 bg-frost" : ""} ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
+              className={`absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-carbon text-lime transition-[transform,left,background-color] duration-150 ease-out hover:bg-smoke motion-reduce:transition-none ${dragging ? "scale-105 bg-smoke" : ""} ${dragging ? "cursor-ew-resize" : "cursor-col-resize"}`}
               style={{ left: `${position}%`, transition: dragging || reduceMotion ? "none" : undefined }}
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -180,7 +180,7 @@ export default function BeforeAfterBlock({ block }: BlockProps<"beforeAfterBlock
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 6 }}
                   transition={{ duration: reduceMotion ? 0 : 0.35, ease: EASE_PRESENCE, delay: 0.6 }}
-                  className="body-sm hairline pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full border bg-white px-3.5 py-1.5 text-carbon"
+                  className="body-sm pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-carbon px-3.5 py-1.5 text-lime"
                 >
                   Drag to compare
                 </motion.span>
