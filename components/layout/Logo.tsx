@@ -10,8 +10,8 @@ export default function Logo({ className = "", tone = "light" }: { className?: s
       <Image
         src="/images/original/dd-logo.svg"
         alt=""
-        width={50}
-        height={32}
+        width={100}
+        height={63}
         className={`h-8 w-auto ${tone === "dark" ? "invert" : ""}`}
         priority
         unoptimized

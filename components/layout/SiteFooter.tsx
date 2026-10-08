@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { stegaClean } from "next-sanity";
+import { isCompleteLink } from "@/components/ActionLink";
 import type { MenuDocument, SiteSettings } from "@/blocks/types";
 import { t, type Locale } from "@/lib/i18n";
 import { LEGACY_SITE_ORIGIN, LEGACY_STOCKISTS_URL } from "@/lib/site";
@@ -25,14 +26,14 @@ export default function SiteFooter({ locale, menu, settings }: { locale: Locale;
           </div>
           <div>
             <p className={head}>Products</p>
-            <ul className={col}>{(menu?.items ?? []).map((item) => <li key={item._key}><Link href={stegaClean(item.href)} className={link}>{item.label}</Link></li>)}</ul>
+            <ul className={col}>{(menu?.items ?? []).filter(isCompleteLink).map((item) => <li key={item._key}><Link href={stegaClean(item.href)} className={link}>{item.label}</Link></li>)}</ul>
           </div>
           <div>
             <p className={head}>D-D</p>
             <ul className={col}>
               <li><a href={dealerUrl} className={link} rel="noopener">{t(locale, "findStockist")}</a></li>
               <li><a href={mainSite} className={link} rel="noopener">theaquariumsolution.com</a></li>
-              {(menu?.footerLinks ?? []).map((item) => <li key={item._key}><Link href={stegaClean(item.href)} className={link}>{item.label}</Link></li>)}
+              {(menu?.footerLinks ?? []).filter(isCompleteLink).map((item) => <li key={item._key}><Link href={stegaClean(item.href)} className={link}>{item.label}</Link></li>)}
             </ul>
           </div>
           <div>
@@ -40,7 +41,7 @@ export default function SiteFooter({ locale, menu, settings }: { locale: Locale;
             <ul className={col}>
               {(settings?.email ?? []).map((email) => <li key={email}><a href={`mailto:${email}`} className={link}>{email}</a></li>)}
               {(settings?.phone ?? []).map((phone) => <li key={phone}><a href={`tel:${phone.replace(/\s/g, "")}`} className={link}>{phone}</a></li>)}
-              {(settings?.socialLinks ?? []).map((s) => <li key={s._key}><a href={stegaClean(s.href)} className={link} rel="noopener">{s.label}</a></li>)}
+              {(settings?.socialLinks ?? []).filter(isCompleteLink).map((s) => <li key={s._key}><a href={stegaClean(s.href)} className={link} rel="noopener">{s.label}</a></li>)}
             </ul>
           </div>
         </div>

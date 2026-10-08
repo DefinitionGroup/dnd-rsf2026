@@ -3,6 +3,11 @@ import { stegaClean } from "next-sanity";
 
 export type LinkLike = { label?: string | null; href?: string | null } | null | undefined;
 
+/** A link worth rendering: both label and target set. Half-filled links in a draft are skipped, not crashed on. */
+export function isCompleteLink<T extends LinkLike>(link: T): link is NonNullable<T> & { label: string; href: string } {
+  return Boolean(link?.href && link.label);
+}
+
 function Chevron() {
   return (
     <svg aria-hidden="true" viewBox="0 0 12 12" width="11" height="11" className="shrink-0">
@@ -26,7 +31,7 @@ export default function ActionLink({
   size?: "md" | "sm";
   className?: string;
 }) {
-  if (!link?.href || !link.label) return null;
+  if (!isCompleteLink(link)) return null;
   const href = stegaClean(link.href);
   const classes = `action-link action-link--${variant} ${size === "sm" ? "action-link--small" : ""} ${className}`.trim();
   const external = /^(https?:|mailto:|tel:)/.test(href);

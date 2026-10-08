@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { stegaClean } from "next-sanity";
+import { isCompleteLink } from "@/components/ActionLink";
 import { LOCALES, t, type Locale } from "@/lib/i18n";
 import { alternatePath, type PageRoute } from "@/lib/translations";
 import type { MenuDocument, ProductMenuDocument, SiteSettings } from "@/blocks/types";
@@ -57,7 +58,7 @@ export default function SiteHeader({
     setLangOpen(false);
     setProductsOpen(false);
   };
-  const items = menu?.items ?? [];
+  const items = (menu?.items ?? []).filter(isCompleteLink);
   const hasProducts = Boolean(productMenu?.categories?.length);
   const brand = settings?.brandName ?? "The Aquarium Solution";
 
@@ -156,7 +157,7 @@ export default function SiteHeader({
               {item.label}
             </Link>
           ))}
-          {menu?.cta && (
+          {isCompleteLink(menu?.cta) && (
             <a href={stegaClean(menu.cta.href)} className="action-link action-link--primary mt-4 self-start" rel="noopener" onClick={closeAll}>
               {menu.cta.label}
             </a>
