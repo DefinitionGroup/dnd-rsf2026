@@ -129,6 +129,25 @@ export const PAGE_ROUTES_QUERY = defineQuery(
 
 /* ---------- shell ---------- */
 
+/** Locale Products menu with an `en` fallback (brands resolved). */
+const productMenuSelection = /* groq */ `coalesce(
+  *[_type == "productMenu" && language == $locale][0],
+  *[_type == "productMenu" && language == "en"][0]
+){
+  _id,
+  label,
+  allProductsLink,
+  categories[]{
+    _key,
+    title,
+    groups[]{
+      _key,
+      title,
+      items[]{ _key, name, href, badge, brand->{ _id, name, code, house } }
+    }
+  }
+}`;
+
 export const SITE_SHELL_QUERY = defineQuery(
   `{
     "settings": *[_type == "siteSettings"][0]{
@@ -146,25 +165,12 @@ export const SITE_SHELL_QUERY = defineQuery(
       *[_type == "menu" && language == $locale][0],
       *[_type == "menu" && language == "en"][0]
     ){ _id, language, items, cta, footerLinks },
-    "productMenu": coalesce(
-      *[_type == "productMenu" && language == $locale][0],
-      *[_type == "productMenu" && language == "en"][0]
-    ){
-      _id,
-      label,
-      allProductsLink,
-      categories[]{
-        _key,
-        title,
-        groups[]{
-          _key,
-          title,
-          items[]{ _key, name, href, badge, brand->{ _id, name, code, house } }
-        }
-      }
-    }
+    "productMenu": ${productMenuSelection}
   }`,
 );
+
+/** The nav's Products menu on its own — feeds the embeddable /lpmenu.html snippet. */
+export const PRODUCT_MENU_QUERY = defineQuery(productMenuSelection);
 
 /* ---------- products ---------- */
 

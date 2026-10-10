@@ -2,9 +2,10 @@ import "server-only";
 import { isSanityConfigured } from "@/sanity/env";
 import type { Locale } from "@/lib/i18n";
 import { getDemoHome, getDemoPage, getDemoRoutes, getDemoShell } from "@/content/demo";
+import { client } from "./client";
 import { sanityFetch } from "./live";
-import { HOME_PAGE_QUERY, PAGE_BY_SLUG_QUERY, PAGE_ROUTES_QUERY, SITE_SHELL_QUERY } from "./queries";
-import type { HOME_PAGE_QUERY_RESULT, PAGE_BY_SLUG_QUERY_RESULT, PAGE_ROUTES_QUERY_RESULT, SITE_SHELL_QUERY_RESULT } from "@/sanity.types";
+import { HOME_PAGE_QUERY, PAGE_BY_SLUG_QUERY, PAGE_ROUTES_QUERY, PRODUCT_MENU_QUERY, SITE_SHELL_QUERY } from "./queries";
+import type { HOME_PAGE_QUERY_RESULT, PAGE_BY_SLUG_QUERY_RESULT, PAGE_ROUTES_QUERY_RESULT, PRODUCT_MENU_QUERY_RESULT, SITE_SHELL_QUERY_RESULT } from "@/sanity.types";
 
 // sanityFetch brands strings as StegaString<…> when stega may be enabled; the
 // runtime values are plain strings, so we widen back to the generated result types.
@@ -36,4 +37,14 @@ export async function loadSiteShell(locale: Locale) {
   if (!isSanityConfigured) return getDemoShell(locale);
   const { data } = await sanityFetch({ query: SITE_SHELL_QUERY, params: { locale } });
   return data as SITE_SHELL_QUERY_RESULT;
+}
+
+/**
+ * Published Products menu for the /lpmenu.html export. Uncached here: the
+ * route's CDN header decides freshness, so a published change reaches the
+ * snippet within a minute without a deploy.
+ */
+export async function loadProductMenu(locale: Locale) {
+  if (!isSanityConfigured) return getDemoShell(locale).productMenu;
+  return client.fetch<PRODUCT_MENU_QUERY_RESULT>(PRODUCT_MENU_QUERY, { locale }, { perspective: "published", stega: false, cache: "no-store" });
 }
