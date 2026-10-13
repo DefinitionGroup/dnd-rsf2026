@@ -52,6 +52,12 @@ export default function PageBuilder({ page, locale, productBar = true }: { page:
 
   return (
     <>
+      {/* Scroll anchor for client navigation. Next scrolls a new page to the top only
+          once it finds a first element with a box that is not sticky/fixed — the
+          JSON-LD script, the sticky product bar and the `contents` block wrappers
+          all fail that, so without this the page kept the old scroll position.
+          Zero height, full width: no layout, but a real box. */}
+      <div aria-hidden="true" />
       {productBar && bar}
       {content.map((block, index) => {
         const Component = blockComponents[block._type as BlockType] as

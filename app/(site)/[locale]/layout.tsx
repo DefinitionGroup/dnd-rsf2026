@@ -28,7 +28,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const [shell, routes, { isEnabled: isDraft }] = await Promise.all([loadSiteShell(locale), loadPageRoutes(), draftMode()]);
 
   return (
-    <html lang={localeMeta(locale).htmlLang} className={fontClassNames}>
+    // data-scroll-behavior: globals.css scrolls smoothly (in-page anchors); this tells
+    // Next to jump instantly instead when a navigation resets the scroll position.
+    <html lang={localeMeta(locale).htmlLang} className={fontClassNames} data-scroll-behavior="smooth">
       <body>
         {/* impeccable direction contract — kept in the emitted HTML so the finish review can audit it */}
         <DirectionContract />
