@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { mobileFieldset, mobileImageField, mobileVideoField } from "@/blocks/mobile-field";
 
 /** Cinematic film hero: full-viewport background video revealed through a staggered grid mask. */
 export const schema = defineType({
@@ -7,6 +8,7 @@ export const schema = defineType({
   type: "object",
   description:
     "Full-viewport film hero: the background video is revealed through a flickering grid mask, then headline, tagline and pills enter word by word.",
+  fieldsets: [mobileFieldset()],
   fields: [
     defineField({ name: "brand", title: "Brand signal", type: "string", description: "Small pill above the headline, e.g. product family." }),
     defineField({ name: "headline", title: "Headline", type: "text", rows: 2, validation: (Rule) => Rule.required() }),
@@ -24,6 +26,14 @@ export const schema = defineType({
       type: "image",
       options: { hotspot: true },
       description: "First frame stand-in — shown while the video loads and for visitors who prefer reduced motion.",
+    }),
+    mobileVideoField("videoMobile", "Background video — mobile", {
+      description: "Played on phones instead — a portrait 9:16 cut fills the screen without cropping the action away. Short and small, like the desktop clip.",
+      hidden: ({ parent }) => !parent?.video,
+    }),
+    mobileImageField("posterMobile", "Poster image — mobile", {
+      description: "A still from the mobile clip, if there is one.",
+      hidden: ({ parent }) => !parent?.poster,
     }),
     defineField({
       name: "videoAlt",

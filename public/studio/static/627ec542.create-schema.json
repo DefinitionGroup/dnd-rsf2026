@@ -767,6 +767,28 @@
         "title": "Background video"
       },
       {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Its own crop and hotspot for phones. Uses the same alternative text.",
+        "hidden": "conditional",
+        "name": "imageMobile",
+        "type": "image",
+        "title": "Image — mobile",
+        "fieldset": "mobile"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Played on phones instead — e.g. a portrait 9:16 cut or a smaller file. MP4 (H.264) plays everywhere.",
+        "hidden": "conditional",
+        "name": "videoMobile",
+        "type": "file",
+        "title": "Background video — mobile",
+        "fieldset": "mobile"
+      },
+      {
         "validation": [
           {
             "level": "error",
@@ -879,6 +901,17 @@
         "name": "secondaryCta",
         "type": "linkField",
         "title": "Secondary CTA"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "mobile",
+        "title": "Mobile version",
+        "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
       }
     ],
     "name": "heroBlock",
@@ -1005,6 +1038,28 @@
         "name": "poster",
         "type": "image",
         "title": "Poster image"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Played on phones instead — a portrait 9:16 cut fills the screen without cropping the action away. Short and small, like the desktop clip.",
+        "hidden": "conditional",
+        "name": "videoMobile",
+        "type": "file",
+        "title": "Background video — mobile",
+        "fieldset": "mobile"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "A still from the mobile clip, if there is one.",
+        "hidden": "conditional",
+        "name": "posterMobile",
+        "type": "image",
+        "title": "Poster image — mobile",
+        "fieldset": "mobile"
       },
       {
         "validation": [
@@ -1167,6 +1222,17 @@
         "name": "secondaryCta",
         "type": "linkField",
         "title": "Secondary CTA"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "mobile",
+        "title": "Mobile version",
+        "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
       }
     ],
     "name": "cinematicHeroBlock",
@@ -1345,6 +1411,28 @@
         "title": "Background muting (%)"
       },
       {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Its own crop and hotspot for phones. Uses the same alternative text.",
+        "hidden": "conditional",
+        "name": "backgroundImageMobile",
+        "type": "image",
+        "title": "Background image — mobile",
+        "fieldset": "backgroundMobile"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Played on phones instead — e.g. a portrait 9:16 cut or a smaller file. MP4 (H.264) plays everywhere.",
+        "hidden": "conditional",
+        "name": "backgroundVideoMobile",
+        "type": "file",
+        "title": "Background video — mobile",
+        "fieldset": "backgroundMobile"
+      },
+      {
         "initialValue": "none",
         "options": {
           "list": [
@@ -1387,6 +1475,17 @@
         "name": "minHeight",
         "type": "string",
         "title": "Minimum height"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "backgroundMobile",
+        "title": "Background — mobile version",
+        "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
       }
     ],
     "name": "introBlock",
@@ -1757,6 +1856,39 @@
         "name": "poster",
         "type": "image",
         "title": "Poster image"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Its own crop and hotspot for phones. With 'Original proportions' the frame follows this image's shape on phones.",
+        "hidden": "conditional",
+        "name": "imageMobile",
+        "type": "image",
+        "title": "Image — mobile",
+        "fieldset": "mobile"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Played on phones instead — e.g. a portrait 9:16 cut or a smaller file. MP4 (H.264) plays everywhere.",
+        "hidden": "conditional",
+        "name": "videoMobile",
+        "type": "file",
+        "title": "Video file — mobile",
+        "fieldset": "mobile"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "A still from the mobile video, if there is one.",
+        "hidden": "conditional",
+        "name": "posterMobile",
+        "type": "image",
+        "title": "Poster image — mobile",
+        "fieldset": "mobile"
       },
       {
         "initialValue": true,
@@ -2185,6 +2317,15 @@
       }
     ],
     "fieldsets": [
+      {
+        "name": "mobile",
+        "title": "Mobile version",
+        "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      },
       {
         "name": "video",
         "title": "Video playback",
@@ -3104,6 +3245,28 @@
         "title": "Image"
       },
       {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Its own crop and hotspot for phones. Uses the same alternative text.",
+        "hidden": "conditional",
+        "name": "posterMobile",
+        "type": "image",
+        "title": "Image — mobile",
+        "fieldset": "mobile"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Played on phones instead — e.g. a portrait 9:16 cut or a smaller file. MP4 (H.264) plays everywhere.",
+        "hidden": "conditional",
+        "name": "fileMobile",
+        "type": "file",
+        "title": "Video file — mobile",
+        "fieldset": "mobile"
+      },
+      {
         "validation": [
           {
             "level": "error",
@@ -3205,6 +3368,17 @@
         "description": "Leave empty to keep this block's default canvas.",
         "name": "background",
         "type": "string"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "mobile",
+        "title": "Mobile version",
+        "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
       }
     ],
     "name": "videoBlock",
@@ -3665,6 +3839,39 @@
         "name": "backgroundMuted",
         "type": "number",
         "title": "Background muting (%)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Its own crop and hotspot for phones. Uses the same alternative text.",
+        "hidden": "conditional",
+        "name": "backgroundImageMobile",
+        "type": "image",
+        "title": "Background image — mobile",
+        "fieldset": "backgroundMobile"
+      },
+      {
+        "options": {
+          "accept": "video/mp4,video/webm,video/quicktime"
+        },
+        "description": "Played on phones instead — e.g. a portrait 9:16 cut or a smaller file. MP4 (H.264) plays everywhere.",
+        "hidden": "conditional",
+        "name": "backgroundVideoMobile",
+        "type": "file",
+        "title": "Background video — mobile",
+        "fieldset": "backgroundMobile"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "backgroundMobile",
+        "title": "Background — mobile version",
+        "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
       }
     ],
     "name": "productFinderBlock",
@@ -5439,6 +5646,17 @@
         ],
         "of": [
           {
+            "fieldsets": [
+              {
+                "name": "mobile",
+                "title": "Mobile version",
+                "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+                "options": {
+                  "collapsible": true,
+                  "collapsed": true
+                }
+              }
+            ],
             "type": "heroBlock",
             "title": "Hero"
           },
@@ -5449,6 +5667,17 @@
           },
           {
             "description": "Full-viewport film hero: the background video is revealed through a flickering grid mask, then headline, tagline and pills enter word by word.",
+            "fieldsets": [
+              {
+                "name": "mobile",
+                "title": "Mobile version",
+                "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+                "options": {
+                  "collapsible": true,
+                  "collapsed": true
+                }
+              }
+            ],
             "type": "cinematicHeroBlock",
             "title": "Hero — cinematic film"
           },
@@ -5457,6 +5686,17 @@
             "title": "Animated headline"
           },
           {
+            "fieldsets": [
+              {
+                "name": "backgroundMobile",
+                "title": "Background — mobile version",
+                "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+                "options": {
+                  "collapsible": true,
+                  "collapsed": true
+                }
+              }
+            ],
             "type": "introBlock",
             "title": "Editorial intro"
           },
@@ -5478,6 +5718,15 @@
           },
           {
             "fieldsets": [
+              {
+                "name": "mobile",
+                "title": "Mobile version",
+                "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+                "options": {
+                  "collapsible": true,
+                  "collapsed": true
+                }
+              },
               {
                 "name": "video",
                 "title": "Video playback",
@@ -5525,6 +5774,17 @@
             "title": "FAQ"
           },
           {
+            "fieldsets": [
+              {
+                "name": "mobile",
+                "title": "Mobile version",
+                "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+                "options": {
+                  "collapsible": true,
+                  "collapsed": true
+                }
+              }
+            ],
             "type": "videoBlock",
             "title": "Image / video"
           },
@@ -5533,6 +5793,17 @@
             "title": "How it works (stepper)"
           },
           {
+            "fieldsets": [
+              {
+                "name": "backgroundMobile",
+                "title": "Background — mobile version",
+                "description": "Optional. Shown on phones (below 768 px) instead of the desktop version — e.g. a portrait crop or a lighter film. Leave empty to use the desktop version everywhere.",
+                "options": {
+                  "collapsible": true,
+                  "collapsed": true
+                }
+              }
+            ],
             "type": "productFinderBlock",
             "title": "Product finder (calculator)"
           },

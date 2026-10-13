@@ -6,6 +6,7 @@ import { resolveImageUrl } from "@/sanity/lib/image";
 import { resolveOverlayVideo } from "@/lib/overlay-video";
 import { resolveVideoUrl } from "@/sanity/lib/video";
 import { t } from "@/lib/i18n";
+import { MOBILE_MEDIA } from "@/lib/mobile-media";
 import type { BlockProps } from "@/blocks/types";
 
 /** Product render width: edge to edge, the page container (default) or a small centred 880 px. */
@@ -74,7 +75,7 @@ export default function HeroBlock({ block, index, locale }: BlockProps<"heroBloc
       {hasImage && (
         <div className={`${imageSize.frame} mt-[clamp(2rem,5vw,4rem)]`}>
           <div className={imageSize.inner}>
-            <SanityImage image={block.image} alt={block.imageAlt} priority sizes={imageSize.sizes} className="h-auto w-full object-contain" />
+            <SanityImage image={block.image} mobileImage={block.imageMobile} alt={block.imageAlt} priority sizes={imageSize.sizes} className="h-auto w-full object-contain" />
           </div>
         </div>
       )}
@@ -82,6 +83,9 @@ export default function HeroBlock({ block, index, locale }: BlockProps<"heroBloc
         <div className="container-page page-gutter mt-[clamp(2rem,5vw,4rem)] pb-[var(--section-y)]">
           <div className="media relative mx-auto aspect-video w-full max-w-[1100px] bg-carbon">
             <video className="absolute inset-0 h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata" aria-label={block.imageAlt}>
+              {block.videoMobile?.asset?.url && (
+                <source src={block.videoMobile.asset.url} type={block.videoMobile.asset.mimeType ?? undefined} media={MOBILE_MEDIA} />
+              )}
               <source src={videoUrl} type={block.video?.asset?.mimeType ?? undefined} />
             </video>
           </div>

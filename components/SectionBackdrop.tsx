@@ -6,6 +6,9 @@ import type { ResolvedImage, ResolvedVideo } from "@/blocks/types";
 export type BackdropMedia = {
   image?: ResolvedImage | null;
   video?: ResolvedVideo | null;
+  /** Optional phone versions, swapped in below 768 px. */
+  imageMobile?: ResolvedImage | null;
+  videoMobile?: ResolvedVideo | null;
   /** 0–100. How far the scrim dims the media; the default matches the old fixed 60%. */
   muted?: number | null;
 };
@@ -28,7 +31,7 @@ export function hasBackdrop({ image, video }: BackdropMedia) {
  * Expects a `relative isolate overflow-hidden` parent; sits on -z-10 so the
  * section's own canvas colour still paints behind it.
  */
-export default function SectionBackdrop({ image, video, muted }: BackdropMedia) {
+export default function SectionBackdrop({ image, video, imageMobile, videoMobile, muted }: BackdropMedia) {
   const videoUrl = video?.asset?.url;
   const hasImage = Boolean(image?.asset);
   if (!videoUrl && !hasImage) return null;
@@ -37,8 +40,17 @@ export default function SectionBackdrop({ image, video, muted }: BackdropMedia) 
 
   return (
     <div aria-hidden="true" className="absolute inset-0 -z-10">
-      {hasImage && <SanityImage image={image} alt="" fill sizes="100vw" className="object-cover" />}
-      {videoUrl && <BackdropVideo src={videoUrl} mimeType={video?.asset?.mimeType} poster={resolveImageUrl(image, { width: 1920 })} />}
+      {hasImage && <SanityImage image={image} mobileImage={imageMobile} alt="" fill sizes="100vw" className="object-cover" />}
+      {videoUrl && (
+        <BackdropVideo
+          src={videoUrl}
+          mimeType={video?.asset?.mimeType}
+          mobileSrc={videoMobile?.asset?.url}
+          mobileMimeType={videoMobile?.asset?.mimeType}
+          poster={resolveImageUrl(image, { width: 1920 })}
+          mobilePoster={resolveImageUrl(imageMobile, { width: 1080 })}
+        />
+      )}
       {dim > 0 && <div className="absolute inset-0" style={{ backgroundColor: `rgba(0,0,0,${dim})` }} />}
     </div>
   );

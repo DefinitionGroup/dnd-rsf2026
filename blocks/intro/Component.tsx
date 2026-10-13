@@ -22,7 +22,13 @@ const MIN_HEIGHT: Record<string, string> = {
  * the footage does.
  */
 export default function IntroBlock({ block }: BlockProps<"introBlock">) {
-  const media = { image: block.backgroundImage, video: block.backgroundVideo, muted: block.backgroundMuted };
+  const media = {
+    image: block.backgroundImage,
+    video: block.backgroundVideo,
+    imageMobile: block.backgroundImageMobile,
+    videoMobile: block.backgroundVideoMobile,
+    muted: block.backgroundMuted,
+  };
   const backdrop = hasBackdrop(media);
   const canvas = backgroundClass(block.background, "canvas-white");
   // A taller section centres its copy; the default stays as tall as the content.

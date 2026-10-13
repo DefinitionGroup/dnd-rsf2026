@@ -37,7 +37,9 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "heroBlock" => {
     ...,
     image ${imageFragment},
+    imageMobile ${imageFragment},
     video{ asset->{ _id, url, mimeType } },
+    videoMobile{ asset->{ _id, url, mimeType } },
     overlayVideo{ asset->{ _id, url, mimeType } }
   },
   _type == "hero3dBlock" => {
@@ -47,13 +49,17 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "cinematicHeroBlock" => {
     ...,
     video{ asset->{ _id, url, mimeType } },
+    videoMobile{ asset->{ _id, url, mimeType } },
     overlayVideo{ asset->{ _id, url, mimeType } },
-    poster ${imageFragment}
+    poster ${imageFragment},
+    posterMobile ${imageFragment}
   },
   _type == "introBlock" => {
     ...,
     backgroundImage ${imageFragment},
-    backgroundVideo{ asset->{ _id, url, mimeType } }
+    backgroundVideo{ asset->{ _id, url, mimeType } },
+    backgroundImageMobile ${imageFragment},
+    backgroundVideoMobile{ asset->{ _id, url, mimeType } }
   },
   _type == "splitContentBlock" => { ..., image ${imageFragment} },
   _type == "galleryBlock" => { ..., images[] ${captionedImageFragment} },
@@ -70,13 +76,29 @@ const pageContentFragment = /* groq */ `content[]{
   _type == "featureTourBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
   _type == "comparisonTableBlock" => { ..., columns[]{ ..., product-> ${productFragment} } },
   _type == "specsBlock" => { ..., product-> ${productFragment} },
-  _type == "videoBlock" => { ..., file{ asset->{ _id, url, mimeType } }, poster ${imageFragment} },
-  _type == "mediaBlock" => { ..., image ${imageFragment}, video{ asset->{ _id, url, mimeType } }, poster ${imageFragment} },
+  _type == "videoBlock" => {
+    ...,
+    file{ asset->{ _id, url, mimeType } },
+    fileMobile{ asset->{ _id, url, mimeType } },
+    poster ${imageFragment},
+    posterMobile ${imageFragment}
+  },
+  _type == "mediaBlock" => {
+    ...,
+    image ${imageFragment},
+    imageMobile ${imageFragment},
+    video{ asset->{ _id, url, mimeType } },
+    videoMobile{ asset->{ _id, url, mimeType } },
+    poster ${imageFragment},
+    posterMobile ${imageFragment}
+  },
   _type == "howItWorksBlock" => { ..., steps[]{ ..., image ${imageFragment} } },
   _type == "productFinderBlock" => {
     ...,
     backgroundImage ${imageFragment},
     backgroundVideo{ asset->{ _id, url, mimeType } },
+    backgroundImageMobile ${imageFragment},
+    backgroundVideoMobile{ asset->{ _id, url, mimeType } },
     rules[]{ ..., image ${imageFragment}, product->{ _id, "slug": slug.current, "name": coalesce(name[language == $locale][0].value, name[language == "en"][0].value), image ${imageFragment} } }
   },
   _type == "testimonialBlock" => {

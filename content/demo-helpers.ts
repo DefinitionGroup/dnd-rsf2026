@@ -80,6 +80,8 @@ export function backdrop(input: BackdropInput) {
           },
         }
       : null,
+    backgroundImageMobile: null,
+    backgroundVideoMobile: null,
     backgroundMuted: input.backgroundMuted,
   };
 }

@@ -127,22 +127,29 @@ export default function MediaBlock({ block, index, locale }: BlockProps<"mediaBl
   const rounded = `${bleedMobile ? "" : "rounded-[var(--radius-media)]"} ${bleedDesktop ? "md:rounded-none" : "md:rounded-[var(--radius-media)]"}`;
   const sizes = `(min-width: 768px) ${SIZES_DESKTOP[widthDesktop]}, ${SIZES_MOBILE[widthMobile]}`;
 
-  // Natural frames carry the media's own ratio; fill/fit frames carry the editor's.
+  // Natural frames carry the media's own ratio — per breakpoint, so a mobile crop
+  // gets its own shape on phones; fill/fit frames carry the editor's.
   const poster = isVideo ? block.poster : block.image;
+  const posterMobile = isVideo ? block.posterMobile : block.imageMobile;
   const naturalRatio = croppedRatio(poster) ?? 16 / 9;
+  const naturalRatioMobile = croppedRatio(posterMobile) ?? naturalRatio;
   const frameVars: Record<string, string | number> =
     fit === "natural"
-      ? { "--media-ratio": naturalRatio, aspectRatio: "var(--media-ratio)" }
+      ? { "--media-ratio-m": naturalRatioMobile, "--media-ratio-d": naturalRatio, aspectRatio: "var(--media-ratio)" }
       : { "--frame-ratio": option(block.aspectRatio, ["21/9", "16/9", "3/2", "4/3", "1/1", "4/5", "9/16"], "16/9") };
   const frameStyle = frameVars as CSSProperties;
   const frameClassName = [
     "relative mx-auto overflow-hidden",
     rounded,
     fit === "natural"
-      ? `${NATURAL_MOBILE[heightMobile]} ${NATURAL_DESKTOP[heightDesktop]}`
+      ? `[--media-ratio:var(--media-ratio-m)] md:[--media-ratio:var(--media-ratio-d)] ${NATURAL_MOBILE[heightMobile]} ${NATURAL_DESKTOP[heightDesktop]}`
       : `w-full ${FRAME_MOBILE[heightMobile]} ${FRAME_DESKTOP[heightDesktop]}`,
   ].join(" ");
   const objectFit = fit === "contain" ? "contain" : "cover";
+  // Cover keeps each image's own hotspot in view; the mobile one takes over below md.
+  const focusDesktop = hotspotPosition(block.image) ?? "50% 50%";
+  const focusMobile = block.imageMobile?.asset ? (hotspotPosition(block.imageMobile) ?? "50% 50%") : focusDesktop;
+  const focus = fit === "cover" ? ({ "--focus-d": focusDesktop, "--focus-m": focusMobile } as CSSProperties) : undefined;
 
   const media =
     isVideo && videoUrl ? (
@@ -150,6 +157,9 @@ export default function MediaBlock({ block, index, locale }: BlockProps<"mediaBl
         src={videoUrl}
         mimeType={block.video?.asset?.mimeType}
         poster={resolveImageUrl(block.poster, { width: 1920 })}
+        mobileSrc={block.videoMobile?.asset?.url}
+        mobileMimeType={block.videoMobile?.asset?.mimeType}
+        mobilePoster={resolveImageUrl(block.posterMobile, { width: 1080 })}
         alt={block.alt}
         autoplay={block.autoplay ?? true}
         loop={block.loop ?? true}
@@ -163,12 +173,13 @@ export default function MediaBlock({ block, index, locale }: BlockProps<"mediaBl
       <div className={frameClassName} style={frameStyle}>
         <SanityImage
           image={block.image}
+          mobileImage={block.imageMobile}
           alt={block.alt}
           fill
           sizes={sizes}
           priority={index === 0}
-          className={objectFit === "contain" ? "object-contain" : "object-cover"}
-          style={fit === "cover" ? { objectPosition: hotspotPosition(block.image) } : undefined}
+          className={objectFit === "contain" ? "object-contain" : "object-cover object-[var(--focus-m)] md:object-[var(--focus-d)]"}
+          style={focus}
         />
       </div>
     );

@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { backgroundField } from "@/blocks/background-field";
+import { mobileFieldset, mobileImageField, mobileVideoField } from "@/blocks/mobile-field";
 
 const HEIGHTS = [
   { title: "Auto", value: "auto" },
@@ -20,6 +21,7 @@ export const schema = defineType({
   title: "Media",
   type: "object",
   fieldsets: [
+    mobileFieldset(),
     { name: "video", title: "Video playback", options: { columns: 2 } },
     { name: "size", title: "Size", description: "The media always sits centred.", options: { columns: 2 } },
   ],
@@ -64,6 +66,15 @@ export const schema = defineType({
       type: "image",
       description: "Shown before the video plays and to visitors who prefer reduced motion. Use a still from the video.",
       hidden: ({ parent }) => parent?.mediaType !== "video",
+    }),
+    mobileImageField("imageMobile", "Image — mobile", {
+      description: "Its own crop and hotspot for phones. With 'Original proportions' the frame follows this image's shape on phones.",
+      hidden: ({ parent }) => parent?.mediaType === "video" || !parent?.image,
+    }),
+    mobileVideoField("videoMobile", "Video file — mobile", { hidden: ({ parent }) => parent?.mediaType !== "video" || !parent?.video }),
+    mobileImageField("posterMobile", "Poster image — mobile", {
+      description: "A still from the mobile video, if there is one.",
+      hidden: ({ parent }) => parent?.mediaType !== "video" || !parent?.poster,
     }),
     defineField({
       name: "autoplay",

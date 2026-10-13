@@ -33,6 +33,8 @@ export function heroDemo(input: {
     summary: input.summary,
     image: img(input.image),
     video: input.video ? videoAsset(input.video) : null,
+    imageMobile: null,
+    videoMobile: null,
     imageAlt: input.imageAlt,
     videoButton: input.videoButton,
     videoButtonLabel: input.videoButtonLabel,

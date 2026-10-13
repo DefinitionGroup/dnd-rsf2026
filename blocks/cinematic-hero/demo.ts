@@ -43,6 +43,8 @@ export function cinematicHeroDemo(input: {
       },
     },
     poster: img(input.poster ?? "clarisea-video-poster.jpg", { width: 1920, height: 1080 }),
+    videoMobile: null,
+    posterMobile: null,
     videoAlt: input.videoAlt,
     shader: input.shader ?? true,
     entrance: input.entrance ?? "grid",

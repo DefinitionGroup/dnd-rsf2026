@@ -1,4 +1,5 @@
 import { defineField } from "sanity";
+import { mobileFieldset, mobileImageField, mobileVideoField } from "@/blocks/mobile-field";
 
 /**
  * Shared "Background" control. Kept apart from `lib/section-background.ts` on
@@ -25,8 +26,9 @@ export function backgroundField() {
 }
 
 /**
- * Optional still / film behind a section, plus the scrim strength. Grouped so the
- * blocks that offer a backdrop all expose the same three controls.
+ * Optional still / film behind a section, plus the scrim strength and their phone
+ * versions. Grouped so the blocks that offer a backdrop all expose the same
+ * controls. Blocks spreading these must declare `backgroundMobileFieldset()`.
  */
 export function backgroundMediaFields() {
   return [
@@ -53,5 +55,18 @@ export function backgroundMediaFields() {
       validation: (Rule) => Rule.min(0).max(100),
       hidden: ({ parent }) => !parent?.backgroundImage && !parent?.backgroundVideo,
     }),
+    mobileImageField("backgroundImageMobile", "Background image — mobile", {
+      fieldset: "backgroundMobile",
+      hidden: ({ parent }) => !parent?.backgroundImage,
+    }),
+    mobileVideoField("backgroundVideoMobile", "Background video — mobile", {
+      fieldset: "backgroundMobile",
+      hidden: ({ parent }) => !parent?.backgroundVideo,
+    }),
   ];
+}
+
+/** The collapsed "Background — mobile version" group the backdrop's phone fields sit in. */
+export function backgroundMobileFieldset() {
+  return mobileFieldset("backgroundMobile", "Background — mobile version");
 }

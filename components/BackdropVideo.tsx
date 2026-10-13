@@ -2,11 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
+import { MOBILE_MEDIA } from "@/lib/mobile-media";
+import { usePoster } from "@/lib/use-mobile-media";
 
 type Props = {
   src: string;
   mimeType?: string | null;
   poster?: string;
+  /** Optional phone cut and still, used below 768 px. */
+  mobileSrc?: string;
+  mobileMimeType?: string | null;
+  mobilePoster?: string;
 };
 
 /** Input that counts as a user gesture, so a play() inside it is allowed where autoplay is not. */
@@ -23,7 +29,8 @@ const GESTURES = ["click", "touchend", "keydown"] as const;
  * Reduced motion hides the element in CSS (the still behind it carries the
  * section) and nothing here starts it.
  */
-export default function BackdropVideo({ src, mimeType, poster }: Props) {
+export default function BackdropVideo({ src, mimeType, mobileSrc, mobileMimeType, poster, mobilePoster }: Props) {
+  const posterUrl = usePoster(poster, mobilePoster);
   const ref = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
 
@@ -82,8 +89,9 @@ export default function BackdropVideo({ src, mimeType, poster }: Props) {
       loop
       playsInline
       preload="metadata"
-      poster={poster}
+      poster={posterUrl}
     >
+      {mobileSrc && <source src={mobileSrc} type={mobileMimeType ?? undefined} media={MOBILE_MEDIA} />}
       <source src={src} type={mimeType ?? undefined} />
     </video>
   );

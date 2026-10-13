@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { mobileFieldset, mobileImageField, mobileVideoField } from "@/blocks/mobile-field";
 
 export const schema = defineType({
   name: "heroBlock",
   title: "Hero",
   type: "object",
+  fieldsets: [mobileFieldset()],
   fields: [
     defineField({ name: "brand", title: "Brand signal", type: "string", description: "Small line above the headline, e.g. product family." }),
     defineField({ name: "headline", title: "Headline", type: "text", rows: 2, validation: (Rule) => Rule.required() }),
@@ -42,6 +44,8 @@ export const schema = defineType({
       description: "Optional full-bleed video. MP4 or WebM; muted, looping, inline.",
       options: { accept: "video/mp4,video/webm,video/quicktime" },
     }),
+    mobileImageField("imageMobile", "Image — mobile", { hidden: ({ parent }) => !parent?.image }),
+    mobileVideoField("videoMobile", "Background video — mobile", { hidden: ({ parent }) => !parent?.video }),
     defineField({ name: "imageAlt", title: "Media alternative text", type: "string", validation: (Rule) => Rule.required() }),
     defineField({
       name: "videoButton",

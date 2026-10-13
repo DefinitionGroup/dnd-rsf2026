@@ -104,7 +104,13 @@ export default function ProductFinderBlock({ block }: BlockProps<"productFinderB
   };
 
   const pct = ((volume - min) / (max - min)) * 100;
-  const media = { image: block.backgroundImage, video: block.backgroundVideo, muted: block.backgroundMuted };
+  const media = {
+    image: block.backgroundImage,
+    video: block.backgroundVideo,
+    imageMobile: block.backgroundImageMobile,
+    videoMobile: block.backgroundVideoMobile,
+    muted: block.backgroundMuted,
+  };
   const backdrop = hasBackdrop(media);
 
   return (

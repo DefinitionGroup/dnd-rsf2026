@@ -9,6 +9,8 @@ import VideoOverlayButton from "@/components/VideoOverlayButton";
 import { resolveImageUrl } from "@/sanity/lib/image";
 import { resolveOverlayVideo } from "@/lib/overlay-video";
 import { t } from "@/lib/i18n";
+import { MOBILE_MEDIA } from "@/lib/mobile-media";
+import { usePoster } from "@/lib/use-mobile-media";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import type { BlockProps } from "@/blocks/types";
 import GridReveal from "./GridReveal";
@@ -68,6 +70,9 @@ export default function CinematicHeroBlock({ block, index, locale }: BlockProps<
   const Heading = index === 0 ? "h1" : "h2";
   const videoUrl = block.video?.asset?.url;
   const posterUrl = resolveImageUrl(block.poster, { width: 1920 });
+  const posterMobileUrl = resolveImageUrl(block.posterMobile, { width: 1080 });
+  const videoPoster = usePoster(posterUrl, posterMobileUrl);
+  const videoMobileUrl = block.videoMobile?.asset?.url;
   const showVideo = Boolean(videoUrl) && !reduce;
   const shaderOn = Boolean(block.shader) && showVideo;
   // Entrance mode: "grid" = flicker-mask raster reveal; "rise" = the film scales & fades up from below.
@@ -114,14 +119,16 @@ export default function CinematicHeroBlock({ block, index, locale }: BlockProps<
             any entrance animation — the film fades in over it. Same URL as the
             video's poster attribute, so the browser fetches it once. */}
         {posterUrl && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={posterUrl}
-            alt={showVideo ? "" : block.videoAlt}
-            aria-hidden={showVideo || undefined}
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <picture>
+            {posterMobileUrl && <source media={MOBILE_MEDIA} srcSet={posterMobileUrl} />}
+            <img
+              src={posterUrl}
+              alt={showVideo ? "" : block.videoAlt}
+              aria-hidden={showVideo || undefined}
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </picture>
         )}
 
         {/* the film — grid mode settles from a slow overscale behind the mask;
@@ -142,10 +149,11 @@ export default function CinematicHeroBlock({ block, index, locale }: BlockProps<
               loop
               playsInline
               preload="auto"
-              poster={posterUrl}
+              poster={videoPoster}
               aria-label={block.videoAlt}
               crossOrigin="anonymous"
             >
+              {videoMobileUrl && <source src={videoMobileUrl} type={block.videoMobile?.asset?.mimeType ?? undefined} media={MOBILE_MEDIA} />}
               <source src={videoUrl} type={block.video?.asset?.mimeType ?? undefined} />
             </video>
           )}

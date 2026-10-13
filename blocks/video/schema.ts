@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { backgroundField } from "@/blocks/background-field";
+import { mobileFieldset, mobileImageField, mobileVideoField } from "@/blocks/mobile-field";
 
 /**
  * Image / video: one image, optionally with a film — an uploaded file (autoplay/loop
@@ -10,6 +11,7 @@ export const schema = defineType({
   name: "videoBlock",
   title: "Image / video",
   type: "object",
+  fieldsets: [mobileFieldset()],
   fields: [
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
     defineField({ name: "headline", title: "Headline", type: "string" }),
@@ -43,6 +45,10 @@ export const schema = defineType({
           const hasVideo = parent?.source === "external" ? Boolean(parent?.url) : Boolean(parent?.file?.asset);
           return image || hasVideo ? true : "Add an image or a video.";
         }),
+    }),
+    mobileImageField("posterMobile", "Image — mobile", { hidden: ({ parent }) => !parent?.poster }),
+    mobileVideoField("fileMobile", "Video file — mobile", {
+      hidden: ({ parent }) => parent?.source === "external" || !(parent?.file as { asset?: unknown } | undefined)?.asset,
     }),
     defineField({ name: "alt", title: "Alt / description", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "caption", title: "Caption", type: "string" }),

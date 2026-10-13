@@ -1,10 +1,11 @@
 import { defineField, defineType } from "sanity";
-import { backgroundField, backgroundMediaFields } from "@/blocks/background-field";
+import { backgroundField, backgroundMediaFields, backgroundMobileFieldset } from "@/blocks/background-field";
 
 export const schema = defineType({
   name: "introBlock",
   title: "Editorial intro",
   type: "object",
+  fieldsets: [backgroundMobileFieldset()],
   fields: [
     defineField({ name: "eyebrow", title: "Eyebrow", type: "string" }),
     defineField({ name: "headline", title: "Headline", type: "text", rows: 3, validation: (Rule) => Rule.required() }),

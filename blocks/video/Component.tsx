@@ -7,6 +7,8 @@ import SanityImage from "@/components/SanityImage";
 import SectionHeader from "@/components/SectionHeader";
 import { resolveImageUrl } from "@/sanity/lib/image";
 import { parseEmbed, type Embed } from "@/lib/video-embed";
+import { MOBILE_MEDIA } from "@/lib/mobile-media";
+import { usePoster } from "@/lib/use-mobile-media";
 import type { BlockProps } from "@/blocks/types";
 import { backgroundClass } from "@/lib/section-background";
 
@@ -41,13 +43,16 @@ export default function VideoBlock({ block }: BlockProps<"videoBlock">) {
         src={fileUrl}
         mimeType={block.file?.asset?.mimeType}
         poster={resolveImageUrl(block.poster, { width: 1600 })}
+        mobileSrc={block.fileMobile?.asset?.url}
+        mobileMimeType={block.fileMobile?.asset?.mimeType}
+        mobilePoster={resolveImageUrl(block.posterMobile, { width: 1080 })}
         autoplay={Boolean(block.autoplay)}
         alt={block.alt}
       />
     ) : embed ? (
-      <ExternalPlayer embed={embed} poster={block.poster} alt={block.alt} privacyNotice={block.privacyNotice} sizes={SIZE[size].sizes} />
+      <ExternalPlayer embed={embed} poster={block.poster} posterMobile={block.posterMobile} alt={block.alt} privacyNotice={block.privacyNotice} sizes={SIZE[size].sizes} />
     ) : (
-      <SanityImage image={block.poster} alt={block.alt} fill sizes={SIZE[size].sizes} className="object-cover" />
+      <SanityImage image={block.poster} mobileImage={block.posterMobile} alt={block.alt} fill sizes={SIZE[size].sizes} className="object-cover" />
     );
 
   return (
@@ -71,16 +76,24 @@ function FilePlayer({
   src,
   mimeType,
   poster,
+  mobileSrc,
+  mobileMimeType,
+  mobilePoster,
   autoplay,
   alt,
 }: {
   src: string;
   mimeType?: string | null;
   poster?: string;
+  /** Optional phone cut and still, used below 768 px. */
+  mobileSrc?: string;
+  mobileMimeType?: string | null;
+  mobilePoster?: string;
   autoplay: boolean;
   alt: string;
 }) {
   const reduceMotion = useReducedMotion();
+  const posterUrl = usePoster(poster, mobilePoster);
   const auto = autoplay && !reduceMotion;
   const [playing, setPlaying] = useState(auto);
   // Manual videos show the poster + one drawn play control; native controls appear only once playing.
@@ -93,8 +106,10 @@ function FilePlayer({
         aria-label={`Play video: ${alt}`}
       >
         {poster ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <picture>
+            {mobilePoster && <source media={MOBILE_MEDIA} srcSet={mobilePoster} />}
+            <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          </picture>
         ) : (
           <span className="absolute inset-0 bg-carbon" aria-hidden />
         )}
@@ -116,9 +131,10 @@ function FilePlayer({
       loop={auto}
       playsInline
       preload="auto"
-      poster={poster}
+      poster={posterUrl}
       aria-label={alt}
     >
+      {mobileSrc && <source src={mobileSrc} type={mobileMimeType ?? undefined} media={MOBILE_MEDIA} />}
       <source src={src} type={mimeType ?? undefined} />
     </video>
   );
@@ -127,12 +143,14 @@ function FilePlayer({
 function ExternalPlayer({
   embed,
   poster,
+  posterMobile,
   alt,
   privacyNotice,
   sizes,
 }: {
   embed: Embed;
   poster: BlockProps<"videoBlock">["block"]["poster"];
+  posterMobile: BlockProps<"videoBlock">["block"]["posterMobile"];
   alt: string;
   privacyNotice?: string;
   sizes: string;
@@ -156,7 +174,7 @@ function ExternalPlayer({
   return (
     <div className="absolute inset-0 text-white">
       {poster?.asset ? (
-        <SanityImage image={poster} alt="" fill sizes={sizes} className="object-cover" />
+        <SanityImage image={poster} mobileImage={posterMobile} alt="" fill sizes={sizes} className="object-cover" />
       ) : (
         <div className="absolute inset-0 bg-carbon" aria-hidden />
       )}

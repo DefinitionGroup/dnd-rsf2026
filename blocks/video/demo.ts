@@ -43,6 +43,8 @@ export function videoDemo(
         },
     url: input.url,
     poster: img(input.poster ?? "clarisea-video-poster.jpg", { width: 1280, height: 720 }),
+    posterMobile: null,
+    fileMobile: null,
     alt: input.alt ?? "ClariSea Gen 3 fleece filter running in a reef sump",
     caption: input.caption ?? "ClariSea SK-5000 Gen 3 — automatic fleece advance in a running sump.",
     layout: input.layout ?? "contained",

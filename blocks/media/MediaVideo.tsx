@@ -2,11 +2,17 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useReducedMotion } from "motion/react";
+import { MOBILE_MEDIA } from "@/lib/mobile-media";
+import { usePoster } from "@/lib/use-mobile-media";
 
 type Props = {
   src: string;
   mimeType?: string | null;
   poster?: string;
+  /** Optional phone cut and still, used below 768 px. */
+  mobileSrc?: string;
+  mobileMimeType?: string | null;
+  mobilePoster?: string;
   alt: string;
   /** Muted, plays while on screen, small pause control. Off: poster + play button, then sound and native controls. */
   autoplay: boolean;
@@ -19,9 +25,10 @@ type Props = {
   labels: { play: string; pause: string };
 };
 
-export default function MediaVideo({ src, mimeType, poster, alt, autoplay, loop, objectFit, followRatio, frameClassName, frameStyle, labels }: Props) {
+export default function MediaVideo({ src, mimeType, poster, mobileSrc, mobileMimeType, mobilePoster, alt, autoplay, loop, objectFit, followRatio, frameClassName, frameStyle, labels }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
+  const posterUrl = usePoster(poster, mobilePoster);
   const ambient = autoplay && !reduceMotion;
   const [started, setStarted] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -86,7 +93,7 @@ export default function MediaVideo({ src, mimeType, poster, alt, autoplay, loop,
       <video
         ref={ref}
         className={`absolute inset-0 h-full w-full ${objectFit === "contain" ? "object-contain" : "object-cover"}`}
-        poster={poster}
+        poster={posterUrl}
         muted={autoplay}
         loop={loop}
         playsInline
@@ -98,6 +105,7 @@ export default function MediaVideo({ src, mimeType, poster, alt, autoplay, loop,
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
       >
+        {mobileSrc && <source src={mobileSrc} type={mobileMimeType ?? undefined} media={MOBILE_MEDIA} />}
         <source src={src} type={mimeType ?? undefined} />
       </video>
 
